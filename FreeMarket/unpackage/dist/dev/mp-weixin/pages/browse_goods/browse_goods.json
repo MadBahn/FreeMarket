@@ -1,0 +1,16 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-card": "../../uni_modules/uni-card/components/uni-card/uni-card",
+    "uni-section": "../../uni_modules/uni-section/components/uni-section/uni-section",
+    "uni-icons": "../../uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "uni-popup": "../../uni_modules/uni-popup/components/uni-popup/uni-popup",
+    "comment-input": "../../components/comment_input/comment_input",
+    "comment-display": "../../components/comment_display/comment_display",
+    "content-loading": "../../components/content_loading/content_loading",
+    "content-error": "../../components/content_error/content_error",
+    "common-report": "../../components/common_report/common_report",
+    "report-popup": "../../components/report_popup/report_popup"
+  }
+}

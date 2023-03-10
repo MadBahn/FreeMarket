@@ -1,0 +1,1 @@
+<view class="filled"><uni-icons wx:if="{{a}}" u-i="33705f9e-0" bind:__l="__l" u-p="{{a}}"></uni-icons> 咦，好像粗了什么错欸。 </view>

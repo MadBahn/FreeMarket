@@ -1,0 +1,1 @@
+<view class="content"><view><input placeholder="帖子标题"/><textarea placeholder="正文"></textarea><button>发表</button><uni-file-picker wx:if="{{d}}" bindselect="{{a}}" binddelete="{{b}}" u-i="a30b5fdc-0" bind:__l="__l" bindupdateModelValue="{{c}}" u-p="{{d}}"></uni-file-picker></view></view>

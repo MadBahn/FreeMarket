@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3818268 */
+  src: url('iconfont.ttf?t=1670570894719') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-icon_wenzhang:before {
+  content: "\e61d";
+}
+
+.icon-shangpin:before {
+  content: "\f230";
+}
+
+.icon-jiaoyi:before {
+  content: "\fbfa";
+}
+
+.icon-pinglun-08:before {
+  content: "\fc1d";
+}
+

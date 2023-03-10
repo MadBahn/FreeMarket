@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-section": "../../uni_modules/uni-section/components/uni-section/uni-section",
+    "comment-input": "../../components/comment_input/comment_input",
+    "comment-display": "../../components/comment_display/comment_display"
+  }
+}

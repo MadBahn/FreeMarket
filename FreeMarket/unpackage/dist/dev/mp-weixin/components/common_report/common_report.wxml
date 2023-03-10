@@ -1,0 +1,1 @@
+<view class="report" bindtap="{{b}}"><uni-icons wx:if="{{a}}" u-i="0e7034ac-0" bind:__l="__l" u-p="{{a}}"/><text>举报</text></view>

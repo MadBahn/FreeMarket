@@ -1,0 +1,61 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/discover/discover",
+    "pages/message/message",
+    "pages/my/my",
+    "pages/favorite/favorite",
+    "pages/exchange/exchange",
+    "pages/new_post/new_post",
+    "pages/new_goods/new_goods",
+    "pages/chat/chat",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/browse_goods/browse_goods",
+    "pages/edit_info/edit_info",
+    "pages/search/search",
+    "pages/browse_post/browse_post",
+    "pages/history/history",
+    "pages/settings/settings",
+    "pages/mygoods/mygoods",
+    "pages/report/report"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": 0
+  },
+  "tabBar": {
+    "selectedColor": "#1296db",
+    "list": [
+      {
+        "text": "主页",
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabBarIcons/home.png",
+        "selectedIconPath": "static/tabBarIcons/home_fill.png"
+      },
+      {
+        "text": "发现",
+        "pagePath": "pages/discover/discover",
+        "iconPath": "static/tabBarIcons/attention.png",
+        "selectedIconPath": "static/tabBarIcons/attention_fill.png"
+      },
+      {
+        "text": "消息",
+        "pagePath": "pages/message/message",
+        "iconPath": "static/tabBarIcons/message.png",
+        "selectedIconPath": "static/tabBarIcons/message_fill_light.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/my/my",
+        "iconPath": "static/tabBarIcons/my.png",
+        "selectedIconPath": "static/tabBarIcons/my_fill.png"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

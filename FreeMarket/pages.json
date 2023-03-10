@@ -1,0 +1,175 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": true,
+				"navigationStyle": "custom"
+			}
+		},{
+		    "path": "pages/discover/discover",
+		    "style": {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": true,
+				"navigationStyle": "custom"
+		    }
+		},{
+		    "path": "pages/message/message",
+		    "style": {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": true,
+				"navigationStyle": "custom"
+		    }
+		},{
+            "path": "pages/my/my",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }   
+        },{
+            "path": "pages/favorite/favorite",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },{
+            "path": "pages/exchange/exchange",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },{
+            "path": "pages/new_post/new_post",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },{
+            "path": "pages/new_goods/new_goods",
+            "style": {
+                "navigationBarTitleText": "商品",
+                "enablePullDownRefresh": false
+            }
+        },{
+            "path": "pages/chat/chat",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },{
+			"path": "pages/login/login",
+			"style": {
+			    "navigationBarTitleText": "",
+			    "enablePullDownRefresh": false
+			}
+		},{
+			"path": "pages/register/register",
+			"style": {
+			    "navigationBarTitleText": "",
+			    "enablePullDownRefresh": false
+			}
+		},{
+            "path" : "pages/browse_goods/browse_goods",
+            "style" : {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+				// "navigationStyle": "custom"
+            }
+        },{
+            "path" : "pages/edit_info/edit_info",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },{
+            "path" : "pages/search/search",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },{
+            "path" : "pages/browse_post/browse_post",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        }
+        ,{
+            "path" : "pages/history/history",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": true
+            }
+            
+        }
+        ,{
+            "path" : "pages/settings/settings",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/mygoods/mygoods",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/report/report",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"enablePullDownRefresh": true,
+		"onReachBottomDistance": 0
+	},
+	"easycom": {
+		"autoscan": true
+	},
+	"tabBar": {
+		"selectedColor": "#1296db",
+		"list": [{
+				"text": "主页",
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabBarIcons/home.png",
+				"selectedIconPath": "static/tabBarIcons/home_fill.png"
+			},{
+				"text": "发现",
+				"pagePath": "pages/discover/discover",
+				"iconPath": "static/tabBarIcons/attention.png",
+				"selectedIconPath": "static/tabBarIcons/attention_fill.png"
+			},{
+				"text": "消息",
+				"pagePath": "pages/message/message",
+				"iconPath": "static/tabBarIcons/message.png",
+				"selectedIconPath": "static/tabBarIcons/message_fill_light.png"
+			},{
+				"text": "我的",
+				"pagePath": "pages/my/my",
+				"iconPath": "static/tabBarIcons/my.png",
+				"selectedIconPath": "static/tabBarIcons/my_fill.png"
+			}
+		]
+	},
+	"uniIdRouter": {}
+}

@@ -4,13 +4,16 @@
 		<view 
 			class="card" 
 			v-for="(i,index) in _data" 
-			:key="index"
+			:key="i.comment_id"
+			v-else
 		>
 			<uni-card 
 				:title="i.comment_by.username || i.comment_by" 
 				:isFull="true" 
 				:sub-title="new Date(i.post_date).toLocaleString()" 
-				:thumbnail="i.comment_by.headImg || default_avatar"
+				:thumbnail="cfg.server + `:` +
+							cfg.port + `/` +
+							i.comment_by.headImg"
 			>
 				<view class="uni-card__content">
 					<text>{{i.content}}</text>
@@ -23,25 +26,18 @@
 	</view>
 </template>
 
-<script>
+<script lang="ts" setup>
+	import { ref } from "vue";
+	
 	import cfg from "../../cfg.json";
 	import commonReport from "@/components/common_report/common_report.vue";
 	
-	export default {
-		name:"comment_display",
-		// emits: ['report'],
-		components:{
-			commonReport
-		},
-		data(){
-			return {
-				default_avatar: cfg.default_avatar
-			}
-		},
-		props: {
-			_data: Array,
-		}
-	}
+	const props = defineProps({
+		_data: Array
+	});
+	
+	const default_avatar = ref(cfg.default_avatar);
+	
 </script>
 
 <style lang="scss" scoped>

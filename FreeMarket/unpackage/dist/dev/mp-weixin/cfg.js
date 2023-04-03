@@ -19,7 +19,7 @@ const api = {
     prefix: "/user",
     login: "/login",
     register: "/register",
-    modify: "/modify",
+    modify_info: "/modify_info",
     create_comment: "/create_comment",
     verify_email: "/verify_email/",
     favorite: "/favorite",

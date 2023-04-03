@@ -13,13 +13,21 @@ if (!Math) {
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "settings",
   setup(__props) {
+    const isLogin = common_vendor.ref(false);
+    common_vendor.onLoad(() => {
+      isLogin.value = Object.keys(getApp().globalData.login).length !== 0;
+    });
     function goto(url) {
       common_vendor.index.navigateTo({
         url
       });
     }
+    function logout() {
+      common_vendor.index.$emit("logout");
+      common_vendor.index.navigateBack();
+    }
     return (_ctx, _cache) => {
-      return {
+      return common_vendor.e({
         a: common_vendor.o(($event) => goto("/pages/edit_info/edit_info")),
         b: common_vendor.p({
           title: "更改账户信息",
@@ -39,8 +47,11 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         }),
         f: common_vendor.p({
           border: "true"
-        })
-      };
+        }),
+        g: isLogin.value
+      }, isLogin.value ? {
+        h: common_vendor.o(logout)
+      } : {});
     };
   }
 });

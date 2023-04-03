@@ -16,11 +16,20 @@ const commentModel = require("../model/comment");
 const reportModel = require("../model/report");
 
 // Write the router here.
-router.get("/:txt", (req, res) => {
-    const {txt} = req.params;
-    const base64txt = new Buffer(txt).toString("base64");
-    const sha1txt = sha1(txt);
-    res.status(200).json({txt: sha1txt});
+// router.get("/:txt", (req, res) => {
+//     const {txt} = req.params;
+//     const base64txt = new Buffer(txt).toString("base64");
+//     const sha1txt = sha1(txt);
+//     res.status(200).json({txt: sha1txt});
+// });
+
+// 清除password属性
+router.use((req, res, next) => {
+    next();
+
+    console.log("request:",req);
+    console.log("response:",res);
+
 });
 
 router.get("/verify_email/:email", (req, res) => {
@@ -35,14 +44,24 @@ router.get("/verify_email/:email", (req, res) => {
 
 router.post("/login", async (req, res) => {
     const { login_form } = req.body;
+
+    let out = {};
+
     const query = {
         ...login_form,
         password: sha1(login_form.password)
     };
-    const result = await userModel.findOne(query).exec();
+    let result = await userModel.findOne(query).exec();
 
-    const out = result ? result : {"error": "用户名或密码错误"};
-    res.status(result ? 200 : 400).json(out);
+    if(result) {
+        result = commonModule.removePassword(result);
+        out = commonModule.responseUnifier(200, "登录成功", result);
+    } else {
+        out = commonModule.responseUnifier(400, "用户名或密码错误")
+    }
+
+    // const out = result ? result : {"error": "用户名或密码错误"};
+    res.status(out.code).json(out);
 });
 
 router.post("/register", ( async (req, res) => {
@@ -81,19 +100,41 @@ router.post("/modify_info", (async (req, res) => {
 
     const result = await userModel.findOne({userid: modify_form.userid}).exec();
 
-//    console.log(result);
-    if(!result) return res.status(400).json({"error": "用户不存在"});
-
-    const r = await result.set({...modify_form}).save();
-    console.log(r);
-
-    res.status(200).json("a");
+    let out = {};
+    if(!result) {
+        out = commonModule.responseUnifier(400, "用户不存在");
+    } else {
+        let r = await result.set({...modify_form}).save();
+        r = commonModule.removePassword(r);
+        console.log(r);
+        out = commonModule.responseUnifier(200, "修改成功",r);
+    }
+    res.status(out.code).json(out);
 }));
 
 router.post("/modify_auth", async (req,res) => {
     const { auth_form } = req.body;
+    auth_form.pwd_cur = sha1(auth_form.pwd_cur);
 
 //    1.验证原密码 2.确认新密码和确认密码相同
+    const mod_user = await userModel.findOne({userid: auth_form.userid}).exec();
+
+    let out = {};
+
+    if(!mod_user) {
+        out = commonModule.responseUnifier(400, "找不到用户");
+    } else {
+        if(auth_form.pwd_cur === mod_user.password) {
+            if(auth_form.new_pwd === auth_form.repwd) {
+                let t = await mod_user.set({password: auth_form.new_pwd}).save();
+                t = commonModule.removePassword(t);
+            }
+        } else {
+            out = commonModule.responseUnifier(400, "原密码错误");
+        }
+    }
+
+    res.status(out.code).json(out);
 });
 
 //需要admin_token
@@ -131,9 +172,9 @@ router.post("/create_comment", async (req, res) => {
 router.post("/create_report", async (req, res) => {
     const { report_form } = req.body;
 
-    console.log(report_form);
+    console.log("form:",report_form);
 
-    const next = await commonModule.checkUserAndData(report_form.report_by, report_form.refer_to);
+    const next = await commonModule.checkUserAndData(report_form.report_by, report_form.refer_to, {});
 
     //检查表单
     if(report_form.reason === "other" && report_form.other_reason === "")
@@ -149,7 +190,7 @@ router.post("/create_report", async (req, res) => {
         if (next) {
             const out = await new reportModel({
                 ...report_form,
-                report_id: "report:" + uuid.v3(),
+                report_id: "report:" + uuid.v4(),
                 post_date: new Date()
             }).save();
 
@@ -159,7 +200,6 @@ router.post("/create_report", async (req, res) => {
             res.status(400).json({"error": "用户或要举报的对象不存在"});
         }
     }
-
 });
 
 //添加收藏
@@ -254,7 +294,7 @@ router.post("/get_history",async (req, res) => {
     const { filter } = req.body;
 
     //查询前获取相关用户信息
-    const isExist = await userModel.findOne({userid: filter.userid}).exec();
+    const isExist = await userModel.findOne({userid: filter.query.userid}).exec();
 
     const data = await historyModule.loadHistory(filter);
 
@@ -275,9 +315,15 @@ router.post("/get_history",async (req, res) => {
         if(tmp) data[i]._doc.detail = tmp;
     }
 
+    //根据type过滤
+
+    const format_data = data.filter(i => {
+        return i.history_to.split(":")[0] === filter.type;
+    });
+
     //计算下一次查询的索引值
     const out = {
-        data: data,
+        data: format_data,
         next_index : filter.start_at + filter.count
     };
 

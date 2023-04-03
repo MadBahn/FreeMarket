@@ -5,14 +5,16 @@
 			:current="current"
 			styleType="text"
 			:values="segItems"
-			@clickItem="switchSegments"/>
+			@clickItem="switchSegments"
+		/>
 		<view 
 			class="items" 
 			v-for="(i, index) in data" 
 			:key="index"
 		>
-			{{i}}
+			<history-unit :type="type" :data="i"/>
 		</view>
+		<view v-show="!enableBottomRequest">再怎么找也没有了</view>
 	</view>
 </template>
 
@@ -28,6 +30,7 @@
 	const type = ref("goods");
 	const current = ref(0);
 	const segItems = ref(["商 品", "帖 子"]);
+	const enableBottomRequest = ref(true);
 	
 	onLoad(() => {
 		request(true);
@@ -38,22 +41,24 @@
 	});
 	
 	onReachBottom(() => {
-		request(false);
+		enableBottomRequest.value && request(false);
 	});
 	
 	function switchSegments(e) {
-		console.log(e);
+		
 		current.value = e.currentIndex;
 		// 0为商品，1为帖子
 		if(current.value === 0) type.value = "goods";
 		else if(current.value === 1) type.value = "post";
 		// 
+		console.log(type.value);
+		request(true);
 	}
 	
-	function request(type : boolean) {
+	function request(start_type : boolean) {
 		const count = 5;
 		
-		if(type) start_at.value = 0;
+		if(start_type) start_at.value = 0;
 		
 		uni.request({
 			url: cfg.server + ":" +
@@ -65,6 +70,8 @@
 			data: {
 				filter: {
 					userid: getApp().globalData.login.userid,
+					type: type.value,
+					query: {userid: getApp().globalData.login.userid,},
 					start_at: start_at.value,
 					count: count
 				}
@@ -72,8 +79,12 @@
 			success(res) {
 				console.log(res);
 				if(res.statusCode === 200) {
+					
+					enableBottomRequest.value =
+						res.data.data.length === count;
+					
 					// 根据type变量决定重写data或追加至data末尾
-					if(type) data.value = res.data.data;
+					if(start_type) data.value = res.data.data;
 					else {
 						data.value = data.value.concat(res.data.data);
 						start_at.value = res.data.next_index;

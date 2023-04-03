@@ -7,12 +7,7 @@
 
 <script>
 	export default {
-		name:"common_report",
-		data() {
-			return {
-				
-			};
-		}
+		name:"common_report"
 	}
 </script>
 

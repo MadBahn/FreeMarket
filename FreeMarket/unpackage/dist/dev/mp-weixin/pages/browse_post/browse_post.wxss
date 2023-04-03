@@ -27,7 +27,47 @@
   width: 100vw;
   align-items: flex-start;
 }
+.post-by-info {
+  height: 8vh;
+  margin-bottom: 1vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.post-by-info .avatar {
+  width: 13vw;
+  height: 13vw;
+  margin-left: 3vw;
+  border-radius: 50%;
+}
+.post-by-info .info {
+  width: 80vw;
+  height: 8vh;
+  margin-left: 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.post-by-info .info .username {
+  font-size: 4.5vw;
+}
+.post-by-info .info .post-date {
+  font-size: 3vw;
+  color: #b3b4b9;
+}
 .bottom-tab {
   position: fixed;
   bottom: 0;
+}
+.imgs {
+  width: 100vw;
+  min-height: 30vh;
+}
+.imgs swiper {
+  width: 100%;
+  min-height: 30vh;
+}
+.imgs swiper swiper-item {
+  width: 100%;
+  min-height: 30vh;
 }

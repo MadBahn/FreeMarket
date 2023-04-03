@@ -18,7 +18,16 @@ const blacklistModel = require("../model/blacklist");
 
 
 
+//admin中间件
 
+router.use(async (req, res, next) => {
+    console.log("middleware:",req.body, req.params);
+
+    //验证token
+    if(!await adminModule.tokenValidation(req.body.token)) console.log("no valid token");
+
+    next();
+});
 
 
 // Write the router here.
@@ -57,16 +66,24 @@ router.post("/remove_complete", async (req, res) => {
     const { admin_token, remove_id } = req.body;
 //    验证token
     console.log(await adminModule.tokenValidation(admin_token));
+    if(await adminModule.tokenValidation(admin_token)) {
+
+    } else {
+
+    }
 });
 
 router.post("/handle_report", async (req, res) => {
     const { admin_token, type } = req.body;
-    const isValid = await adminModule.tokenValidation(admin_token);
-
-    console.log(isValid);
     // type可接受的值：拒绝、处理
 
     // console.log(await adminModule.removeToken(admin_token));
+
+    if(await adminModule.tokenValidation(admin_token)) {
+
+    } else {
+
+    }
 });
 
 router.post("/remove_blacklist", async (req, res) => {
@@ -75,51 +92,76 @@ router.post("/remove_blacklist", async (req, res) => {
 
     const isValid = await adminModule.tokenValidation(admin_token);
     //
+    if(await adminModule.tokenValidation(admin_token)) {
+        const result = await blacklistModel.findOneAndRemove({black_id: black_id}).exec();
+    } else {
 
-
-    const result = await blacklistModel.findOneAndRemove({black_id: black_id}).exec();
-
+    }
 });
 
 //数据条数
 router.post("/count", async (req, res) => {
-
     //验证令牌
-    const { admin_token } = req.body;
+    const { admin_token, time, isChart } = req.body;
 
-    const date = new Date();
-    //    日期查询条件——近一个月
-    const query = {post_date: { $gt: date.getTime() - (60*60*24*30*1000)}};
+    //    日期查询条件——近30天
+
 
     //根据特定时间段获取数据条数
-    const countG = await goodsModel
-        .find(query)
-        .countDocuments()
-        .exec();
-    const countP = await postModel
-        .find(query)
-        .countDocuments()
-        .exec();
-    const countC = await commentModel
-        .find(query)
-        .countDocuments()
-        .exec();
-    const countR = await reportModel
-        .find(query)
-        .countDocuments()
-        .exec();
+    if(await adminModule.tokenValidation(admin_token)) {
+        const c_data = await adminModule.getDataCount(admin_token, time).then();
 
-    console.log(countG, countP, countC, countR);
+        let out = isChart ? {
+            data: [
+                ["商品", c_data.g_count],
+                ["帖子", c_data.p_count],
+                ["评论", c_data.c_count],
+                ["举报", c_data.r_count]
+            ]
+        } : {
+            goods: c_data.g_count,
+            post: c_data.p_count,
+            exchange: c_data.e_count,
+            comment: c_data.c_count
+        }
 
-    //返回数据条目
-    res.status(200).json({
-        data: [
-            ["商品", countG],
-            ["帖子", countP],
-            ["评论", countC],
-            ["举报", countR]
-        ]
-    });
+        //返回数据条目
+        res.status(200).json(out);
+    } else {
+        res.status(400).json("");
+    }
+
+
 });
+
+router.post("/data_admin", async (req, res) => {
+    const { admin_token, query } = req.body;
+
+//    验证token
+//    根据过滤器查询：goods, post, exchange
+//    前二者会返回comments子数据
+
+    const count = 0;
+
+    const data = await adminModule
+        .queryData(admin_token, require(`../model/${query.model}`), query.filter, query.field)
+        .then();
+
+    if(query.model !== "exchange"){
+
+    }
+
+    res.status(200).json({
+        data: data
+    });
+
+});
+
+router.post("/user_list", async (req, res) => {
+    const { token } = req.body;
+//    组合用户的基本信息及状态
+
+});
+
 
 module.exports = router;

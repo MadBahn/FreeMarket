@@ -4,9 +4,12 @@ const cfg = require("../../cfg.js");
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "report",
   setup(__props) {
+    const to = common_vendor.ref("");
     common_vendor.onLoad((option) => {
       console.log("onLoad");
-      console.log(option);
+      console.log("option:", option);
+      to.value = option.refer_to;
+      console.log(to.value);
     });
     function onSubmit(e) {
       console.log(e.detail.value);
@@ -15,7 +18,9 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         method: "POST",
         data: {
           report_form: {
-            ...e.detail.value
+            ...e.detail.value,
+            report_by: getApp().globalData.login.userid,
+            refer_to: to.value
           }
         },
         success(res) {

@@ -55,11 +55,12 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           }
         },
         success(res) {
-          console.log(res.data);
+          console.log(res.data.data);
           if (res.statusCode === 200) {
-            enableBottomRequest.value = res.data.data.length === amount;
-            goods.value = type ? res.data.data : goods.value.concat(res.data.data);
-            end_index.value = res.data.next_index;
+            enableBottomRequest.value = res.data.data.data.length === amount;
+            goods.value = type ? res.data.data.data : goods.value.concat(res.data.data.data);
+            end_index.value = res.data.data.next_index;
+            console.log(end_index.value);
             common_vendor.index.stopPullDownRefresh();
           }
         }

@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import ReactEcharts from "echarts-for-react"
 import {http} from "@tauri-apps/api";
+import {Card} from "antd";
+
+import "./main.scss";
 
 function Main() {
 
@@ -16,8 +19,9 @@ function Main() {
         // ["评论", 10],
         // ["举报", 10],
     // ]);
-
     //使用state时出现了图表不更新的问题
+
+
     let _source: never[] = [];
 
     const ops = {
@@ -49,7 +53,9 @@ function Main() {
             return http.fetch("http://localhost:4000/api/admin/count", {
                 method: "POST",
                 body: http.Body.json({
-                    admin_token: localStorage.getItem("token")
+                    admin_token: localStorage.getItem("token"),
+                    time: {post_date: { $gt: new Date().getTime() - (60*60*24*30*1000)}},
+                    isChart: true
                 })
             }).then();
         });
@@ -73,6 +79,10 @@ function Main() {
                 option={option}
                 lazyUpdate={false}
             />
+            <div className="down">
+                <Card>recent report</Card>
+                <Card>status</Card>
+            </div>
         </div>
     );
 }

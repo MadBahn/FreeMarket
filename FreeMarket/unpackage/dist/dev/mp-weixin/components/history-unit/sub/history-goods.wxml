@@ -1,0 +1,1 @@
+<view class="frame data-v-9788bc81"><image wx:if="{{a}}" class="data-v-9788bc81" src="{{b}}"/><view class="info data-v-9788bc81"><view class="data-v-9788bc81">{{c}}</view><view class="data-v-9788bc81">{{d}}</view><view class="data-v-9788bc81"> ￥{{e}}</view></view></view>

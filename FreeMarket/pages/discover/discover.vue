@@ -24,8 +24,9 @@
 							  i.post_id + 
 							  `&userid=` + 
 							  appData.login.userid)"
+				:cover="cfg.server + ':' + cfg.port + '/' + i.imgs[0].url"
 			>
-				{{i.title}}
+				<text>{{i.title}}</text>
 			</uni-card>
 		</view>
 	</view>

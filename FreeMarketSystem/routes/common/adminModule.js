@@ -2,7 +2,9 @@ const tokenModel = require("../model/auth_token");
 
 const goodsModel = require("../model/goods");
 const exchangeModel = require("../model/exchange");
+const commentModel = require("../model/comment");
 const postModel = require("../model/post");
+const reportModel = require("../model/report");
 
 const adminModule = {};
 
@@ -26,16 +28,50 @@ adminModule.tokenValidation = async (token) => {
     return false;
 };
 
-adminModule.getDataCount = async (token) => {
+adminModule.getDataCount = async (token, filter) => {
     if(await adminModule.tokenValidation(token)) {
     //    获取数据条目
         return {
-            g_count: await goodsModel.find().countDocuments().exec(),
-            p_count: await postModel.find().countDocuments().exec(),
-            e_count: await exchangeModel.find().countDocuments().exec()
+            g_count: await goodsModel.find(filter)
+                .countDocuments()
+                .exec(),
+            p_count: await postModel.find(filter)
+                .countDocuments()
+                .exec(),
+            c_count: await commentModel
+                .find(filter)
+                .countDocuments()
+                .exec(),
+            r_count: await reportModel
+                .find(filter)
+                .countDocuments()
+                .exec(),
+            e_count: await exchangeModel
+                .find(filter)
+                .countDocuments()
+                .exec()
         };
     }
     return null;
+};
+
+//获取数据
+adminModule.queryData = async (token, model, filter, field) => {
+    console.log(token, model, filter);
+
+    if(await adminModule.tokenValidation(token)) {
+        return await model
+            .find(filter)
+            .sort("-post-date")
+            .skip(field.start)
+            .limit(field.limit)
+            .exec();
+    }
+    return null;
+};
+
+adminModule.queryUser = async () => {
+
 };
 
 module.exports = adminModule;

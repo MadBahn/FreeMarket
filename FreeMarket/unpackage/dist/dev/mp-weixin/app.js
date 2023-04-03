@@ -21,6 +21,8 @@ if (!Math) {
   "./pages/settings/settings.js";
   "./pages/mygoods/mygoods.js";
   "./pages/report/report.js";
+  "./pages/edit_auth/edit_auth.js";
+  "./pages/custom_exchange/custom_exchange.js";
 }
 const _sfc_main = {
   onLaunch() {

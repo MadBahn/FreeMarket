@@ -1,10 +1,7 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
-  name: "common_report",
-  data() {
-    return {};
-  }
+  name: "common_report"
 };
 if (!Array) {
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");

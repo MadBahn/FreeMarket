@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import "./assets/iconfont.css";
 import {useRoutes} from "react-router-dom";
 import routes from "./router";

@@ -1,10 +1,24 @@
 <template>
 	<view class="content">
 		<view class="content info">
-			<view class="avatar l-side" :style="{ backgroundImage: `url(`+ info.headImg +`)` }" @click="gotoEditInfo">
+			<view 
+				class="avatar l-side" 
+				:style="{ 
+					backgroundImage: `url(`+ (
+						info.headImg !== '' ? 
+							(
+								cfg.server + ':' + 
+								cfg.port + '/' +
+								info.headImg
+							) : 
+							cfg.default_avatar
+					) +`)`
+				 }" 
+				@click="editAvatar"
+			>
 			</view>
 			<view class="r-side">
-				<view v-if="isLogin">
+				<view v-if="isLogin" @click="goto(`/pages/edit_info/edit_info`)">
 					<view class="username">{{info.username}}</view>
 					<view class="desc">{{info.desc}}</view>
 				</view>
@@ -44,29 +58,41 @@
 				<uni-icons 
 					size="35" 
 					customPrefix="iconfont" 
-					type="icon-31quanbushangpin">
-				</uni-icons>
+					type="icon-31quanbushangpin"
+				></uni-icons>
 				<text>我发布的</text>
 			</view>
-			<view class="menu-items">
+			<view class="menu-items" @click="goto(`/pages/exchange/exchange?type=buyer`)">
 				<uni-icons
 					size="35"
 					customPrefix="iconfont"
-					type="icon-mairu">
-				</uni-icons>
+					type="icon-mairu"
+				></uni-icons>
 				<text>我买入的</text>
 			</view>
-			<view class="menu-items">
+			<view class="menu-items" @click="goto(`/pages/exchange/exchange?type=seller`)">
 				<uni-icons
 					size="35"
 					customPrefix="iconfont"
-					type="icon-maichu">
-				</uni-icons>
+					type="icon-maichu"
+				></uni-icons>
 				<text>我卖出的</text>
 			</view>
 		</view>
 		<button @click="goto(`/pages/settings/settings`)">设置</button>
-		<button v-if="isLogin" @click="logout">退出登录</button>
+		<!-- <button v-if="isLogin" @click="logout">退出登录</button> -->
+		<uni-popup ref="action">
+			<view class="action">
+				<view @click="selecctImage(['camera'])">
+					<uni-icons type="camera-filled" size="25"></uni-icons>
+					<text>拍照</text>
+				</view>
+				<view @click="selecctImage(['album'])">
+					<uni-icons type="image-filled" size="25"></uni-icons>
+					<text>选择文件</text>
+				</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
@@ -79,6 +105,8 @@
 	const isLogin = ref(false);
 	const info = ref({});
 	
+	const action = ref();
+	
 	onLoad(async () => {
 		// 获取信息
 		getInfo();
@@ -89,35 +117,88 @@
 	});
 	
 	uni.$on("user", () => getInfo());
+	uni.$on("logout", () => logout());
 	
 	function getInfo() {
 		try {
+			// getApp().globalData.login = uni.getStorage({
+			// 	key: "user_login"
+			// });
 			info.value = getApp().globalData.login;
 			console.log(info.value);
-			if(Object.keys(info.value).length !== 0) 
-				isLogin.value = true;
+			isLogin.value = (Object.keys(info.value).length !== 0) ;
+			
 		} catch(e){
 			//TODO handle the exception
 		}
 	}
 	
 	// 跳转页面
-	function goto(url){
+	function goto(url: string){
 		uni.navigateTo({
 			url: url
 		});
 	}
+	// 跳转至修改个人信息界面，信息从localStorage获取，无需在url上添加参数
 	
-	
-	// 跳转至登录界面
-	
-	// 跳转至修改个人信息界面
-	function gotoEditInfo() {
-		uni.navigateTo({
-			url: "/pages/edit_info/edit_info"
-		});
+	function editAvatar(){
+		action.value.open("bottom");
 	}
 	
+	// 修改用户图像
+	function selecctImage(from: Array<string>) {
+		uni.chooseImage({
+			count: 1,
+			sourceType: from,
+			success(res) {
+				console.log(res);
+				// 上传文件
+				uni.uploadFile({
+					url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.files.prefix}${cfg.api.files.upload_file}`,
+					filePath: res.tempFilePaths[0],
+					name: 'file',
+					success(_res) {
+						console.log(_res);
+						if(_res.statusCode === 200){
+							const url_t = JSON.parse(_res.data)[0]
+										.path
+										.split("\\")
+							const url = "files\\\\".concat(url_t[1]);
+							
+							// 请求修改用户图像
+							uni.request({
+								url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.user.prefix}${cfg.api.user.modify_info}`,
+								method: "POST",
+								data: {
+									modify_form: {
+										userid: getApp().globalData.login.userid,
+										headImg: url
+									}
+								},
+								success(__res) {
+									console.log(__res);
+									if(__res.statusCode === 200) {
+										// globalData
+										getApp().globalData.login.headImg = url;
+										// localStorage
+										uni.setStorage({
+											key: "user_login",
+											data: __res.data,
+											complete() {
+												info.value = {};
+												getInfo();
+												action.value.close();
+											}
+										});
+									}
+								}
+							})
+						}
+					}
+				});
+			}
+		});
+	}	
 	// 在设置页面通过emit调用之
 	function logout() {
 		try {
@@ -126,6 +207,7 @@
 				success() {
 					getApp().globalData.login = {};
 					isLogin.value = false;
+					getInfo();
 				}
 			});
 		} catch(e){
@@ -136,7 +218,7 @@
 	// 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.info, .exchange, .views {
 		width: 100vw;
 	}
@@ -159,8 +241,6 @@
 			background-position: center;
 			background-size: 100%;
 			background-repeat: no-repeat;
-			// background-color: aquamarine;
-			margin-bottom: 2vh;
 		}
 		
 		.l-side {
@@ -201,5 +281,21 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-evenly	
+	}
+	
+	.action {
+		background-color: white;
+		
+		view {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			padding: 3vw;
+			
+			text {
+				margin-left: 2vw;
+				font-size: 2vh;
+			}
+		}
 	}
 </style>

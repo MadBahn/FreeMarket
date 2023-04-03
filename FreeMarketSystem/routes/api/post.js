@@ -114,10 +114,10 @@ router.post("/read_post", async (req, res) => {
     if(result) {
         if(!isEdit) {
             const tmp_user = await userModel
-                .findOne({userid: result.owner})
+                .findOne({userid: result.post_by})
                 .sort("-post_date")
                 .exec();
-            if(tmp_user) result._doc.owner = tmp_user;
+            if(tmp_user) result._doc.post_by = tmp_user;
 
             const tmp_comments = await commentModel.find({comment_to: result.post_id, isDel: false}).exec();
 

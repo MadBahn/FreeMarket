@@ -8,8 +8,9 @@ const Main = lazy(() => import("../views/home/subviews/main/main"));
 const Data =  lazy(() => import("../views/home/subviews/data/data"));
 const Report = lazy(() => import("../views/home/subviews/report/report"));
 const Info = lazy(() => import("../views/home/subviews/info/info"));
+const User = lazy(() => import("../views/home/subviews/user/user"))
 
-const Loading = lazy(() => import("../components/loading"));
+const Loading = lazy(() => import("../components/loading/loading"));
 
 const loading = (comp: React.ReactElement<any,any>) => (
     <React.Suspense fallback={<Loading/>}>
@@ -33,6 +34,10 @@ const routes = [
             {
                 path: "/main",
                 element: loading(<Main />)
+            },
+            {
+                path: "/user",
+                element: loading(<User />)
             },
             {
                 path: "/data",

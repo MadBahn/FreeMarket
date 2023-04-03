@@ -1,0 +1,1 @@
+<view bindtap="{{f}}"> {{a}} <history-goods wx:if="{{b}}" u-i="bc66a510-0" bind:__l="__l" u-p="{{c}}"/><history-post wx:elif="{{d}}" u-i="bc66a510-1" bind:__l="__l" u-p="{{e}}"/></view>

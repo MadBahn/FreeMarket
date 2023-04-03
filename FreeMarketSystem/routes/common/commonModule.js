@@ -1,6 +1,7 @@
 const userModel = require("../model/user");
 const goodsModel = require("../model/goods");
 const postModel = require("../model/post");
+const commentModel = require("../model/comment");
 
 const commonModule = {};
 
@@ -9,6 +10,7 @@ commonModule.checkUserAndData = async (userid, dataid, query) => {
     //用户
     const result_user = await userModel.findOne({userid: userid}).exec();
 
+    console.log("dataid:",dataid);
     //数据
     const result_to = await (async function (){
         switch (dataid.split(":")[0]) {
@@ -17,6 +19,8 @@ commonModule.checkUserAndData = async (userid, dataid, query) => {
                 return await goodsModel.findOne({goods_id: dataid}).exec();
             case "post":
                 return await postModel.findOne({post_id: dataid}).exec();
+            case "comment":
+                return await commentModel.findOne({comment_id: dataid}).exec();
         }
     }());
 
@@ -26,5 +30,18 @@ commonModule.checkUserAndData = async (userid, dataid, query) => {
 commonModule.subQuery = async (obj, filter) => {
     return await obj.findOne(filter).exec();
 };
+
+//规范化响应数据
+commonModule.responseUnifier = (code, msg, data) => {
+    let out = {code: code, msg: msg};
+    if(data) out.data= data;
+    return out;
+}
+
+//移除用户数据中的密码属性
+commonModule.removePassword = (data) => {
+    delete data._doc.password;
+    return data;
+}
 
 module.exports = commonModule;

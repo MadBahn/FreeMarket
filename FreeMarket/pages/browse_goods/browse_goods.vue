@@ -11,9 +11,12 @@
 		<view class="main_content">
 			<uni-card 
 				isFull="true"
+				avatarCircle="true"
 				:title="content.owner.username || content.owner"
 				:subTitle="new Date(content.post_date).toLocaleString()"
-				:thumbnail="content.owner.headImg || cfg.default_avatar"
+				:thumbnail="cfg.server + `:` + 
+							cfg.port + `/` +
+							content.owner.headImg || cfg.default_avatar"
 			>
 				<text>￥{{content.price}} | {{content.status}}</text>
 				<view>{{content.desc}}</view>
@@ -60,41 +63,29 @@
 			></uni-icons>
 			<button @click="want">我想要</button>
 		</view>
-		
-		<uni-popup type="bottom" ref="report">
-			<report-popup/>
-		</uni-popup>
 	</scroll-view>
 </template>
 
 <script lang="ts" setup>
 	import { ref } from "vue";
 	import { onLoad, onError } from "@dcloudio/uni-app";
-	import commentInput from "../../components/comment_input/comment_input.vue";
-	import commentDisplay from "../../components/comment_display/comment_display.vue";
-	import contentLoading from "../../components/content_loading/content_loading.vue";
-	import contentError from "../../components/content_error/content_error.vue";
-	import commonReport from "../../components/common_report/common_report.vue";
-	import reportPopup from "../../components/report_popup/report_popup.vue";
+	import commentInput from "@/components/comment_input/comment_input.vue";
+	import commentDisplay from "@/components/comment_display/comment_display.vue";
+	import contentLoading from "@/components/content_loading/content_loading.vue";
+	import contentError from "@/components/content_error/content_error.vue";
+	import commonReport from "@/components/common_report/common_report.vue";
+	import reportPopup from "@/components/report_popup/report_popup.vue";
 	
-	import cfg from "../../cfg.json";
+	import cfg from "@/cfg.json";
 	
 	// 展示的商品内容
 	const content = ref({});
-	// 举报
-	const report_data = ref({
-		to: "",
-		reason: ""
-	});
 	// 加载商品数据的查询条件
 	const query = ref({});
 	// 加载页面控制
 	const isLoading = ref(true);
 	// 错误页面控制
 	const isError = ref(false);
-	
-	// 绑定时要与需要绑定的popup的ref值相等
-	const report = ref(null);
 	
 	onLoad((option) => {
 		uni.showNavigationBarLoading();
@@ -110,7 +101,7 @@
 	// 加载商品请求
 	function request(data){
 		uni.request({
-			url: "http://localhost:4000/api/goods/goods_info",
+			url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.goods.prefix}${cfg.api.goods.goods_info}`,
 			method: "POST",
 			data: {
 				goods_id: data.id,
@@ -118,7 +109,7 @@
 			},
 			success(res) {
 				console.log(res);
-				content.value = res.data
+				content.value = res.data.data
 				// error
 				if(content.value.error) isError.value = true;
 				console.log(content.value);
@@ -138,7 +129,7 @@
 	
 	// 发表评论请求
 	function getSubmit(c) {
-		console.log(c);
+		// console.log(c);
 		uni.request({
 			url: cfg.server + ":" + 
 				 cfg.port + 
@@ -156,6 +147,7 @@
 			success(res) {
 				console.log(res);
 				if(res.statusCode === 200) {
+					// 解决评论后显示id之问题
 					const t = res.data;
 					t.comment_by = getApp().globalData.login;
 					content.value.comments.push(t);
@@ -203,7 +195,7 @@
 					uni.showToast({
 						icon: "success",
 						title: res.data.msg
-					})
+					});
 					content.value.isFavorite = 
 						!content.value.isFavorite;
 				}
@@ -223,7 +215,6 @@
 		call_report(content.value.goods_id);
 	}
 	
-	// 弹出举报窗口
 	function call_report(id){
 		console.log(id);
 		// report_data.value.to = id;

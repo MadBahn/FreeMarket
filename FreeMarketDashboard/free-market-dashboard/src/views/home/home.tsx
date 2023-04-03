@@ -4,6 +4,7 @@ import Sider from "antd/es/layout/Sider";
 import { useNavigate, Outlet } from "react-router-dom";
 import { Footer, Header } from "antd/es/layout/layout";
 import { HomeOutlined,
+    UserOutlined,
     DatabaseOutlined,
     ExclamationCircleOutlined,
     InfoOutlined } from "@ant-design/icons";
@@ -12,7 +13,7 @@ import { getTauriVersion } from "@tauri-apps/api/app";
 
 import { verify } from "../../common/verify";
 
-import "./home.css";
+import "./home.scss";
 
 function Home() {
     /*
@@ -28,6 +29,7 @@ function Home() {
 
     const menu_items = [
         {label: "首页", key: "main", icon: <HomeOutlined />},
+        {label: "用户", key: "user", icon: <UserOutlined />},
         {label: "数据", key: "data", icon: <DatabaseOutlined />},
         {label: "举报", key: "report", icon: <ExclamationCircleOutlined />},
         {label: "关于", key: "info", icon: <InfoOutlined />},
@@ -42,12 +44,7 @@ function Home() {
     }, []);
 
     useEffect(() => {
-        // console.log((getTauriVersion().then()));
         verifyToken().then();
-        // const t_ver = async function(){
-        //     return await getTauriVersion().then();
-        // }();
-        // setVer(t_ver.then());
     });
 
     const verifyToken = async () => {
@@ -71,7 +68,7 @@ function Home() {
                 breakpoint="lg"
                 collapsedWidth="0"
             >
-                <h1>a</h1>
+                <div className="logo">管理端</div>
                 <Menu
                     items={menu_items}
                     theme="dark"

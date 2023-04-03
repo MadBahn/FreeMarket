@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "history-goods": "./sub/history-goods",
+    "history-post": "./sub/history-post"
+  }
+}

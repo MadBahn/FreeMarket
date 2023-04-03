@@ -10,19 +10,32 @@
 			<uni-list-item title="用户协议" clickable="true"></uni-list-item>
 			<uni-list-item title="关于本应用" clickable="true"></uni-list-item>
 		</uni-list>
-		<button class="logout">退出登录</button>
+		<button v-if="isLogin" class="logout" @click="logout">退出登录</button>
 	</view>
 </template>
 
 <script lang="ts" setup>
 	import { ref } from "vue";
-	
+	import { onLoad } from "@dcloudio/uni-app";
 	import cfg from "../../cfg.json";
+	
+	const isLogin = ref(false);
+	
+	onLoad(() => {
+		isLogin.value = Object.keys(getApp().globalData.login).length !== 0;
+	});
 	
 	function goto(url: string) {
 		uni.navigateTo({
 			url: url,
 		});
+	}
+	
+	function logout() {
+		
+		
+		uni.$emit("logout");
+		uni.navigateBack();
 	}
 	
 </script>

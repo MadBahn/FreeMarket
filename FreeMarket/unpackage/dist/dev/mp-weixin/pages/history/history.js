@@ -3,11 +3,13 @@ const common_vendor = require("../../common/vendor.js");
 const cfg = require("../../cfg.js");
 if (!Array) {
   const _easycom_uni_segmented_control2 = common_vendor.resolveComponent("uni-segmented-control");
-  _easycom_uni_segmented_control2();
+  const _easycom_history_unit2 = common_vendor.resolveComponent("history-unit");
+  (_easycom_uni_segmented_control2 + _easycom_history_unit2)();
 }
 const _easycom_uni_segmented_control = () => "../../uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.js";
+const _easycom_history_unit = () => "../../components/history-unit/history-unit.js";
 if (!Math) {
-  _easycom_uni_segmented_control();
+  (_easycom_uni_segmented_control + _easycom_history_unit)();
 }
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "history",
@@ -17,6 +19,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     const type = common_vendor.ref("goods");
     const current = common_vendor.ref(0);
     const segItems = common_vendor.ref(["商 品", "帖 子"]);
+    const enableBottomRequest = common_vendor.ref(true);
     common_vendor.onLoad(() => {
       request(true);
     });
@@ -24,19 +27,20 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       request(true);
     });
     common_vendor.onReachBottom(() => {
-      request(false);
+      enableBottomRequest.value && request(false);
     });
     function switchSegments(e) {
-      console.log(e);
       current.value = e.currentIndex;
       if (current.value === 0)
         type.value = "goods";
       else if (current.value === 1)
         type.value = "post";
+      console.log(type.value);
+      request(true);
     }
-    function request(type2) {
+    function request(start_type) {
       const count = 5;
-      if (type2)
+      if (start_type)
         start_at.value = 0;
       common_vendor.index.request({
         url: cfg.cfg.server + ":" + cfg.cfg.port + cfg.cfg.api.prefix + cfg.cfg.api.user.prefix + cfg.cfg.api.user.get_history,
@@ -44,6 +48,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         data: {
           filter: {
             userid: getApp().globalData.login.userid,
+            type: type.value,
+            query: { userid: getApp().globalData.login.userid },
             start_at: start_at.value,
             count
           }
@@ -51,7 +57,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         success(res) {
           console.log(res);
           if (res.statusCode === 200) {
-            if (type2)
+            enableBottomRequest.value = res.data.data.length === count;
+            if (start_type)
               data.value = res.data.data;
             else {
               data.value = data.value.concat(res.data.data);
@@ -74,10 +81,15 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         }),
         c: common_vendor.f(data.value, (i, index, i0) => {
           return {
-            a: common_vendor.t(i),
-            b: index
+            a: "fbcb4048-1-" + i0,
+            b: common_vendor.p({
+              type: type.value,
+              data: i
+            }),
+            c: index
           };
-        })
+        }),
+        d: !enableBottomRequest.value
       };
     };
   }

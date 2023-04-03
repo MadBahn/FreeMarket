@@ -3,6 +3,8 @@ const common_vendor = require("../../common/vendor.js");
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "exchange",
   setup(__props) {
+    common_vendor.onLoad((option) => {
+    });
     return (_ctx, _cache) => {
       return {};
     };

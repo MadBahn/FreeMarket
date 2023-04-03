@@ -22,9 +22,9 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             if (res.statusCode === 200) {
               common_vendor.index.setStorage({
                 key: "user_login",
-                data: res.data
+                data: res.data.data
               });
-              getApp().globalData.login = res.data;
+              getApp().globalData.login = res.data.data;
               common_vendor.index.$emit("user");
               common_vendor.index.switchTab({
                 url: "/pages/my/my"

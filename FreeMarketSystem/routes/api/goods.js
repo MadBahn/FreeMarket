@@ -4,6 +4,7 @@ const uuid = require("uuid");
 
 const adminModule = require("../common/adminModule");
 const historyModule = require("../common/historyModule");
+const commonModule = require("../common/commonModule");
 
 const goodsModel = require("../model/goods");
 const userModel = require("../model/user");
@@ -16,11 +17,12 @@ const exchangeModel = require("../model/exchange");
 router.post("/add_goods", async (req, res) => {
     const { new_goods } = req.body;
 
+    let out;
+
     const user = await userModel.findOne({userid: new_goods.owner}).exec();
 
     if(!user) return res.status(400).json({"error": "用户不存在"});
 //    检查是否有图片
-
 
     const e_r = await new goodsModel({
         goods_id: "goods:" + uuid.v4(),
@@ -46,20 +48,14 @@ router.post("/modify_goods", async (req, res) => {
     const result = await goodsModel.findOne({
         goods_id: modify_form.goods_id
     }).exec();
-    let out;
 
-    out =
+    const out =
         result && (result._doc.owner === userid) ?
-        await result.set(modify_form).save() :
-        {
-            error:
-                result._doc.owner !== userid ?
-                    "必须由商品拥有者修改" :
-                    "商品不存在"
-        };
-    console.log(out);
+            commonModule.responseUnifier(200, "修改成功",await result.set(modify_form).save()) :
+            commonModule.responseUnifier(400, (result._doc.owner !== userid) ? "必须由商品拥有者修改" : "商品不存在");
+    // console.log(out);
 
-    res.status(200).json(out);
+    res.status(out.code).json(out);
 });
 
 router.post("/remove_goods", async (req, res) => {
@@ -87,6 +83,7 @@ router.post("/goods_display", async (req, res) => {
     const { admin_token, filter } = req.body;
 
     const isDel = !(await adminModule.tokenValidation(admin_token));
+    let out;
 
     const result = await goodsModel.find(isDel && {isDel: false})
         .skip(filter.start_at)
@@ -102,11 +99,12 @@ router.post("/goods_display", async (req, res) => {
     }
 
     // console.log(result);
-
-    res.status(200).json({
+    out = commonModule.responseUnifier(200, "正常访问", {
         data: result,
         next_index: (filter.start_at + filter.amount)
     });
+
+    res.status(out.code).json(out);
 
     /*
     * filter应包含：
@@ -125,6 +123,8 @@ router.post("/goods_info", async (req, res) => {
     const { userid, goods_id, isEdit, admin_token } = req.body;
 
     const filter = { goods_id: goods_id };
+
+    let out;
     //没有admin_token时，不查找被假删除的数据
     if(!await adminModule.tokenValidation(admin_token)) filter.isDel = false;
 
@@ -133,17 +133,23 @@ router.post("/goods_info", async (req, res) => {
     if(result) {
         //是否由编辑页面发起请求
         if(!isEdit) {
-            const tmp_user = await userModel
+            let tmp_user = await userModel
                 .findOne({userid: result.owner})
                 .sort("-post_date")
                 .exec();
-            if(tmp_user) result._doc.owner = tmp_user;
+            if(tmp_user) {
+                tmp_user = commonModule.removePassword(tmp_user);
+                result._doc.owner = tmp_user;
+            }
 
             const tmp_comments = await commentModel.find({comment_to: result.goods_id, isDel: false}).exec();
 
             for (let i in tmp_comments){
-                const tmp_by = await userModel.findOne({userid: tmp_comments[i].comment_by}).exec();
-                if( tmp_by !== null ) tmp_comments[i]._doc.comment_by = tmp_by;
+                let tmp_by = await userModel.findOne({userid: tmp_comments[i].comment_by}).exec();
+                if( tmp_by !== null ) {
+                    tmp_by = commonModule.removePassword(tmp_by);
+                    tmp_comments[i]._doc.comment_by = tmp_by;
+                }
             }
             result._doc.comments = tmp_comments;
         }
@@ -161,11 +167,16 @@ router.post("/goods_info", async (req, res) => {
                 history_to: goods_id
             });
         }
+        out = commonModule.responseUnifier(200, "找到商品了", result);
+    } else {
+        out = commonModule.responseUnifier(400, "商品不存在");
     }
+    res.status(out.code).json(out);
+});
 
-
-
-    res.status(result ? 200 : 400).json(result ? result : {"error":"商品不存在"});
+router.post("/hot_goods", async (req, res) => {
+//    热门商品，根据历史记录排序
+    const history = await historyModule.loadHistory().then();
 });
 
 router.post("/create_deal", async (req, res) => {
@@ -199,7 +210,7 @@ router.post("/get_deal", async (req, res) => {
     const result = await exchangeModel.find(query).exec();
 
 
-    res.status(200).json({});
+    res.status(200).json(result);
 });
 
 module.exports = router;

@@ -32,12 +32,17 @@
 
 <script lang="ts" setup>
 	import { onLoad, onShow } from "@dcloudio/uni-app";
+	import { ref } from "vue";
 	
 	import cfg from "../../cfg.json";
 	
+	const to = ref("");
+	
 	onLoad((option) => {
 		console.log("onLoad");
-		console.log(option);
+		console.log("option:",option);
+		to.value = option.refer_to;
+		console.log(to.value)
 	});
 	
 	function onSubmit(e) {
@@ -60,7 +65,9 @@
 			method: "POST",
 			data: {
 				report_form: {
-					...e.detail.value
+					...e.detail.value,
+					report_by: getApp().globalData.login.userid,
+					refer_to: to.value
 				}
 			},
 			success(res) {

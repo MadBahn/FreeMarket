@@ -2,8 +2,9 @@
 const common_vendor = require("../../common/vendor.js");
 const cfg = require("../../cfg.js");
 if (!Array) {
+  const _component_commomReport = common_vendor.resolveComponent("commomReport");
   const _easycom_uni_section2 = common_vendor.resolveComponent("uni-section");
-  _easycom_uni_section2();
+  (_component_commomReport + _easycom_uni_section2)();
 }
 const _easycom_uni_section = () => "../../uni_modules/uni-section/components/uni-section/uni-section.js";
 if (!Math) {
@@ -22,7 +23,24 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       request(option);
     });
     function getSubmit(c) {
-      console.log(c);
+      common_vendor.index.request({
+        url: `${cfg.cfg.server}:${cfg.cfg.port}${cfg.cfg.api.prefix}${cfg.cfg.api.user.prefix}${cfg.cfg.api.user.create_comment}`,
+        method: "POST",
+        data: {
+          comment_form: {
+            content: c,
+            comment_to: post.value.post_id,
+            comment_by: getApp().globalData.login.userid
+          }
+        },
+        success(res) {
+          if (res.statusCode === 200) {
+            const t = res.data;
+            t.comment_by = getApp().globalData.login;
+            post.value.comments.push(t);
+          }
+        }
+      });
     }
     function request(data) {
       common_vendor.index.request({
@@ -47,20 +65,33 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         }
       });
     }
+    function call_post() {
+      call_report(post.value.post_id);
+    }
+    function call_report(id) {
+      common_vendor.index.navigateTo({
+        url: `/pages/report/report?refer_to=${id}&report_by=${getApp().globalData.login.userid}`
+      });
+    }
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.t(post.value.imgs),
-        b: common_vendor.f(post.value.imgs, (i, index, i0) => {
+        a: common_vendor.unref(cfg.cfg).server + `:` + common_vendor.unref(cfg.cfg).port + `/` + post.value.post_by.headImg || common_vendor.unref(cfg.cfg).default_avatar,
+        b: common_vendor.t(post.value.post_by.username),
+        c: common_vendor.t(new Date(post.value.post_date).toLocaleString()),
+        d: common_vendor.f(post.value.imgs, (i, index, i0) => {
           return {
-            a: common_vendor.t(i)
+            a: common_vendor.unref(cfg.cfg).server + ":" + common_vendor.unref(cfg.cfg).port + "/" + i.url,
+            b: index
           };
         }),
-        c: common_vendor.t(post.value.content),
-        d: common_vendor.o(getSubmit),
-        e: common_vendor.p({
+        e: common_vendor.t(post.value.content),
+        f: common_vendor.o(call_post),
+        g: common_vendor.o(getSubmit),
+        h: common_vendor.o(call_report),
+        i: common_vendor.p({
           _data: post.value.comments
         }),
-        f: common_vendor.p({
+        j: common_vendor.p({
           id: "comment",
           titleFontSize: "20px",
           title: "评论",

@@ -18,7 +18,7 @@ history_module.addHistory = async (data) => {
 
 history_module.loadHistory = async (filter) => {
     return await historyModel
-        .find({userid: filter.userid})
+        .find(filter.query)
         .sort("-post_date")
         .skip(filter.start_at)
         .limit(filter.count)

@@ -18,7 +18,9 @@
     "pages/history/history",
     "pages/settings/settings",
     "pages/mygoods/mygoods",
-    "pages/report/report"
+    "pages/report/report",
+    "pages/edit_auth/edit_auth",
+    "pages/custom_exchange/custom_exchange"
   ],
   "window": {
     "navigationBarTextStyle": "black",

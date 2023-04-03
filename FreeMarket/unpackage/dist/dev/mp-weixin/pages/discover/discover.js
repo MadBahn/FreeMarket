@@ -71,7 +71,10 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           return {
             a: common_vendor.t(i.title),
             b: common_vendor.o(($event) => goto(`/pages/browse_post/browse_post?id=` + i.post_id + `&userid=` + common_vendor.unref(appData).login.userid)),
-            c: "7f6951af-1-" + i0
+            c: "7f6951af-1-" + i0,
+            d: common_vendor.p({
+              cover: common_vendor.unref(cfg.cfg).server + ":" + common_vendor.unref(cfg.cfg).port + "/" + i.imgs[0].url
+            })
           };
         })
       };

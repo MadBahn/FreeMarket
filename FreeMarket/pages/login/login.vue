@@ -48,9 +48,9 @@
 					if(res.statusCode === 200) {
 						uni.setStorage({
 							key: "user_login",
-							data: res.data
+							data: res.data.data
 						});
-						getApp().globalData.login = res.data;
+						getApp().globalData.login = res.data.data;
 						uni.$emit("user");
 						uni.switchTab({
 							url: "/pages/my/my"

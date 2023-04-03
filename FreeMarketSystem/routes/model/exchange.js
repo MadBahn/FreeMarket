@@ -8,7 +8,7 @@ const exchangeSchema = mongoose.Schema({
     goods: { type: String },
     price: { type: Number },
     pay: { type: String },
-    isDone: { type: Boolean },
+    status: { type: String },
     post_date: { type: Date },
     isDel: { type: Boolean }
 });

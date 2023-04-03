@@ -44,8 +44,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           success(res) {
             console.log(res);
             if (res.statusCode === 200) {
-              newGoods.value = res.data;
-              imgList.value = JSON.parse(JSON.stringify(res.data.imgs));
+              newGoods.value = res.data.data;
+              imgList.value = JSON.parse(JSON.stringify(res.data.data.imgs));
               for (let i in imgList.value) {
                 imgList.value[i].url = cfg.cfg.server + ":" + cfg.cfg.port + "/" + imgList.value[i].url;
               }

@@ -23,7 +23,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.item uni-input[data-v-891c2434] {
+.item uni-input[data-v-bac4a35d] {
   width: 70vw;
   height: 6vh;
   line-height: 6vh;
@@ -32,11 +32,12 @@
   border: 1px solid;
   border-radius: 3vh;
 }
-.action uni-button[data-v-891c2434] {
+.action uni-button[data-v-bac4a35d] {
   width: 70vw;
   height: 9vh;
   line-height: 9vh;
   border-radius: 4.5vh;
   margin-top: 1rem;
-  background-color: gray;
+  background-color: #007aff;
+  color: white;
 }

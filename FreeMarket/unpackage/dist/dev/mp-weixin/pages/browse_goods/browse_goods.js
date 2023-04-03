@@ -5,34 +5,26 @@ if (!Array) {
   const _easycom_uni_card2 = common_vendor.resolveComponent("uni-card");
   const _easycom_uni_section2 = common_vendor.resolveComponent("uni-section");
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
-  const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
-  (_easycom_uni_card2 + _easycom_uni_section2 + _easycom_uni_icons2 + _easycom_uni_popup2)();
+  (_easycom_uni_card2 + _easycom_uni_section2 + _easycom_uni_icons2)();
 }
 const _easycom_uni_card = () => "../../uni_modules/uni-card/components/uni-card/uni-card.js";
 const _easycom_uni_section = () => "../../uni_modules/uni-section/components/uni-section/uni-section.js";
 const _easycom_uni_icons = () => "../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
-const _easycom_uni_popup = () => "../../uni_modules/uni-popup/components/uni-popup/uni-popup.js";
 if (!Math) {
-  (contentLoading + contentError + commonReport + _easycom_uni_card + commentInput + commentDisplay + _easycom_uni_section + _easycom_uni_icons + reportPopup + _easycom_uni_popup)();
+  (contentLoading + contentError + commonReport + _easycom_uni_card + commentInput + commentDisplay + _easycom_uni_section + _easycom_uni_icons)();
 }
 const commentInput = () => "../../components/comment_input/comment_input.js";
 const commentDisplay = () => "../../components/comment_display/comment_display.js";
 const contentLoading = () => "../../components/content_loading/content_loading.js";
 const contentError = () => "../../components/content_error/content_error.js";
 const commonReport = () => "../../components/common_report/common_report.js";
-const reportPopup = () => "../../components/report_popup/report_popup.js";
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "browse_goods",
   setup(__props) {
     const content = common_vendor.ref({});
-    common_vendor.ref({
-      to: "",
-      reason: ""
-    });
     const query = common_vendor.ref({});
     const isLoading = common_vendor.ref(true);
     const isError = common_vendor.ref(false);
-    const report = common_vendor.ref(null);
     common_vendor.onLoad((option) => {
       common_vendor.index.showNavigationBarLoading();
       query.value.id = option.id;
@@ -44,7 +36,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     });
     function request(data) {
       common_vendor.index.request({
-        url: "http://localhost:4000/api/goods/goods_info",
+        url: `${cfg.cfg.server}:${cfg.cfg.port}${cfg.cfg.api.prefix}${cfg.cfg.api.goods.prefix}${cfg.cfg.api.goods.goods_info}`,
         method: "POST",
         data: {
           goods_id: data.id,
@@ -52,7 +44,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         },
         success(res) {
           console.log(res);
-          content.value = res.data;
+          content.value = res.data.data;
           if (content.value.error)
             isError.value = true;
           console.log(content.value);
@@ -70,7 +62,6 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       });
     }
     function getSubmit(c) {
-      console.log(c);
       common_vendor.index.request({
         url: cfg.cfg.server + ":" + cfg.cfg.port + cfg.cfg.api.prefix + cfg.cfg.api.user.prefix + cfg.cfg.api.user.create_comment,
         method: "POST",
@@ -155,9 +146,10 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         h: common_vendor.o(call_goods),
         i: common_vendor.p({
           isFull: "true",
+          avatarCircle: "true",
           title: content.value.owner.username || content.value.owner,
           subTitle: new Date(content.value.post_date).toLocaleString(),
-          thumbnail: content.value.owner.headImg || common_vendor.unref(cfg.cfg).default_avatar
+          thumbnail: common_vendor.unref(cfg.cfg).server + `:` + common_vendor.unref(cfg.cfg).port + `/` + content.value.owner.headImg || common_vendor.unref(cfg.cfg).default_avatar
         }),
         j: common_vendor.o(getSubmit),
         k: common_vendor.o(call_report),
@@ -185,14 +177,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           type: content.value.isFavorite ? "star-filled" : "star"
         }),
         s: common_vendor.o(want)
-      } : {}, {
-        t: common_vendor.sr(report, "fdc5c65b-9", {
-          "k": "report"
-        }),
-        v: common_vendor.p({
-          type: "bottom"
-        })
-      }) : {});
+      } : {}) : {});
     };
   }
 });

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "price-keypad": "../../components/price_keypad/price_keypad"
+  }
+}

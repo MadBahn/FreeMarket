@@ -1,1 +1,1 @@
-<view><uni-segmented-control wx:if="{{b}}" class="segs" bindclickItem="{{a}}" u-i="fbcb4048-0" bind:__l="__l" u-p="{{b}}"/><view wx:for="{{c}}" wx:for-item="i" wx:key="b" class="items">{{i.a}}</view></view>
+<view><uni-segmented-control wx:if="{{b}}" class="segs" bindclickItem="{{a}}" u-i="fbcb4048-0" bind:__l="__l" u-p="{{b}}"/><view wx:for="{{c}}" wx:for-item="i" wx:key="c" class="items"><history-unit wx:if="{{i.b}}" u-i="{{i.a}}" bind:__l="__l" u-p="{{i.b}}"/></view><view hidden="{{!d}}">再怎么找也没有了</view></view>

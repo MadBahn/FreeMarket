@@ -11,7 +11,9 @@
 		<input v-model="newGoods.status" placeholder="商品状况"/>
 		<textarea v-model="newGoods.desc" placeholder="商品简介"></textarea>
 		<view>
-			<button @click="doGoods">{{ operation === "new" ? "添加" : "修改" }}</button>
+			<button @click="doGoods">
+				{{ operation === "new" ? "添加" : "修改" }}
+			</button>
 		</view>
 		<uni-file-picker 
 			v-model="imgList"
@@ -94,8 +96,8 @@
 				success(res) {
 					console.log(res);
 					if(res.statusCode === 200){
-						newGoods.value = res.data;
-						imgList.value = JSON.parse(JSON.stringify(res.data.imgs));
+						newGoods.value = res.data.data;
+						imgList.value = JSON.parse(JSON.stringify(res.data.data.imgs));
 						for(let i in imgList.value) {
 							imgList.value[i].url = cfg.server + ":" + cfg.port + "/" +
 													imgList.value[i].url;

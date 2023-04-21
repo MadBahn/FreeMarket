@@ -1,0 +1,24 @@
+.login_box {
+    width: 400px;
+    /*width: 30vw;*/
+    background-color: #ecebeb;
+    /*height: 250px;*/
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.input {
+    margin-bottom: 2vh;
+}
+
+.btn {
+    height: 60px;
+    width: 100%;
+}
+
+h2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 4vh;
+}

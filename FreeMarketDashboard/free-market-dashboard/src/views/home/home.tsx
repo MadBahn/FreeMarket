@@ -11,7 +11,7 @@ import { HomeOutlined,
 import { getTauriVersion } from "@tauri-apps/api/app";
 
 
-import { verify } from "../../common/verify";
+import { verify } from "@/common/verify";
 
 import "./home.scss";
 

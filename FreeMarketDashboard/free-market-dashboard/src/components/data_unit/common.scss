@@ -1,0 +1,10 @@
+.data {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  div {
+    width: 50vw;
+  }
+}

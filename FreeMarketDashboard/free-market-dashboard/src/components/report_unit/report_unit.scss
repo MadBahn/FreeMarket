@@ -1,0 +1,28 @@
+.report_frame {
+  margin-bottom: 2vh;
+
+  .report_by_info {
+    display: flex;
+    flex-direction: row;
+
+    h2 {
+      margin-left: 1.5vw;
+    }
+
+    .avatar {
+      $scale: 60px;
+      width: $scale;
+      height: $scale;
+      border: 1px #dadada solid;
+      border-radius: 50%;
+      background-color: #646cff;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+.btn {
+  margin-right: 1vw;
+}

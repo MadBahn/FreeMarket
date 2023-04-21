@@ -5,6 +5,8 @@ const reportSchema = mongoose.Schema({
     refer_to: { type: String },
     report_by: { type: String },
     reason: { type: String },
+    other_reason: { type: String },
+    isDone: { type: Boolean },
     post_date: { type: Date }
 });
 

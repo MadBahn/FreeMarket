@@ -1,28 +1,55 @@
 import React, { useEffect, useState } from 'react';
-import {Button, List, Pagination, Segmented} from "antd";
+import {Button, List, Pagination, Segmented, Table} from "antd";
 
-import { CustomIcon } from "../../../../components/custom_icon/custom_icon";
+import { CustomIcon } from "@/components/custom_icon/custom_icon";
 import { http } from "@tauri-apps/api";
-import DataUnit from "../../../../components/data_unit/data_unit";
+
+import DataUnit from "@/components/data_unit/data_unit";
+
+import cfg from "@/common/cfg.json";
 
 function Data(){
-    const [data, setData] = useState([]);
-    const [option, setOption] = useState("goods");
-    const [field, setField] = useState({
-        start: 0,
-        limit: 5
-    });
+    const [ expandKey, setExpandKey ] = useState();
+    const [ data, setData ] = useState([]);
+    const [ option, setOption ] = useState("goods");
+    const [ loading, setLoading ] = useState(false);
 
-    let total = 0;
+    // let expandData: any[] = [];
 
-    let queryIndex = 0;
+    const columns = [{
+        title: "数据id",
+        width: "30%",
+        key: "id",
+        render: (r) => <span>
+            {option === "goods" ? <p>{r.goods_id}</p> :
+            option === "post" ? <p>{r.post_id}</p> :
+            option === "comment" ? <p>{r.comment_id}</p> :
+            <p>{r.exchange_id}</p>}
+        </span>
 
+    },{
+        title: "发布日期",
+        dataIndex: "post_date",
+        key: "post_date",
+        width: "20%",
+        defaultSortOrder: "descend",
+        sorter: (a, b) => new Date(a.post_date).getTime() - new Date(b.post_date).getTime(),
+        render: (r) => <p>{new Date(r).toLocaleString()}</p>
+    },{
+        title: "创建者",
+        key: "creator",
+        render: (r) => <p>
+            {option === "goods" ? <p>{r.owner}</p> :
+            option === "post" ? <p>{r.post_by}</p> :
+            option === "comment" ? <p>{r.comment_by}</p> :
+            <p>{r.buyer}</p>}
+        </p>
+    }];
     /*
     * 商品
     * 帖子
     * 评论
     * 交易
-    * 历史
     * */
 
     const options = [
@@ -40,6 +67,7 @@ function Data(){
         comment: 0
     })
 
+    // @ts-ignore
     const setCountIndex = () : number => {
       switch (option) {
           case "goods": return d_count.goods;
@@ -50,27 +78,26 @@ function Data(){
     }
 
     useEffect(() => {
-        // setData(await request());
-
         //获取总数据
         async function Do() {
-            await http.fetch("http://localhost:4000/api/admin/count", {
+            await http.fetch(`${cfg.base_url}api/admin/count`, {
                 method: "POST",
                 body: http.Body.json({
-                    admin_token: localStorage.getItem("token"),
+                    token: localStorage.getItem("token"),
                     time: {},
                     isChart: false
                 })
             }).then(r => {
-                console.log(`${JSON.stringify(r.data)}`);
+                // console.log(`${JSON.stringify(r.data)}`);
                 if(r.status === 200) {
-                    // console.log(r.data.data[0])
-                    setD_count(r.data)
+                    console.log(r.data);
+                    // @ts-ignore
+                    setD_count(r.data);
                 }
             });
 
             // @ts-ignore
-            setData((await request(option).then()).data.data);
+            await request(option);
         }
         Do().then();
 
@@ -80,48 +107,81 @@ function Data(){
     useEffect(() => {
         console.log(option)
 
-
         console.log("set",setCountIndex());
-
-        // setTotal(setCountIndex());
-
-        total = setCountIndex();
 
         async function Do() {
             // @ts-ignore
-            setData((await request(option).then()).data.data);
+            await request(option);
         }
         Do().then();
     }, [option])
 
-    const req_count = () => {
-
-    }
-    //传入自适应字段，以第一条数据为准
-    const custom_key = () => {
-
-    }
     //锁定/解锁
-    const lock = (e) => {
+    const lock = async (e) => {
         console.log(e);
-    }
+        const query = (() => {
+            switch (e.split(":")[0]) {
+                case "goods": return {goods_id: e};
+                case "post": return {post_id: e};
+                case "exchange": return {exchange_id: e};
+                case "comment": return {comment_id: e};
+            }
+        })();
+    //    请求锁定/解锁
+        await http.fetch(`${cfg.base_url}api/admin/lock`, {
+            method: "POST",
+            body: http.Body.json({
+                token: localStorage.getItem("token"),
+                target: e,
+                filter: query
+            })
+        }).then(async r => {
+            if(r.status === 200) { // @ts-ignore
+                await request(option);
+            }
+        });
+    };
     //彻底删除
-    const delete_data = (e) => {
+    const delete_data = async (e) => {
         console.log(e);
+    //    请求彻底删除
+        await http.fetch(`${cfg.base_url}api/admin/remove_complete`, {
+            method: "POST",
+            body: http.Body.json({
+                token: localStorage.getItem("token"),
+                target: e
+            })
+        }).then(async r => {
+            if(r.status === 200) { // @ts-ignore
+                await request(option);
+            }
+        });
+
     }
 
     const request = (model: string) => {
-        return http.fetch("http://localhost:4000/api/admin/data_admin", {
+        setData([]);
+        setLoading(true);
+        http.fetch(`${cfg.base_url}api/admin/data_admin`, {
             method: "POST",
             body: http.Body.json({
-                admin_token: localStorage.getItem("token"),
+                token: localStorage.getItem("token"),
                 query: {
                     model: model,
                     filter: {},
-                    field: field
+                    field: {start:0,limit:0}
                 }
             })
-        }).then();
+        }).then(r=>{
+            if(r.status === 200) {
+                setLoading(false);
+                setData(r.data.data.map(i => ({
+                        ...i,
+                        key: i._id
+                    }))
+                );
+            }
+        });
     };
 
     return (
@@ -130,27 +190,36 @@ function Data(){
                 options={options}
                 onChange={(e) => setOption(e)}
             />
-            <List
-                style={
-                    {
-                        height: "80vh",
-                        overflowY: "scroll"
+            <Table
+                style={{
+                    height: "80vh",
+                    overflowY: "scroll"
+                }}
+                columns={columns}
+                loading={loading}
+                pagination={{
+                    hideOnSinglePage: true,
+                    defaultPageSize: 4
+                }}
+                expandable={{
+                    expandedRowKeys: expandKey,
+                    rowExpandable: (r) => true,
+                    expandedRowRender: (r) =>
+                        <DataUnit
+                            source={r}
+                            _type={option}
+                            onLock={lock}
+                            onDelete={delete_data}
+                        />,
+                    onExpand: (e, r) => {
+                        const keys = [];
+                        if(e) keys.push(r._id);
+                        console.log(e, r, keys);
+                        setExpandKey(keys);
                     }
-                }
-                itemLayout="vertical"
-                size="large"
+                }}
                 dataSource={data}
-                renderItem={(i) => (
-                    //@ts-ignore
-                    <List.Item id={i._id}>
-                        {/*以下划线为分割符，长度为二*/}
-                        {/*{}*/}
-                        <DataUnit source={i} onLock={lock}/>
-
-                    </List.Item>
-                )}
             />
-            <Pagination total={total}/>
         </div>
     );
 }

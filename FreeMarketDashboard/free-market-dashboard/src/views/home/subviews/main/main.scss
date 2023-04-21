@@ -4,7 +4,9 @@
   flex-direction: row;
   justify-content: space-evenly;
 
-  Card {
-    width: 40vw;
+  .panel {
+    width: 45vw;
+    height: 50vh;
+    overflow-y: scroll;
   }
 }

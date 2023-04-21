@@ -1,11 +1,11 @@
 import {Button, Card, Input, message} from 'antd';
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate } from "react-router-dom";
 import { http } from "@tauri-apps/api";
 
-import { verify } from "../../common/verify";
+import { verify } from "@/common/verify";
 
-import "./login.css";
+import "./login.scss";
 
 function Login() {
     const [ msgAPI, msgContext ] = message.useMessage();
@@ -75,6 +75,7 @@ function Login() {
             {msgContext}
             <Card className="login_box"
                   onKeyDownCapture={doEnterPress}>
+                <h2>管理端登录</h2>
                 <Input
                     className="input"
                     placeholder="用户名"

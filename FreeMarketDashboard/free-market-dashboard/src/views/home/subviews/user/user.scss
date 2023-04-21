@@ -1,0 +1,10 @@
+.avatar {
+  $scale: 60px;
+  width: $scale;
+  height: $scale;
+  border: 1px #dadada solid;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

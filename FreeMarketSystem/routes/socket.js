@@ -1,5 +1,10 @@
 const io = {};
+
 const { Server } = require("socket.io");
+const os = require("os");
+const pubSub = require("pubsub-js");
+
+const adminModule = require("./common/adminModule");
 
 //用于消息部分
 function getSocket(server) {
@@ -29,12 +34,58 @@ function getSocket(server) {
     io.on("connect", (socket) => {
         console.log( socket.id," connected");
         //首先需要初始化
-        socket.on("init", () => {
-            console.log("init on server");
-            socket.emit("init");
+        socket.on("init", async (e) => {
+            //需要传入token
+            console.log("init on server", e);
+            // socket.emit("init");
+
+            if(e.token && (e.type === "admin" && await adminModule.tokenValidation(e.token))) {
+                setInterval(() => {
+                    socket.emit("status", {
+                        cpu: process.cpuUsage(),
+                        ram: (os.totalmem() / 1024 / 1024 / 1024).toFixed(2),
+                        freeram: (os.freemem() / 1024 / 1024 / 1024).toFixed(2)
+                    });
+                }, 5000);
+            } else if(e.type === "client"){
+                // for(let i in ioList) {
+                //     if(ioList[i].userid === e.userid) break;
+                //     else if(ioList[i].userid !== e.userid && ((i + 1) * 1) === ioList.length ) ioList.push({socket: socket.id, userid: e.userid});
+                // }
+                for (let i in ioList) {
+                    if(ioList[i].userid === e.user) return;
+                }
+                ioList.push({socket: socket.id, userid: e.user});
+                console.log(ioList);
+                socket.emit("new_msg", {userid: e.user});
+            }
+
+        //    判断e是否为管理端，如是则定时发送服务器状况
         });
 
     //    消息部分
+        pubSub.subscribe("msg", async (msg, data) => {
+            /*
+            格式：
+            {
+                target: "---用户id---",
+                content: ""
+            }
+            *
+            *
+            * */
+
+            //存储消息
+            console.log(msg, data);
+            ioList.forEach(i => {
+                if(i.userid === data.target) {
+                //    发送消息
+                    socket.emit("new_msg", {userid: data.target});
+                }
+            });
+
+        });
+
 
         // 管理端执行了操作，如在线立即通知之
         socket.on("do_admin", (e) => {
@@ -44,6 +95,13 @@ function getSocket(server) {
         //客户端执行了操作
         socket.on("do", (e) => {
             console.log(e);
+        });
+
+        socket.on("disconnect", () => {
+            console.log(socket.id, "disconnect");
+        //    移除ioList
+            ioList = ioList.filter(i => i.socket !== socket.id);
+            console.log(ioList);
         });
 
     });

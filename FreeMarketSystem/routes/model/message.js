@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 
 const messageSchema = mongoose.Schema({
     message_id: { type: String, unique: true },
-    sender: { type: String },
     receiver: { type: String },
+    //商品、帖子、交易、账号
+    type: { type: String },
+    content: { type: String },
     post_date: { type: Date }
 });
 

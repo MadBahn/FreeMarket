@@ -6,7 +6,11 @@
 				clickable="true"
 				@click="goto('/pages/edit_info/edit_info')"
 			></uni-list-item>
-			<uni-list-item title="账户安全" clickable="true"></uni-list-item>
+			<uni-list-item 
+				title="账户安全" 
+				clickable="true" 
+				@click="goto('/pages/edit_auth/edit_auth')"
+			></uni-list-item>
 			<uni-list-item title="用户协议" clickable="true"></uni-list-item>
 			<uni-list-item title="关于本应用" clickable="true"></uni-list-item>
 		</uni-list>
@@ -17,7 +21,6 @@
 <script lang="ts" setup>
 	import { ref } from "vue";
 	import { onLoad } from "@dcloudio/uni-app";
-	import cfg from "../../cfg.json";
 	
 	const isLogin = ref(false);
 	
@@ -32,8 +35,6 @@
 	}
 	
 	function logout() {
-		
-		
 		uni.$emit("logout");
 		uni.navigateBack();
 	}

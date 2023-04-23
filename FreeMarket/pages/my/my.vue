@@ -18,7 +18,7 @@
 			>
 			</view>
 			<view class="r-side">
-				<view v-if="isLogin" @click="goto(`/pages/edit_info/edit_info`)">
+				<view v-if="isLogin" @click="gotoInfo(info.userid)">
 					<view class="username">{{info.username}}</view>
 					<view class="desc">{{info.desc}}</view>
 				</view>
@@ -44,7 +44,7 @@
 				></uni-icons>
 				<text>浏览历史</text>
 			</view>
-			<view class="menu-items">
+			<view class="menu-items" @click="goto(`/pages/mypost/mypost`)">
 				<uni-icons
 					size="35"
 					customPrefix="iconfont"
@@ -137,6 +137,12 @@
 	function goto(url: string){
 		uni.navigateTo({
 			url: url
+		});
+	}
+	
+	function gotoInfo(id: string) {
+		uni.navigateTo({
+			url: `/pages/info/info?id=${id}`
 		});
 	}
 	// 跳转至修改个人信息界面，信息从localStorage获取，无需在url上添加参数

@@ -9,15 +9,36 @@
 		v-if="!isError"
 	>
 		<view class="main_content">
-			<uni-card 
-				isFull="true"
-				avatarCircle="true"
-				:title="content.owner.username || content.owner"
-				:subTitle="new Date(content.post_date).toLocaleString()"
-				:thumbnail="cfg.server + `:` + 
-							cfg.port + `/` +
-							content.owner.headImg || cfg.default_avatar"
-			>
+			<uni-card isFull="true">
+				<template v-slot:title>
+					<view @click="gotoInfo(content.owner.userid)" class="info">
+						<view
+							class="avatar l-side" 
+							:style="{ 
+								backgroundImage: `url(`+ (
+									content.owner.headImg !== '' ? 
+										(
+											cfg.server + ':' + 
+											cfg.port + '/' +
+											content.owner.headImg
+										) : 
+										cfg.default_avatar
+								) +`)`
+							 }" 
+						>
+						</view>
+						<view class="r-side">
+							<view>
+								<view class="username">
+									{{content.owner.username ? content.owner.username : content.owner}}
+								</view>
+								<view class="desc">
+									{{new Date(content.post_date).toLocaleString()}}
+								</view>
+							</view>
+						</view>
+					</view>
+				</template>
 				<text>￥{{content.price}} | {{content.status}}</text>
 				<view>{{content.desc}}</view>
 				<view id="imgs">
@@ -74,7 +95,6 @@
 	import contentLoading from "@/components/content_loading/content_loading.vue";
 	import contentError from "@/components/content_error/content_error.vue";
 	import commonReport from "@/components/common_report/common_report.vue";
-	import reportPopup from "@/components/report_popup/report_popup.vue";
 	
 	import cfg from "@/cfg.json";
 	
@@ -96,6 +116,7 @@
 	
 	onError((err) => {
 		console.log(err);
+		isError.value = true;
 	});
 	
 	// 加载商品请求
@@ -109,9 +130,9 @@
 			},
 			success(res) {
 				console.log(res);
-				content.value = res.data.data
+				if(res.statusCode === 200) content.value = res.data.data
 				// error
-				if(content.value.error) isError.value = true;
+				else isError.value = true;
 				console.log(content.value);
 			},
 			fail(){
@@ -206,7 +227,25 @@
 	// 订单请求
 	function want() {
 		// 生成订单
-		
+		uni.request({
+			url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.goods.prefix}${cfg.api.goods.create_deal}`,
+			method: "POST",
+			data: {
+				exchange_form: {
+					buyer: getApp().globalData.login.userid,
+					seller: content.value.owner.userid,
+					goods: content.value.goods_id,
+					price: content.value.price,
+				}
+			},
+			success(res) {
+				console.log(res);
+				uni.showToast({
+					icon: res.statusCode === 200 ? "success" : "error",
+					title: res.data.msg
+				});
+			}
+		});
 	}
 	
 	// 举报商品
@@ -224,6 +263,12 @@
 		uni.navigateTo({
 			url: "/pages/report/report?refer_to=" + id + 
 				 "&report_by=" + getApp().globalData.login.userid
+		});
+	}
+	
+	function gotoInfo(id: string) {
+		uni.navigateTo({
+			url: `/pages/info/info?id=${id}`
 		});
 	}
 </script>
@@ -284,7 +329,41 @@
 		justify-content: flex-start;
 		min-height: 30vh;
 		padding-bottom: 8vh;
+	}
+	
+	.info {
+		// height: 15vh;
+		padding-top: var(--status-bar-height);
+		// background-color: blanchedalmond;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
 		
+		.avatar {
+			width: 7vh;
+			height: 7vh;
+			border-radius: 50%;
+			background-position: center;
+			background-size: 100%;
+			background-repeat: no-repeat;
+		}
 		
+		.l-side {
+			
+		}
+		
+		.r-side {
+			margin-left: 3vw;
+			width: 70vw;
+			// flex: 0 0 1;
+			.username {
+				font-size: 3vh;
+			}
+			
+			.desc {
+				color: #d0d0d0;
+				font-size: 2vh;
+			}
+		}
 	}
 </style>

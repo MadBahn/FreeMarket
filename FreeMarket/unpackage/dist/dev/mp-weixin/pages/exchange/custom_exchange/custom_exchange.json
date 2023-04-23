@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "自定义交易",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-popup": "../../../uni_modules/uni-popup/components/uni-popup/uni-popup",
+    "price-keypad": "../../../components/price_keypad/price_keypad",
+    "goods-unit": "../../../components/goods_unit/goods_unit"
+  }
+}

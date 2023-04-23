@@ -9,6 +9,7 @@ const adminModule = require("./common/adminModule");
 //用于消息部分
 function getSocket(server) {
     const io = new Server( server,{
+        //跨域
         cors: {
             origin: process.env.ORIGIN
         },
@@ -20,15 +21,10 @@ function getSocket(server) {
     let ioList = [];
 
     /*
-    *
     * {
     *   socketId,
     *   data(userid)
-    *
-    *
     * }
-    *
-    *
     * */
 
     io.on("connect", (socket) => {
@@ -37,23 +33,18 @@ function getSocket(server) {
         socket.on("init", async (e) => {
             //需要传入token
             console.log("init on server", e);
-            // socket.emit("init");
 
             if(e.token && (e.type === "admin" && await adminModule.tokenValidation(e.token))) {
                 setInterval(() => {
                     socket.emit("status", {
                         cpu: process.cpuUsage(),
-                        ram: (os.totalmem() / 1024 / 1024 / 1024).toFixed(2),
-                        freeram: (os.freemem() / 1024 / 1024 / 1024).toFixed(2)
+                        ram: (os.totalmem() / 1024 / 1024 / 1024).toFixed(2) * 1.0,
+                        freeram: (os.freemem() / 1024 / 1024 / 1024).toFixed(2) * 1.0
                     });
                 }, 5000);
             } else if(e.type === "client"){
-                // for(let i in ioList) {
-                //     if(ioList[i].userid === e.userid) break;
-                //     else if(ioList[i].userid !== e.userid && ((i + 1) * 1) === ioList.length ) ioList.push({socket: socket.id, userid: e.userid});
-                // }
-                for (let i in ioList) {
-                    if(ioList[i].userid === e.user) return;
+                for (let i of ioList) {
+                    if(i.userid === e.user) return;
                 }
                 ioList.push({socket: socket.id, userid: e.user});
                 console.log(ioList);
@@ -85,7 +76,6 @@ function getSocket(server) {
             });
 
         });
-
 
         // 管理端执行了操作，如在线立即通知之
         socket.on("do_admin", (e) => {

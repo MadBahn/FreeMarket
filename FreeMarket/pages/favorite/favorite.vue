@@ -6,36 +6,32 @@
 			styleType="text"
 			:values="segItems"
 			@clickItem="switchSegments"/>
-		<view class="favorite-list">
+		<view class="favorite-list" v-if="favor_out.length !== 0">
 			<!-- {{favor_out}} -->
 			<view 
 				class="favorite-item" 
 				v-for="(i, index) in favor_out"
 			>
 				<!-- string -->
-				<view v-if="i.isDel">
-					str
-				</view>
-				<view v-else>
-					{{i}}
-					<!-- img -->
-					<image :src="
-						cfg.server + `:` +
-						cfg.port + `/` +
-						i.refer_to.imgs[0].url"></image>
-					<!-- desc -->
-					{{i.refer_to.desc}}
+				<view v-if="!i.isDel">
+					<GoodsUnit v-if="type === 'goods'" :data="i.refer_to"/>
+					<PostUnit v-else :data="i.refer_to"/>
 					<!-- operation -->
 					
 				</view>
 			</view>
 		</view>
+		<view v-else>NO</view>
 	</view>
 </template>
 
 <script lang="ts" setup>
 	import { ref } from "vue";
 	import { onLoad } from "@dcloudio/uni-app";
+	
+	import GoodsUnit from "@/components/goods_unit/goods_unit.vue";
+	import PostUnit from "@/components/post_unit/post_unit.vue";
+	
 	import cfg from "../../cfg.json";
 	
 	const favor_list = ref([]);

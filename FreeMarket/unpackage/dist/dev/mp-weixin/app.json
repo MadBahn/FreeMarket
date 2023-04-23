@@ -20,7 +20,12 @@
     "pages/mygoods/mygoods",
     "pages/report/report",
     "pages/edit_auth/edit_auth",
-    "pages/custom_exchange/custom_exchange"
+    "pages/exchange/custom_exchange/custom_exchange",
+    "pages/exchange/confirm_exchange/confirm_exchange",
+    "pages/mypost/mypost",
+    "pages/pay/pay",
+    "pages/msg_detail/msg_detail",
+    "pages/info/info"
   ],
   "window": {
     "navigationBarTextStyle": "black",

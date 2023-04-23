@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "设置",
   "enablePullDownRefresh": false,
   "usingComponents": {
     "uni-list-item": "../../uni_modules/uni-list/components/uni-list-item/uni-list-item",

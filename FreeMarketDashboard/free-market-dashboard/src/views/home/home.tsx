@@ -9,11 +9,13 @@ import { HomeOutlined,
     ExclamationCircleOutlined,
     InfoOutlined } from "@ant-design/icons";
 import { getTauriVersion } from "@tauri-apps/api/app";
+import {useDispatch} from "react-redux";
 
-
+import {init} from "@/store/reducer/common_reducer";
 import { verify } from "@/common/verify";
 
 import "./home.scss";
+
 
 function Home() {
     /*
@@ -26,6 +28,7 @@ function Home() {
     const [ ver, setVer ] = useState("");
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const menu_items = [
         {label: "首页", key: "main", icon: <HomeOutlined />},
@@ -37,6 +40,7 @@ function Home() {
 
     //等价于componentDidMount生命周期钩子
     useEffect(() => {
+        dispatch(init())
         async function Do(){
           setVer((await getTauriVersion().then()));
         }

@@ -38,7 +38,7 @@
             "path": "pages/exchange/exchange",
             "style": {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": true
             }
         },{
             "path": "pages/new_post/new_post",
@@ -61,13 +61,13 @@
         },{
 			"path": "pages/login/login",
 			"style": {
-			    "navigationBarTitleText": "",
+			    "navigationBarTitleText": "登录",
 			    "enablePullDownRefresh": false
 			}
 		},{
 			"path": "pages/register/register",
 			"style": {
-			    "navigationBarTitleText": "",
+			    "navigationBarTitleText": "注册",
 			    "enablePullDownRefresh": false
 			}
 		},{
@@ -80,7 +80,7 @@
         },{
             "path" : "pages/edit_info/edit_info",
             "style": {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "编辑个人信息",
                 "enablePullDownRefresh": false
             }
         },{
@@ -102,7 +102,7 @@
             "path" : "pages/history/history",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "浏览历史",
                 "enablePullDownRefresh": true
             }
             
@@ -111,7 +111,7 @@
             "path" : "pages/settings/settings",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "设置",
                 "enablePullDownRefresh": false
             }
             
@@ -120,8 +120,8 @@
             "path" : "pages/mygoods/mygoods",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "navigationBarTitleText": "我发布的商品",
+                "enablePullDownRefresh": true
             }
             
         }
@@ -129,7 +129,7 @@
             "path" : "pages/report/report",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "举报",
                 "enablePullDownRefresh": false
             }
             
@@ -144,11 +144,56 @@
             
         }
         ,{
-            "path" : "pages/custom_exchange/custom_exchange",
+            "path" : "pages/exchange/custom_exchange/custom_exchange",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "自定义交易",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/exchange/confirm_exchange/confirm_exchange",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "确认交易",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/mypost/mypost",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我发布的帖子",
+                "enablePullDownRefresh": true
+            }
+            
+        }
+        ,{
+            "path" : "pages/pay/pay",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/msg_detail/msg_detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "消息",
+                "enablePullDownRefresh": true
+            }
+            
+        }
+        ,{
+            "path" : "pages/info/info",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": true
             }
             
         }

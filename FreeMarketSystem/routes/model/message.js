@@ -5,6 +5,7 @@ const messageSchema = mongoose.Schema({
     receiver: { type: String },
     //商品、帖子、交易、账号
     type: { type: String },
+    title: {type: String },
     content: { type: String },
     post_date: { type: Date }
 });

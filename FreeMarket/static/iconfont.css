@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3782891 */
-  src: url('iconfont.ttf?t=1670812591714') format('truetype');
+  src: url('iconfont.ttf?t=1682231813912') format('truetype');
 }
 
 .iconfont {
@@ -9,6 +9,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-xingbie:before {
+  content: "\e62d";
+}
+
+.icon-xingbienv:before {
+  content: "\e638";
+}
+
+.icon-xingbienan:before {
+  content: "\e639";
 }
 
 .icon-lishi:before {

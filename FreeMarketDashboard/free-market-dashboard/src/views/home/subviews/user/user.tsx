@@ -6,6 +6,7 @@ import cfg from "@/common/cfg.json";
 
 import "./user.scss";
 import {confirm} from "@tauri-apps/api/dialog";
+import {ColumnsType} from "antd/es/table";
 
 function User() {
     //前端自行整理用户或后端处理
@@ -14,7 +15,7 @@ function User() {
 
     const queryIndex = 0;
 
-    const columns = [
+    const columns : ColumnsType<any> = [
         {
             title: "头像",
             render: (r) =>
@@ -35,7 +36,6 @@ function User() {
             title: "用户名",
             dataIndex: "username",
             key: "username",
-            filter: [],
             filterMode: "tree",
             filterSearch: true,
             onFilter: (v, r) => r.username.has(v)
@@ -85,6 +85,7 @@ function User() {
             // console.log(r);
             if(r.status === 200) {
                 // console.log(r.data);
+                //@ts-ignore
                 setUserData(r.data);
                 setLoading(false);
                 console.log(r.data);
@@ -159,11 +160,14 @@ function User() {
         }
     };
 
+    // @ts-ignore
     return (
         <div>
+
             <Table
                 dataSource={userData}
-                columns={columns}
+                columns={//@ts-ignore
+                    columns}
                 loading={loading}
                 pagination={{
                     hideOnSinglePage: true,

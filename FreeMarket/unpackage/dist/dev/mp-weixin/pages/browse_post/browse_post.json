@@ -2,8 +2,10 @@
   "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
   "usingComponents": {
+    "uni-icons": "../../uni_modules/uni-icons/components/uni-icons/uni-icons",
     "uni-section": "../../uni_modules/uni-section/components/uni-section/uni-section",
     "comment-input": "../../components/comment_input/comment_input",
-    "comment-display": "../../components/comment_display/comment_display"
+    "comment-display": "../../components/comment_display/comment_display",
+    "common-report": "../../components/common_report/common_report"
   }
 }

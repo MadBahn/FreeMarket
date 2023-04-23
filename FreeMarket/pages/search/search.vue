@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="search-full-scale" @click="focusOn = false">
-			<view class="search-btn" @click="doSearch(``, false, true)">搜索</view>
+			<view class="search-btn" @click="doSearch(searchText, false, true)">搜索</view>
 			<uni-icons 
 				@click="clearText" 
 				v-show="isClear" 
@@ -18,7 +18,7 @@
 		<view v-if="!focusOn">
 			<view class="option">
 				<view>历史记录</view>
-				<view @click="clearHistory">清空</view>
+				<view @click="operateHistory('c', null, 0)">清空</view>
 			</view>
 			<view class="history">
 				<view 
@@ -30,15 +30,19 @@
 					<uni-icons 
 						type="close" 
 						class="item-close" 
-						@click="delHistory(i)"
+						@click="operateHistory('d', i, index)"
 					></uni-icons>
 				</view>
 			</view>
 		</view>
 		
 		<view class="result" v-else>
-			{{result}}
-			<view>再怎么找也没有了</view>
+			<view class="unit" v-for="(i,index) in result">
+				<GoodsUnit v-if="type==='goods'" :data="i"/>
+				<PostUnit v-else :data="i"/>
+			</view>
+			
+			<view v-if="!enableBottomRequest">再怎么找也没有了</view>
 		</view>
 	</view>
 </template>
@@ -54,11 +58,14 @@
 	import { onLoad, onReachBottom } from "@dcloudio/uni-app";
 	import { ref } from "vue";
 	
-	import cfg from "../../cfg.json";
+	import GoodsUnit from "@/components/goods_unit/goods_unit.vue";
+	import PostUnit from "@/components/post_unit/post_unit.vue";
+	
+	import cfg from "@/cfg.json";
 	
 	const type = ref("");
 	// 搜索历史，存储于localStorage中
-	const history = ref(["item1","item2","item itemi", "item3"]);
+	const history = ref();
 	
 	// 搜索框内容
 	const searchText = ref("");
@@ -68,40 +75,68 @@
 	const start_at = ref(0);
 	const result = ref([]);
 	
+	const enableBottomRequest = ref(true);
+	
 	onLoad((option) => {
 		type.value = option.type;
-		operateHistory("w");
-		// console.log("options:", type.value);
-		// console.log(searchText.value.length, isClear.value);
+		operateHistory("r", null, 0);
 	});
 	
-	function operateHistory(op: string) {
-		console.log(op);
+	onReachBottom(() => {
+		doSearch(searchText.value, false, false);
+	});
+	
+	function operateHistory(op: string, i: any, index: number) {
+		console.log(index);
 
 		// 从localStorage获取历史记录
 		if (op === "r") {
-			
+			history.value = JSON.parse(uni.getStorageSync("history"));
 		} else {
 			// 写入localHistory
 			if (op === "w"){
 				// 遍历列表是否存在历史记录，如有则尝试移至第一处，否则添加
-				console.log("w");
+				// console.log("w");
+				if(i === "") return;
+				console.log(history.value.includes(i));
+				if(history.value.includes(i)) {
+					history.value.filter(j => j !== i);
+				}
+				
+				console.log(history.value);
+				// push到末尾
+				history.value.push(i);
+				
+				console.log(history.value);
+				
+				// 交换数组位置
+				let tmp = history.value[0];
+				const last_index = history.value.indexOf(i);
+				
+				history.value[0] = i;
+				history.value[last_index] = tmp;
+				
+				
+				
+				console.log(history.value);
 			}
 			// 删除一个历史记录
 			else if (op === "d") {
-				console.log("d");
+				// console.log("d");
+				history.value = history.value.splice(index, 1);
 			}
 			// 清空历史记录
 			else if (op === "c") {
-				console.log("c");
+				// console.log("c");
+				history.value = [];
 			}
 			
-			// uni.setStorage({
-			// 	key: "history",
-			// 	data: "{}"
-			// });
+			console.log("setStorage");
+			uni.setStorageSync("history",JSON.stringify(history.value));
 			
 		}
+		
+		console.log(history.value);
 		
 	}
 	
@@ -111,10 +146,12 @@
 	
 	function doSearch(txt: string, isItem: boolean, isNew: boolean) {
 		const key = isItem ? txt : searchText.value;
+		const amount = 2;
 		
 		// 是否从搜索框发起请求
 		if(isNew) start_at.value = 0;
 		// 添加历史记录
+		operateHistory("w", txt, 0);
 		
 		// 检索请求
 		uni.request({
@@ -128,13 +165,14 @@
 					keyword: key,
 					type: type.value,
 					start_at: start_at.value,
-					amount: 10
+					amount: amount
 				}
 			},
 			success(res) {
 				console.log(res);
 				// 设置检索结果及索引值
 				if(res.statusCode === 200) {
+					enableBottomRequest.value = res.data.data.length === amount;
 					start_at.value = res.data.next_index;
 					result.value = res.data.data;
 					focusOn.value = true;
@@ -149,17 +187,9 @@
 		isClear.value = false;
 	}
 	
-	function delHistory(i) {
-		console.log("del");
-		
-		history.value = history.value.filter((_i) => _i !== i);
-	}
-	
-	function clearHistory() {
-		history.value = [];
+	function goto(url: string) {
 		
 	}
-	
 </script>
 
 <style lang="scss">
@@ -241,6 +271,13 @@
 	
 	.result {
 		height: 80vh;
-		background-color: burlywood;
+		
+		// .unit {
+		// 	margin: 2vh;
+		// 	padding: 2vh;
+			
+		// 	border: 1px #dadada solid;
+		// 	border-radius: 15px;
+		// }
 	}
 </style>

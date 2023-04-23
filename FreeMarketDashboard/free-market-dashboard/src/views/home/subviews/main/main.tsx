@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ReactEcharts from "echarts-for-react"
 import {http} from "@tauri-apps/api";
-import {Card} from "antd";
+import {Card, Empty} from "antd";
 import {io} from "socket.io-client";
 
 import cfg from "@/common/cfg.json";
@@ -45,28 +45,45 @@ function Main(props: any) {
         series: [{type: 'bar'}]
     };
 
+    //从redux获取数据条数
+    // const { data_count } = useSelector((state) => state.common);
+
     const [ option, setOption ] = useState(ops);
     const [ recent, setRecent ] = useState([]);
     const [ status, setStatus ] = useState({});
+    const [ ramUsage, setRamUsage ] = useState(0.0);
 
-    const getCount = async () => {
-        return http.fetch(`${cfg.base_url}api/admin/count`, {
+    const getCount = () => {
+        http.fetch(`${cfg.base_url}api/admin/count`, {
             method: "POST",
             body: http.Body.json({
                 token: localStorage.getItem("token"),
                 time: {post_date: { $gt: new Date().getTime() - (60*60*24*30*1000)}},
                 isChart: true
             })
+        }).then(r => {
+            if(r.status === 200){
+                setOption({
+                    ...ops, dataset: {
+                        dimensions: ["name", "条数"],
+                        //@ts-ignore
+                        source: r.data.data
+                    }
+                });
+            }
         });
     }
 
-    const getRecentReport = async () => {
-        return http.fetch(`${cfg.base_url}api/admin/get_report`,{
+    const getRecentReport = () => {
+        http.fetch(`${cfg.base_url}api/admin/get_report`,{
             method: "POST",
             body: http.Body.json({
                 token: localStorage.getItem("token"),
                 isRecent: true
             })
+        }).then(r => {
+            //@ts-ignore
+            setRecent(r.data);
         });
     }
 
@@ -94,13 +111,8 @@ function Main(props: any) {
 
     useEffect(() => {
     //    加载近段时间的数据
-        const a = (async () => {
-            setOption({...ops, dataset: {
-                dimensions: ["name","条数"],
-                source: (await getCount().then()).data.data
-            }});
-            setRecent((await getRecentReport().then()).data);
-        })();
+        getRecentReport();
+        getCount();
     }, []);
 
     //socket.io hook，用在其他地方时，会随着每一次渲染而增加连接，从而导致耗尽websocket资源
@@ -123,6 +135,10 @@ function Main(props: any) {
             socket.on("status",(e) => {
                 console.log(e);
                 setStatus({...e});
+
+                const { ram, freeram } = e;
+                //@ts-ignore
+                setRamUsage((((ram - freeram)/ram) * 100).toFixed(2));
             });
         }
 
@@ -142,14 +158,28 @@ function Main(props: any) {
             <div className="down">
                 <Card className="panel">
                     {/*{JSON.stringify(recent)}*/}
-                    {recent.map(r => (
+                    {recent.length !== 0 && recent.map(r => (
                         <ReportUnit record={r} handleReport={handleReport} />
                     ))}
+                    {recent.length === 0 && (<Empty description="最近没有需要处理的举报"/>)}
                 </Card>
                 <Card className="panel">
+                    <p>服务器地址：{cfg.base_url}</p>
                     {JSON.stringify(status)}
                 {/*    CPU*/}
                 {/*    RAM*/}
+                    <div style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        flexWrap: "wrap",
+                        alignItems: "flex-start"
+                    }}>
+                        <p>内存占用</p>
+                        <div className="total-ram">
+                            <div className="used-ram" style={{width: `${ramUsage}%`}}/>
+                        </div>
+                    </div>
+
                 </Card>
             </div>
         </div>

@@ -1,14 +1,1 @@
-"use strict";
-const common_vendor = require("../../common/vendor.js");
-const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
-  __name: "exchange",
-  setup(__props) {
-    common_vendor.onLoad((option) => {
-    });
-    return (_ctx, _cache) => {
-      return {};
-    };
-  }
-});
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "F:/HBuilderProjects/FreeMarket/pages/exchange/exchange.vue"]]);
-wx.createPage(MiniProgramPage);
+"use strict";const e=require("../../common/vendor.js"),n=require("../../cfg.js");if(!Array){const g=e.resolveComponent("uni-segmented-control"),s=e.resolveComponent("uni-card");(g+s)()}const p=()=>"../../uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.js",v=()=>"../../uni_modules/uni-card/components/uni-card/uni-card.js";Math||(p+x+v)();const x=()=>"../../components/goods_unit/goods_unit.js",h=e.defineComponent({__name:"exchange",setup(g){const s=e.ref(""),u=e.ref(0),c=e.ref(0),f=e.ref(["已发起","待支付","待收货","已完成","已取消"]),l=e.ref([]),d=e.ref(!0);e.onLoad(a=>{console.log(a),s.value=a.type,r(!0)}),e.onPullDownRefresh(()=>{r(!0)}),e.onReachBottom(()=>{d.value&&r(!1)});function r(a){console.log(getApp().globalData.login.userid),a&&(u.value=0);const o=4;e.index.request({url:`${n.cfg.server}:${n.cfg.port}${n.cfg.api.prefix}${n.cfg.api.goods.prefix}${n.cfg.api.goods.get_deal}`,method:"POST",data:{userid:getApp().globalData.login.userid,filter:{isSeller:s.value==="seller",amount:o,start_at:u.value,status:c.value}},success(t){console.log(t),t.statusCode===200&&(d.value=t.data.data.data.length===o,u.value=t.data.data.next_index,l.value=a?t.data.data.data:l.value.concat(t.data.data.data),e.index.stopPullDownRefresh())}})}function _(a){const o=s.value==="buyer"?"confirm_exchange":"custom_exchange";e.index.navigateTo({url:`/pages/exchange/${o}/${o}?id=${a}`})}function m(a){console.log(a),c.value=a.currentIndex,a.currentIndex===4&&(c.value=-1),r(!0)}return(a,o)=>({a:e.o(m),b:e.p({current:c.value,values:f.value,styleType:"text"}),c:e.f(l.value,(t,y,i)=>e.e({a:"7fbf46dc-2-"+i+","+("7fbf46dc-1-"+i),b:e.p({data:t.goods_snapshot}),c:e.t(t.price),d:t.status!==-1&&t.status!==3},t.status!==-1&&t.status!==3?{}:{},{e:e.o($=>_(t.exchange_id)),f:"7fbf46dc-1-"+i,g:e.p({title:typeof t._target!==void 0?t._target.username:t._target,["is-full"]:"true",extra:new Date(t.post_date).toLocaleString(),thumbnail:`${typeof t._target!==void 0?e.unref(n.cfg).server+":"+e.unref(n.cfg).port+"/"+t._target.headImg:e.unref(n.cfg).default_avatar}`})})),d:!d.value})}}),b=e._export_sfc(h,[["__file","F:/HBuilderProjects/FreeMarket/pages/exchange/exchange.vue"]]);wx.createPage(b);

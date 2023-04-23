@@ -19,21 +19,34 @@
 			"prefix": "/user",
 			"login": "/login",
 			"register": "/register",
+			"user_info": "/user_info",
 			"modify_info": "/modify_info",
+			"modify_auth": "/modify_auth",
 			"create_comment": "/create_comment",
 			"verify_email": "/verify_email/",
 			"favorite": "/favorite",
 			"get_favorite": "/get_favorite",
 			"get_history": "/get_history",
+			"get_published": "/get_published",
 			"search": "/search",
-			"create_report": "/create_report"
+			"create_report": "/create_report",
+			"get_msg": "/get_msg",
+			"msg_detail": "/msg_detail"
 		},
 		"goods": {
 			"prefix": "/goods",
 			"goods_info": "/goods_info",
 			"add_goods": "/add_goods",
 			"modify_goods": "/modify_goods",
-			"goods_display": "/goods_display"
+			"goods_display": "/goods_display",
+			"create_deal": "/create_deal",
+			"proceed_deal": "/proceed_deal",
+			"pay_deal": "/pay_deal",
+			"finish_deal": "/finish_deal",
+			"get_deal": "/get_deal",
+			"deal_info": "/deal_info",
+			"remove_goods": "/remove_goods",
+			"hot_goods": "/hot_goods"
 		},
 		"post": {
 			"prefix": "/post",

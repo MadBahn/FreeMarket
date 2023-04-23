@@ -19,10 +19,15 @@
 			<view 
 				@click="gotoGoods(i)" 
 				class="random-box" 
-				v-for="i in 4"
+				v-for="(i, index) in hot_goods"
 			>
-				<view class="pic">pic<!-- pic --></view>
-				<text>price<!-- price --></text>
+				<image
+					:src="`${cfg.server}:${cfg.port}/${i.imgs[0].url}`"
+					class="pic"
+					width="20"
+					height="20"
+				/>
+				<text>￥ {{ i.price }} </text>
 			</view>
 		</view>
 		<view class="list">
@@ -50,16 +55,16 @@
 <script lang="ts" setup>
 	// #ifndef APP-PLUS
 	// @ts-ignore
-	import { io } from "@hyoga/uni-socket.io";
+	// import { io } from "@hyoga/uni-socket.io";
 	// #endif
 	
 	// #ifdef APP-PLUS
 	// @ts-ignore
-	import { io } from "socket.io-client";
+	// import { io } from "socket.io-client";
 	// #endif
 	
 	// json配置文件
-	import cfg from "../../cfg.json";
+	import cfg from "@/cfg.json";
 	
 	// 在组合式API中引入uni-app页面生命周期
 	import { onLoad, onShow, onPullDownRefresh, onHide, onReachBottom } from "@dcloudio/uni-app";
@@ -77,6 +82,7 @@
 	const app = getApp();
 	
 	const goods = ref([]);
+	const hot_goods = ref([]);
 	// 确定下一次请求时从哪儿开始
 	const end_index = ref(0);
 	const enableBottomRequest = ref(true);
@@ -85,6 +91,7 @@
 	onLoad(() => {
 		// 获取商品数据
 		request(true);
+		hotGoods();
 		console.log("globalData:",app.globalData);
 		
 		// if(socket){
@@ -122,6 +129,7 @@
 	
 	onPullDownRefresh(() => {
 		console.log("pull down refresh");
+		hotGoods();
 		request(true);
 	});
 	
@@ -136,9 +144,10 @@
 			url: "http://localhost:4000/api/goods/goods_display",
 			method: "POST",
 			data: {
-				"filter": {
-					"start_at": end_index.value,
-					"amount": amount
+				filter: {
+					start_at: end_index.value,
+					amount: amount,
+					sub_filter: {}
 				}
 			},
 			success(res) {
@@ -147,7 +156,9 @@
 					// 需要检查数据条数以决定是否禁用滚动底部请求
 					enableBottomRequest.value = 
 						res.data.data.data.length === amount;				
-					goods.value = type ? res.data.data.data : goods.value.concat(res.data.data.data);
+					goods.value = type ? 
+						res.data.data.data : 
+						goods.value.concat(res.data.data.data);
 					
 					end_index.value = res.data.data.next_index;
 					console.log(end_index.value);
@@ -157,6 +168,18 @@
 				// console.log(goods.value, enableBottomRequest.value);
 			}
 		});
+	}
+	
+	function hotGoods() {
+		uni.request({
+			url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.goods.prefix}${cfg.api.goods.hot_goods}`,
+			method: "POST",
+			success(res) {
+				if(res.statusCode === 200) {
+					hot_goods.value = res.data;
+				}
+			}
+		})
 	}
 	
 	// 首页的商品数据
@@ -209,7 +232,6 @@
 		.random-box {
 			width: 14vh;
 			height: 16vh;
-			border: 1px solid;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
@@ -224,6 +246,9 @@
 			text {
 				width: 12vh;
 				text-align: left;
+				font-weight: bold;
+				font-size: 20px;
+				color: red;
 			}
 		}
 	}

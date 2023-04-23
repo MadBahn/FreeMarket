@@ -26,37 +26,15 @@
 	</view>
 	
 	<uni-popup ref="pricePopup" type="bottom">
-		<view class="price-input">
-			<view class="display">
-				价格：￥{{price_str}}
-			</view>
-			<view class="keyboard">
-				<view class="number">
-					<button @click="keyboard(`7`)">7</button>
-					<button @click="keyboard(`8`)">8</button>
-					<button @click="keyboard(`9`)">9</button>
-					<button @click="keyboard(`4`)">4</button>
-					<button @click="keyboard(`5`)">5</button>
-					<button @click="keyboard(`6`)">6</button>
-					<button @click="keyboard(`1`)">1</button>
-					<button @click="keyboard(`2`)">2</button>
-					<button @click="keyboard(`3`)">3</button>
-					<button @click="keyboard(`<`)"><uni-icons type="left"></uni-icons></button>
-					<button @click="keyboard(`0`)">0</button>
-					<button @click="keyboard(`.`)">.</button>
-				</view>
-				<view class="action">
-					<button @click="keyboard(`clear`)">清除</button>
-					<button @click="keyboard(`ok`)">确定</button>
-				</view>
-			</view>
-		</view>
+		<PriceKeypad :price="newGoods.price" @changePrice="changePrice" />
 	</uni-popup>
 </template>
 
 <script lang="ts" setup>
 	import { onLoad } from "@dcloudio/uni-app";
 	import { ref } from "vue";
+	
+	import PriceKeypad from "@/components/price_keypad/price_keypad.vue";
 	
 	import cfg from "../../cfg.json";
 	
@@ -71,8 +49,7 @@
 		post_date: "",
 		isDel: false
 	});
-	
-	const price_str = ref(newGoods.value.price.toString());
+
 	const operation = ref("");
 	const imgList = ref([]);
 	
@@ -130,73 +107,12 @@
 	*/
 	
 	function showPrice() {
-		price_str.value = newGoods.value.price.toString();
 		pricePopup.value.open();
 	}
 	
-	function keyboard(input: string) {
-		console.log(input);
-		// 转化为字符串
-		// let str = newGoods.value.price.toString();
-		// console.log(str);
-		switch(input) {
-			// 清除
-			case "clear": {
-				price_str.value = "0";
-				break;
-			}
-			// 退格
-			case "<": {
-				price_str.value = 
-					price_str.value.slice(0,price_str.value.length - 1);
-				console.log(price_str.value.length);
-				console.log(0,price_str.value.length - 1)
-				console.log(price_str.value);
-				
-				if(price_str.value.length === 0) price_str.value = "0";
-				break;
-			}
-			case "ok": {
-				const tmp = price_str.value.split(".");
-				if(tmp.length === 2 && tmp[1].length > 2) {
-					tmp[1] = tmp[1].slice(0,2);
-					price_str.value = tmp[0].concat(".".concat(tmp[1]));
-				}
-				newGoods.value.price = price_str.value * 1;
-				pricePopup.value.close();
-				break;
-			}
-			// 数字和小数点
-			default: {
-				if(price_str.value === "0") {
-					if(input === ".") price_str.value += input;
-					else price_str.value = input;
-				}
-				else {
-					price_str.value = price_str.value.concat(input);
-					if(input === "."){
-						const regex = /[.]/g;
-						const dict = price_str.value.match(regex);
-						console.log(dict);
-						// 不能有二个（含）以上的小数点
-						console.log(dict.length);
-						if(dict && dict.length > 1) 
-							price_str.value =
-								price_str.value.slice(0,price_str.value.length - 1);
-					}
-				}
-				
-				console.log(price_str.value);
-				break;
-			}
-		}
-		// newGoods.value.price = price_str.value * 1.0;
-	}
-	
-	function checkValue(e) {
-		console.log("input");
-		console.log(e.detail);
-		// 获取extname属性
+	function changePrice(p: string) {
+		newGoods.value.price = 1.0 * p;
+		pricePopup.value.close();
 	}	
 	
 	function uploadFile(e) {
@@ -231,11 +147,6 @@
 	}
 	
 	function removeFile(e) {
-		// console.log(e);
-		// console.log(e.tempFile.name);
-		
-		// console.log(imgList.value);
-		// console.log(newGoods.value.imgs.filter(i => i.name === e.tempFile.name));
 		// 同时将imgs和imgList的项目删除
 		newGoods.value.imgs = newGoods.value.imgs.filter(i => i.name !== e.tempFile.name);
 		imgList.value = imgList.value.filter(i => i.name !== e.tempFile.name);
@@ -244,6 +155,7 @@
 		console.log(newGoods.value.imgs);
 	}
 	
+	// 添加或修改商品
 	function doGoods() {
 		console.log(newGoods.value);
 		if(newGoods.value.imgs.length === 0) {

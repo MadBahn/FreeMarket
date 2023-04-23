@@ -57,7 +57,7 @@ adminModule.tokenValidation = async (token) => {
     await client.disconnect();
 
     //通过PubSub向socket.io模块通信，以实现操作中发送消息
-    pubSub.publish("msg", { target: "", content: "asd"});
+    // pubSub.publish("msg", { target: "", content: "asd"});
 
     //如果过期，立即移除——注意将UTC时间转换为东八区时间方便查看
     if ((isValid && isValid < 0) || (isValid_redis && isValid_redis < 0)) {

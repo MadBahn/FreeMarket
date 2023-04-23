@@ -1,5 +1,7 @@
 {
-  "navigationBarTitleText": "",
-  "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "navigationBarTitleText": "我发布的商品",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "goods-unit": "../../components/goods_unit/goods_unit"
+  }
 }

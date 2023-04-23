@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "我发布的帖子",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "post-unit": "../../components/post_unit/post_unit"
+  }
+}

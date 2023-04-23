@@ -28,20 +28,23 @@
 
 <script lang="ts" setup>
 	import { ref } from "vue";
+	import { onLoad } from "@dcloudio/uni-app";
 	
 	const emits = defineEmits(['changePrice']);
 	// 
 	const props = defineProps({
-		"price": Number
+		price: Number
 	});
 	
-	const price_str = ref(props.price.toString());
+	const price_str = ref("");
+	
+	onLoad(() => {
+		price_str.value = props.price.toString();
+	});
 	
 	function keyboard(input: string) {
 		console.log(input);
 		// 转化为字符串
-		// let str = newGoods.value.price.toString();
-		// console.log(str);
 		switch(input) {
 			// 清除
 			case "clear": {
@@ -65,8 +68,7 @@
 					tmp[1] = tmp[1].slice(0,2);
 					price_str.value = tmp[0].concat(".".concat(tmp[1]));
 				}
-				// newGoods.value.price = price_str.value * 1;
-				// pricePopup.value.close();
+				emits("changePrice", price_str.value);
 				break;
 			}
 			// 数字和小数点
@@ -93,7 +95,6 @@
 				break;
 			}
 		}
-		// newGoods.value.price = price_str.value * 1.0;
 	}
 	
 </script>

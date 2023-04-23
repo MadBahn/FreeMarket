@@ -1,13 +1,23 @@
 <template>
 	<view class="content post">
-		<view class="post-by-info">
-			<image :src="cfg.server + `:` + 
-						 cfg.port + `/` +
-						 post.post_by.headImg || cfg.default_avatar" class="avatar">
-			</image>
-			<view class="info">
-				<text class="username">{{ post.post_by.username }}</text>
-				<text class="post-date">{{ new Date(post.post_date).toLocaleString() }}</text>
+		<view style="display: flex;flex-direction: row;">
+			<view class="post-by-info" @click="gotoInfo(post.post_by.userid)">
+				<image :src="cfg.server + `:` +
+							 cfg.port + `/` +
+							 post.post_by.headImg || cfg.default_avatar" class="avatar">
+				</image>
+				<view class="info">
+					<text class="username">{{ post.post_by.username }}</text>
+					<text class="post-date">{{ new Date(post.post_date).toLocaleString() }}</text>
+				</view>
+			</view>
+			<view>
+				<uni-icons
+					color="#1296db"
+					size="40" 
+					:type="post.isFavorite ? 'star-filled' : 'star'" 
+					@click="favorite"
+				></uni-icons>
 			</view>
 		</view>
 		<view class="imgs">
@@ -25,7 +35,7 @@
 			{{post.content}}
 		</view>
 		<view>
-			<commomReport @call="call_post"/>
+			<commonReport @call="call_post"/>
 		</view>
 	</view>
 	<uni-section
@@ -101,7 +111,7 @@
 			},
 			// 只要能发起请求并得到服务器响应就算success
 			success(res) {
-				console.log(res);
+				console.log(res.data.data);
 				if(res.statusCode === 200) {
 					post.value = res.data.data;
 					uni.setNavigationBarTitle({
@@ -111,6 +121,34 @@
 			},
 			complete() {
 				uni.hideNavigationBarLoading();
+			}
+		});
+	}
+	
+	function favorite() {
+		uni.request({
+			url: cfg.server + ":" +
+				 cfg.port + 
+				 cfg.api.prefix + 
+				 cfg.api.user.prefix + 
+				 cfg.api.user.favorite,
+			method: "POST",
+			data: {
+				favorite_form: {
+					userid: getApp().globalData.login.userid,
+					refer_to: post.value.post_id
+				}
+			},
+			success(res) {
+				console.log(res);
+				if(res.statusCode === 200) {
+					uni.showToast({
+						icon: "success",
+						title: res.data.msg
+					});
+					post.value.isFavorite = 
+						!post.value.isFavorite;
+				}
 			}
 		})
 	}
@@ -122,6 +160,12 @@
 	function call_report(id) {
 		uni.navigateTo({
 			url: `/pages/report/report?refer_to=${id}&report_by=${getApp().globalData.login.userid}`
+		});
+	}
+	
+	function gotoInfo(id: string) {
+		uni.navigateTo({
+			url: `/pages/info/info?id=${id}`
 		});
 	}
 	
@@ -147,7 +191,7 @@
 			border-radius: 50%;
 		}
 		.info {
-			width: 80vw;
+			width: 70vw;
 			height: 8vh;
 			margin-left: 2vw;
 			display: flex;

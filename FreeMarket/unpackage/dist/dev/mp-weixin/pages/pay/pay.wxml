@@ -1,0 +1,1 @@
+<view><text>￥{{a}}</text> 请选择支付方式： <picker bindchange="{{c}}" value="{{d}}" range="{{e}}">{{b}}</picker><button bindtap="{{f}}">支付</button></view>

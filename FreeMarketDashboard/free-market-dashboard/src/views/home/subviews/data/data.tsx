@@ -7,6 +7,7 @@ import { http } from "@tauri-apps/api";
 import DataUnit from "@/components/data_unit/data_unit";
 
 import cfg from "@/common/cfg.json";
+import {ColumnsType} from "antd/es/table";
 
 function Data(){
     const [ expandKey, setExpandKey ] = useState();
@@ -16,7 +17,7 @@ function Data(){
 
     // let expandData: any[] = [];
 
-    const columns = [{
+    const columns : ColumnsType<any> = [{
         title: "数据id",
         width: "30%",
         key: "id",
@@ -175,6 +176,7 @@ function Data(){
         }).then(r=>{
             if(r.status === 200) {
                 setLoading(false);
+                //@ts-ignore
                 setData(r.data.data.map(i => ({
                         ...i,
                         key: i._id
@@ -184,18 +186,21 @@ function Data(){
         });
     };
 
+    // @ts-ignore
     return (
         <div>
             <Segmented
                 options={options}
-                onChange={(e) => setOption(e)}
+                onChange={//@ts-ignore
+                    (e) => setOption(e)}
             />
             <Table
                 style={{
                     height: "80vh",
                     overflowY: "scroll"
                 }}
-                columns={columns}
+                columns={//@ts-ignore
+                    columns}
                 loading={loading}
                 pagination={{
                     hideOnSinglePage: true,
@@ -215,6 +220,7 @@ function Data(){
                         const keys = [];
                         if(e) keys.push(r._id);
                         console.log(e, r, keys);
+                        //@ts-ignore
                         setExpandKey(keys);
                     }
                 }}

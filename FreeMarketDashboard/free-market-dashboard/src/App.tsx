@@ -7,6 +7,7 @@ function App() {
   const outlet = useRoutes(routes);
 
   return (
+
     <div className="App">
       { outlet }
     </div>

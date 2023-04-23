@@ -21,7 +21,10 @@ router.use(async (req, res, next) => {
     //一些接口允许被封禁的账户继续使用
     const blacklist_exclude = [...exclude_url, "/api/goods/get_deal", "/api/goods/deal_info", "/api/goods/favorite"];
     //请求
-    // if(exclude_url.includes(req.originalUrl))
+    // console.log("original_url", req.originalUrl);
+    // console.log("login exclude:",exclude_url.includes(req.originalUrl));
+    // console.log("black exclude:",blacklist_exclude.includes(req.originalUrl));
+    //遍历
     if(true)
         next();
     else res.status(400).json(commonModule.responseUnifier(400,"此账号目前被封禁"));
@@ -192,7 +195,7 @@ router.post("/goods_info", async (req, res) => {
     res.status(out.code).json(out);
 });
 
-router.get("/hot_goods", async (req, res) => {
+router.post("/hot_goods", async (req, res) => {
 //    热门商品，根据历史记录排序
 //     const history = await historyModule.loadHistory().then();
 //    聚合管道随机查询
@@ -235,15 +238,15 @@ router.post("/create_deal", async (req, res) => {
             pay: "未确认",
             desc: "",
             post_date: new Date(),
-            log: {
-                log_active: 0,
-                list: [{title:'已发起',desc: new Date()}]
-            },
+            // log: {
+            //     log_active: 0,
+            //     list: [{title:'已发起',desc: new Date()}]
+            // },
             isDel: false
         }).save();
         out = commonModule.responseUnifier(200,"创建成功", exchange);
 
-        await commonModule.sendMsg(isSeller._doc.userid, `${isSeller._doc.userid}，您有一个新的交易需要处理：${exchange._doc.exchange_id}`, "goods");
+        await commonModule.sendMsg(isSeller._doc.userid, "您有一个新交易", `${isSeller._doc.userid}，您有一个新的交易需要处理：${exchange._doc.exchange_id}`, "goods");
     } else {
         out = commonModule.responseUnifier(400, "买卖双方或商品至少有一项无效");
     }
@@ -268,13 +271,14 @@ router.post("/proceed_deal", async (req, res) => {
             console.log("set status 1");
             await has_exchange.set({pay: proceed_form.pay});
         //是否为卖方确认，符合则直接设状态为2
-            has_exchange._doc.log.log_active = 1;
+        //     has_exchange._doc.log.log_active = 1;
+        //     await has_exchange.set({log: {log_active: 1}});
             if(proceed_form.pay === "卖家确认"){
-                has_exchange._doc.log.list.push({title: "待收货", desc: new Date()});
+                // has_exchange._doc.log.list.push({title: "待收货", desc: new Date()});
                 await has_exchange.set({status: 2}).save();
             } else {
-                has_exchange._doc.log.list.push({title: "待付款", desc: new Date()});
-                await commonModule.sendMsg(has_exchange._doc.buyer, `${has_exchange._doc.buyer}，您有一个待支付的交易：${has_exchange._doc.exchange_id}`, "goods");
+                // has_exchange._doc.log.list.push({title: "待付款", desc: new Date()});
+                await commonModule.sendMsg(has_exchange._doc.buyer, "您有一个待支付的交易", `${has_exchange._doc.buyer}，您有一个待支付的交易：${has_exchange._doc.exchange_id}`, "goods");
                 await has_exchange.set({status: 1}).save();
             }
         }
@@ -309,7 +313,7 @@ router.post("/pay_deal", async (req, res) => {
         if(paid) {
             await has_exchange.set({status: 2}).save();
             //向卖家发送消息
-            await commonModule.sendMsg(has_exchange._doc.seller, `${has_exchange._doc.exchange_id}：买家支付成功，等待收货`, "goods");
+            await commonModule.sendMsg(has_exchange._doc.seller, "您有一个尚未发货的交易", `${has_exchange._doc.exchange_id}：买家支付成功，等待收货`, "goods");
             out = commonModule.responseUnifier(200, `${has_exchange._doc.exchange_id}：付款成功，接下来等待卖家发货了`);
         } else {
             out = commonModule.responseUnifier(500, "付款失败了");
@@ -333,8 +337,8 @@ router.post("/finish_deal", async (req, res) => {
     if(has_exchange && has_exchange._doc.status === 2) {
         await has_exchange.set({status: 3}).save();
         //向买家、卖家发送消息
-        await commonModule.sendMsg(has_exchange._doc.seller,`${has_exchange._doc.exchange_id}：买家已确认收货，交易完成`,"goods");
-        await commonModule.sendMsg(has_exchange._doc.buyer,`${has_exchange._doc.exchange_id}：您已收货`,"goods");
+        await commonModule.sendMsg(has_exchange._doc.seller, "交易完成",`${has_exchange._doc.exchange_id}：买家已确认收货，交易完成`,"goods");
+        await commonModule.sendMsg(has_exchange._doc.buyer, "交易完成",`${has_exchange._doc.exchange_id}：您已收货`,"goods");
         out = commonModule.responseUnifier(200, "交易完成了");
     } else {
         out = commonModule.responseUnifier(400, "没有该交易");
@@ -354,7 +358,7 @@ router.post("/cancel_deal", async (req, res) => {
     // await has_exchange.set({status: -1}).save();
     if(has_exchange && (has_exchange._doc.status !== -1 || has_exchange._doc.status !== 3)) {
         //向卖家发送消息
-        await commonModule.sendMsg(has_exchange.seller, `买家${has_exchange.buyer}已取消支付`, "goods");
+        await commonModule.sendMsg(has_exchange.seller, "交易取消",`买家${has_exchange.buyer}已取消支付`, "goods");
         //添加log
         await has_exchange.set({status: -1}).save();
     } else {

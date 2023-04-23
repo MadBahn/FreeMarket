@@ -1,16 +1,1 @@
-"use strict";
-const common_vendor = require("../../common/vendor.js");
-const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
-  __name: "edit_auth",
-  setup(__props) {
-    const user = common_vendor.ref({});
-    common_vendor.onLoad(() => {
-      user.value = getApp().globalData.login;
-    });
-    return (_ctx, _cache) => {
-      return {};
-    };
-  }
-});
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "F:/HBuilderProjects/FreeMarket/pages/edit_auth/edit_auth.vue"]]);
-wx.createPage(MiniProgramPage);
+"use strict";const e=require("../../common/vendor.js"),t=require("../../cfg.js"),i=e.defineComponent({__name:"edit_auth",setup(c){const o=e.ref({});e.onLoad(()=>{o.value=getApp().globalData.login.userid});function u(r){console.log(r.detail.value),e.index.request({url:`${t.cfg.server}:${t.cfg.port}${t.cfg.api.prefix}${t.cfg.api.user.prefix}${t.cfg.api.user.modify_auth}`,method:"POST",data:{auth_form:{...r.detail.value,userid:o.value}},success(a){console.log(a),a.statusCode}})}return(r,a)=>({a:e.o(u)})}}),s=e._export_sfc(i,[["__file","F:/HBuilderProjects/FreeMarket/pages/edit_auth/edit_auth.vue"]]);wx.createPage(s);

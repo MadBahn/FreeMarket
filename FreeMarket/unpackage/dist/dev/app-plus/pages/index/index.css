@@ -833,7 +833,6 @@
 .random .random-box[data-v-1cf27b2a] {
   width: 14vh;
   height: 16vh;
-  border: 1px solid;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -847,6 +846,9 @@
 .random .random-box uni-text[data-v-1cf27b2a] {
   width: 12vh;
   text-align: left;
+  font-weight: bold;
+  font-size: 20px;
+  color: red;
 }
 .list[data-v-1cf27b2a] {
   min-height: 80vh;

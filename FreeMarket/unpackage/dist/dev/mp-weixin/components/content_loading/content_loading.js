@@ -1,13 +1,1 @@
-"use strict";
-const common_vendor = require("../../common/vendor.js");
-const _sfc_main = {
-  name: "contentLoading",
-  data() {
-    return {};
-  }
-};
-function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {};
-}
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "F:/HBuilderProjects/FreeMarket/components/content_loading/content_loading.vue"]]);
-wx.createComponent(Component);
+"use strict";const e=require("../../common/vendor.js"),n={name:"contentLoading",data(){return{}}};function t(r,c,s,_,a,i){return{}}const o=e._export_sfc(n,[["render",t],["__file","F:/HBuilderProjects/FreeMarket/components/content_loading/content_loading.vue"]]);wx.createComponent(o);

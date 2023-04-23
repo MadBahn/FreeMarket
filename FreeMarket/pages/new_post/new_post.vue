@@ -21,12 +21,12 @@
 </template>
 
 <script lang="ts" setup>
-	import { reactive, ref } from "vue";
+	import { ref } from "vue";
 	import { onLoad } from "@dcloudio/uni-app";
 	
 	import cfg from "../../cfg.json";
 	
-	const newPost = reactive({
+	const newPost = ref({
 		post_id: "",
 		post_by: getApp().globalData.login.userid,
 		title: "",
@@ -43,17 +43,38 @@
 		op.value = option.op;
 		if(op.value === "modify") {
 			// 修改帖子
-			
+			uni.request({
+				url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.post.prefix}${cfg.api.post.read_post}`,
+				method: "POST",
+				data: {
+					post_id: option.post_id,
+					isEdit: true
+				},
+				success(res) {
+					if(res.statusCode === 200) {
+						newPost.value = res.data.data;
+						imgList.value = JSON.parse(JSON.stringify(res.data.data.imgs));
+						for(let i in imgList.value) {
+							imgList.value[i].url = cfg.server + ":" + cfg.port + "/" +
+													imgList.value[i].url;
+						}
+					}
+				}
+			})
 		}
 	});
 	
 	function request() {
 		const reqBody = (op.value === "modify") ? {
 			userid: getApp().globalData.login.userid,
-			modify_form: newPost
+			modify_form: newPost.value
 		} : {
 			userid: getApp().globalData.login.userid,
-			post_data: newPost
+			post_data: {
+				title: newPost.value.title,
+				content: newPost.value.content,
+				imgs: newPost.value.imgs
+			}
 		};
 		const baseURL = cfg.server + ":" + cfg.port + 
 						cfg.api.prefix + 
@@ -65,17 +86,10 @@
 				cfg.api.post.modify_post :
 				cfg.api.post.create_post
 			),
-			 method: "POST",
-			 data: {
-				 userid: getApp().globalData.login.userid,
-				 post_data: {
-					title: newPost.title,
-					content: newPost.content,
-					imgs: newPost.imgs
-				 }
-			 },
-			 success(res) {
-			 	console.log(res);
+			method: "POST",
+			data: reqBody,
+			success(res) {
+				console.log(res);
 				if(res.statusCode === 200) {
 					const info = (
 						op.value === "modify" ?
@@ -89,7 +103,7 @@
 						title:  info
 					});
 				}
-			 }
+			}
 		});
 	}
 	
@@ -108,7 +122,7 @@
 								.path
 								.split("\\")
 					const url = "files\\\\".concat(url_t[1]);
-					newPost.imgs.push({
+					newPost.value.imgs.push({
 						name: JSON.parse(res.data)[0].filename,
 						url: url,
 						extname: e.tempFiles[0].extname,
@@ -119,7 +133,7 @@
 	}
 	
 	function removeFile(e) {
-		newPost.imgs = newPost.imgs.filter(i => i.name !== e.tempFile.name);
+		newPost.value.imgs = newPost.value.imgs.filter(i => i.name !== e.tempFile.name);
 		imgList.value = imgList.value.filter(i => i.name !== e.tempFile.name);
 	}
 	

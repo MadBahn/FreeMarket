@@ -33,7 +33,6 @@ commonModule.checkUserAndData = async (userid, dataid, query) => {
         to: result_to,
         cond: (result_user !== null && result_to !== null)
     }
-    // return (result_user !== null && result_to !== null);
 };
 
 commonModule.subQuery = async (obj, filter) => {
@@ -78,11 +77,12 @@ commonModule.check404Image = async (imgs) => {
 }
 
 //发送消息
-commonModule.sendMsg = async (to, msg_body, type) => {
+commonModule.sendMsg = async (to, title, msg_body, type) => {
     await new messageModel({
         message_id: `msg:${uuid.v4()}`,
         receiver: to,
         type: type,
+        title: title,
         content: msg_body,
         post_date: new Date()
     }).save();

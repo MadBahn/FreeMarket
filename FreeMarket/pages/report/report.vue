@@ -4,23 +4,23 @@
 		<form @submit="onSubmit">
 			<radio-group name="reason" change="">
 				<label>
-					<radio color="#1296db" value="law violation"/>
+					<radio color="#1296db" value="违反法律法规"/>
 					违反法律法规
 				</label>
 				<label>
-					<radio color="#1296db" value=""/>
+					<radio color="#1296db" value="敏感内容"/>
 					敏感内容
 				</label>
 				<label>
-					<radio color="#1296db" value="inappropriate content"/>
+					<radio color="#1296db" value="内容不适"/>
 					内容不适
 				</label>
 				<label>
-					<radio color="#1296db" value="fake content"/>
+					<radio color="#1296db" value="虚假信息"/>
 					虚假信息
 				</label>
 				<label>
-					<radio color="#1296db" value="other"/>
+					<radio color="#1296db" value="其他"/>
 					其他
 					<textarea name="other_reason" maxlength="-1"></textarea>
 				</label>
@@ -49,12 +49,6 @@
 		console.log(e.detail.value);
 		
 		// 执行与服务器相同的检查
-		if(true) {
-			
-		} else {
-			
-		}
-		
 		
 		uni.request({
 			url: cfg.server + ":" +

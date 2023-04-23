@@ -1,0 +1,1 @@
+.item{border:1px solid}.goods_info{display:flex;flex-direction:row;align-items:center;justify-content:space-between}.goods_info .img{width:15vh;height:15vh}

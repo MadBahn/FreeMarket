@@ -144,7 +144,7 @@ if (uni.restoreGlobal) {
     socketReadyCallback = callback;
   };
   let targetHost = "";
-  const hosts = "192.168.233.1,192.168.119.1,192.168.1.195,172.28.112.1,192.168.208.1".split(",");
+  const hosts = "192.168.233.1,192.168.119.1,192.168.1.195,172.30.0.1,172.19.160.1".split(",");
   setTimeout(() => {
     uni.request({
       url: `http://${"localhost"}:${9502}`,
@@ -184,6 +184,9 @@ if (uni.restoreGlobal) {
     socketReadyCallback();
   }
   var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+  function getDefaultExportFromCjs(x2) {
+    return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
+  }
   (function() {
     var __webpack_modules__ = {
       /***/
@@ -13757,7 +13760,7 @@ if (uni.restoreGlobal) {
     const reg = /^[0-9]*$/g;
     return typeof val === "number" || reg.test(val) ? val + "px" : val;
   };
-  const _sfc_main$G = {
+  const _sfc_main$M = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -13814,8 +13817,8 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$h], ["__scopeId", "data-v-d31e1c47"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
-  const _sfc_main$F = {
+  const __easycom_0$7 = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["render", _sfc_render$h], ["__scopeId", "data-v-d31e1c47"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const _sfc_main$L = {
     name: "UniStatusBar",
     data() {
       return {
@@ -13840,9 +13843,9 @@ if (uni.restoreGlobal) {
       /* STYLE */
     );
   }
-  const statusBar = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$g], ["__scopeId", "data-v-7920e3e0"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-status-bar.vue"]]);
+  const statusBar = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["render", _sfc_render$g], ["__scopeId", "data-v-7920e3e0"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-status-bar.vue"]]);
   const getVal = (val) => typeof val === "number" ? val + "px" : val;
-  const _sfc_main$E = {
+  const _sfc_main$K = {
     name: "UniNavBar",
     components: {
       statusBar
@@ -13964,7 +13967,7 @@ if (uni.restoreGlobal) {
   };
   function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_status_bar = vue.resolveComponent("status-bar");
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$6);
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -14117,8 +14120,8 @@ if (uni.restoreGlobal) {
       /* CLASS */
     );
   }
-  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$f], ["__scopeId", "data-v-26544265"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.vue"]]);
-  const _sfc_main$D = {
+  const __easycom_0$6 = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$f], ["__scopeId", "data-v-26544265"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-nav-bar/components/uni-nav-bar/uni-nav-bar.vue"]]);
+  const _sfc_main$J = {
     name: "UniCard",
     emits: ["click"],
     props: {
@@ -14280,7 +14283,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$e], ["__scopeId", "data-v-ae4bee67"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-card/components/uni-card/uni-card.vue"]]);
+  const __easycom_0$5 = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$e], ["__scopeId", "data-v-ae4bee67"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-card/components/uni-card/uni-card.vue"]]);
   const default_avatar = "https://i2.hdslb.com/bfs/face/eaa74bee5a7a0bb937b7128f8b31f4fcf1353e3b.jpg@160w_160h_1c_1s.webp";
   const server = "http://localhost";
   const port = 4e3;
@@ -14308,14 +14311,23 @@ if (uni.restoreGlobal) {
       get_favorite: "/get_favorite",
       get_history: "/get_history",
       search: "/search",
-      create_report: "/create_report"
+      create_report: "/create_report",
+      get_msg: "/get_msg"
     },
     goods: {
       prefix: "/goods",
       goods_info: "/goods_info",
       add_goods: "/add_goods",
       modify_goods: "/modify_goods",
-      goods_display: "/goods_display"
+      goods_display: "/goods_display",
+      create_deal: "/create_deal",
+      proceed_deal: "/proceed_deal",
+      pay_deal: "/pay_deal",
+      finish_deal: "/finish_deal",
+      get_deal: "/get_deal",
+      deal_info: "/deal_info",
+      remove_goods: "/remove_goods",
+      hot_goods: "/hot_goods"
     },
     post: {
       prefix: "/post",
@@ -14349,34 +14361,37 @@ if (uni.restoreGlobal) {
     empty_image,
     api
   };
-  const _sfc_main$C = /* @__PURE__ */ vue.defineComponent({
+  const _sfc_main$I = /* @__PURE__ */ vue.defineComponent({
     __name: "index",
     setup(__props) {
       const ctrl1 = vue.ref(true);
       const app = getApp();
       const goods = vue.ref([]);
+      const hot_goods = vue.ref([]);
       const end_index = vue.ref(0);
       const enableBottomRequest = vue.ref(true);
       onLoad(() => {
         request(true);
-        formatAppLog("log", "at pages/index/index.vue:88", "globalData:", app.globalData);
+        hotGoods();
+        formatAppLog("log", "at pages/index/index.vue:95", "globalData:", app.globalData);
       });
       onShow(() => {
-        formatAppLog("log", "at pages/index/index.vue:105", "onShow");
+        formatAppLog("log", "at pages/index/index.vue:112", "onShow");
         ctrl1.value = true;
-        formatAppLog("log", "at pages/index/index.vue:107", ctrl1.value);
-      });
-      onHide(() => {
-        formatAppLog("log", "at pages/index/index.vue:112", "onHide");
-        ctrl1.value = false;
         formatAppLog("log", "at pages/index/index.vue:114", ctrl1.value);
       });
+      onHide(() => {
+        formatAppLog("log", "at pages/index/index.vue:119", "onHide");
+        ctrl1.value = false;
+        formatAppLog("log", "at pages/index/index.vue:121", ctrl1.value);
+      });
       onReachBottom(() => {
-        formatAppLog("log", "at pages/index/index.vue:119", "reach bottom");
+        formatAppLog("log", "at pages/index/index.vue:126", "reach bottom");
         enableBottomRequest.value && request(false);
       });
       onPullDownRefresh(() => {
-        formatAppLog("log", "at pages/index/index.vue:124", "pull down refresh");
+        formatAppLog("log", "at pages/index/index.vue:131", "pull down refresh");
+        hotGoods();
         request(true);
       });
       function request(type) {
@@ -14387,18 +14402,31 @@ if (uni.restoreGlobal) {
           url: "http://localhost:4000/api/goods/goods_display",
           method: "POST",
           data: {
-            "filter": {
-              "start_at": end_index.value,
-              "amount": amount
+            filter: {
+              start_at: end_index.value,
+              amount,
+              sub_filter: {}
             }
           },
           success(res) {
-            formatAppLog("log", "at pages/index/index.vue:145", res.data);
+            formatAppLog("log", "at pages/index/index.vue:154", res.data.data);
             if (res.statusCode === 200) {
-              enableBottomRequest.value = res.data.data.length === amount;
-              goods.value = type ? res.data.data : goods.value.concat(res.data.data);
-              end_index.value = res.data.next_index;
+              enableBottomRequest.value = res.data.data.data.length === amount;
+              goods.value = type ? res.data.data.data : goods.value.concat(res.data.data.data);
+              end_index.value = res.data.data.next_index;
+              formatAppLog("log", "at pages/index/index.vue:164", end_index.value);
               uni.stopPullDownRefresh();
+            }
+          }
+        });
+      }
+      function hotGoods() {
+        uni.request({
+          url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.goods.prefix}${cfg.api.goods.hot_goods}`,
+          method: "GET",
+          success(res) {
+            if (res.statusCode === 200) {
+              hot_goods.value = res.data;
             }
           }
         });
@@ -14421,8 +14449,8 @@ if (uni.restoreGlobal) {
         });
       }
       return (_ctx, _cache) => {
-        const _component_uni_nav_bar = resolveEasycom(vue.resolveDynamicComponent("uni-nav-bar"), __easycom_0$5);
-        const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$4);
+        const _component_uni_nav_bar = resolveEasycom(vue.resolveDynamicComponent("uni-nav-bar"), __easycom_0$6);
+        const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$5);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createVNode(_component_uni_nav_bar, {
             leftIcon: "plusempty",
@@ -14444,26 +14472,31 @@ if (uni.restoreGlobal) {
             /* STABLE */
           }),
           vue.createElementVNode("view", { class: "random" }, [
-            (vue.openBlock(), vue.createElementBlock(
+            (vue.openBlock(true), vue.createElementBlock(
               vue.Fragment,
               null,
-              vue.renderList(4, (i2) => {
-                return vue.createElementVNode("view", {
+              vue.renderList(hot_goods.value, (i2, index) => {
+                return vue.openBlock(), vue.createElementBlock("view", {
                   onClick: ($event) => gotoGoods(i2),
                   class: "random-box"
                 }, [
-                  vue.createElementVNode("view", { class: "pic" }, [
-                    vue.createTextVNode("pic"),
-                    vue.createCommentVNode(" pic ")
-                  ]),
-                  vue.createElementVNode("text", null, [
-                    vue.createTextVNode("price"),
-                    vue.createCommentVNode(" price ")
-                  ])
+                  vue.createElementVNode("image", {
+                    src: `${vue.unref(cfg).server}:${vue.unref(cfg).port}/${i2.imgs[0].url}`,
+                    class: "pic",
+                    width: "20",
+                    height: "20"
+                  }, null, 8, ["src"]),
+                  vue.createElementVNode(
+                    "text",
+                    null,
+                    "￥ " + vue.toDisplayString(i2.price),
+                    1
+                    /* TEXT */
+                  )
                 ], 8, ["onClick"]);
               }),
-              64
-              /* STABLE_FRAGMENT */
+              256
+              /* UNKEYED_FRAGMENT */
             ))
           ]),
           vue.createElementVNode("view", { class: "list" }, [
@@ -14514,8 +14547,8 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["__scopeId", "data-v-1cf27b2a"], ["__file", "F:/HBuilderProjects/FreeMarket/pages/index/index.vue"]]);
-  const _sfc_main$B = /* @__PURE__ */ vue.defineComponent({
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["__scopeId", "data-v-1cf27b2a"], ["__file", "F:/HBuilderProjects/FreeMarket/pages/index/index.vue"]]);
+  const _sfc_main$H = /* @__PURE__ */ vue.defineComponent({
     __name: "discover",
     setup(__props) {
       const appData = getApp().globalData;
@@ -14529,7 +14562,7 @@ if (uni.restoreGlobal) {
         enableBottomRequest.value && request(false);
       });
       onLoad(() => {
-        formatAppLog("log", "at pages/discover/discover.vue:58", "load");
+        formatAppLog("log", "at pages/discover/discover.vue:60", "load");
         request(true);
       });
       function request(type) {
@@ -14540,13 +14573,14 @@ if (uni.restoreGlobal) {
           url: cfg.server + ":" + cfg.port + cfg.api.prefix + cfg.api.post.prefix + cfg.api.post.post_display,
           method: "POST",
           data: {
-            "filter": {
-              "satrt_at": end_index.value,
-              "amount": amount
+            filter: {
+              satrt_at: end_index.value,
+              amount,
+              sub_filter: {}
             }
           },
           success(res) {
-            formatAppLog("log", "at pages/discover/discover.vue:78", res.data);
+            formatAppLog("log", "at pages/discover/discover.vue:81", res.data);
             if (res.statusCode === 200) {
               enableBottomRequest.value = res.data.data.length === amount;
               posts.value = type ? res.data.data : posts.value.concat(res.data.data);
@@ -14563,8 +14597,8 @@ if (uni.restoreGlobal) {
         });
       }
       return (_ctx, _cache) => {
-        const _component_uni_nav_bar = resolveEasycom(vue.resolveDynamicComponent("uni-nav-bar"), __easycom_0$5);
-        const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$4);
+        const _component_uni_nav_bar = resolveEasycom(vue.resolveDynamicComponent("uni-nav-bar"), __easycom_0$6);
+        const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$5);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createVNode(_component_uni_nav_bar, {
             leftIcon: "plusempty",
@@ -14575,7 +14609,7 @@ if (uni.restoreGlobal) {
             default: vue.withCtx(() => [
               vue.createElementVNode("view", {
                 class: "searchBox",
-                onClick: _cache[0] || (_cache[0] = ($event) => goto(`/pages/search/search?type=posts`))
+                onClick: _cache[0] || (_cache[0] = ($event) => goto(`/pages/search/search?type=post`))
               }, [
                 vue.createCommentVNode(" flex-direction属性为row-reverse "),
                 vue.createElementVNode("view", { id: "searchBtn" }, "搜索"),
@@ -14585,16 +14619,19 @@ if (uni.restoreGlobal) {
             _: 1
             /* STABLE */
           }),
-          vue.createElementVNode("view", { class: "B" }, [
+          vue.createElementVNode("view", { class: "data" }, [
             (vue.openBlock(true), vue.createElementBlock(
               vue.Fragment,
               null,
               vue.renderList(posts.value, (i2, index) => {
                 return vue.openBlock(), vue.createBlock(_component_uni_card, {
-                  onClick: ($event) => goto(`/pages/browse_post/browse_post?id=` + i2.post_id + `&userid=` + vue.unref(appData).login.userid)
+                  onClick: ($event) => goto(`/pages/browse_post/browse_post?id=` + i2.post_id + `&userid=` + vue.unref(appData).login.userid),
+                  cover: vue.unref(cfg).server + ":" + vue.unref(cfg).port + "/" + i2.imgs[0].url
                 }, {
                   default: vue.withCtx(() => [
-                    vue.createTextVNode(
+                    vue.createElementVNode(
+                      "text",
+                      null,
                       vue.toDisplayString(i2.title),
                       1
                       /* TEXT */
@@ -14602,26 +14639,3096 @@ if (uni.restoreGlobal) {
                   ]),
                   _: 2
                   /* DYNAMIC */
-                }, 1032, ["onClick"]);
+                }, 1032, ["onClick", "cover"]);
               }),
               256
               /* UNKEYED_FRAGMENT */
-            ))
+            )),
+            vue.withDirectives(vue.createElementVNode(
+              "view",
+              null,
+              "再怎么找也没有了",
+              512
+              /* NEED_PATCH */
+            ), [
+              [vue.vShow, !enableBottomRequest.value]
+            ])
           ])
         ]);
       };
     }
   });
-  const PagesDiscoverDiscover = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["__scopeId", "data-v-7f6951af"], ["__file", "F:/HBuilderProjects/FreeMarket/pages/discover/discover.vue"]]);
-  const _sfc_main$A = /* @__PURE__ */ vue.defineComponent({
+  const PagesDiscoverDiscover = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["__scopeId", "data-v-7f6951af"], ["__file", "F:/HBuilderProjects/FreeMarket/pages/discover/discover.vue"]]);
+  const _sfc_main$G = {
+    name: "UniBadge",
+    emits: ["click"],
+    props: {
+      type: {
+        type: String,
+        default: "error"
+      },
+      inverted: {
+        type: Boolean,
+        default: false
+      },
+      isDot: {
+        type: Boolean,
+        default: false
+      },
+      maxNum: {
+        type: Number,
+        default: 99
+      },
+      absolute: {
+        type: String,
+        default: ""
+      },
+      offset: {
+        type: Array,
+        default() {
+          return [0, 0];
+        }
+      },
+      text: {
+        type: [String, Number],
+        default: ""
+      },
+      size: {
+        type: String,
+        default: "small"
+      },
+      customStyle: {
+        type: Object,
+        default() {
+          return {};
+        }
+      }
+    },
+    data() {
+      return {};
+    },
+    computed: {
+      width() {
+        return String(this.text).length * 8 + 12;
+      },
+      classNames() {
+        const {
+          inverted,
+          type,
+          size,
+          absolute
+        } = this;
+        return [
+          inverted ? "uni-badge--" + type + "-inverted" : "",
+          "uni-badge--" + type,
+          "uni-badge--" + size,
+          absolute ? "uni-badge--absolute" : ""
+        ].join(" ");
+      },
+      positionStyle() {
+        if (!this.absolute)
+          return {};
+        let w2 = this.width / 2, h2 = 10;
+        if (this.isDot) {
+          w2 = 5;
+          h2 = 5;
+        }
+        const x2 = `${-w2 + this.offset[0]}px`;
+        const y2 = `${-h2 + this.offset[1]}px`;
+        const whiteList = {
+          rightTop: {
+            right: x2,
+            top: y2
+          },
+          rightBottom: {
+            right: x2,
+            bottom: y2
+          },
+          leftBottom: {
+            left: x2,
+            bottom: y2
+          },
+          leftTop: {
+            left: x2,
+            top: y2
+          }
+        };
+        const match = whiteList[this.absolute];
+        return match ? match : whiteList["rightTop"];
+      },
+      dotStyle() {
+        if (!this.isDot)
+          return {};
+        return {
+          width: "10px",
+          minWidth: "0",
+          height: "10px",
+          padding: "0",
+          borderRadius: "10px"
+        };
+      },
+      displayValue() {
+        const {
+          isDot,
+          text,
+          maxNum
+        } = this;
+        return isDot ? "" : Number(text) > maxNum ? `${maxNum}+` : text;
+      }
+    },
+    methods: {
+      onClick() {
+        this.$emit("click");
+      }
+    }
+  };
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-badge--x" }, [
+      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
+      $props.text ? (vue.openBlock(), vue.createElementBlock(
+        "text",
+        {
+          key: 0,
+          class: vue.normalizeClass([$options.classNames, "uni-badge"]),
+          style: vue.normalizeStyle([$options.positionStyle, $props.customStyle, $options.dotStyle]),
+          onClick: _cache[0] || (_cache[0] = ($event) => $options.onClick())
+        },
+        vue.toDisplayString($options.displayValue),
+        7
+        /* TEXT, CLASS, STYLE */
+      )) : vue.createCommentVNode("v-if", true)
+    ]);
+  }
+  const __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$d], ["__scopeId", "data-v-c97cb896"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-badge/components/uni-badge/uni-badge.vue"]]);
+  const _sfc_main$F = {
+    name: "UniListItem",
+    emits: ["click", "switchChange"],
+    props: {
+      direction: {
+        type: String,
+        default: "row"
+      },
+      title: {
+        type: String,
+        default: ""
+      },
+      note: {
+        type: String,
+        default: ""
+      },
+      ellipsis: {
+        type: [Number, String],
+        default: 0
+      },
+      disabled: {
+        type: [Boolean, String],
+        default: false
+      },
+      clickable: {
+        type: Boolean,
+        default: false
+      },
+      showArrow: {
+        type: [Boolean, String],
+        default: false
+      },
+      link: {
+        type: [Boolean, String],
+        default: false
+      },
+      to: {
+        type: String,
+        default: ""
+      },
+      showBadge: {
+        type: [Boolean, String],
+        default: false
+      },
+      showSwitch: {
+        type: [Boolean, String],
+        default: false
+      },
+      switchChecked: {
+        type: [Boolean, String],
+        default: false
+      },
+      badgeText: {
+        type: String,
+        default: ""
+      },
+      badgeType: {
+        type: String,
+        default: "success"
+      },
+      badgeStyle: {
+        type: Object,
+        default() {
+          return {};
+        }
+      },
+      rightText: {
+        type: String,
+        default: ""
+      },
+      thumb: {
+        type: String,
+        default: ""
+      },
+      thumbSize: {
+        type: String,
+        default: "base"
+      },
+      showExtraIcon: {
+        type: [Boolean, String],
+        default: false
+      },
+      extraIcon: {
+        type: Object,
+        default() {
+          return {
+            type: "",
+            color: "#000000",
+            size: 20
+          };
+        }
+      },
+      border: {
+        type: Boolean,
+        default: true
+      },
+      customStyle: {
+        type: Object,
+        default() {
+          return {
+            padding: "",
+            backgroundColor: "#FFFFFF"
+          };
+        }
+      },
+      keepScrollPosition: {
+        type: Boolean,
+        default: false
+      }
+    },
+    watch: {
+      "customStyle.padding": {
+        handler(padding) {
+          if (typeof padding == "number") {
+            padding += "";
+          }
+          let paddingArr = padding.split(" ");
+          if (paddingArr.length === 1) {
+            this.padding = {
+              "top": padding,
+              "right": padding,
+              "bottom": padding,
+              "left": padding
+            };
+          } else if (paddingArr.length === 2) {
+            this.padding = {
+              "top": padding[0],
+              "right": padding[1],
+              "bottom": padding[0],
+              "left": padding[1]
+            };
+          } else if (paddingArr.length === 4) {
+            this.padding = {
+              "top": padding[0],
+              "right": padding[1],
+              "bottom": padding[2],
+              "left": padding[3]
+            };
+          }
+        },
+        immediate: true
+      }
+    },
+    // inject: ['list'],
+    data() {
+      return {
+        isFirstChild: false,
+        padding: {
+          top: "",
+          right: "",
+          bottom: "",
+          left: ""
+        }
+      };
+    },
+    mounted() {
+      this.list = this.getForm();
+      if (this.list) {
+        if (!this.list.firstChildAppend) {
+          this.list.firstChildAppend = true;
+          this.isFirstChild = true;
+        }
+      }
+    },
+    methods: {
+      /**
+       * 获取父元素实例
+       */
+      getForm(name = "uniList") {
+        let parent = this.$parent;
+        let parentName = parent.$options.name;
+        while (parentName !== name) {
+          parent = parent.$parent;
+          if (!parent)
+            return false;
+          parentName = parent.$options.name;
+        }
+        return parent;
+      },
+      onClick() {
+        if (this.to !== "") {
+          this.openPage();
+          return;
+        }
+        if (this.clickable || this.link) {
+          this.$emit("click", {
+            data: {}
+          });
+        }
+      },
+      onSwitchChange(e) {
+        this.$emit("switchChange", e.detail);
+      },
+      openPage() {
+        if (["navigateTo", "redirectTo", "reLaunch", "switchTab"].indexOf(this.link) !== -1) {
+          this.pageApi(this.link);
+        } else {
+          this.pageApi("navigateTo");
+        }
+      },
+      pageApi(api2) {
+        let callback = {
+          url: this.to,
+          success: (res) => {
+            this.$emit("click", {
+              data: res
+            });
+          },
+          fail: (err) => {
+            this.$emit("click", {
+              data: err
+            });
+          }
+        };
+        switch (api2) {
+          case "navigateTo":
+            uni.navigateTo(callback);
+            break;
+          case "redirectTo":
+            uni.redirectTo(callback);
+            break;
+          case "reLaunch":
+            uni.reLaunch(callback);
+            break;
+          case "switchTab":
+            uni.switchTab(callback);
+            break;
+          default:
+            uni.navigateTo(callback);
+        }
+      }
+    }
+  };
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$7);
+    const _component_uni_badge = resolveEasycom(vue.resolveDynamicComponent("uni-badge"), __easycom_1$4);
+    return vue.openBlock(), vue.createElementBlock("view", {
+      class: vue.normalizeClass([{ "uni-list-item--disabled": $props.disabled }, "uni-list-item"]),
+      style: vue.normalizeStyle({ "background-color": $props.customStyle.backgroundColor }),
+      "hover-class": !$props.clickable && !$props.link || $props.disabled || $props.showSwitch ? "" : "uni-list-item--hover",
+      onClick: _cache[1] || (_cache[1] = (...args) => $options.onClick && $options.onClick(...args))
+    }, [
+      !$data.isFirstChild ? (vue.openBlock(), vue.createElementBlock(
+        "view",
+        {
+          key: 0,
+          class: vue.normalizeClass(["border--left", { "uni-list--border": $props.border }])
+        },
+        null,
+        2
+        /* CLASS */
+      )) : vue.createCommentVNode("v-if", true),
+      vue.createElementVNode(
+        "view",
+        {
+          class: vue.normalizeClass(["uni-list-item__container", { "container--right": $props.showArrow || $props.link, "flex--direction": $props.direction === "column" }]),
+          style: vue.normalizeStyle({ paddingTop: $data.padding.top, paddingLeft: $data.padding.left, paddingRight: $data.padding.right, paddingBottom: $data.padding.bottom })
+        },
+        [
+          vue.renderSlot(_ctx.$slots, "header", {}, () => [
+            vue.createElementVNode("view", { class: "uni-list-item__header" }, [
+              $props.thumb ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 0,
+                class: "uni-list-item__icon"
+              }, [
+                vue.createElementVNode("image", {
+                  src: $props.thumb,
+                  class: vue.normalizeClass(["uni-list-item__icon-img", ["uni-list--" + $props.thumbSize]])
+                }, null, 10, ["src"])
+              ])) : $props.showExtraIcon ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 1,
+                class: "uni-list-item__icon"
+              }, [
+                vue.createVNode(_component_uni_icons, {
+                  color: $props.extraIcon.color,
+                  size: $props.extraIcon.size,
+                  type: $props.extraIcon.type
+                }, null, 8, ["color", "size", "type"])
+              ])) : vue.createCommentVNode("v-if", true)
+            ])
+          ], true),
+          vue.renderSlot(_ctx.$slots, "body", {}, () => [
+            vue.createElementVNode(
+              "view",
+              {
+                class: vue.normalizeClass(["uni-list-item__content", { "uni-list-item__content--center": $props.thumb || $props.showExtraIcon || $props.showBadge || $props.showSwitch }])
+              },
+              [
+                $props.title ? (vue.openBlock(), vue.createElementBlock(
+                  "text",
+                  {
+                    key: 0,
+                    class: vue.normalizeClass(["uni-list-item__content-title", [$props.ellipsis !== 0 && $props.ellipsis <= 2 ? "uni-ellipsis-" + $props.ellipsis : ""]])
+                  },
+                  vue.toDisplayString($props.title),
+                  3
+                  /* TEXT, CLASS */
+                )) : vue.createCommentVNode("v-if", true),
+                $props.note ? (vue.openBlock(), vue.createElementBlock(
+                  "text",
+                  {
+                    key: 1,
+                    class: "uni-list-item__content-note"
+                  },
+                  vue.toDisplayString($props.note),
+                  1
+                  /* TEXT */
+                )) : vue.createCommentVNode("v-if", true)
+              ],
+              2
+              /* CLASS */
+            )
+          ], true),
+          vue.renderSlot(_ctx.$slots, "footer", {}, () => [
+            $props.rightText || $props.showBadge || $props.showSwitch ? (vue.openBlock(), vue.createElementBlock(
+              "view",
+              {
+                key: 0,
+                class: vue.normalizeClass(["uni-list-item__extra", { "flex--justify": $props.direction === "column" }])
+              },
+              [
+                $props.rightText ? (vue.openBlock(), vue.createElementBlock(
+                  "text",
+                  {
+                    key: 0,
+                    class: "uni-list-item__extra-text"
+                  },
+                  vue.toDisplayString($props.rightText),
+                  1
+                  /* TEXT */
+                )) : vue.createCommentVNode("v-if", true),
+                $props.showBadge ? (vue.openBlock(), vue.createBlock(_component_uni_badge, {
+                  key: 1,
+                  type: $props.badgeType,
+                  text: $props.badgeText,
+                  "custom-style": $props.badgeStyle
+                }, null, 8, ["type", "text", "custom-style"])) : vue.createCommentVNode("v-if", true),
+                $props.showSwitch ? (vue.openBlock(), vue.createElementBlock("switch", {
+                  key: 2,
+                  disabled: $props.disabled,
+                  checked: $props.switchChecked,
+                  onChange: _cache[0] || (_cache[0] = (...args) => $options.onSwitchChange && $options.onSwitchChange(...args))
+                }, null, 40, ["disabled", "checked"])) : vue.createCommentVNode("v-if", true)
+              ],
+              2
+              /* CLASS */
+            )) : vue.createCommentVNode("v-if", true)
+          ], true)
+        ],
+        6
+        /* CLASS, STYLE */
+      ),
+      $props.showArrow || $props.link ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
+        key: 1,
+        size: 16,
+        class: "uni-icon-wrapper",
+        color: "#bbb",
+        type: "arrowright"
+      })) : vue.createCommentVNode("v-if", true)
+    ], 14, ["hover-class"]);
+  }
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$c], ["__scopeId", "data-v-c7524739"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue"]]);
+  const _sfc_main$E = {
+    name: "uniList",
+    "mp-weixin": {
+      options: {
+        multipleSlots: false
+      }
+    },
+    props: {
+      stackFromEnd: {
+        type: Boolean,
+        default: false
+      },
+      enableBackToTop: {
+        type: [Boolean, String],
+        default: false
+      },
+      scrollY: {
+        type: [Boolean, String],
+        default: false
+      },
+      border: {
+        type: Boolean,
+        default: true
+      },
+      renderReverse: {
+        type: Boolean,
+        default: false
+      }
+    },
+    // provide() {
+    // 	return {
+    // 		list: this
+    // 	};
+    // },
+    created() {
+      this.firstChildAppend = false;
+    },
+    methods: {
+      loadMore(e) {
+        this.$emit("scrolltolower");
+      },
+      scroll(e) {
+        this.$emit("scroll", e);
+      }
+    }
+  };
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-list uni-border-top-bottom" }, [
+      $props.border ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 0,
+        class: "uni-list--border-top"
+      })) : vue.createCommentVNode("v-if", true),
+      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
+      $props.border ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 1,
+        class: "uni-list--border-bottom"
+      })) : vue.createCommentVNode("v-if", true)
+    ]);
+  }
+  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$b], ["__scopeId", "data-v-c2f1266a"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
+  var uniSocket_ioExports = {};
+  var uniSocket_io = {
+    get exports() {
+      return uniSocket_ioExports;
+    },
+    set exports(v2) {
+      uniSocket_ioExports = v2;
+    }
+  };
+  (function(module, exports) {
+    !function(t2, e) {
+      module.exports = e();
+    }(window, function() {
+      return function(t2) {
+        var e = {};
+        function n2(r2) {
+          if (e[r2])
+            return e[r2].exports;
+          var o2 = e[r2] = { i: r2, l: false, exports: {} };
+          return t2[r2].call(o2.exports, o2, o2.exports, n2), o2.l = true, o2.exports;
+        }
+        return n2.m = t2, n2.c = e, n2.d = function(t3, e2, r2) {
+          n2.o(t3, e2) || Object.defineProperty(t3, e2, { enumerable: true, get: r2 });
+        }, n2.r = function(t3) {
+          "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(t3, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(t3, "__esModule", { value: true });
+        }, n2.t = function(t3, e2) {
+          if (1 & e2 && (t3 = n2(t3)), 8 & e2)
+            return t3;
+          if (4 & e2 && "object" == typeof t3 && t3 && t3.__esModule)
+            return t3;
+          var r2 = /* @__PURE__ */ Object.create(null);
+          if (n2.r(r2), Object.defineProperty(r2, "default", { enumerable: true, value: t3 }), 2 & e2 && "string" != typeof t3)
+            for (var o2 in t3)
+              n2.d(r2, o2, function(e3) {
+                return t3[e3];
+              }.bind(null, o2));
+          return r2;
+        }, n2.n = function(t3) {
+          var e2 = t3 && t3.__esModule ? function() {
+            return t3.default;
+          } : function() {
+            return t3;
+          };
+          return n2.d(e2, "a", e2), e2;
+        }, n2.o = function(t3, e2) {
+          return Object.prototype.hasOwnProperty.call(t3, e2);
+        }, n2.p = "", n2(n2.s = 18);
+      }([function(t2, e) {
+        t2.exports = function() {
+          return function() {
+          };
+        };
+      }, function(t2, e, n2) {
+        function r2(t3) {
+          if (t3)
+            return function(t4) {
+              for (var e2 in r2.prototype)
+                t4[e2] = r2.prototype[e2];
+              return t4;
+            }(t3);
+        }
+        t2.exports = r2, r2.prototype.on = r2.prototype.addEventListener = function(t3, e2) {
+          return this._callbacks = this._callbacks || {}, (this._callbacks["$" + t3] = this._callbacks["$" + t3] || []).push(e2), this;
+        }, r2.prototype.once = function(t3, e2) {
+          function n3() {
+            this.off(t3, n3), e2.apply(this, arguments);
+          }
+          return n3.fn = e2, this.on(t3, n3), this;
+        }, r2.prototype.off = r2.prototype.removeListener = r2.prototype.removeAllListeners = r2.prototype.removeEventListener = function(t3, e2) {
+          if (this._callbacks = this._callbacks || {}, 0 == arguments.length)
+            return this._callbacks = {}, this;
+          var n3, r3 = this._callbacks["$" + t3];
+          if (!r3)
+            return this;
+          if (1 == arguments.length)
+            return delete this._callbacks["$" + t3], this;
+          for (var o2 = 0; o2 < r3.length; o2++)
+            if ((n3 = r3[o2]) === e2 || n3.fn === e2) {
+              r3.splice(o2, 1);
+              break;
+            }
+          return 0 === r3.length && delete this._callbacks["$" + t3], this;
+        }, r2.prototype.emit = function(t3) {
+          this._callbacks = this._callbacks || {};
+          for (var e2 = new Array(arguments.length - 1), n3 = this._callbacks["$" + t3], r3 = 1; r3 < arguments.length; r3++)
+            e2[r3 - 1] = arguments[r3];
+          if (n3) {
+            r3 = 0;
+            for (var o2 = (n3 = n3.slice(0)).length; r3 < o2; ++r3)
+              n3[r3].apply(this, e2);
+          }
+          return this;
+        }, r2.prototype.listeners = function(t3) {
+          return this._callbacks = this._callbacks || {}, this._callbacks["$" + t3] || [];
+        }, r2.prototype.hasListeners = function(t3) {
+          return !!this.listeners(t3).length;
+        };
+      }, function(t2, e, n2) {
+        const r2 = n2(25), o2 = n2(26), s2 = String.fromCharCode(30);
+        t2.exports = { protocol: 4, encodePacket: r2, encodePayload: (t3, e2) => {
+          const n3 = t3.length, o3 = new Array(n3);
+          let i2 = 0;
+          t3.forEach((t4, a2) => {
+            r2(t4, false, (t5) => {
+              o3[a2] = t5, ++i2 === n3 && e2(o3.join(s2));
+            });
+          });
+        }, decodePacket: o2, decodePayload: (t3, e2) => {
+          const n3 = t3.split(s2), r3 = [];
+          for (let t4 = 0; t4 < n3.length; t4++) {
+            const s3 = o2(n3[t4], e2);
+            if (r3.push(s3), "error" === s3.type)
+              break;
+          }
+          return r3;
+        } };
+      }, function(t2, e) {
+        t2.exports = "undefined" != typeof self ? self : "undefined" != typeof window ? window : Function("return this")();
+      }, function(t2, e, n2) {
+        const r2 = n2(2), o2 = n2(1), s2 = n2(0)("engine.io-client:transport");
+        t2.exports = class extends o2 {
+          constructor(t3) {
+            super(), this.opts = t3, this.query = t3.query, this.readyState = "", this.socket = t3.socket;
+          }
+          onError(t3, e2) {
+            const n3 = new Error(t3);
+            return n3.type = "TransportError", n3.description = e2, this.emit("error", n3), this;
+          }
+          open() {
+            return "closed" !== this.readyState && "" !== this.readyState || (this.readyState = "opening", this.doOpen()), this;
+          }
+          close() {
+            return "opening" !== this.readyState && "open" !== this.readyState || (this.doClose(), this.onClose()), this;
+          }
+          send(t3) {
+            "open" === this.readyState ? this.write(t3) : s2("transport is not open, discarding packets");
+          }
+          onOpen() {
+            this.readyState = "open", this.writable = true, this.emit("open");
+          }
+          onData(t3) {
+            const e2 = r2.decodePacket(t3, this.socket.binaryType);
+            this.onPacket(e2);
+          }
+          onPacket(t3) {
+            this.emit("packet", t3);
+          }
+          onClose() {
+            this.readyState = "closed", this.emit("close");
+          }
+        };
+      }, function(t2, e) {
+        e.encode = function(t3) {
+          var e2 = "";
+          for (var n2 in t3)
+            t3.hasOwnProperty(n2) && (e2.length && (e2 += "&"), e2 += encodeURIComponent(n2) + "=" + encodeURIComponent(t3[n2]));
+          return e2;
+        }, e.decode = function(t3) {
+          for (var e2 = {}, n2 = t3.split("&"), r2 = 0, o2 = n2.length; r2 < o2; r2++) {
+            var s2 = n2[r2].split("=");
+            e2[decodeURIComponent(s2[0])] = decodeURIComponent(s2[1]);
+          }
+          return e2;
+        };
+      }, function(t2, e, n2) {
+        Object.defineProperty(e, "__esModule", { value: true }), e.Decoder = e.Encoder = e.PacketType = e.protocol = void 0;
+        const r2 = n2(1), o2 = n2(38), s2 = n2(16), i2 = n2(0)("socket.io-parser");
+        var a2;
+        e.protocol = 5, function(t3) {
+          t3[t3.CONNECT = 0] = "CONNECT", t3[t3.DISCONNECT = 1] = "DISCONNECT", t3[t3.EVENT = 2] = "EVENT", t3[t3.ACK = 3] = "ACK", t3[t3.CONNECT_ERROR = 4] = "CONNECT_ERROR", t3[t3.BINARY_EVENT = 5] = "BINARY_EVENT", t3[t3.BINARY_ACK = 6] = "BINARY_ACK";
+        }(a2 = e.PacketType || (e.PacketType = {}));
+        e.Encoder = class {
+          encode(t3) {
+            return i2("encoding packet %j", t3), t3.type !== a2.EVENT && t3.type !== a2.ACK || !s2.hasBinary(t3) ? [this.encodeAsString(t3)] : (t3.type = t3.type === a2.EVENT ? a2.BINARY_EVENT : a2.BINARY_ACK, this.encodeAsBinary(t3));
+          }
+          encodeAsString(t3) {
+            let e2 = "" + t3.type;
+            return t3.type !== a2.BINARY_EVENT && t3.type !== a2.BINARY_ACK || (e2 += t3.attachments + "-"), t3.nsp && "/" !== t3.nsp && (e2 += t3.nsp + ","), null != t3.id && (e2 += t3.id), null != t3.data && (e2 += JSON.stringify(t3.data)), i2("encoded %j as %s", t3, e2), e2;
+          }
+          encodeAsBinary(t3) {
+            const e2 = o2.deconstructPacket(t3), n3 = this.encodeAsString(e2.packet), r3 = e2.buffers;
+            return r3.unshift(n3), r3;
+          }
+        };
+        class c2 extends r2 {
+          constructor() {
+            super();
+          }
+          add(t3) {
+            let e2;
+            if ("string" == typeof t3)
+              e2 = this.decodeString(t3), e2.type === a2.BINARY_EVENT || e2.type === a2.BINARY_ACK ? (this.reconstructor = new h2(e2), 0 === e2.attachments && super.emit("decoded", e2)) : super.emit("decoded", e2);
+            else {
+              if (!s2.isBinary(t3) && !t3.base64)
+                throw new Error("Unknown type: " + t3);
+              if (!this.reconstructor)
+                throw new Error("got binary data when not reconstructing a packet");
+              e2 = this.reconstructor.takeBinaryData(t3), e2 && (this.reconstructor = null, super.emit("decoded", e2));
+            }
+          }
+          decodeString(t3) {
+            let e2 = 0;
+            const n3 = { type: Number(t3.charAt(0)) };
+            if (void 0 === a2[n3.type])
+              throw new Error("unknown packet type " + n3.type);
+            if (n3.type === a2.BINARY_EVENT || n3.type === a2.BINARY_ACK) {
+              const r4 = e2 + 1;
+              for (; "-" !== t3.charAt(++e2) && e2 != t3.length; )
+                ;
+              const o3 = t3.substring(r4, e2);
+              if (o3 != Number(o3) || "-" !== t3.charAt(e2))
+                throw new Error("Illegal attachments");
+              n3.attachments = Number(o3);
+            }
+            if ("/" === t3.charAt(e2 + 1)) {
+              const r4 = e2 + 1;
+              for (; ++e2; ) {
+                if ("," === t3.charAt(e2))
+                  break;
+                if (e2 === t3.length)
+                  break;
+              }
+              n3.nsp = t3.substring(r4, e2);
+            } else
+              n3.nsp = "/";
+            const r3 = t3.charAt(e2 + 1);
+            if ("" !== r3 && Number(r3) == r3) {
+              const r4 = e2 + 1;
+              for (; ++e2; ) {
+                const n4 = t3.charAt(e2);
+                if (null == n4 || Number(n4) != n4) {
+                  --e2;
+                  break;
+                }
+                if (e2 === t3.length)
+                  break;
+              }
+              n3.id = Number(t3.substring(r4, e2 + 1));
+            }
+            if (t3.charAt(++e2)) {
+              const r4 = function(t4) {
+                try {
+                  return JSON.parse(t4);
+                } catch (t5) {
+                  return false;
+                }
+              }(t3.substr(e2));
+              if (!c2.isPayloadValid(n3.type, r4))
+                throw new Error("invalid payload");
+              n3.data = r4;
+            }
+            return i2("decoded %s as %j", t3, n3), n3;
+          }
+          static isPayloadValid(t3, e2) {
+            switch (t3) {
+              case a2.CONNECT:
+                return "object" == typeof e2;
+              case a2.DISCONNECT:
+                return void 0 === e2;
+              case a2.CONNECT_ERROR:
+                return "string" == typeof e2 || "object" == typeof e2;
+              case a2.EVENT:
+              case a2.BINARY_EVENT:
+                return Array.isArray(e2) && "string" == typeof e2[0];
+              case a2.ACK:
+              case a2.BINARY_ACK:
+                return Array.isArray(e2);
+            }
+          }
+          destroy() {
+            this.reconstructor && this.reconstructor.finishedReconstruction();
+          }
+        }
+        e.Decoder = c2;
+        class h2 {
+          constructor(t3) {
+            this.packet = t3, this.buffers = [], this.reconPack = t3;
+          }
+          takeBinaryData(t3) {
+            if (this.buffers.push(t3), this.buffers.length === this.reconPack.attachments) {
+              const t4 = o2.reconstructPacket(this.reconPack, this.buffers);
+              return this.finishedReconstruction(), t4;
+            }
+            return null;
+          }
+          finishedReconstruction() {
+            this.reconPack = null, this.buffers = [];
+          }
+        }
+      }, function(t2, e) {
+        var n2 = /^(?:(?![^:@]+:[^:@\/]*@)(http|https|ws|wss):\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?((?:[a-f0-9]{0,4}:){2,7}[a-f0-9]{0,4}|[^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/, r2 = ["source", "protocol", "authority", "userInfo", "user", "password", "host", "port", "relative", "path", "directory", "file", "query", "anchor"];
+        t2.exports = function(t3) {
+          var e2 = t3, o2 = t3.indexOf("["), s2 = t3.indexOf("]");
+          -1 != o2 && -1 != s2 && (t3 = t3.substring(0, o2) + t3.substring(o2, s2).replace(/:/g, ";") + t3.substring(s2, t3.length));
+          for (var i2, a2, c2 = n2.exec(t3 || ""), h2 = {}, u2 = 14; u2--; )
+            h2[r2[u2]] = c2[u2] || "";
+          return -1 != o2 && -1 != s2 && (h2.source = e2, h2.host = h2.host.substring(1, h2.host.length - 1).replace(/;/g, ":"), h2.authority = h2.authority.replace("[", "").replace("]", "").replace(/;/g, ":"), h2.ipv6uri = true), h2.pathNames = function(t4, e3) {
+            var n3 = e3.replace(/\/{2,9}/g, "/").split("/");
+            "/" != e3.substr(0, 1) && 0 !== e3.length || n3.splice(0, 1);
+            "/" == e3.substr(e3.length - 1, 1) && n3.splice(n3.length - 1, 1);
+            return n3;
+          }(0, h2.path), h2.queryKey = (i2 = h2.query, a2 = {}, i2.replace(/(?:^|&)([^&=]*)=?([^&]*)/g, function(t4, e3, n3) {
+            e3 && (a2[e3] = n3);
+          }), a2), h2;
+        };
+      }, function(t2, e, n2) {
+        Object.defineProperty(e, "__esModule", { value: true }), e.Manager = void 0;
+        const r2 = n2(21), o2 = n2(15), s2 = n2(1), i2 = n2(6), a2 = n2(17), c2 = n2(39), h2 = n2(0)("socket.io-client:manager");
+        e.Manager = class extends s2 {
+          constructor(t3, e2) {
+            super(), this.nsps = {}, this.subs = [], t3 && "object" == typeof t3 && (e2 = t3, t3 = void 0), (e2 = e2 || {}).path = e2.path || "/socket.io", this.opts = e2, this.reconnection(false !== e2.reconnection), this.reconnectionAttempts(e2.reconnectionAttempts || 1 / 0), this.reconnectionDelay(e2.reconnectionDelay || 1e3), this.reconnectionDelayMax(e2.reconnectionDelayMax || 5e3), this.randomizationFactor(e2.randomizationFactor || 0.5), this.backoff = new c2({ min: this.reconnectionDelay(), max: this.reconnectionDelayMax(), jitter: this.randomizationFactor() }), this.timeout(null == e2.timeout ? 2e4 : e2.timeout), this._readyState = "closed", this.uri = t3;
+            const n3 = e2.parser || i2;
+            this.encoder = new n3.Encoder(), this.decoder = new n3.Decoder(), this._autoConnect = false !== e2.autoConnect, this._autoConnect && this.open();
+          }
+          reconnection(t3) {
+            return arguments.length ? (this._reconnection = !!t3, this) : this._reconnection;
+          }
+          reconnectionAttempts(t3) {
+            return void 0 === t3 ? this._reconnectionAttempts : (this._reconnectionAttempts = t3, this);
+          }
+          reconnectionDelay(t3) {
+            var e2;
+            return void 0 === t3 ? this._reconnectionDelay : (this._reconnectionDelay = t3, null === (e2 = this.backoff) || void 0 === e2 || e2.setMin(t3), this);
+          }
+          randomizationFactor(t3) {
+            var e2;
+            return void 0 === t3 ? this._randomizationFactor : (this._randomizationFactor = t3, null === (e2 = this.backoff) || void 0 === e2 || e2.setJitter(t3), this);
+          }
+          reconnectionDelayMax(t3) {
+            var e2;
+            return void 0 === t3 ? this._reconnectionDelayMax : (this._reconnectionDelayMax = t3, null === (e2 = this.backoff) || void 0 === e2 || e2.setMax(t3), this);
+          }
+          timeout(t3) {
+            return arguments.length ? (this._timeout = t3, this) : this._timeout;
+          }
+          maybeReconnectOnOpen() {
+            !this._reconnecting && this._reconnection && 0 === this.backoff.attempts && this.reconnect();
+          }
+          open(t3) {
+            if (h2("readyState %s", this._readyState), ~this._readyState.indexOf("open"))
+              return this;
+            h2("opening %s", this.uri), this.engine = r2(this.uri, this.opts);
+            const e2 = this.engine, n3 = this;
+            this._readyState = "opening", this.skipReconnect = false;
+            const o3 = a2.on(e2, "open", function() {
+              n3.onopen(), t3 && t3();
+            }), s3 = a2.on(e2, "error", (e3) => {
+              h2("error"), n3.cleanup(), n3._readyState = "closed", super.emit("error", e3), t3 ? t3(e3) : n3.maybeReconnectOnOpen();
+            });
+            if (false !== this._timeout) {
+              const t4 = this._timeout;
+              h2("connect attempt will timeout after %d", t4), 0 === t4 && o3();
+              const n4 = setTimeout(() => {
+                h2("connect attempt timed out after %d", t4), o3(), e2.close(), e2.emit("error", new Error("timeout"));
+              }, t4);
+              this.subs.push(function() {
+                clearTimeout(n4);
+              });
+            }
+            return this.subs.push(o3), this.subs.push(s3), this;
+          }
+          connect(t3) {
+            return this.open(t3);
+          }
+          onopen() {
+            h2("open"), this.cleanup(), this._readyState = "open", super.emit("open");
+            const t3 = this.engine;
+            this.subs.push(a2.on(t3, "ping", this.onping.bind(this)), a2.on(t3, "data", this.ondata.bind(this)), a2.on(t3, "error", this.onerror.bind(this)), a2.on(t3, "close", this.onclose.bind(this)), a2.on(this.decoder, "decoded", this.ondecoded.bind(this)));
+          }
+          onping() {
+            super.emit("ping");
+          }
+          ondata(t3) {
+            this.decoder.add(t3);
+          }
+          ondecoded(t3) {
+            super.emit("packet", t3);
+          }
+          onerror(t3) {
+            h2("error", t3), super.emit("error", t3);
+          }
+          socket(t3, e2) {
+            let n3 = this.nsps[t3];
+            return n3 || (n3 = new o2.Socket(this, t3, e2), this.nsps[t3] = n3), n3;
+          }
+          _destroy(t3) {
+            const e2 = Object.keys(this.nsps);
+            for (const t4 of e2) {
+              if (this.nsps[t4].active)
+                return void h2("socket %s is still active, skipping close", t4);
+            }
+            this._close();
+          }
+          _packet(t3) {
+            h2("writing packet %j", t3), t3.query && 0 === t3.type && (t3.nsp += "?" + t3.query);
+            const e2 = this.encoder.encode(t3);
+            for (let n3 = 0; n3 < e2.length; n3++)
+              this.engine.write(e2[n3], t3.options);
+          }
+          cleanup() {
+            h2("cleanup"), this.subs.forEach((t3) => t3()), this.subs.length = 0, this.decoder.destroy();
+          }
+          _close() {
+            h2("disconnect"), this.skipReconnect = true, this._reconnecting = false, "opening" === this._readyState && this.cleanup(), this.backoff.reset(), this._readyState = "closed", this.engine && this.engine.close();
+          }
+          disconnect() {
+            return this._close();
+          }
+          onclose(t3) {
+            h2("onclose"), this.cleanup(), this.backoff.reset(), this._readyState = "closed", super.emit("close", t3), this._reconnection && !this.skipReconnect && this.reconnect();
+          }
+          reconnect() {
+            if (this._reconnecting || this.skipReconnect)
+              return this;
+            const t3 = this;
+            if (this.backoff.attempts >= this._reconnectionAttempts)
+              h2("reconnect failed"), this.backoff.reset(), super.emit("reconnect_failed"), this._reconnecting = false;
+            else {
+              const e2 = this.backoff.duration();
+              h2("will wait %dms before reconnect attempt", e2), this._reconnecting = true;
+              const n3 = setTimeout(() => {
+                t3.skipReconnect || (h2("attempting reconnect"), super.emit("reconnect_attempt", t3.backoff.attempts), t3.skipReconnect || t3.open((e3) => {
+                  e3 ? (h2("reconnect attempt error"), t3._reconnecting = false, t3.reconnect(), super.emit("reconnect_error", e3)) : (h2("reconnect success"), t3.onreconnect());
+                }));
+              }, e2);
+              this.subs.push(function() {
+                clearTimeout(n3);
+              });
+            }
+          }
+          onreconnect() {
+            const t3 = this.backoff.attempts;
+            this._reconnecting = false, this.backoff.reset(), super.emit("reconnect", t3);
+          }
+        };
+      }, function(t2, e, n2) {
+        const r2 = n2(10), o2 = n2(24), s2 = n2(28), i2 = n2(29);
+        e.polling = function(t3) {
+          let e2, n3 = false, i3 = false;
+          const a2 = false !== t3.jsonp;
+          if ("undefined" != typeof location) {
+            const e3 = "https:" === location.protocol;
+            let r3 = location.port;
+            r3 || (r3 = e3 ? 443 : 80), n3 = t3.hostname !== location.hostname || r3 !== t3.port, i3 = t3.secure !== e3;
+          }
+          if (t3.xdomain = n3, t3.xscheme = i3, e2 = new r2(t3), "open" in e2 && !t3.forceJSONP)
+            return new o2(t3);
+          if (!a2)
+            throw new Error("JSONP disabled");
+          return new s2(t3);
+        }, e.websocket = i2;
+      }, function(t2, e, n2) {
+        const r2 = n2(23), o2 = n2(3);
+        t2.exports = function(t3) {
+          const e2 = t3.xdomain, n3 = t3.xscheme, s2 = t3.enablesXDR;
+          try {
+            if ("undefined" != typeof XMLHttpRequest && (!e2 || r2))
+              return new XMLHttpRequest();
+          } catch (t4) {
+          }
+          try {
+            if ("undefined" != typeof XDomainRequest && !n3 && s2)
+              return new XDomainRequest();
+          } catch (t4) {
+          }
+          if (!e2)
+            try {
+              return new o2[["Active"].concat("Object").join("X")]("Microsoft.XMLHTTP");
+            } catch (t4) {
+            }
+        };
+      }, function(t2, e, n2) {
+        const r2 = n2(4), o2 = n2(5), s2 = n2(2), i2 = n2(13), a2 = n2(0)("engine.io-client:polling");
+        t2.exports = class extends r2 {
+          get name() {
+            return "polling";
+          }
+          doOpen() {
+            this.poll();
+          }
+          pause(t3) {
+            const e2 = this;
+            function n3() {
+              a2("paused"), e2.readyState = "paused", t3();
+            }
+            if (this.readyState = "pausing", this.polling || !this.writable) {
+              let t4 = 0;
+              this.polling && (a2("we are currently polling - waiting to pause"), t4++, this.once("pollComplete", function() {
+                a2("pre-pause polling complete"), --t4 || n3();
+              })), this.writable || (a2("we are currently writing - waiting to pause"), t4++, this.once("drain", function() {
+                a2("pre-pause writing complete"), --t4 || n3();
+              }));
+            } else
+              n3();
+          }
+          poll() {
+            a2("polling"), this.polling = true, this.doPoll(), this.emit("poll");
+          }
+          onData(t3) {
+            const e2 = this;
+            a2("polling got data %s", t3);
+            s2.decodePayload(t3, this.socket.binaryType).forEach(function(t4, n3, r3) {
+              if ("opening" === e2.readyState && "open" === t4.type && e2.onOpen(), "close" === t4.type)
+                return e2.onClose(), false;
+              e2.onPacket(t4);
+            }), "closed" !== this.readyState && (this.polling = false, this.emit("pollComplete"), "open" === this.readyState ? this.poll() : a2('ignoring poll - transport state "%s"', this.readyState));
+          }
+          doClose() {
+            const t3 = this;
+            function e2() {
+              a2("writing close packet"), t3.write([{ type: "close" }]);
+            }
+            "open" === this.readyState ? (a2("transport open - closing"), e2()) : (a2("transport not open - deferring close"), this.once("open", e2));
+          }
+          write(t3) {
+            this.writable = false, s2.encodePayload(t3, (t4) => {
+              this.doWrite(t4, () => {
+                this.writable = true, this.emit("drain");
+              });
+            });
+          }
+          uri() {
+            let t3 = this.query || {};
+            const e2 = this.opts.secure ? "https" : "http";
+            let n3 = "";
+            false !== this.opts.timestampRequests && (t3[this.opts.timestampParam] = i2()), this.supportsBinary || t3.sid || (t3.b64 = 1), t3 = o2.encode(t3), this.opts.port && ("https" === e2 && 443 !== Number(this.opts.port) || "http" === e2 && 80 !== Number(this.opts.port)) && (n3 = ":" + this.opts.port), t3.length && (t3 = "?" + t3);
+            return e2 + "://" + (-1 !== this.opts.hostname.indexOf(":") ? "[" + this.opts.hostname + "]" : this.opts.hostname) + n3 + this.opts.path + t3;
+          }
+        };
+      }, function(t2, e) {
+        const n2 = /* @__PURE__ */ Object.create(null);
+        n2.open = "0", n2.close = "1", n2.ping = "2", n2.pong = "3", n2.message = "4", n2.upgrade = "5", n2.noop = "6";
+        const r2 = /* @__PURE__ */ Object.create(null);
+        Object.keys(n2).forEach((t3) => {
+          r2[n2[t3]] = t3;
+        });
+        t2.exports = { PACKET_TYPES: n2, PACKET_TYPES_REVERSE: r2, ERROR_PACKET: { type: "error", data: "parser error" } };
+      }, function(t2, e, n2) {
+        var r2, o2 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_".split(""), s2 = {}, i2 = 0, a2 = 0;
+        function c2(t3) {
+          var e2 = "";
+          do {
+            e2 = o2[t3 % 64] + e2, t3 = Math.floor(t3 / 64);
+          } while (t3 > 0);
+          return e2;
+        }
+        function h2() {
+          var t3 = c2(+new Date());
+          return t3 !== r2 ? (i2 = 0, r2 = t3) : t3 + "." + c2(i2++);
+        }
+        for (; a2 < 64; a2++)
+          s2[o2[a2]] = a2;
+        h2.encode = c2, h2.decode = function(t3) {
+          var e2 = 0;
+          for (a2 = 0; a2 < t3.length; a2++)
+            e2 = 64 * e2 + s2[t3.charAt(a2)];
+          return e2;
+        }, t2.exports = h2;
+      }, function(t2, e) {
+        t2.exports.pick = (t3, ...e2) => e2.reduce((e3, n2) => (t3.hasOwnProperty(n2) && (e3[n2] = t3[n2]), e3), {});
+      }, function(t2, e, n2) {
+        Object.defineProperty(e, "__esModule", { value: true }), e.Socket = void 0;
+        const r2 = n2(6), o2 = n2(1), s2 = n2(17), i2 = n2(0)("socket.io-client:socket"), a2 = Object.freeze({ connect: 1, connect_error: 1, disconnect: 1, disconnecting: 1, newListener: 1, removeListener: 1 });
+        e.Socket = class extends o2 {
+          constructor(t3, e2, n3) {
+            super(), this.receiveBuffer = [], this.sendBuffer = [], this.ids = 0, this.acks = {}, this.flags = {}, this.io = t3, this.nsp = e2, this.ids = 0, this.acks = {}, this.receiveBuffer = [], this.sendBuffer = [], this.connected = false, this.disconnected = true, this.flags = {}, n3 && n3.auth && (this.auth = n3.auth), this.io._autoConnect && this.open();
+          }
+          subEvents() {
+            if (this.subs)
+              return;
+            const t3 = this.io;
+            this.subs = [s2.on(t3, "open", this.onopen.bind(this)), s2.on(t3, "packet", this.onpacket.bind(this)), s2.on(t3, "error", this.onerror.bind(this)), s2.on(t3, "close", this.onclose.bind(this))];
+          }
+          get active() {
+            return !!this.subs;
+          }
+          connect() {
+            return this.connected || (this.subEvents(), this.io._reconnecting || this.io.open(), "open" === this.io._readyState && this.onopen()), this;
+          }
+          open() {
+            return this.connect();
+          }
+          send(...t3) {
+            return t3.unshift("message"), this.emit.apply(this, t3), this;
+          }
+          emit(t3, ...e2) {
+            if (a2.hasOwnProperty(t3))
+              throw new Error('"' + t3 + '" is a reserved event name');
+            e2.unshift(t3);
+            const n3 = { type: r2.PacketType.EVENT, data: e2, options: {} };
+            n3.options.compress = false !== this.flags.compress, "function" == typeof e2[e2.length - 1] && (i2("emitting packet with ack id %d", this.ids), this.acks[this.ids] = e2.pop(), n3.id = this.ids++);
+            const o3 = this.io.engine && this.io.engine.transport && this.io.engine.transport.writable;
+            return this.flags.volatile && (!o3 || !this.connected) ? i2("discard packet as the transport is not currently writable") : this.connected ? this.packet(n3) : this.sendBuffer.push(n3), this.flags = {}, this;
+          }
+          packet(t3) {
+            t3.nsp = this.nsp, this.io._packet(t3);
+          }
+          onopen() {
+            i2("transport is open - connecting"), "function" == typeof this.auth ? this.auth((t3) => {
+              this.packet({ type: r2.PacketType.CONNECT, data: t3 });
+            }) : this.packet({ type: r2.PacketType.CONNECT, data: this.auth });
+          }
+          onerror(t3) {
+            this.connected || super.emit("connect_error", t3);
+          }
+          onclose(t3) {
+            i2("close (%s)", t3), this.connected = false, this.disconnected = true, delete this.id, super.emit("disconnect", t3);
+          }
+          onpacket(t3) {
+            if (t3.nsp === this.nsp)
+              switch (t3.type) {
+                case r2.PacketType.CONNECT:
+                  if (t3.data && t3.data.sid) {
+                    const e3 = t3.data.sid;
+                    this.onconnect(e3);
+                  } else
+                    super.emit("connect_error", new Error("It seems you are trying to reach a Socket.IO server in v2.x with a v3.x client, but they are not compatible (more information here: https://socket.io/docs/v3/migrating-from-2-x-to-3-0/)"));
+                  break;
+                case r2.PacketType.EVENT:
+                case r2.PacketType.BINARY_EVENT:
+                  this.onevent(t3);
+                  break;
+                case r2.PacketType.ACK:
+                case r2.PacketType.BINARY_ACK:
+                  this.onack(t3);
+                  break;
+                case r2.PacketType.DISCONNECT:
+                  this.ondisconnect();
+                  break;
+                case r2.PacketType.CONNECT_ERROR:
+                  const e2 = new Error(t3.data.message);
+                  e2.data = t3.data.data, super.emit("connect_error", e2);
+              }
+          }
+          onevent(t3) {
+            const e2 = t3.data || [];
+            i2("emitting event %j", e2), null != t3.id && (i2("attaching ack callback to event"), e2.push(this.ack(t3.id))), this.connected ? this.emitEvent(e2) : this.receiveBuffer.push(Object.freeze(e2));
+          }
+          emitEvent(t3) {
+            if (this._anyListeners && this._anyListeners.length) {
+              const e2 = this._anyListeners.slice();
+              for (const n3 of e2)
+                n3.apply(this, t3);
+            }
+            super.emit.apply(this, t3);
+          }
+          ack(t3) {
+            const e2 = this;
+            let n3 = false;
+            return function(...o3) {
+              n3 || (n3 = true, i2("sending ack %j", o3), e2.packet({ type: r2.PacketType.ACK, id: t3, data: o3 }));
+            };
+          }
+          onack(t3) {
+            const e2 = this.acks[t3.id];
+            "function" == typeof e2 ? (i2("calling ack %s with %j", t3.id, t3.data), e2.apply(this, t3.data), delete this.acks[t3.id]) : i2("bad ack %s", t3.id);
+          }
+          onconnect(t3) {
+            i2("socket connected with id %s", t3), this.id = t3, this.connected = true, this.disconnected = false, super.emit("connect"), this.emitBuffered();
+          }
+          emitBuffered() {
+            this.receiveBuffer.forEach((t3) => this.emitEvent(t3)), this.receiveBuffer = [], this.sendBuffer.forEach((t3) => this.packet(t3)), this.sendBuffer = [];
+          }
+          ondisconnect() {
+            i2("server disconnect (%s)", this.nsp), this.destroy(), this.onclose("io server disconnect");
+          }
+          destroy() {
+            this.subs && (this.subs.forEach((t3) => t3()), this.subs = void 0), this.io._destroy(this);
+          }
+          disconnect() {
+            return this.connected && (i2("performing disconnect (%s)", this.nsp), this.packet({ type: r2.PacketType.DISCONNECT })), this.destroy(), this.connected && this.onclose("io client disconnect"), this;
+          }
+          close() {
+            return this.disconnect();
+          }
+          compress(t3) {
+            return this.flags.compress = t3, this;
+          }
+          get volatile() {
+            return this.flags.volatile = true, this;
+          }
+          onAny(t3) {
+            return this._anyListeners = this._anyListeners || [], this._anyListeners.push(t3), this;
+          }
+          prependAny(t3) {
+            return this._anyListeners = this._anyListeners || [], this._anyListeners.unshift(t3), this;
+          }
+          offAny(t3) {
+            if (!this._anyListeners)
+              return this;
+            if (t3) {
+              const e2 = this._anyListeners;
+              for (let n3 = 0; n3 < e2.length; n3++)
+                if (t3 === e2[n3])
+                  return e2.splice(n3, 1), this;
+            } else
+              this._anyListeners = [];
+            return this;
+          }
+          listenersAny() {
+            return this._anyListeners || [];
+          }
+        };
+      }, function(t2, e, n2) {
+        Object.defineProperty(e, "__esModule", { value: true }), e.hasBinary = e.isBinary = void 0;
+        const r2 = "function" == typeof ArrayBuffer, o2 = Object.prototype.toString, s2 = "function" == typeof Blob || "undefined" != typeof Blob && "[object BlobConstructor]" === o2.call(Blob), i2 = "function" == typeof File || "undefined" != typeof File && "[object FileConstructor]" === o2.call(File);
+        function a2(t3) {
+          return r2 && (t3 instanceof ArrayBuffer || ((t4) => "function" == typeof ArrayBuffer.isView ? ArrayBuffer.isView(t4) : t4.buffer instanceof ArrayBuffer)(t3)) || s2 && t3 instanceof Blob || i2 && t3 instanceof File;
+        }
+        e.isBinary = a2, e.hasBinary = function t3(e2, n3) {
+          if (!e2 || "object" != typeof e2)
+            return false;
+          if (Array.isArray(e2)) {
+            for (let n4 = 0, r3 = e2.length; n4 < r3; n4++)
+              if (t3(e2[n4]))
+                return true;
+            return false;
+          }
+          if (a2(e2))
+            return true;
+          if (e2.toJSON && "function" == typeof e2.toJSON && 1 === arguments.length)
+            return t3(e2.toJSON(), true);
+          for (const n4 in e2)
+            if (Object.prototype.hasOwnProperty.call(e2, n4) && t3(e2[n4]))
+              return true;
+          return false;
+        };
+      }, function(t2, e, n2) {
+        Object.defineProperty(e, "__esModule", { value: true }), e.on = void 0, e.on = function(t3, e2, n3) {
+          return t3.on(e2, n3), function() {
+            t3.off(e2, n3);
+          };
+        };
+      }, function(t2, e, n2) {
+        t2.exports = n2(19);
+      }, function(t2, e, n2) {
+        Object.defineProperty(e, "__esModule", { value: true }), e.Socket = e.io = e.Manager = e.protocol = void 0;
+        const r2 = n2(20), o2 = n2(8), s2 = n2(15);
+        Object.defineProperty(e, "Socket", { enumerable: true, get: function() {
+          return s2.Socket;
+        } });
+        const i2 = n2(0)("socket.io-client");
+        t2.exports = e = c2;
+        const a2 = e.managers = {};
+        function c2(t3, e2) {
+          "object" == typeof t3 && (e2 = t3, t3 = void 0), e2 = e2 || {};
+          const n3 = r2.url(t3), s3 = n3.source, c3 = n3.id, h3 = n3.path, u3 = a2[c3] && h3 in a2[c3].nsps;
+          let p2;
+          return e2.forceNew || e2["force new connection"] || false === e2.multiplex || u3 ? (i2("ignoring socket cache for %s", s3), p2 = new o2.Manager(s3, e2)) : (a2[c3] || (i2("new io instance for %s", s3), a2[c3] = new o2.Manager(s3, e2)), p2 = a2[c3]), n3.query && !e2.query && (e2.query = n3.query), p2.socket(n3.path, e2);
+        }
+        e.io = c2;
+        var h2 = n2(6);
+        Object.defineProperty(e, "protocol", { enumerable: true, get: function() {
+          return h2.protocol;
+        } }), e.connect = c2;
+        var u2 = n2(8);
+        Object.defineProperty(e, "Manager", { enumerable: true, get: function() {
+          return u2.Manager;
+        } });
+      }, function(t2, e, n2) {
+        Object.defineProperty(e, "__esModule", { value: true }), e.url = void 0;
+        const r2 = n2(7), o2 = n2(0)("socket.io-client:url");
+        e.url = function(t3, e2) {
+          let n3 = t3;
+          e2 = e2 || "undefined" != typeof location && location, null == t3 && (t3 = e2.protocol + "//" + e2.host), "string" == typeof t3 && ("/" === t3.charAt(0) && (t3 = "/" === t3.charAt(1) ? e2.protocol + t3 : e2.host + t3), /^(https?|wss?):\/\//.test(t3) || (o2("protocol-less url %s", t3), t3 = void 0 !== e2 ? e2.protocol + "//" + t3 : "https://" + t3), o2("parse %s", t3), n3 = r2(t3)), n3.port || (/^(http|ws)$/.test(n3.protocol) ? n3.port = "80" : /^(http|ws)s$/.test(n3.protocol) && (n3.port = "443")), n3.path = n3.path || "/";
+          const s2 = -1 !== n3.host.indexOf(":") ? "[" + n3.host + "]" : n3.host;
+          return n3.id = n3.protocol + "://" + s2 + ":" + n3.port, n3.href = n3.protocol + "://" + s2 + (e2 && e2.port === n3.port ? "" : ":" + n3.port), n3;
+        };
+      }, function(t2, e, n2) {
+        const r2 = n2(22);
+        t2.exports = (t3, e2) => new r2(t3, e2), t2.exports.Socket = r2, t2.exports.protocol = r2.protocol, t2.exports.Transport = n2(4), t2.exports.transports = n2(9), t2.exports.parser = n2(2);
+      }, function(t2, e, n2) {
+        const r2 = n2(9), o2 = n2(1), s2 = n2(0)("engine.io-client:socket"), i2 = n2(2), a2 = n2(7), c2 = n2(5);
+        class h2 extends o2 {
+          constructor(t3, e2 = {}) {
+            super(), t3 && "object" == typeof t3 && (e2 = t3, t3 = null), t3 ? (t3 = a2(t3), e2.hostname = t3.host, e2.secure = "https" === t3.protocol || "wss" === t3.protocol, e2.port = t3.port, t3.query && (e2.query = t3.query)) : e2.host && (e2.hostname = a2(e2.host).host), this.secure = null != e2.secure ? e2.secure : "undefined" != typeof location && "https:" === location.protocol, e2.hostname && !e2.port && (e2.port = this.secure ? "443" : "80"), this.hostname = e2.hostname || ("undefined" != typeof location ? location.hostname : "localhost"), this.port = e2.port || ("undefined" != typeof location && location.port ? location.port : this.secure ? 443 : 80), this.transports = e2.transports || ["polling", "websocket"], this.readyState = "", this.writeBuffer = [], this.prevBufferLen = 0, this.opts = Object.assign({ path: "/engine.io", agent: false, withCredentials: false, upgrade: true, jsonp: true, timestampParam: "t", rememberUpgrade: false, rejectUnauthorized: true, perMessageDeflate: { threshold: 1024 }, transportOptions: {} }, e2), this.opts.path = this.opts.path.replace(/\/$/, "") + "/", "string" == typeof this.opts.query && (this.opts.query = c2.decode(this.opts.query)), this.id = null, this.upgrades = null, this.pingInterval = null, this.pingTimeout = null, this.pingTimeoutTimer = null, "function" == typeof addEventListener && (addEventListener("beforeunload", () => {
+              this.transport && (this.transport.removeAllListeners(), this.transport.close());
+            }, false), "localhost" !== this.hostname && (this.offlineEventListener = () => {
+              this.onClose("transport close");
+            }, addEventListener("offline", this.offlineEventListener, false))), this.open();
+          }
+          createTransport(t3) {
+            s2('creating transport "%s"', t3);
+            const e2 = function(t4) {
+              const e3 = {};
+              for (let n4 in t4)
+                t4.hasOwnProperty(n4) && (e3[n4] = t4[n4]);
+              return e3;
+            }(this.opts.query);
+            e2.EIO = i2.protocol, e2.transport = t3, this.id && (e2.sid = this.id);
+            const n3 = Object.assign({}, this.opts.transportOptions[t3], this.opts, { query: e2, socket: this, hostname: this.hostname, secure: this.secure, port: this.port });
+            return s2("options: %j", n3), new r2[t3](n3);
+          }
+          open() {
+            let t3;
+            if (this.opts.rememberUpgrade && h2.priorWebsocketSuccess && -1 !== this.transports.indexOf("websocket"))
+              t3 = "websocket";
+            else {
+              if (0 === this.transports.length) {
+                const t4 = this;
+                return void setTimeout(function() {
+                  t4.emit("error", "No transports available");
+                }, 0);
+              }
+              t3 = this.transports[0];
+            }
+            this.readyState = "opening";
+            try {
+              t3 = this.createTransport(t3);
+            } catch (t4) {
+              return s2("error while creating transport: %s", t4), this.transports.shift(), void this.open();
+            }
+            t3.open(), this.setTransport(t3);
+          }
+          setTransport(t3) {
+            s2("setting transport %s", t3.name);
+            const e2 = this;
+            this.transport && (s2("clearing existing transport %s", this.transport.name), this.transport.removeAllListeners()), this.transport = t3, t3.on("drain", function() {
+              e2.onDrain();
+            }).on("packet", function(t4) {
+              e2.onPacket(t4);
+            }).on("error", function(t4) {
+              e2.onError(t4);
+            }).on("close", function() {
+              e2.onClose("transport close");
+            });
+          }
+          probe(t3) {
+            s2('probing transport "%s"', t3);
+            let e2 = this.createTransport(t3, { probe: 1 }), n3 = false;
+            const r3 = this;
+            function o3() {
+              if (r3.onlyBinaryUpgrades) {
+                const t4 = !this.supportsBinary && r3.transport.supportsBinary;
+                n3 = n3 || t4;
+              }
+              n3 || (s2('probe transport "%s" opened', t3), e2.send([{ type: "ping", data: "probe" }]), e2.once("packet", function(o4) {
+                if (!n3)
+                  if ("pong" === o4.type && "probe" === o4.data) {
+                    if (s2('probe transport "%s" pong', t3), r3.upgrading = true, r3.emit("upgrading", e2), !e2)
+                      return;
+                    h2.priorWebsocketSuccess = "websocket" === e2.name, s2('pausing current transport "%s"', r3.transport.name), r3.transport.pause(function() {
+                      n3 || "closed" !== r3.readyState && (s2("changing transport and sending upgrade packet"), f2(), r3.setTransport(e2), e2.send([{ type: "upgrade" }]), r3.emit("upgrade", e2), e2 = null, r3.upgrading = false, r3.flush());
+                    });
+                  } else {
+                    s2('probe transport "%s" failed', t3);
+                    const n4 = new Error("probe error");
+                    n4.transport = e2.name, r3.emit("upgradeError", n4);
+                  }
+              }));
+            }
+            function i3() {
+              n3 || (n3 = true, f2(), e2.close(), e2 = null);
+            }
+            function a3(n4) {
+              const o4 = new Error("probe error: " + n4);
+              o4.transport = e2.name, i3(), s2('probe transport "%s" failed because of error: %s', t3, n4), r3.emit("upgradeError", o4);
+            }
+            function c3() {
+              a3("transport closed");
+            }
+            function u2() {
+              a3("socket closed");
+            }
+            function p2(t4) {
+              e2 && t4.name !== e2.name && (s2('"%s" works - aborting "%s"', t4.name, e2.name), i3());
+            }
+            function f2() {
+              e2.removeListener("open", o3), e2.removeListener("error", a3), e2.removeListener("close", c3), r3.removeListener("close", u2), r3.removeListener("upgrading", p2);
+            }
+            h2.priorWebsocketSuccess = false, e2.once("open", o3), e2.once("error", a3), e2.once("close", c3), this.once("close", u2), this.once("upgrading", p2), e2.open();
+          }
+          onOpen() {
+            if (s2("socket open"), this.readyState = "open", h2.priorWebsocketSuccess = "websocket" === this.transport.name, this.emit("open"), this.flush(), "open" === this.readyState && this.opts.upgrade && this.transport.pause) {
+              s2("starting upgrade probes");
+              let t3 = 0;
+              const e2 = this.upgrades.length;
+              for (; t3 < e2; t3++)
+                this.probe(this.upgrades[t3]);
+            }
+          }
+          onPacket(t3) {
+            if ("opening" === this.readyState || "open" === this.readyState || "closing" === this.readyState)
+              switch (s2('socket receive: type "%s", data "%s"', t3.type, t3.data), this.emit("packet", t3), this.emit("heartbeat"), t3.type) {
+                case "open":
+                  this.onHandshake(JSON.parse(t3.data));
+                  break;
+                case "ping":
+                  this.resetPingTimeout(), this.sendPacket("pong"), this.emit("pong");
+                  break;
+                case "error":
+                  const e2 = new Error("server error");
+                  e2.code = t3.data, this.onError(e2);
+                  break;
+                case "message":
+                  this.emit("data", t3.data), this.emit("message", t3.data);
+              }
+            else
+              s2('packet received with socket readyState "%s"', this.readyState);
+          }
+          onHandshake(t3) {
+            this.emit("handshake", t3), this.id = t3.sid, this.transport.query.sid = t3.sid, this.upgrades = this.filterUpgrades(t3.upgrades), this.pingInterval = t3.pingInterval, this.pingTimeout = t3.pingTimeout, this.onOpen(), "closed" !== this.readyState && this.resetPingTimeout();
+          }
+          resetPingTimeout() {
+            clearTimeout(this.pingTimeoutTimer), this.pingTimeoutTimer = setTimeout(() => {
+              this.onClose("ping timeout");
+            }, this.pingInterval + this.pingTimeout), this.opts.autoUnref && this.pingTimeoutTimer.unref();
+          }
+          onDrain() {
+            this.writeBuffer.splice(0, this.prevBufferLen), this.prevBufferLen = 0, 0 === this.writeBuffer.length ? this.emit("drain") : this.flush();
+          }
+          flush() {
+            "closed" !== this.readyState && this.transport.writable && !this.upgrading && this.writeBuffer.length && (s2("flushing %d packets in socket", this.writeBuffer.length), this.transport.send(this.writeBuffer), this.prevBufferLen = this.writeBuffer.length, this.emit("flush"));
+          }
+          write(t3, e2, n3) {
+            return this.sendPacket("message", t3, e2, n3), this;
+          }
+          send(t3, e2, n3) {
+            return this.sendPacket("message", t3, e2, n3), this;
+          }
+          sendPacket(t3, e2, n3, r3) {
+            if ("function" == typeof e2 && (r3 = e2, e2 = void 0), "function" == typeof n3 && (r3 = n3, n3 = null), "closing" === this.readyState || "closed" === this.readyState)
+              return;
+            (n3 = n3 || {}).compress = false !== n3.compress;
+            const o3 = { type: t3, data: e2, options: n3 };
+            this.emit("packetCreate", o3), this.writeBuffer.push(o3), r3 && this.once("flush", r3), this.flush();
+          }
+          close() {
+            const t3 = this;
+            function e2() {
+              t3.onClose("forced close"), s2("socket closing - telling transport to close"), t3.transport.close();
+            }
+            function n3() {
+              t3.removeListener("upgrade", n3), t3.removeListener("upgradeError", n3), e2();
+            }
+            function r3() {
+              t3.once("upgrade", n3), t3.once("upgradeError", n3);
+            }
+            return "opening" !== this.readyState && "open" !== this.readyState || (this.readyState = "closing", this.writeBuffer.length ? this.once("drain", function() {
+              this.upgrading ? r3() : e2();
+            }) : this.upgrading ? r3() : e2()), this;
+          }
+          onError(t3) {
+            s2("socket error %j", t3), h2.priorWebsocketSuccess = false, this.emit("error", t3), this.onClose("transport error", t3);
+          }
+          onClose(t3, e2) {
+            if ("opening" === this.readyState || "open" === this.readyState || "closing" === this.readyState) {
+              s2('socket close with reason: "%s"', t3);
+              const n3 = this;
+              clearTimeout(this.pingIntervalTimer), clearTimeout(this.pingTimeoutTimer), this.transport.removeAllListeners("close"), this.transport.close(), this.transport.removeAllListeners(), "function" == typeof removeEventListener && removeEventListener("offline", this.offlineEventListener, false), this.readyState = "closed", this.id = null, this.emit("close", t3, e2), n3.writeBuffer = [], n3.prevBufferLen = 0;
+            }
+          }
+          filterUpgrades(t3) {
+            const e2 = [];
+            let n3 = 0;
+            const r3 = t3.length;
+            for (; n3 < r3; n3++)
+              ~this.transports.indexOf(t3[n3]) && e2.push(t3[n3]);
+            return e2;
+          }
+        }
+        h2.priorWebsocketSuccess = false, h2.protocol = i2.protocol, t2.exports = h2;
+      }, function(t2, e) {
+        try {
+          t2.exports = "undefined" != typeof XMLHttpRequest && "withCredentials" in new XMLHttpRequest();
+        } catch (e2) {
+          t2.exports = false;
+        }
+      }, function(t2, e, n2) {
+        const r2 = n2(10), o2 = n2(11), s2 = n2(1), { pick: i2 } = n2(14), a2 = n2(3), c2 = n2(0)("engine.io-client:polling-xhr");
+        function h2() {
+        }
+        const u2 = null != new r2({ xdomain: false }).responseType;
+        class p2 extends s2 {
+          constructor(t3, e2) {
+            super(), this.opts = e2, this.method = e2.method || "GET", this.uri = t3, this.async = false !== e2.async, this.data = void 0 !== e2.data ? e2.data : null, this.create();
+          }
+          create() {
+            const t3 = i2(this.opts, "agent", "enablesXDR", "pfx", "key", "passphrase", "cert", "ca", "ciphers", "rejectUnauthorized", "autoUnref");
+            t3.xdomain = !!this.opts.xd, t3.xscheme = !!this.opts.xs;
+            const e2 = this.xhr = new r2(t3), n3 = this;
+            try {
+              c2("xhr open %s: %s", this.method, this.uri), e2.open(this.method, this.uri, this.async);
+              try {
+                if (this.opts.extraHeaders) {
+                  e2.setDisableHeaderCheck && e2.setDisableHeaderCheck(true);
+                  for (let t4 in this.opts.extraHeaders)
+                    this.opts.extraHeaders.hasOwnProperty(t4) && e2.setRequestHeader(t4, this.opts.extraHeaders[t4]);
+                }
+              } catch (t4) {
+              }
+              if ("POST" === this.method)
+                try {
+                  e2.setRequestHeader("Content-type", "text/plain;charset=UTF-8");
+                } catch (t4) {
+                }
+              try {
+                e2.setRequestHeader("Accept", "*/*");
+              } catch (t4) {
+              }
+              "withCredentials" in e2 && (e2.withCredentials = this.opts.withCredentials), this.opts.requestTimeout && (e2.timeout = this.opts.requestTimeout), this.hasXDR() ? (e2.onload = function() {
+                n3.onLoad();
+              }, e2.onerror = function() {
+                n3.onError(e2.responseText);
+              }) : e2.onreadystatechange = function() {
+                4 === e2.readyState && (200 === e2.status || 1223 === e2.status ? n3.onLoad() : setTimeout(function() {
+                  n3.onError("number" == typeof e2.status ? e2.status : 0);
+                }, 0));
+              }, c2("xhr data %s", this.data), e2.send(this.data);
+            } catch (t4) {
+              return void setTimeout(function() {
+                n3.onError(t4);
+              }, 0);
+            }
+            "undefined" != typeof document && (this.index = p2.requestsCount++, p2.requests[this.index] = this);
+          }
+          onSuccess() {
+            this.emit("success"), this.cleanup();
+          }
+          onData(t3) {
+            this.emit("data", t3), this.onSuccess();
+          }
+          onError(t3) {
+            this.emit("error", t3), this.cleanup(true);
+          }
+          cleanup(t3) {
+            if (void 0 !== this.xhr && null !== this.xhr) {
+              if (this.hasXDR() ? this.xhr.onload = this.xhr.onerror = h2 : this.xhr.onreadystatechange = h2, t3)
+                try {
+                  this.xhr.abort();
+                } catch (t4) {
+                }
+              "undefined" != typeof document && delete p2.requests[this.index], this.xhr = null;
+            }
+          }
+          onLoad() {
+            const t3 = this.xhr.responseText;
+            null !== t3 && this.onData(t3);
+          }
+          hasXDR() {
+            return "undefined" != typeof XDomainRequest && !this.xs && this.enablesXDR;
+          }
+          abort() {
+            this.cleanup();
+          }
+        }
+        if (p2.requestsCount = 0, p2.requests = {}, "undefined" != typeof document) {
+          if ("function" == typeof attachEvent)
+            attachEvent("onunload", f2);
+          else if ("function" == typeof addEventListener) {
+            addEventListener("onpagehide" in a2 ? "pagehide" : "unload", f2, false);
+          }
+        }
+        function f2() {
+          for (let t3 in p2.requests)
+            p2.requests.hasOwnProperty(t3) && p2.requests[t3].abort();
+        }
+        t2.exports = class extends o2 {
+          constructor(t3) {
+            if (super(t3), "undefined" != typeof location) {
+              const e3 = "https:" === location.protocol;
+              let n3 = location.port;
+              n3 || (n3 = e3 ? 443 : 80), this.xd = "undefined" != typeof location && t3.hostname !== location.hostname || n3 !== t3.port, this.xs = t3.secure !== e3;
+            }
+            const e2 = t3 && t3.forceBase64;
+            this.supportsBinary = u2 && !e2;
+          }
+          request(t3 = {}) {
+            return Object.assign(t3, { xd: this.xd, xs: this.xs }, this.opts), new p2(this.uri(), t3);
+          }
+          doWrite(t3, e2) {
+            const n3 = this.request({ method: "POST", data: t3 }), r3 = this;
+            n3.on("success", e2), n3.on("error", function(t4) {
+              r3.onError("xhr post error", t4);
+            });
+          }
+          doPoll() {
+            c2("xhr poll");
+            const t3 = this.request(), e2 = this;
+            t3.on("data", function(t4) {
+              e2.onData(t4);
+            }), t3.on("error", function(t4) {
+              e2.onError("xhr poll error", t4);
+            }), this.pollXhr = t3;
+          }
+        }, t2.exports.Request = p2;
+      }, function(t2, e, n2) {
+        const { PACKET_TYPES: r2 } = n2(12), o2 = "function" == typeof Blob || "undefined" != typeof Blob && "[object BlobConstructor]" === Object.prototype.toString.call(Blob), s2 = "function" == typeof ArrayBuffer, i2 = (t3, e2) => {
+          const n3 = new FileReader();
+          return n3.onload = function() {
+            const t4 = n3.result.split(",")[1];
+            e2("b" + t4);
+          }, n3.readAsDataURL(t3);
+        };
+        t2.exports = ({ type: t3, data: e2 }, n3, a2) => {
+          return o2 && e2 instanceof Blob ? n3 ? a2(e2) : i2(e2, a2) : s2 && (e2 instanceof ArrayBuffer || (c2 = e2, "function" == typeof ArrayBuffer.isView ? ArrayBuffer.isView(c2) : c2 && c2.buffer instanceof ArrayBuffer)) ? n3 ? a2(e2 instanceof ArrayBuffer ? e2 : e2.buffer) : i2(new Blob([e2]), a2) : a2(r2[t3] + (e2 || ""));
+          var c2;
+        };
+      }, function(t2, e, n2) {
+        const { PACKET_TYPES_REVERSE: r2, ERROR_PACKET: o2 } = n2(12);
+        let s2;
+        "function" == typeof ArrayBuffer && (s2 = n2(27));
+        const i2 = (t3, e2) => {
+          if (s2) {
+            const n3 = s2.decode(t3);
+            return a2(n3, e2);
+          }
+          return { base64: true, data: t3 };
+        }, a2 = (t3, e2) => {
+          switch (e2) {
+            case "blob":
+              return t3 instanceof ArrayBuffer ? new Blob([t3]) : t3;
+            case "arraybuffer":
+            default:
+              return t3;
+          }
+        };
+        t2.exports = (t3, e2) => {
+          if ("string" != typeof t3)
+            return { type: "message", data: a2(t3, e2) };
+          const n3 = t3.charAt(0);
+          if ("b" === n3)
+            return { type: "message", data: i2(t3.substring(1), e2) };
+          return r2[n3] ? t3.length > 1 ? { type: r2[n3], data: t3.substring(1) } : { type: r2[n3] } : o2;
+        };
+      }, function(t2, e) {
+        !function(t3) {
+          e.encode = function(e2) {
+            var n2, r2 = new Uint8Array(e2), o2 = r2.length, s2 = "";
+            for (n2 = 0; n2 < o2; n2 += 3)
+              s2 += t3[r2[n2] >> 2], s2 += t3[(3 & r2[n2]) << 4 | r2[n2 + 1] >> 4], s2 += t3[(15 & r2[n2 + 1]) << 2 | r2[n2 + 2] >> 6], s2 += t3[63 & r2[n2 + 2]];
+            return o2 % 3 == 2 ? s2 = s2.substring(0, s2.length - 1) + "=" : o2 % 3 == 1 && (s2 = s2.substring(0, s2.length - 2) + "=="), s2;
+          }, e.decode = function(e2) {
+            var n2, r2, o2, s2, i2, a2 = 0.75 * e2.length, c2 = e2.length, h2 = 0;
+            "=" === e2[e2.length - 1] && (a2--, "=" === e2[e2.length - 2] && a2--);
+            var u2 = new ArrayBuffer(a2), p2 = new Uint8Array(u2);
+            for (n2 = 0; n2 < c2; n2 += 4)
+              r2 = t3.indexOf(e2[n2]), o2 = t3.indexOf(e2[n2 + 1]), s2 = t3.indexOf(e2[n2 + 2]), i2 = t3.indexOf(e2[n2 + 3]), p2[h2++] = r2 << 2 | o2 >> 4, p2[h2++] = (15 & o2) << 4 | s2 >> 2, p2[h2++] = (3 & s2) << 6 | 63 & i2;
+            return u2;
+          };
+        }("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/");
+      }, function(t2, e, n2) {
+        const r2 = n2(11), o2 = n2(3), s2 = /\n/g, i2 = /\\n/g;
+        let a2;
+        t2.exports = class extends r2 {
+          constructor(t3) {
+            super(t3), this.query = this.query || {}, a2 || (a2 = o2.___eio = o2.___eio || []), this.index = a2.length;
+            const e2 = this;
+            a2.push(function(t4) {
+              e2.onData(t4);
+            }), this.query.j = this.index;
+          }
+          get supportsBinary() {
+            return false;
+          }
+          doClose() {
+            this.script && (this.script.onerror = () => {
+            }, this.script.parentNode.removeChild(this.script), this.script = null), this.form && (this.form.parentNode.removeChild(this.form), this.form = null, this.iframe = null), super.doClose();
+          }
+          doPoll() {
+            const t3 = this, e2 = document.createElement("script");
+            this.script && (this.script.parentNode.removeChild(this.script), this.script = null), e2.async = true, e2.src = this.uri(), e2.onerror = function(e3) {
+              t3.onError("jsonp poll error", e3);
+            };
+            const n3 = document.getElementsByTagName("script")[0];
+            n3 ? n3.parentNode.insertBefore(e2, n3) : (document.head || document.body).appendChild(e2), this.script = e2;
+            "undefined" != typeof navigator && /gecko/i.test(navigator.userAgent) && setTimeout(function() {
+              const t4 = document.createElement("iframe");
+              document.body.appendChild(t4), document.body.removeChild(t4);
+            }, 100);
+          }
+          doWrite(t3, e2) {
+            const n3 = this;
+            let r3;
+            if (!this.form) {
+              const t4 = document.createElement("form"), e3 = document.createElement("textarea"), n4 = this.iframeId = "eio_iframe_" + this.index;
+              t4.className = "socketio", t4.style.position = "absolute", t4.style.top = "-1000px", t4.style.left = "-1000px", t4.target = n4, t4.method = "POST", t4.setAttribute("accept-charset", "utf-8"), e3.name = "d", t4.appendChild(e3), document.body.appendChild(t4), this.form = t4, this.area = e3;
+            }
+            function o3() {
+              a3(), e2();
+            }
+            function a3() {
+              if (n3.iframe)
+                try {
+                  n3.form.removeChild(n3.iframe);
+                } catch (t4) {
+                  n3.onError("jsonp polling iframe removal error", t4);
+                }
+              try {
+                const t4 = '<iframe src="javascript:0" name="' + n3.iframeId + '">';
+                r3 = document.createElement(t4);
+              } catch (t4) {
+                r3 = document.createElement("iframe"), r3.name = n3.iframeId, r3.src = "javascript:0";
+              }
+              r3.id = n3.iframeId, n3.form.appendChild(r3), n3.iframe = r3;
+            }
+            this.form.action = this.uri(), a3(), t3 = t3.replace(i2, "\\\n"), this.area.value = t3.replace(s2, "\\n");
+            try {
+              this.form.submit();
+            } catch (t4) {
+            }
+            this.iframe.attachEvent ? this.iframe.onreadystatechange = function() {
+              "complete" === n3.iframe.readyState && o3();
+            } : this.iframe.onload = o3;
+          }
+        };
+      }, function(t2, e, n2) {
+        (function(e2) {
+          const r2 = n2(2), o2 = n2(5), s2 = n2(13), i2 = n2(4), { pick: a2 } = n2(14), c2 = n2(3), h2 = n2(0)("engine.io-client:websocket");
+          let u2 = c2.WebSocket || c2.MozWebSocket, p2 = true, f2 = "arraybuffer";
+          "undefined" == typeof window && (u2 = n2(35), p2 = false, f2 = "nodebuffer");
+          const l2 = "undefined" != typeof navigator && "string" == typeof navigator.product && "reactnative" === navigator.product.toLowerCase();
+          class d2 extends i2 {
+            constructor(t3) {
+              super(t3), this.supportsBinary = !t3.forceBase64;
+            }
+            get name() {
+              return "websocket";
+            }
+            doOpen() {
+              if (!this.check())
+                return;
+              const t3 = this.uri(), e3 = this.opts.protocols, n3 = l2 ? {} : a2(this.opts, "agent", "perMessageDeflate", "pfx", "key", "passphrase", "cert", "ca", "ciphers", "rejectUnauthorized", "localAddress", "protocolVersion", "origin", "maxPayload", "family", "checkServerIdentity");
+              this.opts.extraHeaders && (n3.headers = this.opts.extraHeaders);
+              try {
+                this.ws = p2 && !l2 ? e3 ? new u2(t3, e3) : new u2(t3) : new u2(t3, e3, n3);
+              } catch (t4) {
+                return formatAppLog("log", "at node_modules/@hyoga/uni-socket.io/dist/uni-socket.io.js:1", "error", t4), this.emit("error", t4);
+              }
+              this.ws.binaryType = this.socket.binaryType || f2, this.addEventListeners();
+            }
+            addEventListeners() {
+              this.ws.onopen = () => {
+                this.opts.autoUnref && this.ws._socket.unref(), this.onOpen();
+              }, this.ws.onclose = this.onClose.bind(this), this.ws.onmessage = (t3) => this.onData(t3.data), this.ws.onerror = (t3) => this.onError("websocket error", t3);
+            }
+            write(t3) {
+              const n3 = this;
+              this.writable = false;
+              let o3 = t3.length, s3 = 0;
+              const i3 = o3;
+              for (; s3 < i3; s3++)
+                !function(t4) {
+                  r2.encodePacket(t4, n3.supportsBinary, function(r3) {
+                    const s4 = {};
+                    if (!p2 && (t4.options && (s4.compress = t4.options.compress), n3.opts.perMessageDeflate)) {
+                      ("string" == typeof r3 ? e2.byteLength(r3) : r3.length) < n3.opts.perMessageDeflate.threshold && (s4.compress = false);
+                    }
+                    try {
+                      p2 ? n3.ws.send(r3) : n3.ws.send(r3, s4);
+                    } catch (t5) {
+                      h2("websocket closed before onclose event");
+                    }
+                    --o3 || a3();
+                  });
+                }(t3[s3]);
+              function a3() {
+                n3.emit("flush"), setTimeout(function() {
+                  n3.writable = true, n3.emit("drain");
+                }, 0);
+              }
+            }
+            onClose() {
+              i2.prototype.onClose.call(this);
+            }
+            doClose() {
+              void 0 !== this.ws && (this.ws.close(), this.ws = null);
+            }
+            uri() {
+              let t3 = this.query || {};
+              const e3 = this.opts.secure ? "wss" : "ws";
+              let n3 = "";
+              this.opts.port && ("wss" === e3 && 443 !== Number(this.opts.port) || "ws" === e3 && 80 !== Number(this.opts.port)) && (n3 = ":" + this.opts.port), this.opts.timestampRequests && (t3[this.opts.timestampParam] = s2()), this.supportsBinary || (t3.b64 = 1), t3 = o2.encode(t3), t3.length && (t3 = "?" + t3);
+              return e3 + "://" + (-1 !== this.opts.hostname.indexOf(":") ? "[" + this.opts.hostname + "]" : this.opts.hostname) + n3 + this.opts.path + t3;
+            }
+            check() {
+              return !(!u2 || "__initialize" in u2 && this.name === d2.prototype.name);
+            }
+          }
+          t2.exports = d2;
+        }).call(this, n2(30).Buffer);
+      }, function(t2, e, n2) {
+        (function(t3) {
+          /*!
+           * The buffer module from node.js, for the browser.
+           *
+           * @author   Feross Aboukhadijeh <http://feross.org>
+           * @license  MIT
+           */
+          var r2 = n2(32), o2 = n2(33), s2 = n2(34);
+          function i2() {
+            return c2.TYPED_ARRAY_SUPPORT ? 2147483647 : 1073741823;
+          }
+          function a2(t4, e2) {
+            if (i2() < e2)
+              throw new RangeError("Invalid typed array length");
+            return c2.TYPED_ARRAY_SUPPORT ? (t4 = new Uint8Array(e2)).__proto__ = c2.prototype : (null === t4 && (t4 = new c2(e2)), t4.length = e2), t4;
+          }
+          function c2(t4, e2, n3) {
+            if (!(c2.TYPED_ARRAY_SUPPORT || this instanceof c2))
+              return new c2(t4, e2, n3);
+            if ("number" == typeof t4) {
+              if ("string" == typeof e2)
+                throw new Error("If encoding is specified then the first argument must be a string");
+              return p2(this, t4);
+            }
+            return h2(this, t4, e2, n3);
+          }
+          function h2(t4, e2, n3, r3) {
+            if ("number" == typeof e2)
+              throw new TypeError('"value" argument must not be a number');
+            return "undefined" != typeof ArrayBuffer && e2 instanceof ArrayBuffer ? function(t5, e3, n4, r4) {
+              if (e3.byteLength, n4 < 0 || e3.byteLength < n4)
+                throw new RangeError("'offset' is out of bounds");
+              if (e3.byteLength < n4 + (r4 || 0))
+                throw new RangeError("'length' is out of bounds");
+              e3 = void 0 === n4 && void 0 === r4 ? new Uint8Array(e3) : void 0 === r4 ? new Uint8Array(e3, n4) : new Uint8Array(e3, n4, r4);
+              c2.TYPED_ARRAY_SUPPORT ? (t5 = e3).__proto__ = c2.prototype : t5 = f2(t5, e3);
+              return t5;
+            }(t4, e2, n3, r3) : "string" == typeof e2 ? function(t5, e3, n4) {
+              "string" == typeof n4 && "" !== n4 || (n4 = "utf8");
+              if (!c2.isEncoding(n4))
+                throw new TypeError('"encoding" must be a valid string encoding');
+              var r4 = 0 | d2(e3, n4), o3 = (t5 = a2(t5, r4)).write(e3, n4);
+              o3 !== r4 && (t5 = t5.slice(0, o3));
+              return t5;
+            }(t4, e2, n3) : function(t5, e3) {
+              if (c2.isBuffer(e3)) {
+                var n4 = 0 | l2(e3.length);
+                return 0 === (t5 = a2(t5, n4)).length || e3.copy(t5, 0, 0, n4), t5;
+              }
+              if (e3) {
+                if ("undefined" != typeof ArrayBuffer && e3.buffer instanceof ArrayBuffer || "length" in e3)
+                  return "number" != typeof e3.length || (r4 = e3.length) != r4 ? a2(t5, 0) : f2(t5, e3);
+                if ("Buffer" === e3.type && s2(e3.data))
+                  return f2(t5, e3.data);
+              }
+              var r4;
+              throw new TypeError("First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.");
+            }(t4, e2);
+          }
+          function u2(t4) {
+            if ("number" != typeof t4)
+              throw new TypeError('"size" argument must be a number');
+            if (t4 < 0)
+              throw new RangeError('"size" argument must not be negative');
+          }
+          function p2(t4, e2) {
+            if (u2(e2), t4 = a2(t4, e2 < 0 ? 0 : 0 | l2(e2)), !c2.TYPED_ARRAY_SUPPORT)
+              for (var n3 = 0; n3 < e2; ++n3)
+                t4[n3] = 0;
+            return t4;
+          }
+          function f2(t4, e2) {
+            var n3 = e2.length < 0 ? 0 : 0 | l2(e2.length);
+            t4 = a2(t4, n3);
+            for (var r3 = 0; r3 < n3; r3 += 1)
+              t4[r3] = 255 & e2[r3];
+            return t4;
+          }
+          function l2(t4) {
+            if (t4 >= i2())
+              throw new RangeError("Attempt to allocate Buffer larger than maximum size: 0x" + i2().toString(16) + " bytes");
+            return 0 | t4;
+          }
+          function d2(t4, e2) {
+            if (c2.isBuffer(t4))
+              return t4.length;
+            if ("undefined" != typeof ArrayBuffer && "function" == typeof ArrayBuffer.isView && (ArrayBuffer.isView(t4) || t4 instanceof ArrayBuffer))
+              return t4.byteLength;
+            "string" != typeof t4 && (t4 = "" + t4);
+            var n3 = t4.length;
+            if (0 === n3)
+              return 0;
+            for (var r3 = false; ; )
+              switch (e2) {
+                case "ascii":
+                case "latin1":
+                case "binary":
+                  return n3;
+                case "utf8":
+                case "utf-8":
+                case void 0:
+                  return Y2(t4).length;
+                case "ucs2":
+                case "ucs-2":
+                case "utf16le":
+                case "utf-16le":
+                  return 2 * n3;
+                case "hex":
+                  return n3 >>> 1;
+                case "base64":
+                  return q2(t4).length;
+                default:
+                  if (r3)
+                    return Y2(t4).length;
+                  e2 = ("" + e2).toLowerCase(), r3 = true;
+              }
+          }
+          function y2(t4, e2, n3) {
+            var r3 = false;
+            if ((void 0 === e2 || e2 < 0) && (e2 = 0), e2 > this.length)
+              return "";
+            if ((void 0 === n3 || n3 > this.length) && (n3 = this.length), n3 <= 0)
+              return "";
+            if ((n3 >>>= 0) <= (e2 >>>= 0))
+              return "";
+            for (t4 || (t4 = "utf8"); ; )
+              switch (t4) {
+                case "hex":
+                  return C2(this, e2, n3);
+                case "utf8":
+                case "utf-8":
+                  return x2(this, e2, n3);
+                case "ascii":
+                  return S2(this, e2, n3);
+                case "latin1":
+                case "binary":
+                  return P2(this, e2, n3);
+                case "base64":
+                  return T(this, e2, n3);
+                case "ucs2":
+                case "ucs-2":
+                case "utf16le":
+                case "utf-16le":
+                  return R2(this, e2, n3);
+                default:
+                  if (r3)
+                    throw new TypeError("Unknown encoding: " + t4);
+                  t4 = (t4 + "").toLowerCase(), r3 = true;
+              }
+          }
+          function g2(t4, e2, n3) {
+            var r3 = t4[e2];
+            t4[e2] = t4[n3], t4[n3] = r3;
+          }
+          function m2(t4, e2, n3, r3, o3) {
+            if (0 === t4.length)
+              return -1;
+            if ("string" == typeof n3 ? (r3 = n3, n3 = 0) : n3 > 2147483647 ? n3 = 2147483647 : n3 < -2147483648 && (n3 = -2147483648), n3 = +n3, isNaN(n3) && (n3 = o3 ? 0 : t4.length - 1), n3 < 0 && (n3 = t4.length + n3), n3 >= t4.length) {
+              if (o3)
+                return -1;
+              n3 = t4.length - 1;
+            } else if (n3 < 0) {
+              if (!o3)
+                return -1;
+              n3 = 0;
+            }
+            if ("string" == typeof e2 && (e2 = c2.from(e2, r3)), c2.isBuffer(e2))
+              return 0 === e2.length ? -1 : v2(t4, e2, n3, r3, o3);
+            if ("number" == typeof e2)
+              return e2 &= 255, c2.TYPED_ARRAY_SUPPORT && "function" == typeof Uint8Array.prototype.indexOf ? o3 ? Uint8Array.prototype.indexOf.call(t4, e2, n3) : Uint8Array.prototype.lastIndexOf.call(t4, e2, n3) : v2(t4, [e2], n3, r3, o3);
+            throw new TypeError("val must be string, number or Buffer");
+          }
+          function v2(t4, e2, n3, r3, o3) {
+            var s3, i3 = 1, a3 = t4.length, c3 = e2.length;
+            if (void 0 !== r3 && ("ucs2" === (r3 = String(r3).toLowerCase()) || "ucs-2" === r3 || "utf16le" === r3 || "utf-16le" === r3)) {
+              if (t4.length < 2 || e2.length < 2)
+                return -1;
+              i3 = 2, a3 /= 2, c3 /= 2, n3 /= 2;
+            }
+            function h3(t5, e3) {
+              return 1 === i3 ? t5[e3] : t5.readUInt16BE(e3 * i3);
+            }
+            if (o3) {
+              var u3 = -1;
+              for (s3 = n3; s3 < a3; s3++)
+                if (h3(t4, s3) === h3(e2, -1 === u3 ? 0 : s3 - u3)) {
+                  if (-1 === u3 && (u3 = s3), s3 - u3 + 1 === c3)
+                    return u3 * i3;
+                } else
+                  -1 !== u3 && (s3 -= s3 - u3), u3 = -1;
+            } else
+              for (n3 + c3 > a3 && (n3 = a3 - c3), s3 = n3; s3 >= 0; s3--) {
+                for (var p3 = true, f3 = 0; f3 < c3; f3++)
+                  if (h3(t4, s3 + f3) !== h3(e2, f3)) {
+                    p3 = false;
+                    break;
+                  }
+                if (p3)
+                  return s3;
+              }
+            return -1;
+          }
+          function b2(t4, e2, n3, r3) {
+            n3 = Number(n3) || 0;
+            var o3 = t4.length - n3;
+            r3 ? (r3 = Number(r3)) > o3 && (r3 = o3) : r3 = o3;
+            var s3 = e2.length;
+            if (s3 % 2 != 0)
+              throw new TypeError("Invalid hex string");
+            r3 > s3 / 2 && (r3 = s3 / 2);
+            for (var i3 = 0; i3 < r3; ++i3) {
+              var a3 = parseInt(e2.substr(2 * i3, 2), 16);
+              if (isNaN(a3))
+                return i3;
+              t4[n3 + i3] = a3;
+            }
+            return i3;
+          }
+          function w2(t4, e2, n3, r3) {
+            return F2(Y2(e2, t4.length - n3), t4, n3, r3);
+          }
+          function _2(t4, e2, n3, r3) {
+            return F2(function(t5) {
+              for (var e3 = [], n4 = 0; n4 < t5.length; ++n4)
+                e3.push(255 & t5.charCodeAt(n4));
+              return e3;
+            }(e2), t4, n3, r3);
+          }
+          function E2(t4, e2, n3, r3) {
+            return _2(t4, e2, n3, r3);
+          }
+          function k2(t4, e2, n3, r3) {
+            return F2(q2(e2), t4, n3, r3);
+          }
+          function A2(t4, e2, n3, r3) {
+            return F2(function(t5, e3) {
+              for (var n4, r4, o3, s3 = [], i3 = 0; i3 < t5.length && !((e3 -= 2) < 0); ++i3)
+                n4 = t5.charCodeAt(i3), r4 = n4 >> 8, o3 = n4 % 256, s3.push(o3), s3.push(r4);
+              return s3;
+            }(e2, t4.length - n3), t4, n3, r3);
+          }
+          function T(t4, e2, n3) {
+            return 0 === e2 && n3 === t4.length ? r2.fromByteArray(t4) : r2.fromByteArray(t4.slice(e2, n3));
+          }
+          function x2(t4, e2, n3) {
+            n3 = Math.min(t4.length, n3);
+            for (var r3 = [], o3 = e2; o3 < n3; ) {
+              var s3, i3, a3, c3, h3 = t4[o3], u3 = null, p3 = h3 > 239 ? 4 : h3 > 223 ? 3 : h3 > 191 ? 2 : 1;
+              if (o3 + p3 <= n3)
+                switch (p3) {
+                  case 1:
+                    h3 < 128 && (u3 = h3);
+                    break;
+                  case 2:
+                    128 == (192 & (s3 = t4[o3 + 1])) && (c3 = (31 & h3) << 6 | 63 & s3) > 127 && (u3 = c3);
+                    break;
+                  case 3:
+                    s3 = t4[o3 + 1], i3 = t4[o3 + 2], 128 == (192 & s3) && 128 == (192 & i3) && (c3 = (15 & h3) << 12 | (63 & s3) << 6 | 63 & i3) > 2047 && (c3 < 55296 || c3 > 57343) && (u3 = c3);
+                    break;
+                  case 4:
+                    s3 = t4[o3 + 1], i3 = t4[o3 + 2], a3 = t4[o3 + 3], 128 == (192 & s3) && 128 == (192 & i3) && 128 == (192 & a3) && (c3 = (15 & h3) << 18 | (63 & s3) << 12 | (63 & i3) << 6 | 63 & a3) > 65535 && c3 < 1114112 && (u3 = c3);
+                }
+              null === u3 ? (u3 = 65533, p3 = 1) : u3 > 65535 && (u3 -= 65536, r3.push(u3 >>> 10 & 1023 | 55296), u3 = 56320 | 1023 & u3), r3.push(u3), o3 += p3;
+            }
+            return function(t5) {
+              var e3 = t5.length;
+              if (e3 <= 4096)
+                return String.fromCharCode.apply(String, t5);
+              var n4 = "", r4 = 0;
+              for (; r4 < e3; )
+                n4 += String.fromCharCode.apply(String, t5.slice(r4, r4 += 4096));
+              return n4;
+            }(r3);
+          }
+          e.Buffer = c2, e.SlowBuffer = function(t4) {
+            +t4 != t4 && (t4 = 0);
+            return c2.alloc(+t4);
+          }, e.INSPECT_MAX_BYTES = 50, c2.TYPED_ARRAY_SUPPORT = void 0 !== t3.TYPED_ARRAY_SUPPORT ? t3.TYPED_ARRAY_SUPPORT : function() {
+            try {
+              var t4 = new Uint8Array(1);
+              return t4.__proto__ = { __proto__: Uint8Array.prototype, foo: function() {
+                return 42;
+              } }, 42 === t4.foo() && "function" == typeof t4.subarray && 0 === t4.subarray(1, 1).byteLength;
+            } catch (t5) {
+              return false;
+            }
+          }(), e.kMaxLength = i2(), c2.poolSize = 8192, c2._augment = function(t4) {
+            return t4.__proto__ = c2.prototype, t4;
+          }, c2.from = function(t4, e2, n3) {
+            return h2(null, t4, e2, n3);
+          }, c2.TYPED_ARRAY_SUPPORT && (c2.prototype.__proto__ = Uint8Array.prototype, c2.__proto__ = Uint8Array, "undefined" != typeof Symbol && Symbol.species && c2[Symbol.species] === c2 && Object.defineProperty(c2, Symbol.species, { value: null, configurable: true })), c2.alloc = function(t4, e2, n3) {
+            return function(t5, e3, n4, r3) {
+              return u2(e3), e3 <= 0 ? a2(t5, e3) : void 0 !== n4 ? "string" == typeof r3 ? a2(t5, e3).fill(n4, r3) : a2(t5, e3).fill(n4) : a2(t5, e3);
+            }(null, t4, e2, n3);
+          }, c2.allocUnsafe = function(t4) {
+            return p2(null, t4);
+          }, c2.allocUnsafeSlow = function(t4) {
+            return p2(null, t4);
+          }, c2.isBuffer = function(t4) {
+            return !(null == t4 || !t4._isBuffer);
+          }, c2.compare = function(t4, e2) {
+            if (!c2.isBuffer(t4) || !c2.isBuffer(e2))
+              throw new TypeError("Arguments must be Buffers");
+            if (t4 === e2)
+              return 0;
+            for (var n3 = t4.length, r3 = e2.length, o3 = 0, s3 = Math.min(n3, r3); o3 < s3; ++o3)
+              if (t4[o3] !== e2[o3]) {
+                n3 = t4[o3], r3 = e2[o3];
+                break;
+              }
+            return n3 < r3 ? -1 : r3 < n3 ? 1 : 0;
+          }, c2.isEncoding = function(t4) {
+            switch (String(t4).toLowerCase()) {
+              case "hex":
+              case "utf8":
+              case "utf-8":
+              case "ascii":
+              case "latin1":
+              case "binary":
+              case "base64":
+              case "ucs2":
+              case "ucs-2":
+              case "utf16le":
+              case "utf-16le":
+                return true;
+              default:
+                return false;
+            }
+          }, c2.concat = function(t4, e2) {
+            if (!s2(t4))
+              throw new TypeError('"list" argument must be an Array of Buffers');
+            if (0 === t4.length)
+              return c2.alloc(0);
+            var n3;
+            if (void 0 === e2)
+              for (e2 = 0, n3 = 0; n3 < t4.length; ++n3)
+                e2 += t4[n3].length;
+            var r3 = c2.allocUnsafe(e2), o3 = 0;
+            for (n3 = 0; n3 < t4.length; ++n3) {
+              var i3 = t4[n3];
+              if (!c2.isBuffer(i3))
+                throw new TypeError('"list" argument must be an Array of Buffers');
+              i3.copy(r3, o3), o3 += i3.length;
+            }
+            return r3;
+          }, c2.byteLength = d2, c2.prototype._isBuffer = true, c2.prototype.swap16 = function() {
+            var t4 = this.length;
+            if (t4 % 2 != 0)
+              throw new RangeError("Buffer size must be a multiple of 16-bits");
+            for (var e2 = 0; e2 < t4; e2 += 2)
+              g2(this, e2, e2 + 1);
+            return this;
+          }, c2.prototype.swap32 = function() {
+            var t4 = this.length;
+            if (t4 % 4 != 0)
+              throw new RangeError("Buffer size must be a multiple of 32-bits");
+            for (var e2 = 0; e2 < t4; e2 += 4)
+              g2(this, e2, e2 + 3), g2(this, e2 + 1, e2 + 2);
+            return this;
+          }, c2.prototype.swap64 = function() {
+            var t4 = this.length;
+            if (t4 % 8 != 0)
+              throw new RangeError("Buffer size must be a multiple of 64-bits");
+            for (var e2 = 0; e2 < t4; e2 += 8)
+              g2(this, e2, e2 + 7), g2(this, e2 + 1, e2 + 6), g2(this, e2 + 2, e2 + 5), g2(this, e2 + 3, e2 + 4);
+            return this;
+          }, c2.prototype.toString = function() {
+            var t4 = 0 | this.length;
+            return 0 === t4 ? "" : 0 === arguments.length ? x2(this, 0, t4) : y2.apply(this, arguments);
+          }, c2.prototype.equals = function(t4) {
+            if (!c2.isBuffer(t4))
+              throw new TypeError("Argument must be a Buffer");
+            return this === t4 || 0 === c2.compare(this, t4);
+          }, c2.prototype.inspect = function() {
+            var t4 = "", n3 = e.INSPECT_MAX_BYTES;
+            return this.length > 0 && (t4 = this.toString("hex", 0, n3).match(/.{2}/g).join(" "), this.length > n3 && (t4 += " ... ")), "<Buffer " + t4 + ">";
+          }, c2.prototype.compare = function(t4, e2, n3, r3, o3) {
+            if (!c2.isBuffer(t4))
+              throw new TypeError("Argument must be a Buffer");
+            if (void 0 === e2 && (e2 = 0), void 0 === n3 && (n3 = t4 ? t4.length : 0), void 0 === r3 && (r3 = 0), void 0 === o3 && (o3 = this.length), e2 < 0 || n3 > t4.length || r3 < 0 || o3 > this.length)
+              throw new RangeError("out of range index");
+            if (r3 >= o3 && e2 >= n3)
+              return 0;
+            if (r3 >= o3)
+              return -1;
+            if (e2 >= n3)
+              return 1;
+            if (this === t4)
+              return 0;
+            for (var s3 = (o3 >>>= 0) - (r3 >>>= 0), i3 = (n3 >>>= 0) - (e2 >>>= 0), a3 = Math.min(s3, i3), h3 = this.slice(r3, o3), u3 = t4.slice(e2, n3), p3 = 0; p3 < a3; ++p3)
+              if (h3[p3] !== u3[p3]) {
+                s3 = h3[p3], i3 = u3[p3];
+                break;
+              }
+            return s3 < i3 ? -1 : i3 < s3 ? 1 : 0;
+          }, c2.prototype.includes = function(t4, e2, n3) {
+            return -1 !== this.indexOf(t4, e2, n3);
+          }, c2.prototype.indexOf = function(t4, e2, n3) {
+            return m2(this, t4, e2, n3, true);
+          }, c2.prototype.lastIndexOf = function(t4, e2, n3) {
+            return m2(this, t4, e2, n3, false);
+          }, c2.prototype.write = function(t4, e2, n3, r3) {
+            if (void 0 === e2)
+              r3 = "utf8", n3 = this.length, e2 = 0;
+            else if (void 0 === n3 && "string" == typeof e2)
+              r3 = e2, n3 = this.length, e2 = 0;
+            else {
+              if (!isFinite(e2))
+                throw new Error("Buffer.write(string, encoding, offset[, length]) is no longer supported");
+              e2 |= 0, isFinite(n3) ? (n3 |= 0, void 0 === r3 && (r3 = "utf8")) : (r3 = n3, n3 = void 0);
+            }
+            var o3 = this.length - e2;
+            if ((void 0 === n3 || n3 > o3) && (n3 = o3), t4.length > 0 && (n3 < 0 || e2 < 0) || e2 > this.length)
+              throw new RangeError("Attempt to write outside buffer bounds");
+            r3 || (r3 = "utf8");
+            for (var s3 = false; ; )
+              switch (r3) {
+                case "hex":
+                  return b2(this, t4, e2, n3);
+                case "utf8":
+                case "utf-8":
+                  return w2(this, t4, e2, n3);
+                case "ascii":
+                  return _2(this, t4, e2, n3);
+                case "latin1":
+                case "binary":
+                  return E2(this, t4, e2, n3);
+                case "base64":
+                  return k2(this, t4, e2, n3);
+                case "ucs2":
+                case "ucs-2":
+                case "utf16le":
+                case "utf-16le":
+                  return A2(this, t4, e2, n3);
+                default:
+                  if (s3)
+                    throw new TypeError("Unknown encoding: " + r3);
+                  r3 = ("" + r3).toLowerCase(), s3 = true;
+              }
+          }, c2.prototype.toJSON = function() {
+            return { type: "Buffer", data: Array.prototype.slice.call(this._arr || this, 0) };
+          };
+          function S2(t4, e2, n3) {
+            var r3 = "";
+            n3 = Math.min(t4.length, n3);
+            for (var o3 = e2; o3 < n3; ++o3)
+              r3 += String.fromCharCode(127 & t4[o3]);
+            return r3;
+          }
+          function P2(t4, e2, n3) {
+            var r3 = "";
+            n3 = Math.min(t4.length, n3);
+            for (var o3 = e2; o3 < n3; ++o3)
+              r3 += String.fromCharCode(t4[o3]);
+            return r3;
+          }
+          function C2(t4, e2, n3) {
+            var r3 = t4.length;
+            (!e2 || e2 < 0) && (e2 = 0), (!n3 || n3 < 0 || n3 > r3) && (n3 = r3);
+            for (var o3 = "", s3 = e2; s3 < n3; ++s3)
+              o3 += D2(t4[s3]);
+            return o3;
+          }
+          function R2(t4, e2, n3) {
+            for (var r3 = t4.slice(e2, n3), o3 = "", s3 = 0; s3 < r3.length; s3 += 2)
+              o3 += String.fromCharCode(r3[s3] + 256 * r3[s3 + 1]);
+            return o3;
+          }
+          function O(t4, e2, n3) {
+            if (t4 % 1 != 0 || t4 < 0)
+              throw new RangeError("offset is not uint");
+            if (t4 + e2 > n3)
+              throw new RangeError("Trying to access beyond buffer length");
+          }
+          function B2(t4, e2, n3, r3, o3, s3) {
+            if (!c2.isBuffer(t4))
+              throw new TypeError('"buffer" argument must be a Buffer instance');
+            if (e2 > o3 || e2 < s3)
+              throw new RangeError('"value" argument is out of bounds');
+            if (n3 + r3 > t4.length)
+              throw new RangeError("Index out of range");
+          }
+          function L2(t4, e2, n3, r3) {
+            e2 < 0 && (e2 = 65535 + e2 + 1);
+            for (var o3 = 0, s3 = Math.min(t4.length - n3, 2); o3 < s3; ++o3)
+              t4[n3 + o3] = (e2 & 255 << 8 * (r3 ? o3 : 1 - o3)) >>> 8 * (r3 ? o3 : 1 - o3);
+          }
+          function N2(t4, e2, n3, r3) {
+            e2 < 0 && (e2 = 4294967295 + e2 + 1);
+            for (var o3 = 0, s3 = Math.min(t4.length - n3, 4); o3 < s3; ++o3)
+              t4[n3 + o3] = e2 >>> 8 * (r3 ? o3 : 3 - o3) & 255;
+          }
+          function j2(t4, e2, n3, r3, o3, s3) {
+            if (n3 + r3 > t4.length)
+              throw new RangeError("Index out of range");
+            if (n3 < 0)
+              throw new RangeError("Index out of range");
+          }
+          function I2(t4, e2, n3, r3, s3) {
+            return s3 || j2(t4, 0, n3, 4), o2.write(t4, e2, n3, r3, 23, 4), n3 + 4;
+          }
+          function M2(t4, e2, n3, r3, s3) {
+            return s3 || j2(t4, 0, n3, 8), o2.write(t4, e2, n3, r3, 52, 8), n3 + 8;
+          }
+          c2.prototype.slice = function(t4, e2) {
+            var n3, r3 = this.length;
+            if ((t4 = ~~t4) < 0 ? (t4 += r3) < 0 && (t4 = 0) : t4 > r3 && (t4 = r3), (e2 = void 0 === e2 ? r3 : ~~e2) < 0 ? (e2 += r3) < 0 && (e2 = 0) : e2 > r3 && (e2 = r3), e2 < t4 && (e2 = t4), c2.TYPED_ARRAY_SUPPORT)
+              (n3 = this.subarray(t4, e2)).__proto__ = c2.prototype;
+            else {
+              var o3 = e2 - t4;
+              n3 = new c2(o3, void 0);
+              for (var s3 = 0; s3 < o3; ++s3)
+                n3[s3] = this[s3 + t4];
+            }
+            return n3;
+          }, c2.prototype.readUIntLE = function(t4, e2, n3) {
+            t4 |= 0, e2 |= 0, n3 || O(t4, e2, this.length);
+            for (var r3 = this[t4], o3 = 1, s3 = 0; ++s3 < e2 && (o3 *= 256); )
+              r3 += this[t4 + s3] * o3;
+            return r3;
+          }, c2.prototype.readUIntBE = function(t4, e2, n3) {
+            t4 |= 0, e2 |= 0, n3 || O(t4, e2, this.length);
+            for (var r3 = this[t4 + --e2], o3 = 1; e2 > 0 && (o3 *= 256); )
+              r3 += this[t4 + --e2] * o3;
+            return r3;
+          }, c2.prototype.readUInt8 = function(t4, e2) {
+            return e2 || O(t4, 1, this.length), this[t4];
+          }, c2.prototype.readUInt16LE = function(t4, e2) {
+            return e2 || O(t4, 2, this.length), this[t4] | this[t4 + 1] << 8;
+          }, c2.prototype.readUInt16BE = function(t4, e2) {
+            return e2 || O(t4, 2, this.length), this[t4] << 8 | this[t4 + 1];
+          }, c2.prototype.readUInt32LE = function(t4, e2) {
+            return e2 || O(t4, 4, this.length), (this[t4] | this[t4 + 1] << 8 | this[t4 + 2] << 16) + 16777216 * this[t4 + 3];
+          }, c2.prototype.readUInt32BE = function(t4, e2) {
+            return e2 || O(t4, 4, this.length), 16777216 * this[t4] + (this[t4 + 1] << 16 | this[t4 + 2] << 8 | this[t4 + 3]);
+          }, c2.prototype.readIntLE = function(t4, e2, n3) {
+            t4 |= 0, e2 |= 0, n3 || O(t4, e2, this.length);
+            for (var r3 = this[t4], o3 = 1, s3 = 0; ++s3 < e2 && (o3 *= 256); )
+              r3 += this[t4 + s3] * o3;
+            return r3 >= (o3 *= 128) && (r3 -= Math.pow(2, 8 * e2)), r3;
+          }, c2.prototype.readIntBE = function(t4, e2, n3) {
+            t4 |= 0, e2 |= 0, n3 || O(t4, e2, this.length);
+            for (var r3 = e2, o3 = 1, s3 = this[t4 + --r3]; r3 > 0 && (o3 *= 256); )
+              s3 += this[t4 + --r3] * o3;
+            return s3 >= (o3 *= 128) && (s3 -= Math.pow(2, 8 * e2)), s3;
+          }, c2.prototype.readInt8 = function(t4, e2) {
+            return e2 || O(t4, 1, this.length), 128 & this[t4] ? -1 * (255 - this[t4] + 1) : this[t4];
+          }, c2.prototype.readInt16LE = function(t4, e2) {
+            e2 || O(t4, 2, this.length);
+            var n3 = this[t4] | this[t4 + 1] << 8;
+            return 32768 & n3 ? 4294901760 | n3 : n3;
+          }, c2.prototype.readInt16BE = function(t4, e2) {
+            e2 || O(t4, 2, this.length);
+            var n3 = this[t4 + 1] | this[t4] << 8;
+            return 32768 & n3 ? 4294901760 | n3 : n3;
+          }, c2.prototype.readInt32LE = function(t4, e2) {
+            return e2 || O(t4, 4, this.length), this[t4] | this[t4 + 1] << 8 | this[t4 + 2] << 16 | this[t4 + 3] << 24;
+          }, c2.prototype.readInt32BE = function(t4, e2) {
+            return e2 || O(t4, 4, this.length), this[t4] << 24 | this[t4 + 1] << 16 | this[t4 + 2] << 8 | this[t4 + 3];
+          }, c2.prototype.readFloatLE = function(t4, e2) {
+            return e2 || O(t4, 4, this.length), o2.read(this, t4, true, 23, 4);
+          }, c2.prototype.readFloatBE = function(t4, e2) {
+            return e2 || O(t4, 4, this.length), o2.read(this, t4, false, 23, 4);
+          }, c2.prototype.readDoubleLE = function(t4, e2) {
+            return e2 || O(t4, 8, this.length), o2.read(this, t4, true, 52, 8);
+          }, c2.prototype.readDoubleBE = function(t4, e2) {
+            return e2 || O(t4, 8, this.length), o2.read(this, t4, false, 52, 8);
+          }, c2.prototype.writeUIntLE = function(t4, e2, n3, r3) {
+            (t4 = +t4, e2 |= 0, n3 |= 0, r3) || B2(this, t4, e2, n3, Math.pow(2, 8 * n3) - 1, 0);
+            var o3 = 1, s3 = 0;
+            for (this[e2] = 255 & t4; ++s3 < n3 && (o3 *= 256); )
+              this[e2 + s3] = t4 / o3 & 255;
+            return e2 + n3;
+          }, c2.prototype.writeUIntBE = function(t4, e2, n3, r3) {
+            (t4 = +t4, e2 |= 0, n3 |= 0, r3) || B2(this, t4, e2, n3, Math.pow(2, 8 * n3) - 1, 0);
+            var o3 = n3 - 1, s3 = 1;
+            for (this[e2 + o3] = 255 & t4; --o3 >= 0 && (s3 *= 256); )
+              this[e2 + o3] = t4 / s3 & 255;
+            return e2 + n3;
+          }, c2.prototype.writeUInt8 = function(t4, e2, n3) {
+            return t4 = +t4, e2 |= 0, n3 || B2(this, t4, e2, 1, 255, 0), c2.TYPED_ARRAY_SUPPORT || (t4 = Math.floor(t4)), this[e2] = 255 & t4, e2 + 1;
+          }, c2.prototype.writeUInt16LE = function(t4, e2, n3) {
+            return t4 = +t4, e2 |= 0, n3 || B2(this, t4, e2, 2, 65535, 0), c2.TYPED_ARRAY_SUPPORT ? (this[e2] = 255 & t4, this[e2 + 1] = t4 >>> 8) : L2(this, t4, e2, true), e2 + 2;
+          }, c2.prototype.writeUInt16BE = function(t4, e2, n3) {
+            return t4 = +t4, e2 |= 0, n3 || B2(this, t4, e2, 2, 65535, 0), c2.TYPED_ARRAY_SUPPORT ? (this[e2] = t4 >>> 8, this[e2 + 1] = 255 & t4) : L2(this, t4, e2, false), e2 + 2;
+          }, c2.prototype.writeUInt32LE = function(t4, e2, n3) {
+            return t4 = +t4, e2 |= 0, n3 || B2(this, t4, e2, 4, 4294967295, 0), c2.TYPED_ARRAY_SUPPORT ? (this[e2 + 3] = t4 >>> 24, this[e2 + 2] = t4 >>> 16, this[e2 + 1] = t4 >>> 8, this[e2] = 255 & t4) : N2(this, t4, e2, true), e2 + 4;
+          }, c2.prototype.writeUInt32BE = function(t4, e2, n3) {
+            return t4 = +t4, e2 |= 0, n3 || B2(this, t4, e2, 4, 4294967295, 0), c2.TYPED_ARRAY_SUPPORT ? (this[e2] = t4 >>> 24, this[e2 + 1] = t4 >>> 16, this[e2 + 2] = t4 >>> 8, this[e2 + 3] = 255 & t4) : N2(this, t4, e2, false), e2 + 4;
+          }, c2.prototype.writeIntLE = function(t4, e2, n3, r3) {
+            if (t4 = +t4, e2 |= 0, !r3) {
+              var o3 = Math.pow(2, 8 * n3 - 1);
+              B2(this, t4, e2, n3, o3 - 1, -o3);
+            }
+            var s3 = 0, i3 = 1, a3 = 0;
+            for (this[e2] = 255 & t4; ++s3 < n3 && (i3 *= 256); )
+              t4 < 0 && 0 === a3 && 0 !== this[e2 + s3 - 1] && (a3 = 1), this[e2 + s3] = (t4 / i3 >> 0) - a3 & 255;
+            return e2 + n3;
+          }, c2.prototype.writeIntBE = function(t4, e2, n3, r3) {
+            if (t4 = +t4, e2 |= 0, !r3) {
+              var o3 = Math.pow(2, 8 * n3 - 1);
+              B2(this, t4, e2, n3, o3 - 1, -o3);
+            }
+            var s3 = n3 - 1, i3 = 1, a3 = 0;
+            for (this[e2 + s3] = 255 & t4; --s3 >= 0 && (i3 *= 256); )
+              t4 < 0 && 0 === a3 && 0 !== this[e2 + s3 + 1] && (a3 = 1), this[e2 + s3] = (t4 / i3 >> 0) - a3 & 255;
+            return e2 + n3;
+          }, c2.prototype.writeInt8 = function(t4, e2, n3) {
+            return t4 = +t4, e2 |= 0, n3 || B2(this, t4, e2, 1, 127, -128), c2.TYPED_ARRAY_SUPPORT || (t4 = Math.floor(t4)), t4 < 0 && (t4 = 255 + t4 + 1), this[e2] = 255 & t4, e2 + 1;
+          }, c2.prototype.writeInt16LE = function(t4, e2, n3) {
+            return t4 = +t4, e2 |= 0, n3 || B2(this, t4, e2, 2, 32767, -32768), c2.TYPED_ARRAY_SUPPORT ? (this[e2] = 255 & t4, this[e2 + 1] = t4 >>> 8) : L2(this, t4, e2, true), e2 + 2;
+          }, c2.prototype.writeInt16BE = function(t4, e2, n3) {
+            return t4 = +t4, e2 |= 0, n3 || B2(this, t4, e2, 2, 32767, -32768), c2.TYPED_ARRAY_SUPPORT ? (this[e2] = t4 >>> 8, this[e2 + 1] = 255 & t4) : L2(this, t4, e2, false), e2 + 2;
+          }, c2.prototype.writeInt32LE = function(t4, e2, n3) {
+            return t4 = +t4, e2 |= 0, n3 || B2(this, t4, e2, 4, 2147483647, -2147483648), c2.TYPED_ARRAY_SUPPORT ? (this[e2] = 255 & t4, this[e2 + 1] = t4 >>> 8, this[e2 + 2] = t4 >>> 16, this[e2 + 3] = t4 >>> 24) : N2(this, t4, e2, true), e2 + 4;
+          }, c2.prototype.writeInt32BE = function(t4, e2, n3) {
+            return t4 = +t4, e2 |= 0, n3 || B2(this, t4, e2, 4, 2147483647, -2147483648), t4 < 0 && (t4 = 4294967295 + t4 + 1), c2.TYPED_ARRAY_SUPPORT ? (this[e2] = t4 >>> 24, this[e2 + 1] = t4 >>> 16, this[e2 + 2] = t4 >>> 8, this[e2 + 3] = 255 & t4) : N2(this, t4, e2, false), e2 + 4;
+          }, c2.prototype.writeFloatLE = function(t4, e2, n3) {
+            return I2(this, t4, e2, true, n3);
+          }, c2.prototype.writeFloatBE = function(t4, e2, n3) {
+            return I2(this, t4, e2, false, n3);
+          }, c2.prototype.writeDoubleLE = function(t4, e2, n3) {
+            return M2(this, t4, e2, true, n3);
+          }, c2.prototype.writeDoubleBE = function(t4, e2, n3) {
+            return M2(this, t4, e2, false, n3);
+          }, c2.prototype.copy = function(t4, e2, n3, r3) {
+            if (n3 || (n3 = 0), r3 || 0 === r3 || (r3 = this.length), e2 >= t4.length && (e2 = t4.length), e2 || (e2 = 0), r3 > 0 && r3 < n3 && (r3 = n3), r3 === n3)
+              return 0;
+            if (0 === t4.length || 0 === this.length)
+              return 0;
+            if (e2 < 0)
+              throw new RangeError("targetStart out of bounds");
+            if (n3 < 0 || n3 >= this.length)
+              throw new RangeError("sourceStart out of bounds");
+            if (r3 < 0)
+              throw new RangeError("sourceEnd out of bounds");
+            r3 > this.length && (r3 = this.length), t4.length - e2 < r3 - n3 && (r3 = t4.length - e2 + n3);
+            var o3, s3 = r3 - n3;
+            if (this === t4 && n3 < e2 && e2 < r3)
+              for (o3 = s3 - 1; o3 >= 0; --o3)
+                t4[o3 + e2] = this[o3 + n3];
+            else if (s3 < 1e3 || !c2.TYPED_ARRAY_SUPPORT)
+              for (o3 = 0; o3 < s3; ++o3)
+                t4[o3 + e2] = this[o3 + n3];
+            else
+              Uint8Array.prototype.set.call(t4, this.subarray(n3, n3 + s3), e2);
+            return s3;
+          }, c2.prototype.fill = function(t4, e2, n3, r3) {
+            if ("string" == typeof t4) {
+              if ("string" == typeof e2 ? (r3 = e2, e2 = 0, n3 = this.length) : "string" == typeof n3 && (r3 = n3, n3 = this.length), 1 === t4.length) {
+                var o3 = t4.charCodeAt(0);
+                o3 < 256 && (t4 = o3);
+              }
+              if (void 0 !== r3 && "string" != typeof r3)
+                throw new TypeError("encoding must be a string");
+              if ("string" == typeof r3 && !c2.isEncoding(r3))
+                throw new TypeError("Unknown encoding: " + r3);
+            } else
+              "number" == typeof t4 && (t4 &= 255);
+            if (e2 < 0 || this.length < e2 || this.length < n3)
+              throw new RangeError("Out of range index");
+            if (n3 <= e2)
+              return this;
+            var s3;
+            if (e2 >>>= 0, n3 = void 0 === n3 ? this.length : n3 >>> 0, t4 || (t4 = 0), "number" == typeof t4)
+              for (s3 = e2; s3 < n3; ++s3)
+                this[s3] = t4;
+            else {
+              var i3 = c2.isBuffer(t4) ? t4 : Y2(new c2(t4, r3).toString()), a3 = i3.length;
+              for (s3 = 0; s3 < n3 - e2; ++s3)
+                this[s3 + e2] = i3[s3 % a3];
+            }
+            return this;
+          };
+          var U2 = /[^+\/0-9A-Za-z-_]/g;
+          function D2(t4) {
+            return t4 < 16 ? "0" + t4.toString(16) : t4.toString(16);
+          }
+          function Y2(t4, e2) {
+            var n3;
+            e2 = e2 || 1 / 0;
+            for (var r3 = t4.length, o3 = null, s3 = [], i3 = 0; i3 < r3; ++i3) {
+              if ((n3 = t4.charCodeAt(i3)) > 55295 && n3 < 57344) {
+                if (!o3) {
+                  if (n3 > 56319) {
+                    (e2 -= 3) > -1 && s3.push(239, 191, 189);
+                    continue;
+                  }
+                  if (i3 + 1 === r3) {
+                    (e2 -= 3) > -1 && s3.push(239, 191, 189);
+                    continue;
+                  }
+                  o3 = n3;
+                  continue;
+                }
+                if (n3 < 56320) {
+                  (e2 -= 3) > -1 && s3.push(239, 191, 189), o3 = n3;
+                  continue;
+                }
+                n3 = 65536 + (o3 - 55296 << 10 | n3 - 56320);
+              } else
+                o3 && (e2 -= 3) > -1 && s3.push(239, 191, 189);
+              if (o3 = null, n3 < 128) {
+                if ((e2 -= 1) < 0)
+                  break;
+                s3.push(n3);
+              } else if (n3 < 2048) {
+                if ((e2 -= 2) < 0)
+                  break;
+                s3.push(n3 >> 6 | 192, 63 & n3 | 128);
+              } else if (n3 < 65536) {
+                if ((e2 -= 3) < 0)
+                  break;
+                s3.push(n3 >> 12 | 224, n3 >> 6 & 63 | 128, 63 & n3 | 128);
+              } else {
+                if (!(n3 < 1114112))
+                  throw new Error("Invalid code point");
+                if ((e2 -= 4) < 0)
+                  break;
+                s3.push(n3 >> 18 | 240, n3 >> 12 & 63 | 128, n3 >> 6 & 63 | 128, 63 & n3 | 128);
+              }
+            }
+            return s3;
+          }
+          function q2(t4) {
+            return r2.toByteArray(function(t5) {
+              if ((t5 = function(t6) {
+                return t6.trim ? t6.trim() : t6.replace(/^\s+|\s+$/g, "");
+              }(t5).replace(U2, "")).length < 2)
+                return "";
+              for (; t5.length % 4 != 0; )
+                t5 += "=";
+              return t5;
+            }(t4));
+          }
+          function F2(t4, e2, n3, r3) {
+            for (var o3 = 0; o3 < r3 && !(o3 + n3 >= e2.length || o3 >= t4.length); ++o3)
+              e2[o3 + n3] = t4[o3];
+            return o3;
+          }
+        }).call(this, n2(31));
+      }, function(t2, e) {
+        var n2;
+        n2 = function() {
+          return this;
+        }();
+        try {
+          n2 = n2 || new Function("return this")();
+        } catch (t3) {
+          "object" == typeof window && (n2 = window);
+        }
+        t2.exports = n2;
+      }, function(t2, e, n2) {
+        e.byteLength = function(t3) {
+          var e2 = h2(t3), n3 = e2[0], r3 = e2[1];
+          return 3 * (n3 + r3) / 4 - r3;
+        }, e.toByteArray = function(t3) {
+          var e2, n3, r3 = h2(t3), i3 = r3[0], a3 = r3[1], c3 = new s2(function(t4, e3, n4) {
+            return 3 * (e3 + n4) / 4 - n4;
+          }(0, i3, a3)), u3 = 0, p2 = a3 > 0 ? i3 - 4 : i3;
+          for (n3 = 0; n3 < p2; n3 += 4)
+            e2 = o2[t3.charCodeAt(n3)] << 18 | o2[t3.charCodeAt(n3 + 1)] << 12 | o2[t3.charCodeAt(n3 + 2)] << 6 | o2[t3.charCodeAt(n3 + 3)], c3[u3++] = e2 >> 16 & 255, c3[u3++] = e2 >> 8 & 255, c3[u3++] = 255 & e2;
+          2 === a3 && (e2 = o2[t3.charCodeAt(n3)] << 2 | o2[t3.charCodeAt(n3 + 1)] >> 4, c3[u3++] = 255 & e2);
+          1 === a3 && (e2 = o2[t3.charCodeAt(n3)] << 10 | o2[t3.charCodeAt(n3 + 1)] << 4 | o2[t3.charCodeAt(n3 + 2)] >> 2, c3[u3++] = e2 >> 8 & 255, c3[u3++] = 255 & e2);
+          return c3;
+        }, e.fromByteArray = function(t3) {
+          for (var e2, n3 = t3.length, o3 = n3 % 3, s3 = [], i3 = 0, a3 = n3 - o3; i3 < a3; i3 += 16383)
+            s3.push(u2(t3, i3, i3 + 16383 > a3 ? a3 : i3 + 16383));
+          1 === o3 ? (e2 = t3[n3 - 1], s3.push(r2[e2 >> 2] + r2[e2 << 4 & 63] + "==")) : 2 === o3 && (e2 = (t3[n3 - 2] << 8) + t3[n3 - 1], s3.push(r2[e2 >> 10] + r2[e2 >> 4 & 63] + r2[e2 << 2 & 63] + "="));
+          return s3.join("");
+        };
+        for (var r2 = [], o2 = [], s2 = "undefined" != typeof Uint8Array ? Uint8Array : Array, i2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", a2 = 0, c2 = i2.length; a2 < c2; ++a2)
+          r2[a2] = i2[a2], o2[i2.charCodeAt(a2)] = a2;
+        function h2(t3) {
+          var e2 = t3.length;
+          if (e2 % 4 > 0)
+            throw new Error("Invalid string. Length must be a multiple of 4");
+          var n3 = t3.indexOf("=");
+          return -1 === n3 && (n3 = e2), [n3, n3 === e2 ? 0 : 4 - n3 % 4];
+        }
+        function u2(t3, e2, n3) {
+          for (var o3, s3, i3 = [], a3 = e2; a3 < n3; a3 += 3)
+            o3 = (t3[a3] << 16 & 16711680) + (t3[a3 + 1] << 8 & 65280) + (255 & t3[a3 + 2]), i3.push(r2[(s3 = o3) >> 18 & 63] + r2[s3 >> 12 & 63] + r2[s3 >> 6 & 63] + r2[63 & s3]);
+          return i3.join("");
+        }
+        o2["-".charCodeAt(0)] = 62, o2["_".charCodeAt(0)] = 63;
+      }, function(t2, e) {
+        /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
+        e.read = function(t3, e2, n2, r2, o2) {
+          var s2, i2, a2 = 8 * o2 - r2 - 1, c2 = (1 << a2) - 1, h2 = c2 >> 1, u2 = -7, p2 = n2 ? o2 - 1 : 0, f2 = n2 ? -1 : 1, l2 = t3[e2 + p2];
+          for (p2 += f2, s2 = l2 & (1 << -u2) - 1, l2 >>= -u2, u2 += a2; u2 > 0; s2 = 256 * s2 + t3[e2 + p2], p2 += f2, u2 -= 8)
+            ;
+          for (i2 = s2 & (1 << -u2) - 1, s2 >>= -u2, u2 += r2; u2 > 0; i2 = 256 * i2 + t3[e2 + p2], p2 += f2, u2 -= 8)
+            ;
+          if (0 === s2)
+            s2 = 1 - h2;
+          else {
+            if (s2 === c2)
+              return i2 ? NaN : 1 / 0 * (l2 ? -1 : 1);
+            i2 += Math.pow(2, r2), s2 -= h2;
+          }
+          return (l2 ? -1 : 1) * i2 * Math.pow(2, s2 - r2);
+        }, e.write = function(t3, e2, n2, r2, o2, s2) {
+          var i2, a2, c2, h2 = 8 * s2 - o2 - 1, u2 = (1 << h2) - 1, p2 = u2 >> 1, f2 = 23 === o2 ? Math.pow(2, -24) - Math.pow(2, -77) : 0, l2 = r2 ? 0 : s2 - 1, d2 = r2 ? 1 : -1, y2 = e2 < 0 || 0 === e2 && 1 / e2 < 0 ? 1 : 0;
+          for (e2 = Math.abs(e2), isNaN(e2) || e2 === 1 / 0 ? (a2 = isNaN(e2) ? 1 : 0, i2 = u2) : (i2 = Math.floor(Math.log(e2) / Math.LN2), e2 * (c2 = Math.pow(2, -i2)) < 1 && (i2--, c2 *= 2), (e2 += i2 + p2 >= 1 ? f2 / c2 : f2 * Math.pow(2, 1 - p2)) * c2 >= 2 && (i2++, c2 /= 2), i2 + p2 >= u2 ? (a2 = 0, i2 = u2) : i2 + p2 >= 1 ? (a2 = (e2 * c2 - 1) * Math.pow(2, o2), i2 += p2) : (a2 = e2 * Math.pow(2, p2 - 1) * Math.pow(2, o2), i2 = 0)); o2 >= 8; t3[n2 + l2] = 255 & a2, l2 += d2, a2 /= 256, o2 -= 8)
+            ;
+          for (i2 = i2 << o2 | a2, h2 += o2; h2 > 0; t3[n2 + l2] = 255 & i2, l2 += d2, i2 /= 256, h2 -= 8)
+            ;
+          t3[n2 + l2 - d2] |= 128 * y2;
+        };
+      }, function(t2, e) {
+        var n2 = {}.toString;
+        t2.exports = Array.isArray || function(t3) {
+          return "[object Array]" == n2.call(t3);
+        };
+      }, function(t2, e, n2) {
+        const r2 = n2(36), o2 = n2(37), s2 = n2(0)("@hyoga/uni-socket"), i2 = uni || wx;
+        class a2 extends r2 {
+          constructor(t3, e2, n3) {
+            super(), this._readyState = a2.CONNECTING, this._socket = null, null !== t3 && (Array.isArray(e2) ? e2 = e2.join(", ") : "object" == typeof e2 && null !== e2 && (n3 = e2, e2 = void 0), this.initAsClient(t3, e2, n3));
+          }
+          initAsClient(t3, e2, n3) {
+            Object.assign(n3, { url: t3, header: { "content-type": "application/json" }, protocols: e2, timeout: 25e3 }), this._socket = this.createConnection(n3), this.addSocketEventListeners();
+          }
+          createConnection(t3) {
+            return i2.connectSocket({ complete: () => {
+            }, ...t3 });
+          }
+          addSocketEventListeners() {
+            this._socket.onOpen(() => {
+              this._readyState = a2.OPEN, this.onopen();
+            }), this._socket.onClose((t3) => {
+              s2("onclose: ", t3), this._readyState = a2.CLOSED, this.onclose(t3.code, t3.reason);
+            }), this._socket.onError((t3) => {
+              s2("onerror: ", t3), this.onerror(t3);
+            }), this._socket.onMessage((t3) => {
+              this.onmessage(t3);
+            });
+          }
+          send(t3) {
+            if (s2("send data: ", t3, this._readyState), this._readyState === a2.CONNECTING)
+              throw new Error("WebSocket is not open: readyState 0 (CONNECTING)");
+            "number" == typeof t3 && (t3 = t3.toString()), this._readyState === a2.OPEN && this._socket.send({ data: t3 });
+          }
+          close(t3, e2) {
+            s2("close socket: ", t3, e2), this._readyState = a2.CLOSING, this._socket.close({ code: t3, reason: e2 });
+          }
+        }
+        ["CONNECTING", "OPEN", "CLOSING", "CLOSED"].forEach((t3, e2) => {
+          a2[t3] = e2;
+        });
+        ["open", "error", "close", "message"].forEach((t3) => {
+          Object.defineProperty(a2.prototype, "on" + t3, { get() {
+            const e2 = this.listeners(t3);
+            for (var n3 = 0; n3 < e2.length; n3++)
+              if (e2[n3]._listener)
+                return e2[n3]._listener;
+          }, set(e2) {
+            const n3 = this.listeners(t3);
+            for (var r3 = 0; r3 < n3.length; r3++)
+              n3[r3]._listener && this.removeListener(t3, n3[r3]);
+            this.addEventListener(t3, e2);
+          } });
+        }), a2.prototype.addEventListener = o2.addEventListener, a2.prototype.removeEventListener = o2.removeEventListener, t2.exports = a2;
+      }, function(t2, e, n2) {
+        var r2, o2 = "object" == typeof Reflect ? Reflect : null, s2 = o2 && "function" == typeof o2.apply ? o2.apply : function(t3, e2, n3) {
+          return Function.prototype.apply.call(t3, e2, n3);
+        };
+        r2 = o2 && "function" == typeof o2.ownKeys ? o2.ownKeys : Object.getOwnPropertySymbols ? function(t3) {
+          return Object.getOwnPropertyNames(t3).concat(Object.getOwnPropertySymbols(t3));
+        } : function(t3) {
+          return Object.getOwnPropertyNames(t3);
+        };
+        var i2 = Number.isNaN || function(t3) {
+          return t3 != t3;
+        };
+        function a2() {
+          a2.init.call(this);
+        }
+        t2.exports = a2, t2.exports.once = function(t3, e2) {
+          return new Promise(function(n3, r3) {
+            function o3() {
+              void 0 !== s3 && t3.removeListener("error", s3), n3([].slice.call(arguments));
+            }
+            var s3;
+            "error" !== e2 && (s3 = function(n4) {
+              t3.removeListener(e2, o3), r3(n4);
+            }, t3.once("error", s3)), t3.once(e2, o3);
+          });
+        }, a2.EventEmitter = a2, a2.prototype._events = void 0, a2.prototype._eventsCount = 0, a2.prototype._maxListeners = void 0;
+        var c2 = 10;
+        function h2(t3) {
+          if ("function" != typeof t3)
+            throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof t3);
+        }
+        function u2(t3) {
+          return void 0 === t3._maxListeners ? a2.defaultMaxListeners : t3._maxListeners;
+        }
+        function p2(t3, e2, n3, r3) {
+          var o3, s3, i3, a3;
+          if (h2(n3), void 0 === (s3 = t3._events) ? (s3 = t3._events = /* @__PURE__ */ Object.create(null), t3._eventsCount = 0) : (void 0 !== s3.newListener && (t3.emit("newListener", e2, n3.listener ? n3.listener : n3), s3 = t3._events), i3 = s3[e2]), void 0 === i3)
+            i3 = s3[e2] = n3, ++t3._eventsCount;
+          else if ("function" == typeof i3 ? i3 = s3[e2] = r3 ? [n3, i3] : [i3, n3] : r3 ? i3.unshift(n3) : i3.push(n3), (o3 = u2(t3)) > 0 && i3.length > o3 && !i3.warned) {
+            i3.warned = true;
+            var c3 = new Error("Possible EventEmitter memory leak detected. " + i3.length + " " + String(e2) + " listeners added. Use emitter.setMaxListeners() to increase limit");
+            c3.name = "MaxListenersExceededWarning", c3.emitter = t3, c3.type = e2, c3.count = i3.length, a3 = c3, console && console.warn && formatAppLog("warn", "at node_modules/@hyoga/uni-socket.io/dist/uni-socket.io.js:10", a3);
+          }
+          return t3;
+        }
+        function f2() {
+          if (!this.fired)
+            return this.target.removeListener(this.type, this.wrapFn), this.fired = true, 0 === arguments.length ? this.listener.call(this.target) : this.listener.apply(this.target, arguments);
+        }
+        function l2(t3, e2, n3) {
+          var r3 = { fired: false, wrapFn: void 0, target: t3, type: e2, listener: n3 }, o3 = f2.bind(r3);
+          return o3.listener = n3, r3.wrapFn = o3, o3;
+        }
+        function d2(t3, e2, n3) {
+          var r3 = t3._events;
+          if (void 0 === r3)
+            return [];
+          var o3 = r3[e2];
+          return void 0 === o3 ? [] : "function" == typeof o3 ? n3 ? [o3.listener || o3] : [o3] : n3 ? function(t4) {
+            for (var e3 = new Array(t4.length), n4 = 0; n4 < e3.length; ++n4)
+              e3[n4] = t4[n4].listener || t4[n4];
+            return e3;
+          }(o3) : g2(o3, o3.length);
+        }
+        function y2(t3) {
+          var e2 = this._events;
+          if (void 0 !== e2) {
+            var n3 = e2[t3];
+            if ("function" == typeof n3)
+              return 1;
+            if (void 0 !== n3)
+              return n3.length;
+          }
+          return 0;
+        }
+        function g2(t3, e2) {
+          for (var n3 = new Array(e2), r3 = 0; r3 < e2; ++r3)
+            n3[r3] = t3[r3];
+          return n3;
+        }
+        Object.defineProperty(a2, "defaultMaxListeners", { enumerable: true, get: function() {
+          return c2;
+        }, set: function(t3) {
+          if ("number" != typeof t3 || t3 < 0 || i2(t3))
+            throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + t3 + ".");
+          c2 = t3;
+        } }), a2.init = function() {
+          void 0 !== this._events && this._events !== Object.getPrototypeOf(this)._events || (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0), this._maxListeners = this._maxListeners || void 0;
+        }, a2.prototype.setMaxListeners = function(t3) {
+          if ("number" != typeof t3 || t3 < 0 || i2(t3))
+            throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + t3 + ".");
+          return this._maxListeners = t3, this;
+        }, a2.prototype.getMaxListeners = function() {
+          return u2(this);
+        }, a2.prototype.emit = function(t3) {
+          for (var e2 = [], n3 = 1; n3 < arguments.length; n3++)
+            e2.push(arguments[n3]);
+          var r3 = "error" === t3, o3 = this._events;
+          if (void 0 !== o3)
+            r3 = r3 && void 0 === o3.error;
+          else if (!r3)
+            return false;
+          if (r3) {
+            var i3;
+            if (e2.length > 0 && (i3 = e2[0]), i3 instanceof Error)
+              throw i3;
+            var a3 = new Error("Unhandled error." + (i3 ? " (" + i3.message + ")" : ""));
+            throw a3.context = i3, a3;
+          }
+          var c3 = o3[t3];
+          if (void 0 === c3)
+            return false;
+          if ("function" == typeof c3)
+            s2(c3, this, e2);
+          else {
+            var h3 = c3.length, u3 = g2(c3, h3);
+            for (n3 = 0; n3 < h3; ++n3)
+              s2(u3[n3], this, e2);
+          }
+          return true;
+        }, a2.prototype.addListener = function(t3, e2) {
+          return p2(this, t3, e2, false);
+        }, a2.prototype.on = a2.prototype.addListener, a2.prototype.prependListener = function(t3, e2) {
+          return p2(this, t3, e2, true);
+        }, a2.prototype.once = function(t3, e2) {
+          return h2(e2), this.on(t3, l2(this, t3, e2)), this;
+        }, a2.prototype.prependOnceListener = function(t3, e2) {
+          return h2(e2), this.prependListener(t3, l2(this, t3, e2)), this;
+        }, a2.prototype.removeListener = function(t3, e2) {
+          var n3, r3, o3, s3, i3;
+          if (h2(e2), void 0 === (r3 = this._events))
+            return this;
+          if (void 0 === (n3 = r3[t3]))
+            return this;
+          if (n3 === e2 || n3.listener === e2)
+            0 == --this._eventsCount ? this._events = /* @__PURE__ */ Object.create(null) : (delete r3[t3], r3.removeListener && this.emit("removeListener", t3, n3.listener || e2));
+          else if ("function" != typeof n3) {
+            for (o3 = -1, s3 = n3.length - 1; s3 >= 0; s3--)
+              if (n3[s3] === e2 || n3[s3].listener === e2) {
+                i3 = n3[s3].listener, o3 = s3;
+                break;
+              }
+            if (o3 < 0)
+              return this;
+            0 === o3 ? n3.shift() : function(t4, e3) {
+              for (; e3 + 1 < t4.length; e3++)
+                t4[e3] = t4[e3 + 1];
+              t4.pop();
+            }(n3, o3), 1 === n3.length && (r3[t3] = n3[0]), void 0 !== r3.removeListener && this.emit("removeListener", t3, i3 || e2);
+          }
+          return this;
+        }, a2.prototype.off = a2.prototype.removeListener, a2.prototype.removeAllListeners = function(t3) {
+          var e2, n3, r3;
+          if (void 0 === (n3 = this._events))
+            return this;
+          if (void 0 === n3.removeListener)
+            return 0 === arguments.length ? (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0) : void 0 !== n3[t3] && (0 == --this._eventsCount ? this._events = /* @__PURE__ */ Object.create(null) : delete n3[t3]), this;
+          if (0 === arguments.length) {
+            var o3, s3 = Object.keys(n3);
+            for (r3 = 0; r3 < s3.length; ++r3)
+              "removeListener" !== (o3 = s3[r3]) && this.removeAllListeners(o3);
+            return this.removeAllListeners("removeListener"), this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0, this;
+          }
+          if ("function" == typeof (e2 = n3[t3]))
+            this.removeListener(t3, e2);
+          else if (void 0 !== e2)
+            for (r3 = e2.length - 1; r3 >= 0; r3--)
+              this.removeListener(t3, e2[r3]);
+          return this;
+        }, a2.prototype.listeners = function(t3) {
+          return d2(this, t3, true);
+        }, a2.prototype.rawListeners = function(t3) {
+          return d2(this, t3, false);
+        }, a2.listenerCount = function(t3, e2) {
+          return "function" == typeof t3.listenerCount ? t3.listenerCount(e2) : y2.call(t3, e2);
+        }, a2.prototype.listenerCount = y2, a2.prototype.eventNames = function() {
+          return this._eventsCount > 0 ? r2(this._events) : [];
+        };
+      }, function(t2, e, n2) {
+        class r2 {
+          constructor(t3, e2) {
+            this.target = e2, this.type = t3;
+          }
+        }
+        class o2 extends r2 {
+          constructor(t3, e2) {
+            super("message", e2), this.data = t3;
+          }
+        }
+        class s2 extends r2 {
+          constructor(t3, e2, n3) {
+            super("close", n3), this.wasClean = n3._closeFrameReceived && n3._closeFrameSent, this.reason = e2, this.code = t3;
+          }
+        }
+        class i2 extends r2 {
+          constructor(t3) {
+            super("open", t3);
+          }
+        }
+        class a2 extends r2 {
+          constructor(t3, e2) {
+            super("error", e2), this.message = t3.message, this.error = t3;
+          }
+        }
+        const c2 = { addEventListener(t3, e2) {
+          function n3(t4) {
+            e2.call(this, new o2(t4, this));
+          }
+          function r3(t4, n4) {
+            e2.call(this, new s2(t4, n4, this));
+          }
+          function c3(t4) {
+            e2.call(this, new a2(t4, this));
+          }
+          function h2() {
+            e2.call(this, new i2(this));
+          }
+          "function" == typeof e2 && ("message" === t3 ? (n3._listener = e2, this.on(t3, n3)) : "close" === t3 ? (r3._listener = e2, this.on(t3, r3)) : "error" === t3 ? (c3._listener = e2, this.on(t3, c3)) : "open" === t3 ? (h2._listener = e2, this.on(t3, h2)) : this.on(t3, e2));
+        }, removeEventListener(t3, e2) {
+          const n3 = this.listeners(t3);
+          for (var r3 = 0; r3 < n3.length; r3++)
+            n3[r3] !== e2 && n3[r3]._listener !== e2 || this.removeListener(t3, n3[r3]);
+        } };
+        t2.exports = c2;
+      }, function(t2, e, n2) {
+        Object.defineProperty(e, "__esModule", { value: true }), e.reconstructPacket = e.deconstructPacket = void 0;
+        const r2 = n2(16);
+        e.deconstructPacket = function(t3) {
+          const e2 = [], n3 = t3.data, o2 = t3;
+          return o2.data = function t4(e3, n4) {
+            if (!e3)
+              return e3;
+            if (r2.isBinary(e3)) {
+              const t5 = { _placeholder: true, num: n4.length };
+              return n4.push(e3), t5;
+            }
+            if (Array.isArray(e3)) {
+              const r3 = new Array(e3.length);
+              for (let o3 = 0; o3 < e3.length; o3++)
+                r3[o3] = t4(e3[o3], n4);
+              return r3;
+            }
+            if ("object" == typeof e3 && !(e3 instanceof Date)) {
+              const r3 = {};
+              for (const o3 in e3)
+                e3.hasOwnProperty(o3) && (r3[o3] = t4(e3[o3], n4));
+              return r3;
+            }
+            return e3;
+          }(n3, e2), o2.attachments = e2.length, { packet: o2, buffers: e2 };
+        }, e.reconstructPacket = function(t3, e2) {
+          return t3.data = function t4(e3, n3) {
+            if (!e3)
+              return e3;
+            if (e3 && e3._placeholder)
+              return n3[e3.num];
+            if (Array.isArray(e3))
+              for (let r3 = 0; r3 < e3.length; r3++)
+                e3[r3] = t4(e3[r3], n3);
+            else if ("object" == typeof e3)
+              for (const r3 in e3)
+                e3.hasOwnProperty(r3) && (e3[r3] = t4(e3[r3], n3));
+            return e3;
+          }(t3.data, e2), t3.attachments = void 0, t3;
+        };
+      }, function(t2, e) {
+        function n2(t3) {
+          t3 = t3 || {}, this.ms = t3.min || 100, this.max = t3.max || 1e4, this.factor = t3.factor || 2, this.jitter = t3.jitter > 0 && t3.jitter <= 1 ? t3.jitter : 0, this.attempts = 0;
+        }
+        t2.exports = n2, n2.prototype.duration = function() {
+          var t3 = this.ms * Math.pow(this.factor, this.attempts++);
+          if (this.jitter) {
+            var e2 = Math.random(), n3 = Math.floor(e2 * this.jitter * t3);
+            t3 = 0 == (1 & Math.floor(10 * e2)) ? t3 - n3 : t3 + n3;
+          }
+          return 0 | Math.min(t3, this.max);
+        }, n2.prototype.reset = function() {
+          this.attempts = 0;
+        }, n2.prototype.setMin = function(t3) {
+          this.ms = t3;
+        }, n2.prototype.setMax = function(t3) {
+          this.max = t3;
+        }, n2.prototype.setJitter = function(t3) {
+          this.jitter = t3;
+        };
+      }]);
+    });
+  })(uniSocket_io);
+  const io = /* @__PURE__ */ getDefaultExportFromCjs(uniSocket_ioExports);
+  const _sfc_main$D = /* @__PURE__ */ vue.defineComponent({
     __name: "message",
     setup(__props) {
+      const socket = io(`${cfg.server}:${cfg.port}`, {
+        transports: ["websocket", "po"],
+        path: "/socket",
+        timeout: 5e3
+      });
+      onLoad(() => Socket2());
+      uni.$on("user", () => {
+        socket.emit("client_login", "any");
+      });
+      uni.$on("logout", () => {
+        socket.emit("client_logout", "any");
+      });
+      onPullDownRefresh(() => {
+        getMsg(getApp().globalData.login);
+      });
+      function Socket2() {
+        formatAppLog("log", "at pages/message/message.vue:41", "onLoad");
+        formatAppLog("log", "at pages/message/message.vue:42", socket);
+        if (socket && getApp().globalData.login) {
+          formatAppLog("log", "at pages/message/message.vue:45", socket.connected);
+          socket.on("connect", () => {
+            formatAppLog("log", "at pages/message/message.vue:47", socket.id);
+            socket.emit("init", {
+              type: "client",
+              user: getApp().globalData.login.userid
+            });
+            socket.emit("msg");
+            socket.on("new_msg", (e) => {
+              if (e.userid === getApp().globalData.login.userid)
+                getMsg(e.userid);
+            });
+          });
+          socket.on("init", () => {
+            formatAppLog("log", "at pages/message/message.vue:62", "init on client");
+          });
+        }
+      }
+      function getMsg(e) {
+        formatAppLog("log", "at pages/message/message.vue:68", "get msg", e);
+        uni.request({
+          url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.user.prefix}${cfg.api.user.get_msg}`,
+          method: "POST",
+          data: {
+            userid: e
+          },
+          success(res) {
+            formatAppLog("log", "at pages/message/message.vue:76", res);
+          }
+        });
+      }
       return (_ctx, _cache) => {
-        return vue.openBlock(), vue.createElementBlock("view", { class: "content main" });
+        const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_0$4);
+        const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_1$3);
+        return vue.openBlock(), vue.createElementBlock("view", { class: "content main" }, [
+          vue.createVNode(_component_uni_list, { class: "main" }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_uni_list_item, { title: "商品消息" }),
+              vue.createVNode(_component_uni_list_item, { title: "帖子消息" }),
+              vue.createVNode(_component_uni_list_item, { title: "交易消息" }),
+              vue.createVNode(_component_uni_list_item, { title: "账号消息" })
+            ]),
+            _: 1
+            /* STABLE */
+          })
+        ]);
       };
     }
   });
-  const PagesMessageMessage = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["__file", "F:/HBuilderProjects/FreeMarket/pages/message/message.vue"]]);
+  const PagesMessageMessage = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["__file", "F:/HBuilderProjects/FreeMarket/pages/message/message.vue"]]);
   class MPAnimation {
     constructor(options, _this) {
       this.options = options;
@@ -14732,7 +17839,7 @@ if (uni.restoreGlobal) {
     clearTimeout(_this.timer);
     return new MPAnimation(option, _this);
   }
-  const _sfc_main$z = {
+  const _sfc_main$C = {
     name: "uniTransition",
     emits: ["click", "change"],
     props: {
@@ -14979,7 +18086,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     return $data.isShow ? (vue.openBlock(), vue.createElementBlock("view", {
       key: 0,
       ref: "ani",
@@ -14991,8 +18098,8 @@ if (uni.restoreGlobal) {
       vue.renderSlot(_ctx.$slots, "default")
     ], 14, ["animation"])) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$d], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
-  const _sfc_main$y = {
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$a], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const _sfc_main$B = {
     name: "uniPopup",
     components: {},
     emits: ["change", "maskClick"],
@@ -15320,7 +18427,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_0$3);
     return $data.showPopup ? (vue.openBlock(), vue.createElementBlock(
       "view",
@@ -15380,8 +18487,8 @@ if (uni.restoreGlobal) {
       /* CLASS */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$c], ["__scopeId", "data-v-4dd3c44b"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-  const _sfc_main$x = /* @__PURE__ */ vue.defineComponent({
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$9], ["__scopeId", "data-v-4dd3c44b"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const _sfc_main$A = /* @__PURE__ */ vue.defineComponent({
     __name: "my",
     setup(__props) {
       const isLogin = vue.ref(false);
@@ -15393,23 +18500,18 @@ if (uni.restoreGlobal) {
           ;
       });
       uni.$on("user", () => getInfo());
+      uni.$on("logout", () => logout());
       function getInfo() {
         try {
           info.value = getApp().globalData.login;
-          formatAppLog("log", "at pages/my/my.vue:114", info.value);
-          if (Object.keys(info.value).length !== 0)
-            isLogin.value = true;
+          formatAppLog("log", "at pages/my/my.vue:128", info.value);
+          isLogin.value = Object.keys(info.value).length !== 0;
         } catch (e) {
         }
       }
       function goto(url) {
         uni.navigateTo({
           url
-        });
-      }
-      function gotoEditInfo() {
-        uni.navigateTo({
-          url: "/pages/edit_info/edit_info"
         });
       }
       function editAvatar() {
@@ -15420,7 +18522,44 @@ if (uni.restoreGlobal) {
           count: 1,
           sourceType: from,
           success(res) {
-            formatAppLog("log", "at pages/my/my.vue:148", res);
+            formatAppLog("log", "at pages/my/my.vue:154", res);
+            uni.uploadFile({
+              url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.files.prefix}${cfg.api.files.upload_file}`,
+              filePath: res.tempFilePaths[0],
+              name: "file",
+              success(_res) {
+                formatAppLog("log", "at pages/my/my.vue:161", _res);
+                if (_res.statusCode === 200) {
+                  const url_t = JSON.parse(_res.data)[0].path.split("\\");
+                  const url = "files\\\\".concat(url_t[1]);
+                  uni.request({
+                    url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.user.prefix}${cfg.api.user.modify_info}`,
+                    method: "POST",
+                    data: {
+                      modify_form: {
+                        userid: getApp().globalData.login.userid,
+                        headImg: url
+                      }
+                    },
+                    success(__res) {
+                      formatAppLog("log", "at pages/my/my.vue:179", __res);
+                      if (__res.statusCode === 200) {
+                        getApp().globalData.login.headImg = url;
+                        uni.setStorage({
+                          key: "user_login",
+                          data: __res.data,
+                          complete() {
+                            info.value = {};
+                            getInfo();
+                            action.value.close();
+                          }
+                        });
+                      }
+                    }
+                  });
+                }
+              }
+            });
           }
         });
       }
@@ -15431,14 +18570,15 @@ if (uni.restoreGlobal) {
             success() {
               getApp().globalData.login = {};
               isLogin.value = false;
+              getInfo();
             }
           });
         } catch (e) {
         }
       }
       return (_ctx, _cache) => {
-        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$6);
-        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_3);
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$7);
+        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$2);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", { class: "content info" }, [
             vue.createElementVNode(
@@ -15446,7 +18586,7 @@ if (uni.restoreGlobal) {
               {
                 class: "avatar l-side",
                 style: vue.normalizeStyle({
-                  backgroundImage: `url(` + (info.value.headImg !== "" ? info.value.headImg : vue.unref(cfg).default_avatar) + `)`
+                  backgroundImage: `url(` + (info.value.headImg !== "" ? vue.unref(cfg).server + ":" + vue.unref(cfg).port + "/" + info.value.headImg : vue.unref(cfg).default_avatar) + `)`
                 }),
                 onClick: editAvatar
               },
@@ -15457,7 +18597,7 @@ if (uni.restoreGlobal) {
             vue.createElementVNode("view", { class: "r-side" }, [
               isLogin.value ? (vue.openBlock(), vue.createElementBlock("view", {
                 key: 0,
-                onClick: gotoEditInfo
+                onClick: _cache[0] || (_cache[0] = ($event) => goto(`/pages/edit_info/edit_info`))
               }, [
                 vue.createElementVNode(
                   "view",
@@ -15475,7 +18615,7 @@ if (uni.restoreGlobal) {
                 )
               ])) : (vue.openBlock(), vue.createElementBlock("view", { key: 1 }, [
                 vue.createElementVNode("button", {
-                  onClick: _cache[0] || (_cache[0] = ($event) => goto(`/pages/login/login`))
+                  onClick: _cache[1] || (_cache[1] = ($event) => goto(`/pages/login/login`))
                 }, "登录")
               ]))
             ])
@@ -15483,7 +18623,7 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("view", { class: "views" }, [
             vue.createElementVNode("view", {
               class: "menu-items",
-              onClick: _cache[1] || (_cache[1] = ($event) => goto(`/pages/favorite/favorite`))
+              onClick: _cache[2] || (_cache[2] = ($event) => goto(`/pages/favorite/favorite`))
             }, [
               vue.createVNode(_component_uni_icons, {
                 size: "35",
@@ -15494,7 +18634,7 @@ if (uni.restoreGlobal) {
             ]),
             vue.createElementVNode("view", {
               class: "menu-items",
-              onClick: _cache[2] || (_cache[2] = ($event) => goto(`/pages/history/history`))
+              onClick: _cache[3] || (_cache[3] = ($event) => goto(`/pages/history/history`))
             }, [
               vue.createVNode(_component_uni_icons, {
                 size: "35",
@@ -15503,7 +18643,10 @@ if (uni.restoreGlobal) {
               }),
               vue.createElementVNode("text", null, "浏览历史")
             ]),
-            vue.createElementVNode("view", { class: "menu-items" }, [
+            vue.createElementVNode("view", {
+              class: "menu-items",
+              onClick: _cache[4] || (_cache[4] = ($event) => goto(`/pages/mypost/mypost`))
+            }, [
               vue.createVNode(_component_uni_icons, {
                 size: "35",
                 customPrefix: "iconfont",
@@ -15515,7 +18658,7 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("view", { class: "exchange" }, [
             vue.createElementVNode("view", {
               class: "menu-items",
-              onClick: _cache[3] || (_cache[3] = ($event) => goto(`/pages/mygoods/mygoods`))
+              onClick: _cache[5] || (_cache[5] = ($event) => goto(`/pages/mygoods/mygoods`))
             }, [
               vue.createVNode(_component_uni_icons, {
                 size: "35",
@@ -15524,7 +18667,10 @@ if (uni.restoreGlobal) {
               }),
               vue.createElementVNode("text", null, "我发布的")
             ]),
-            vue.createElementVNode("view", { class: "menu-items" }, [
+            vue.createElementVNode("view", {
+              class: "menu-items",
+              onClick: _cache[6] || (_cache[6] = ($event) => goto(`/pages/exchange/exchange?type=buyer`))
+            }, [
               vue.createVNode(_component_uni_icons, {
                 size: "35",
                 customPrefix: "iconfont",
@@ -15532,7 +18678,10 @@ if (uni.restoreGlobal) {
               }),
               vue.createElementVNode("text", null, "我买入的")
             ]),
-            vue.createElementVNode("view", { class: "menu-items" }, [
+            vue.createElementVNode("view", {
+              class: "menu-items",
+              onClick: _cache[7] || (_cache[7] = ($event) => goto(`/pages/exchange/exchange?type=seller`))
+            }, [
               vue.createVNode(_component_uni_icons, {
                 size: "35",
                 customPrefix: "iconfont",
@@ -15542,12 +18691,9 @@ if (uni.restoreGlobal) {
             ])
           ]),
           vue.createElementVNode("button", {
-            onClick: _cache[4] || (_cache[4] = ($event) => goto(`/pages/settings/settings`))
+            onClick: _cache[8] || (_cache[8] = ($event) => goto(`/pages/settings/settings`))
           }, "设置"),
-          isLogin.value ? (vue.openBlock(), vue.createElementBlock("button", {
-            key: 0,
-            onClick: logout
-          }, "退出登录")) : vue.createCommentVNode("v-if", true),
+          vue.createCommentVNode(' <button v-if="isLogin" @click="logout">退出登录</button> '),
           vue.createVNode(
             _component_uni_popup,
             {
@@ -15556,14 +18702,26 @@ if (uni.restoreGlobal) {
             },
             {
               default: vue.withCtx(() => [
-                vue.createCommentVNode(" 拍照 "),
-                vue.createElementVNode("button", {
-                  onClick: _cache[5] || (_cache[5] = ($event) => selecctImage(["camera"]))
-                }, "拍照"),
-                vue.createCommentVNode(" 文件 "),
-                vue.createElementVNode("button", {
-                  onClick: _cache[6] || (_cache[6] = ($event) => selecctImage(["album"]))
-                }, "选择文件")
+                vue.createElementVNode("view", { class: "action" }, [
+                  vue.createElementVNode("view", {
+                    onClick: _cache[9] || (_cache[9] = ($event) => selecctImage(["camera"]))
+                  }, [
+                    vue.createVNode(_component_uni_icons, {
+                      type: "camera-filled",
+                      size: "25"
+                    }),
+                    vue.createElementVNode("text", null, "拍照")
+                  ]),
+                  vue.createElementVNode("view", {
+                    onClick: _cache[10] || (_cache[10] = ($event) => selecctImage(["album"]))
+                  }, [
+                    vue.createVNode(_component_uni_icons, {
+                      type: "image-filled",
+                      size: "25"
+                    }),
+                    vue.createElementVNode("text", null, "选择文件")
+                  ])
+                ])
               ]),
               _: 1
               /* STABLE */
@@ -15575,8 +18733,8 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const PagesMyMy = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["__file", "F:/HBuilderProjects/FreeMarket/pages/my/my.vue"]]);
-  const _sfc_main$w = {
+  const PagesMyMy = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["__scopeId", "data-v-2f1ef635"], ["__file", "F:/HBuilderProjects/FreeMarket/pages/my/my.vue"]]);
+  const _sfc_main$z = {
     name: "UniSegmentedControl",
     emits: ["clickItem"],
     props: {
@@ -15625,7 +18783,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -15670,8 +18828,99 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$b], ["__scopeId", "data-v-86aa1171"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
-  const _sfc_main$v = /* @__PURE__ */ vue.defineComponent({
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$8], ["__scopeId", "data-v-86aa1171"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control.vue"]]);
+  const _sfc_main$y = /* @__PURE__ */ vue.defineComponent({
+    __name: "goods_unit",
+    props: {
+      data: { type: null, required: true }
+    },
+    setup(__props) {
+      return (_ctx, _cache) => {
+        return vue.openBlock(), vue.createElementBlock("view", { class: "goods_info" }, [
+          vue.createElementVNode("view", { class: "img" }, [
+            vue.createElementVNode("image", {
+              class: "img",
+              src: `${vue.unref(cfg).server}:${vue.unref(cfg).port}/${__props.data.imgs[0].url}`
+            }, null, 8, ["src"])
+          ]),
+          vue.createElementVNode("view", null, [
+            vue.createElementVNode(
+              "text",
+              null,
+              vue.toDisplayString(__props.data.goods_name),
+              1
+              /* TEXT */
+            ),
+            vue.createElementVNode(
+              "text",
+              null,
+              "￥" + vue.toDisplayString(__props.data.price),
+              1
+              /* TEXT */
+            ),
+            vue.createElementVNode(
+              "text",
+              null,
+              vue.toDisplayString(__props.data.desc),
+              1
+              /* TEXT */
+            ),
+            vue.createElementVNode(
+              "text",
+              null,
+              vue.toDisplayString(__props.data.status),
+              1
+              /* TEXT */
+            )
+          ])
+        ]);
+      };
+    }
+  });
+  const GoodsUnit = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["__scopeId", "data-v-c8d050b4"], ["__file", "F:/HBuilderProjects/FreeMarket/components/goods_unit/goods_unit.vue"]]);
+  const _sfc_main$x = /* @__PURE__ */ vue.defineComponent({
+    __name: "post_unit",
+    props: {
+      data: { type: null, required: true }
+    },
+    setup(__props) {
+      return (_ctx, _cache) => {
+        return vue.openBlock(), vue.createElementBlock("view", { class: "post_info" }, [
+          vue.createElementVNode("view", { class: "img" }, [
+            vue.createElementVNode("image", {
+              class: "img",
+              src: `${vue.unref(cfg).server}:${vue.unref(cfg).port}/${__props.data.imgs[0].url}`
+            }, null, 8, ["src"])
+          ]),
+          vue.createElementVNode("view", null, [
+            vue.createElementVNode(
+              "text",
+              null,
+              vue.toDisplayString(__props.data.title),
+              1
+              /* TEXT */
+            ),
+            vue.createElementVNode(
+              "text",
+              null,
+              vue.toDisplayString(__props.data.post_by.username),
+              1
+              /* TEXT */
+            ),
+            vue.createElementVNode(
+              "text",
+              null,
+              vue.toDisplayString(__props.data.content),
+              1
+              /* TEXT */
+            )
+          ])
+        ]);
+      };
+    }
+  });
+  const PostUnit = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["__scopeId", "data-v-f6381624"], ["__file", "F:/HBuilderProjects/FreeMarket/components/post_unit/post_unit.vue"]]);
+  const _sfc_main$w = /* @__PURE__ */ vue.defineComponent({
     __name: "favorite",
     setup(__props) {
       const favor_list = vue.ref([]);
@@ -15683,7 +18932,7 @@ if (uni.restoreGlobal) {
         request();
       });
       function switchSegments(e) {
-        formatAppLog("log", "at pages/favorite/favorite.vue:53", e);
+        formatAppLog("log", "at pages/favorite/favorite.vue:51", e);
         current.value = e.currentIndex;
         if (current.value === 0)
           type.value = "goods";
@@ -15700,13 +18949,13 @@ if (uni.restoreGlobal) {
             type: type.value
           },
           success(res) {
-            formatAppLog("log", "at pages/favorite/favorite.vue:75", res);
+            formatAppLog("log", "at pages/favorite/favorite.vue:73", res);
             if (res.statusCode === 200) {
               favor_list.value = res.data;
               for (let i2 in favor_list.value) {
-                formatAppLog("log", "at pages/favorite/favorite.vue:79", favor_list.value);
-                formatAppLog("log", "at pages/favorite/favorite.vue:80", favor_list.value[i2]);
-                formatAppLog("log", "at pages/favorite/favorite.vue:81", typeof favor_list.value[i2].refer_to);
+                formatAppLog("log", "at pages/favorite/favorite.vue:77", favor_list.value);
+                formatAppLog("log", "at pages/favorite/favorite.vue:78", favor_list.value[i2]);
+                formatAppLog("log", "at pages/favorite/favorite.vue:79", typeof favor_list.value[i2].refer_to);
               }
               favor_out.value = favor_list.value.map((i2) => {
                 i2.isDel = typeof i2.refer_to === "string";
@@ -15717,7 +18966,7 @@ if (uni.restoreGlobal) {
         });
       }
       return (_ctx, _cache) => {
-        const _component_uni_segmented_control = resolveEasycom(vue.resolveDynamicComponent("uni-segmented-control"), __easycom_0$2);
+        const _component_uni_segmented_control = resolveEasycom(vue.resolveDynamicComponent("uni-segmented-control"), __easycom_0$1);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createVNode(_component_uni_segmented_control, {
             class: "segs",
@@ -15735,21 +18984,13 @@ if (uni.restoreGlobal) {
                 return vue.openBlock(), vue.createElementBlock("view", { class: "favorite-item" }, [
                   vue.createCommentVNode(" string "),
                   i2.isDel ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, " str ")) : (vue.openBlock(), vue.createElementBlock("view", { key: 1 }, [
-                    vue.createTextVNode(
-                      vue.toDisplayString(i2) + " ",
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createCommentVNode(" img "),
-                    vue.createElementVNode("image", {
-                      src: vue.unref(cfg).server + `:` + vue.unref(cfg).port + `/` + i2.refer_to.imgs[0].url
-                    }, null, 8, ["src"]),
-                    vue.createCommentVNode(" desc "),
-                    vue.createTextVNode(
-                      " " + vue.toDisplayString(i2.refer_to.desc) + " ",
-                      1
-                      /* TEXT */
-                    ),
+                    type.value === "goods" ? (vue.openBlock(), vue.createBlock(GoodsUnit, {
+                      key: 0,
+                      data: i2.refer_to
+                    }, null, 8, ["data"])) : (vue.openBlock(), vue.createBlock(PostUnit, {
+                      key: 1,
+                      data: i2.refer_to
+                    }, null, 8, ["data"])),
                     vue.createCommentVNode(" operation ")
                   ]))
                 ]);
@@ -15762,16 +19003,127 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const PagesFavoriteFavorite = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["__scopeId", "data-v-8850f19c"], ["__file", "F:/HBuilderProjects/FreeMarket/pages/favorite/favorite.vue"]]);
-  const _sfc_main$u = /* @__PURE__ */ vue.defineComponent({
+  const PagesFavoriteFavorite = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["__scopeId", "data-v-8850f19c"], ["__file", "F:/HBuilderProjects/FreeMarket/pages/favorite/favorite.vue"]]);
+  const _sfc_main$v = /* @__PURE__ */ vue.defineComponent({
     __name: "exchange",
     setup(__props) {
+      const side = vue.ref("");
+      const end_index = vue.ref(0);
+      const status_tab = vue.ref(0);
+      const segItems = vue.ref(["已发起", "待支付", "待收货", "已完成", "已取消"]);
+      const data = vue.ref([]);
+      const enableBottomRequest = vue.ref(true);
+      onLoad((option) => {
+        formatAppLog("log", "at pages/exchange/exchange.vue:49", option);
+        side.value = option.type;
+        request(true);
+      });
+      onPullDownRefresh(() => {
+        request(true);
+      });
+      onReachBottom(() => {
+        enableBottomRequest.value && request(false);
+      });
+      function request(type) {
+        formatAppLog("log", "at pages/exchange/exchange.vue:63", getApp().globalData.login.userid);
+        if (type)
+          end_index.value = 0;
+        const amount = 4;
+        uni.request({
+          url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.goods.prefix}${cfg.api.goods.get_deal}`,
+          method: "POST",
+          data: {
+            userid: getApp().globalData.login.userid,
+            filter: {
+              isSeller: side.value === "seller",
+              amount,
+              start_at: end_index.value,
+              status: status_tab.value
+            }
+          },
+          success(res) {
+            formatAppLog("log", "at pages/exchange/exchange.vue:79", res);
+            if (res.statusCode === 200) {
+              enableBottomRequest.value = res.data.data.data.length === amount;
+              end_index.value = res.data.data.next_index;
+              data.value = type ? res.data.data.data : data.value.concat(res.data.data.data);
+              uni.stopPullDownRefresh();
+            }
+          }
+        });
+      }
+      function goto(e) {
+        const url = side.value === "buyer" ? "confirm_exchange" : "custom_exchange";
+        uni.navigateTo({
+          url: `/pages/exchange/${url}/${url}?id=${e}`
+        });
+      }
+      function changeSeg(e) {
+        formatAppLog("log", "at pages/exchange/exchange.vue:101", e);
+        status_tab.value = e.currentIndex;
+        if (e.currentIndex === 4)
+          status_tab.value = -1;
+        request(true);
+      }
       return (_ctx, _cache) => {
-        return vue.openBlock(), vue.createElementBlock("view");
+        const _component_uni_segmented_control = resolveEasycom(vue.resolveDynamicComponent("uni-segmented-control"), __easycom_0$1);
+        const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$5);
+        return vue.openBlock(), vue.createElementBlock("view", null, [
+          vue.createElementVNode("view", null, [
+            vue.createCommentVNode(" 根据买卖方确定查询条件 "),
+            vue.createVNode(_component_uni_segmented_control, {
+              current: status_tab.value,
+              values: segItems.value,
+              onClickItem: changeSeg,
+              styleType: "text"
+            }, null, 8, ["current", "values"]),
+            (vue.openBlock(true), vue.createElementBlock(
+              vue.Fragment,
+              null,
+              vue.renderList(data.value, (e, i2) => {
+                return vue.openBlock(), vue.createBlock(_component_uni_card, {
+                  title: typeof e._target === Object ? e._target.username : e._target,
+                  "is-full": "true",
+                  extra: new Date(e.post_date).toLocaleString(),
+                  thumbnail: `${vue.unref(cfg).server}:${vue.unref(cfg).port}/${typeof e._target === Object ? e._target.headImg : ""}`,
+                  onClick: ($event) => goto(e.exchange_id)
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createVNode(GoodsUnit, {
+                      data: e.goods_snapshot
+                    }, null, 8, ["data"]),
+                    vue.createCommentVNode(" 交易时间 "),
+                    vue.createElementVNode(
+                      "view",
+                      null,
+                      " ￥" + vue.toDisplayString(e.price),
+                      1
+                      /* TEXT */
+                    ),
+                    e.status !== -1 && e.status !== 3 ? (vue.openBlock(), vue.createElementBlock("button", { key: 0 }, "取消")) : vue.createCommentVNode("v-if", true)
+                  ]),
+                  _: 2
+                  /* DYNAMIC */
+                }, 1032, ["title", "extra", "thumbnail", "onClick"]);
+              }),
+              256
+              /* UNKEYED_FRAGMENT */
+            )),
+            vue.withDirectives(vue.createElementVNode(
+              "view",
+              null,
+              "再怎么找也没有了",
+              512
+              /* NEED_PATCH */
+            ), [
+              [vue.vShow, !enableBottomRequest.value]
+            ])
+          ])
+        ]);
       };
     }
   });
-  const PagesExchangeExchange = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["__file", "F:/HBuilderProjects/FreeMarket/pages/exchange/exchange.vue"]]);
+  const PagesExchangeExchange = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["__file", "F:/HBuilderProjects/FreeMarket/pages/exchange/exchange.vue"]]);
   const isObject = (val) => val !== null && typeof val === "object";
   const defaultDelimiters = ["{", "}"];
   class BaseFormatter {
@@ -16096,7 +19448,7 @@ if (uni.restoreGlobal) {
       path: "pages/exchange/exchange",
       style: {
         navigationBarTitleText: "",
-        enablePullDownRefresh: false
+        enablePullDownRefresh: true
       }
     },
     {
@@ -16123,14 +19475,14 @@ if (uni.restoreGlobal) {
     {
       path: "pages/login/login",
       style: {
-        navigationBarTitleText: "",
+        navigationBarTitleText: "登录",
         enablePullDownRefresh: false
       }
     },
     {
       path: "pages/register/register",
       style: {
-        navigationBarTitleText: "",
+        navigationBarTitleText: "注册",
         enablePullDownRefresh: false
       }
     },
@@ -16144,7 +19496,7 @@ if (uni.restoreGlobal) {
     {
       path: "pages/edit_info/edit_info",
       style: {
-        navigationBarTitleText: "",
+        navigationBarTitleText: "编辑个人信息",
         enablePullDownRefresh: false
       }
     },
@@ -16165,26 +19517,61 @@ if (uni.restoreGlobal) {
     {
       path: "pages/history/history",
       style: {
-        navigationBarTitleText: "",
+        navigationBarTitleText: "浏览历史",
         enablePullDownRefresh: true
       }
     },
     {
       path: "pages/settings/settings",
       style: {
-        navigationBarTitleText: "",
+        navigationBarTitleText: "设置",
         enablePullDownRefresh: false
       }
     },
     {
       path: "pages/mygoods/mygoods",
       style: {
+        navigationBarTitleText: "我发布的商品",
+        enablePullDownRefresh: true
+      }
+    },
+    {
+      path: "pages/report/report",
+      style: {
+        navigationBarTitleText: "举报",
+        enablePullDownRefresh: false
+      }
+    },
+    {
+      path: "pages/edit_auth/edit_auth",
+      style: {
         navigationBarTitleText: "",
         enablePullDownRefresh: false
       }
     },
     {
-      path: "pages/report/report",
+      path: "pages/exchange/custom_exchange/custom_exchange",
+      style: {
+        navigationBarTitleText: "自定义交易",
+        enablePullDownRefresh: false
+      }
+    },
+    {
+      path: "pages/exchange/confirm_exchange/confirm_exchange",
+      style: {
+        navigationBarTitleText: "确认交易",
+        enablePullDownRefresh: false
+      }
+    },
+    {
+      path: "pages/mypost/mypost",
+      style: {
+        navigationBarTitleText: "我发布的帖子",
+        enablePullDownRefresh: true
+      }
+    },
+    {
+      path: "pages/pay/pay",
       style: {
         navigationBarTitleText: "",
         enablePullDownRefresh: false
@@ -18910,7 +22297,7 @@ if (uni.restoreGlobal) {
     }
     return filedata;
   };
-  const _sfc_main$t = {
+  const _sfc_main$u = {
     name: "uploadImage",
     emits: ["uploadFiles", "choose", "delFile"],
     props: {
@@ -19057,7 +22444,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-file-picker__container" }, [
       (vue.openBlock(true), vue.createElementBlock(
         vue.Fragment,
@@ -19150,8 +22537,8 @@ if (uni.restoreGlobal) {
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const uploadImage = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$a], ["__scopeId", "data-v-bdfc07e0"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-file-picker/components/uni-file-picker/upload-image.vue"]]);
-  const _sfc_main$s = {
+  const uploadImage = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$7], ["__scopeId", "data-v-bdfc07e0"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-file-picker/components/uni-file-picker/upload-image.vue"]]);
+  const _sfc_main$t = {
     name: "uploadFile",
     emits: ["uploadFiles", "choose", "delFile"],
     props: {
@@ -19287,7 +22674,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-file-picker__files" }, [
       !$props.readonly ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
@@ -19369,8 +22756,8 @@ if (uni.restoreGlobal) {
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const uploadFile = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$9], ["__scopeId", "data-v-a54939c6"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-file-picker/components/uni-file-picker/upload-file.vue"]]);
-  const _sfc_main$r = {
+  const uploadFile = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$6], ["__scopeId", "data-v-a54939c6"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-file-picker/components/uni-file-picker/upload-file.vue"]]);
+  const _sfc_main$s = {
     name: "uniFilePicker",
     components: {
       uploadImage,
@@ -19841,7 +23228,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_upload_image = vue.resolveComponent("upload-image");
     const _component_upload_file = vue.resolveComponent("upload-file");
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-file-picker" }, [
@@ -19911,36 +23298,135 @@ if (uni.restoreGlobal) {
       }, 8, ["readonly", "list-styles", "files-list", "showType", "delIcon", "onUploadFiles", "onChoose", "onDelFile"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$8], ["__scopeId", "data-v-6223573f"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker.vue"]]);
-  const _sfc_main$q = /* @__PURE__ */ vue.defineComponent({
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$5], ["__scopeId", "data-v-6223573f"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker.vue"]]);
+  const _sfc_main$r = /* @__PURE__ */ vue.defineComponent({
     __name: "new_post",
     setup(__props) {
+      const newPost = vue.ref({
+        post_id: "",
+        post_by: getApp().globalData.login.userid,
+        title: "",
+        content: "",
+        imgs: [],
+        post_date: "",
+        isDel: false
+      });
       const imgList = vue.ref([]);
+      const op = vue.ref("");
+      onLoad((option) => {
+        op.value = option.op;
+        if (op.value === "modify") {
+          uni.request({
+            url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.post.prefix}${cfg.api.post.read_post}`,
+            method: "POST",
+            data: {
+              post_id: option.post_id,
+              isEdit: true
+            },
+            success(res) {
+              if (res.statusCode === 200) {
+                newPost.value = res.data.data;
+                imgList.value = JSON.parse(JSON.stringify(res.data.data.imgs));
+                for (let i2 in imgList.value) {
+                  imgList.value[i2].url = cfg.server + ":" + cfg.port + "/" + imgList.value[i2].url;
+                }
+              }
+            }
+          });
+        }
+      });
+      function request() {
+        const reqBody = op.value === "modify" ? {
+          userid: getApp().globalData.login.userid,
+          modify_form: newPost.value
+        } : {
+          userid: getApp().globalData.login.userid,
+          post_data: {
+            title: newPost.value.title,
+            content: newPost.value.content,
+            imgs: newPost.value.imgs
+          }
+        };
+        const baseURL = cfg.server + ":" + cfg.port + cfg.api.prefix + cfg.api.post.prefix;
+        uni.request({
+          url: baseURL + (op.value === "modify" ? cfg.api.post.modify_post : cfg.api.post.create_post),
+          method: "POST",
+          data: reqBody,
+          success(res) {
+            formatAppLog("log", "at pages/new_post/new_post.vue:92", res);
+            if (res.statusCode === 200) {
+              const info = op.value === "modify" ? "帖子修改成功" : "帖子创建成功";
+              formatAppLog("log", "at pages/new_post/new_post.vue:98", info);
+              uni.navigateBack();
+              uni.showToast({
+                icon: "success",
+                title: info
+              });
+            }
+          }
+        });
+      }
       function uploadFile2(e) {
         uni.uploadFile({
           url: cfg.server + ":" + cfg.port + cfg.api.prefix + cfg.api.files.prefix + cfg.api.files.upload_file,
           filePath: e.tempFilePaths[0],
           name: "file",
           success(res) {
+            if (res.statusCode === 200) {
+              const url_t = JSON.parse(res.data)[0].path.split("\\");
+              const url = "files\\\\".concat(url_t[1]);
+              newPost.value.imgs.push({
+                name: JSON.parse(res.data)[0].filename,
+                url,
+                extname: e.tempFiles[0].extname
+              });
+            }
           }
         });
       }
       function removeFile(e) {
+        newPost.value.imgs = newPost.value.imgs.filter((i2) => i2.name !== e.tempFile.name);
+        imgList.value = imgList.value.filter((i2) => i2.name !== e.tempFile.name);
+      }
+      function doPost() {
+        request();
       }
       return (_ctx, _cache) => {
-        const _component_uni_file_picker = resolveEasycom(vue.resolveDynamicComponent("uni-file-picker"), __easycom_1$3);
+        const _component_uni_file_picker = resolveEasycom(vue.resolveDynamicComponent("uni-file-picker"), __easycom_1$2);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", null, [
             vue.createCommentVNode(" 标题 "),
-            vue.createElementVNode("input", { placeholder: "帖子标题" }),
+            vue.withDirectives(vue.createElementVNode(
+              "input",
+              {
+                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => newPost.value.title = $event),
+                placeholder: "帖子标题"
+              },
+              null,
+              512
+              /* NEED_PATCH */
+            ), [
+              [vue.vModelText, newPost.value.title]
+            ]),
             vue.createCommentVNode(" 正文 "),
-            vue.createElementVNode("textarea", { placeholder: "正文" }),
+            vue.withDirectives(vue.createElementVNode(
+              "textarea",
+              {
+                "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => newPost.value.content = $event),
+                placeholder: "正文"
+              },
+              null,
+              512
+              /* NEED_PATCH */
+            ), [
+              [vue.vModelText, newPost.value.content]
+            ]),
             vue.createCommentVNode(" 按钮 "),
-            vue.createElementVNode("button", null, "发表"),
+            vue.createElementVNode("button", { onClick: doPost }, "发表"),
             vue.createCommentVNode(" 配图 "),
             vue.createVNode(_component_uni_file_picker, {
               modelValue: imgList.value,
-              "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => imgList.value = $event),
+              "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => imgList.value = $event),
               fileMediatype: "image",
               limit: "9",
               title: "配图",
@@ -19952,7 +23438,131 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const PagesNew_postNew_post = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["__file", "F:/HBuilderProjects/FreeMarket/pages/new_post/new_post.vue"]]);
+  const PagesNew_postNew_post = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["__file", "F:/HBuilderProjects/FreeMarket/pages/new_post/new_post.vue"]]);
+  const _sfc_main$q = /* @__PURE__ */ vue.defineComponent({
+    __name: "price_keypad",
+    props: {
+      price: Number
+    },
+    emits: ["changePrice"],
+    setup(__props, { emit: emits }) {
+      const props = __props;
+      const price_str = vue.ref("");
+      onLoad(() => {
+        price_str.value = props.price.toString();
+      });
+      function keyboard(input) {
+        formatAppLog("log", "at components/price_keypad/price_keypad.vue:46", input);
+        switch (input) {
+          case "clear": {
+            price_str.value = "0";
+            break;
+          }
+          case "<": {
+            price_str.value = price_str.value.slice(0, price_str.value.length - 1);
+            formatAppLog("log", "at components/price_keypad/price_keypad.vue:58", price_str.value.length);
+            formatAppLog("log", "at components/price_keypad/price_keypad.vue:59", 0, price_str.value.length - 1);
+            formatAppLog("log", "at components/price_keypad/price_keypad.vue:60", price_str.value);
+            if (price_str.value.length === 0)
+              price_str.value = "0";
+            break;
+          }
+          case "ok": {
+            const tmp = price_str.value.split(".");
+            if (tmp.length === 2 && tmp[1].length > 2) {
+              tmp[1] = tmp[1].slice(0, 2);
+              price_str.value = tmp[0].concat(".".concat(tmp[1]));
+            }
+            emits("changePrice", price_str.value);
+            break;
+          }
+          default: {
+            if (price_str.value === "0") {
+              if (input === ".")
+                price_str.value += input;
+              else
+                price_str.value = input;
+            } else {
+              price_str.value = price_str.value.concat(input);
+              if (input === ".") {
+                const regex = /[.]/g;
+                const dict = price_str.value.match(regex);
+                formatAppLog("log", "at components/price_keypad/price_keypad.vue:85", dict);
+                formatAppLog("log", "at components/price_keypad/price_keypad.vue:87", dict.length);
+                if (dict && dict.length > 1)
+                  price_str.value = price_str.value.slice(0, price_str.value.length - 1);
+              }
+            }
+            formatAppLog("log", "at components/price_keypad/price_keypad.vue:94", price_str.value);
+            break;
+          }
+        }
+      }
+      return (_ctx, _cache) => {
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$7);
+        return vue.openBlock(), vue.createElementBlock("view", { class: "price-input" }, [
+          vue.createElementVNode(
+            "view",
+            { class: "display" },
+            " 价格：￥" + vue.toDisplayString(price_str.value),
+            1
+            /* TEXT */
+          ),
+          vue.createElementVNode("view", { class: "keyboard" }, [
+            vue.createElementVNode("view", { class: "number" }, [
+              vue.createElementVNode("button", {
+                onClick: _cache[0] || (_cache[0] = ($event) => keyboard(`7`))
+              }, "7"),
+              vue.createElementVNode("button", {
+                onClick: _cache[1] || (_cache[1] = ($event) => keyboard(`8`))
+              }, "8"),
+              vue.createElementVNode("button", {
+                onClick: _cache[2] || (_cache[2] = ($event) => keyboard(`9`))
+              }, "9"),
+              vue.createElementVNode("button", {
+                onClick: _cache[3] || (_cache[3] = ($event) => keyboard(`4`))
+              }, "4"),
+              vue.createElementVNode("button", {
+                onClick: _cache[4] || (_cache[4] = ($event) => keyboard(`5`))
+              }, "5"),
+              vue.createElementVNode("button", {
+                onClick: _cache[5] || (_cache[5] = ($event) => keyboard(`6`))
+              }, "6"),
+              vue.createElementVNode("button", {
+                onClick: _cache[6] || (_cache[6] = ($event) => keyboard(`1`))
+              }, "1"),
+              vue.createElementVNode("button", {
+                onClick: _cache[7] || (_cache[7] = ($event) => keyboard(`2`))
+              }, "2"),
+              vue.createElementVNode("button", {
+                onClick: _cache[8] || (_cache[8] = ($event) => keyboard(`3`))
+              }, "3"),
+              vue.createElementVNode("button", {
+                onClick: _cache[9] || (_cache[9] = ($event) => keyboard(`<`))
+              }, [
+                vue.createVNode(_component_uni_icons, { type: "left" })
+              ]),
+              vue.createElementVNode("button", {
+                onClick: _cache[10] || (_cache[10] = ($event) => keyboard(`0`))
+              }, "0"),
+              vue.createElementVNode("button", {
+                onClick: _cache[11] || (_cache[11] = ($event) => keyboard(`.`))
+              }, ".")
+            ]),
+            vue.createElementVNode("view", { class: "action" }, [
+              vue.createElementVNode("button", {
+                onClick: _cache[12] || (_cache[12] = ($event) => keyboard(`clear`))
+              }, "清除"),
+              vue.createElementVNode("button", {
+                onClick: _cache[13] || (_cache[13] = ($event) => keyboard(`ok`))
+              }, "确定")
+            ])
+          ])
+        ]);
+      };
+    }
+  });
+  const PriceKeypad = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["__scopeId", "data-v-91e0266e"], ["__file", "F:/HBuilderProjects/FreeMarket/components/price_keypad/price_keypad.vue"]]);
   const _sfc_main$p = /* @__PURE__ */ vue.defineComponent({
     __name: "new_goods",
     setup(__props) {
@@ -19967,7 +23577,6 @@ if (uni.restoreGlobal) {
         post_date: "",
         isDel: false
       });
-      const price_str = vue.ref(newGoods.value.price.toString());
       const operation = vue.ref("");
       const imgList = vue.ref([]);
       const pricePopup = vue.ref(null);
@@ -19982,81 +23591,36 @@ if (uni.restoreGlobal) {
               isEdit: true
             },
             success(res) {
-              formatAppLog("log", "at pages/new_goods/new_goods.vue:95", res);
+              formatAppLog("log", "at pages/new_goods/new_goods.vue:74", res);
               if (res.statusCode === 200) {
-                newGoods.value = res.data;
-                imgList.value = JSON.parse(JSON.stringify(res.data.imgs));
+                newGoods.value = res.data.data;
+                imgList.value = JSON.parse(JSON.stringify(res.data.data.imgs));
                 for (let i2 in imgList.value) {
                   imgList.value[i2].url = cfg.server + ":" + cfg.port + "/" + imgList.value[i2].url;
                 }
-                formatAppLog("log", "at pages/new_goods/new_goods.vue:103", imgList.value);
-                formatAppLog("log", "at pages/new_goods/new_goods.vue:104", newGoods.value);
+                formatAppLog("log", "at pages/new_goods/new_goods.vue:82", imgList.value);
+                formatAppLog("log", "at pages/new_goods/new_goods.vue:83", newGoods.value);
               }
             }
           });
         }
       });
       function showPrice() {
-        price_str.value = newGoods.value.price.toString();
         pricePopup.value.open();
       }
-      function keyboard(input) {
-        formatAppLog("log", "at pages/new_goods/new_goods.vue:136", input);
-        switch (input) {
-          case "clear": {
-            price_str.value = "0";
-            break;
-          }
-          case "<": {
-            price_str.value = price_str.value.slice(0, price_str.value.length - 1);
-            formatAppLog("log", "at pages/new_goods/new_goods.vue:150", price_str.value.length);
-            formatAppLog("log", "at pages/new_goods/new_goods.vue:151", 0, price_str.value.length - 1);
-            formatAppLog("log", "at pages/new_goods/new_goods.vue:152", price_str.value);
-            if (price_str.value.length === 0)
-              price_str.value = "0";
-            break;
-          }
-          case "ok": {
-            const tmp = price_str.value.split(".");
-            if (tmp.length === 2 && tmp[1].length > 2) {
-              tmp[1] = tmp[1].slice(0, 2);
-              price_str.value = tmp[0].concat(".".concat(tmp[1]));
-            }
-            newGoods.value.price = price_str.value * 1;
-            pricePopup.value.close();
-            break;
-          }
-          default: {
-            if (price_str.value === "0") {
-              if (input === ".")
-                price_str.value += input;
-              else
-                price_str.value = input;
-            } else {
-              price_str.value = price_str.value.concat(input);
-              if (input === ".") {
-                const regex = /[.]/g;
-                const dict = price_str.value.match(regex);
-                formatAppLog("log", "at pages/new_goods/new_goods.vue:178", dict);
-                formatAppLog("log", "at pages/new_goods/new_goods.vue:180", dict.length);
-                if (dict && dict.length > 1)
-                  price_str.value = price_str.value.slice(0, price_str.value.length - 1);
-              }
-            }
-            formatAppLog("log", "at pages/new_goods/new_goods.vue:187", price_str.value);
-            break;
-          }
-        }
+      function changePrice(p2) {
+        newGoods.value.price = 1 * p2;
+        pricePopup.value.close();
       }
       function uploadFile2(e) {
-        formatAppLog("log", "at pages/new_goods/new_goods.vue:202", "upload", e);
-        formatAppLog("log", "at pages/new_goods/new_goods.vue:203", newGoods.value.imgs);
+        formatAppLog("log", "at pages/new_goods/new_goods.vue:120", "upload", e);
+        formatAppLog("log", "at pages/new_goods/new_goods.vue:121", newGoods.value.imgs);
         uni.uploadFile({
           url: cfg.server + ":" + cfg.port + cfg.api.prefix + cfg.api.files.prefix + cfg.api.files.upload_file,
           filePath: e.tempFilePaths[0],
           name: "file",
           success(res) {
-            formatAppLog("log", "at pages/new_goods/new_goods.vue:214", res);
+            formatAppLog("log", "at pages/new_goods/new_goods.vue:132", res);
             if (res.statusCode === 200) {
               const url_t = JSON.parse(res.data)[0].path.split("\\");
               const url = "files\\\\".concat(url_t[1]);
@@ -20065,7 +23629,7 @@ if (uni.restoreGlobal) {
                 url,
                 extname: e.tempFiles[0].extname
               });
-              formatAppLog("log", "at pages/new_goods/new_goods.vue:225", newGoods.value.imgs);
+              formatAppLog("log", "at pages/new_goods/new_goods.vue:143", newGoods.value.imgs);
             }
           }
         });
@@ -20073,16 +23637,16 @@ if (uni.restoreGlobal) {
       function removeFile(e) {
         newGoods.value.imgs = newGoods.value.imgs.filter((i2) => i2.name !== e.tempFile.name);
         imgList.value = imgList.value.filter((i2) => i2.name !== e.tempFile.name);
-        formatAppLog("log", "at pages/new_goods/new_goods.vue:241", "imgList:", imgList.value);
-        formatAppLog("log", "at pages/new_goods/new_goods.vue:242", newGoods.value.imgs);
+        formatAppLog("log", "at pages/new_goods/new_goods.vue:154", "imgList:", imgList.value);
+        formatAppLog("log", "at pages/new_goods/new_goods.vue:155", newGoods.value.imgs);
       }
       function doGoods() {
-        formatAppLog("log", "at pages/new_goods/new_goods.vue:246", newGoods.value);
+        formatAppLog("log", "at pages/new_goods/new_goods.vue:160", newGoods.value);
         if (newGoods.value.imgs.length === 0) {
           newGoods.value.imgs.push(cfg.empty_image);
         }
         if (operation.value === "new") {
-          formatAppLog("log", "at pages/new_goods/new_goods.vue:251", "new");
+          formatAppLog("log", "at pages/new_goods/new_goods.vue:165", "new");
           uni.request({
             url: cfg.server + ":" + cfg.port + cfg.api.prefix + cfg.api.goods.prefix + cfg.api.goods.add_goods,
             method: "POST",
@@ -20097,7 +23661,7 @@ if (uni.restoreGlobal) {
               }
             },
             success(res) {
-              formatAppLog("log", "at pages/new_goods/new_goods.vue:270", res);
+              formatAppLog("log", "at pages/new_goods/new_goods.vue:184", res);
               if (res.statusCode === 200) {
                 uni.switchTab({
                   url: "/pages/index/index"
@@ -20110,7 +23674,7 @@ if (uni.restoreGlobal) {
             }
           });
         } else if (operation.value === "modify") {
-          formatAppLog("log", "at pages/new_goods/new_goods.vue:283", "modify");
+          formatAppLog("log", "at pages/new_goods/new_goods.vue:197", "modify");
           uni.request({
             url: cfg.server + ":" + cfg.port + cfg.api.prefix + cfg.api.goods.prefix + cfg.api.goods.modify_goods,
             method: "POST",
@@ -20119,7 +23683,7 @@ if (uni.restoreGlobal) {
               userid: getApp().globalData.login.userid
             },
             success(res) {
-              formatAppLog("log", "at pages/new_goods/new_goods.vue:296", res);
+              formatAppLog("log", "at pages/new_goods/new_goods.vue:210", res);
               uni.switchTab({
                 url: "/pages/index/index"
               });
@@ -20134,9 +23698,9 @@ if (uni.restoreGlobal) {
         }
       }
       return (_ctx, _cache) => {
-        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$6);
-        const _component_uni_file_picker = resolveEasycom(vue.resolveDynamicComponent("uni-file-picker"), __easycom_1$3);
-        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_3);
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$7);
+        const _component_uni_file_picker = resolveEasycom(vue.resolveDynamicComponent("uni-file-picker"), __easycom_1$2);
+        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$2);
         return vue.openBlock(), vue.createElementBlock(
           vue.Fragment,
           null,
@@ -20219,65 +23783,10 @@ if (uni.restoreGlobal) {
               },
               {
                 default: vue.withCtx(() => [
-                  vue.createElementVNode("view", { class: "price-input" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "display" },
-                      " 价格：￥" + vue.toDisplayString(price_str.value),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode("view", { class: "keyboard" }, [
-                      vue.createElementVNode("view", { class: "number" }, [
-                        vue.createElementVNode("button", {
-                          onClick: _cache[4] || (_cache[4] = ($event) => keyboard(`7`))
-                        }, "7"),
-                        vue.createElementVNode("button", {
-                          onClick: _cache[5] || (_cache[5] = ($event) => keyboard(`8`))
-                        }, "8"),
-                        vue.createElementVNode("button", {
-                          onClick: _cache[6] || (_cache[6] = ($event) => keyboard(`9`))
-                        }, "9"),
-                        vue.createElementVNode("button", {
-                          onClick: _cache[7] || (_cache[7] = ($event) => keyboard(`4`))
-                        }, "4"),
-                        vue.createElementVNode("button", {
-                          onClick: _cache[8] || (_cache[8] = ($event) => keyboard(`5`))
-                        }, "5"),
-                        vue.createElementVNode("button", {
-                          onClick: _cache[9] || (_cache[9] = ($event) => keyboard(`6`))
-                        }, "6"),
-                        vue.createElementVNode("button", {
-                          onClick: _cache[10] || (_cache[10] = ($event) => keyboard(`1`))
-                        }, "1"),
-                        vue.createElementVNode("button", {
-                          onClick: _cache[11] || (_cache[11] = ($event) => keyboard(`2`))
-                        }, "2"),
-                        vue.createElementVNode("button", {
-                          onClick: _cache[12] || (_cache[12] = ($event) => keyboard(`3`))
-                        }, "3"),
-                        vue.createElementVNode("button", {
-                          onClick: _cache[13] || (_cache[13] = ($event) => keyboard(`<`))
-                        }, [
-                          vue.createVNode(_component_uni_icons, { type: "left" })
-                        ]),
-                        vue.createElementVNode("button", {
-                          onClick: _cache[14] || (_cache[14] = ($event) => keyboard(`0`))
-                        }, "0"),
-                        vue.createElementVNode("button", {
-                          onClick: _cache[15] || (_cache[15] = ($event) => keyboard(`.`))
-                        }, ".")
-                      ]),
-                      vue.createElementVNode("view", { class: "action" }, [
-                        vue.createElementVNode("button", {
-                          onClick: _cache[16] || (_cache[16] = ($event) => keyboard(`clear`))
-                        }, "清除"),
-                        vue.createElementVNode("button", {
-                          onClick: _cache[17] || (_cache[17] = ($event) => keyboard(`ok`))
-                        }, "确定")
-                      ])
-                    ])
-                  ])
+                  vue.createVNode(PriceKeypad, {
+                    price: newGoods.value.price,
+                    onChangePrice: changePrice
+                  }, null, 8, ["price"])
                 ]),
                 _: 1
                 /* STABLE */
@@ -20323,9 +23832,9 @@ if (uni.restoreGlobal) {
               if (res.statusCode === 200) {
                 uni.setStorage({
                   key: "user_login",
-                  data: res.data
+                  data: res.data.data
                 });
-                getApp().globalData.login = res.data;
+                getApp().globalData.login = res.data.data;
                 uni.$emit("user");
                 uni.switchTab({
                   url: "/pages/my/my"
@@ -20567,7 +24076,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-section" }, [
       vue.createElementVNode("view", {
         class: "uni-section-header",
@@ -20624,7 +24133,7 @@ if (uni.restoreGlobal) {
       )
     ]);
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$7], ["__scopeId", "data-v-637fd36b"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$4], ["__scopeId", "data-v-637fd36b"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
   const _sfc_main$k = /* @__PURE__ */ vue.defineComponent({
     __name: "comment_input",
     emits: ["submit"],
@@ -20639,7 +24148,7 @@ if (uni.restoreGlobal) {
         emit("submit", content.value);
       }
       return (_ctx, _cache) => {
-        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_3);
+        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$2);
         return vue.openBlock(), vue.createElementBlock(
           vue.Fragment,
           null,
@@ -20695,13 +24204,10 @@ if (uni.restoreGlobal) {
   });
   const commentInput = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["__scopeId", "data-v-35eeb961"], ["__file", "F:/HBuilderProjects/FreeMarket/components/comment_input/comment_input.vue"]]);
   const _sfc_main$j = {
-    name: "common_report",
-    data() {
-      return {};
-    }
+    name: "common_report"
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$6);
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "report",
       onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$emit(`call`))
@@ -20713,89 +24219,81 @@ if (uni.restoreGlobal) {
       vue.createElementVNode("text", null, "举报")
     ]);
   }
-  const commonReport = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$6], ["__file", "F:/HBuilderProjects/FreeMarket/components/common_report/common_report.vue"]]);
-  const _sfc_main$i = {
-    name: "comment_display",
-    // emits: ['report'],
-    components: {
-      commonReport
-    },
-    data() {
-      return {
-        default_avatar: cfg.default_avatar
-      };
-    },
+  const commonReport = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$3], ["__file", "F:/HBuilderProjects/FreeMarket/components/common_report/common_report.vue"]]);
+  const _sfc_main$i = /* @__PURE__ */ vue.defineComponent({
+    __name: "comment_display",
     props: {
       _data: Array
+    },
+    setup(__props) {
+      vue.ref(cfg.default_avatar);
+      return (_ctx, _cache) => {
+        const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$5);
+        return vue.openBlock(), vue.createElementBlock("view", { style: { "margin-top": "3vh" } }, [
+          __props._data.length === 0 ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, "还没有评论欸")) : (vue.openBlock(true), vue.createElementBlock(
+            vue.Fragment,
+            { key: 1 },
+            vue.renderList(__props._data, (i2, index) => {
+              return vue.openBlock(), vue.createElementBlock("view", {
+                class: "card",
+                key: i2.comment_id
+              }, [
+                vue.createVNode(_component_uni_card, {
+                  title: i2.comment_by.username || i2.comment_by,
+                  isFull: true,
+                  "sub-title": new Date(i2.post_date).toLocaleString(),
+                  thumbnail: vue.unref(cfg).server + `:` + vue.unref(cfg).port + `/` + i2.comment_by.headImg
+                }, {
+                  default: vue.withCtx(() => [
+                    vue.createElementVNode("view", { class: "uni-card__content" }, [
+                      vue.createElementVNode(
+                        "text",
+                        null,
+                        vue.toDisplayString(i2.content),
+                        1
+                        /* TEXT */
+                      )
+                    ]),
+                    vue.createElementVNode("view", {
+                      slot: "actions",
+                      class: "uni-card__actions"
+                    }, [
+                      vue.createVNode(commonReport, {
+                        onCall: ($event) => _ctx.$emit("report", i2.comment_id)
+                      }, null, 8, ["onCall"])
+                    ])
+                  ]),
+                  _: 2
+                  /* DYNAMIC */
+                }, 1032, ["title", "sub-title", "thumbnail"])
+              ]);
+            }),
+            128
+            /* KEYED_FRAGMENT */
+          ))
+        ]);
+      };
     }
-  };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_commonReport = vue.resolveComponent("commonReport");
-    const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$4);
-    return vue.openBlock(), vue.createElementBlock("view", { style: { "margin-top": "3vh" } }, [
-      $props._data.length === 0 ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, "还没有评论欸")) : vue.createCommentVNode("v-if", true),
-      (vue.openBlock(true), vue.createElementBlock(
-        vue.Fragment,
-        null,
-        vue.renderList($props._data, (i2, index) => {
-          return vue.openBlock(), vue.createElementBlock("view", {
-            class: "card",
-            key: index
-          }, [
-            vue.createVNode(_component_uni_card, {
-              title: i2.comment_by.username || i2.comment_by,
-              isFull: true,
-              "sub-title": new Date(i2.post_date).toLocaleString(),
-              thumbnail: i2.comment_by.headImg || $data.default_avatar
-            }, {
-              default: vue.withCtx(() => [
-                vue.createElementVNode("view", { class: "uni-card__content" }, [
-                  vue.createElementVNode(
-                    "text",
-                    null,
-                    vue.toDisplayString(i2.content),
-                    1
-                    /* TEXT */
-                  )
-                ]),
-                vue.createElementVNode("view", {
-                  slot: "actions",
-                  class: "uni-card__actions"
-                }, [
-                  vue.createVNode(_component_commonReport, {
-                    onCall: ($event) => _ctx.$emit("report", i2.comment_id)
-                  }, null, 8, ["onCall"])
-                ])
-              ]),
-              _: 2
-              /* DYNAMIC */
-            }, 1032, ["title", "sub-title", "thumbnail"])
-          ]);
-        }),
-        128
-        /* KEYED_FRAGMENT */
-      ))
-    ]);
-  }
-  const commentDisplay = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$5], ["__scopeId", "data-v-a34d7f72"], ["__file", "F:/HBuilderProjects/FreeMarket/components/comment_display/comment_display.vue"]]);
+  });
+  const commentDisplay = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["__scopeId", "data-v-a34d7f72"], ["__file", "F:/HBuilderProjects/FreeMarket/components/comment_display/comment_display.vue"]]);
   const _sfc_main$h = {
     name: "contentLoading",
     data() {
       return {};
     }
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", null, " LOADING ");
   }
-  const contentLoading = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$4], ["__file", "F:/HBuilderProjects/FreeMarket/components/content_loading/content_loading.vue"]]);
+  const contentLoading = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$2], ["__file", "F:/HBuilderProjects/FreeMarket/components/content_loading/content_loading.vue"]]);
   const _sfc_main$g = {
     name: "contentError",
     data() {
       return {};
     }
   };
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$6);
+  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "filled" }, [
       vue.createVNode(_component_uni_icons, {
         type: "clear",
@@ -20804,104 +24302,14 @@ if (uni.restoreGlobal) {
       vue.createTextVNode(" 咦，好像粗了什么错欸。 ")
     ]);
   }
-  const contentError = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$3], ["__scopeId", "data-v-cee91399"], ["__file", "F:/HBuilderProjects/FreeMarket/components/content_error/content_error.vue"]]);
+  const contentError = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$1], ["__scopeId", "data-v-cee91399"], ["__file", "F:/HBuilderProjects/FreeMarket/components/content_error/content_error.vue"]]);
   const _sfc_main$f = /* @__PURE__ */ vue.defineComponent({
-    __name: "report_popup",
-    setup(__props) {
-      onLoad(() => {
-        formatAppLog("log", "at components/report_popup/report_popup.vue:44", "onLoad");
-      });
-      onShow(() => {
-        formatAppLog("log", "at components/report_popup/report_popup.vue:48", "onShow");
-      });
-      function onSubmit(e) {
-        formatAppLog("log", "at components/report_popup/report_popup.vue:52", e.detail.value);
-        uni.request({
-          url: cfg.server + ":" + cfg.port + cfg.api.prefix + cfg.api.user.prefix + cfg.api.user.create_report,
-          method: "POST",
-          data: {
-            report_form: {
-              ...e.detail.value
-            }
-          },
-          success(res) {
-            formatAppLog("log", "at components/report_popup/report_popup.vue:66", res);
-          }
-        });
-      }
-      return (_ctx, _cache) => {
-        return vue.openBlock(), vue.createElementBlock("view", { style: { "width": "100vw", "height": "20rem", "background-color": "white" } }, [
-          vue.createTextVNode(" 举报理由： "),
-          vue.createElementVNode(
-            "form",
-            { onSubmit },
-            [
-              vue.createElementVNode("radio-group", {
-                name: "reason",
-                change: ""
-              }, [
-                vue.createElementVNode("label", null, [
-                  vue.createElementVNode("radio", {
-                    color: "#1296db",
-                    value: "law violation"
-                  }),
-                  vue.createTextVNode(" 违反法律法规 ")
-                ]),
-                vue.createElementVNode("label", null, [
-                  vue.createElementVNode("radio", {
-                    color: "#1296db",
-                    value: ""
-                  }),
-                  vue.createTextVNode(" 敏感内容 ")
-                ]),
-                vue.createElementVNode("label", null, [
-                  vue.createElementVNode("radio", {
-                    color: "#1296db",
-                    value: "inappropriate"
-                  }),
-                  vue.createTextVNode(" 内容不适 ")
-                ]),
-                vue.createElementVNode("label", null, [
-                  vue.createElementVNode("radio", {
-                    color: "#1296db",
-                    value: ""
-                  }),
-                  vue.createTextVNode(" 虚假信息 ")
-                ]),
-                vue.createElementVNode("label", null, [
-                  vue.createElementVNode("radio", {
-                    color: "#1296db",
-                    value: "other"
-                  }),
-                  vue.createTextVNode(" 其他 "),
-                  vue.createElementVNode("textarea", {
-                    name: "other_reason",
-                    maxlength: "-1"
-                  })
-                ])
-              ]),
-              vue.createElementVNode("button", { "form-type": "submit" }, "提交")
-            ],
-            32
-            /* HYDRATE_EVENTS */
-          )
-        ]);
-      };
-    }
-  });
-  const reportPopup = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__file", "F:/HBuilderProjects/FreeMarket/components/report_popup/report_popup.vue"]]);
-  const _sfc_main$e = /* @__PURE__ */ vue.defineComponent({
     __name: "browse_goods",
     setup(__props) {
       const content = vue.ref({});
-      vue.ref({
-        to: "",
-        reason: ""
-      });
       const query = vue.ref({});
       const isLoading = vue.ref(true);
       const isError = vue.ref(false);
-      const report = vue.ref(null);
       onLoad((option) => {
         uni.showNavigationBarLoading();
         query.value.id = option.id;
@@ -20909,22 +24317,24 @@ if (uni.restoreGlobal) {
         request(query.value);
       });
       onError((err) => {
-        formatAppLog("log", "at pages/browse_goods/browse_goods.vue:107", err);
+        formatAppLog("log", "at pages/browse_goods/browse_goods.vue:97", err);
+        isError.value = true;
       });
       function request(data) {
         uni.request({
-          url: "http://localhost:4000/api/goods/goods_info",
+          url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.goods.prefix}${cfg.api.goods.goods_info}`,
           method: "POST",
           data: {
             goods_id: data.id,
             userid: data.userid
           },
           success(res) {
-            formatAppLog("log", "at pages/browse_goods/browse_goods.vue:120", res);
-            content.value = res.data;
-            if (content.value.error)
+            formatAppLog("log", "at pages/browse_goods/browse_goods.vue:111", res);
+            if (res.statusCode === 200)
+              content.value = res.data.data;
+            else
               isError.value = true;
-            formatAppLog("log", "at pages/browse_goods/browse_goods.vue:124", content.value);
+            formatAppLog("log", "at pages/browse_goods/browse_goods.vue:115", content.value);
           },
           fail() {
             isError.value = true;
@@ -20939,7 +24349,6 @@ if (uni.restoreGlobal) {
         });
       }
       function getSubmit(c2) {
-        formatAppLog("log", "at pages/browse_goods/browse_goods.vue:141", c2);
         uni.request({
           url: cfg.server + ":" + cfg.port + cfg.api.prefix + cfg.api.user.prefix + cfg.api.user.create_comment,
           method: "POST",
@@ -20951,7 +24360,7 @@ if (uni.restoreGlobal) {
             }
           },
           success(res) {
-            formatAppLog("log", "at pages/browse_goods/browse_goods.vue:157", res);
+            formatAppLog("log", "at pages/browse_goods/browse_goods.vue:148", res);
             if (res.statusCode === 200) {
               const t2 = res.data;
               t2.comment_by = getApp().globalData.login;
@@ -20981,7 +24390,7 @@ if (uni.restoreGlobal) {
             }
           },
           success(res) {
-            formatAppLog("log", "at pages/browse_goods/browse_goods.vue:201", res);
+            formatAppLog("log", "at pages/browse_goods/browse_goods.vue:193", res);
             if (res.statusCode === 200) {
               uni.showToast({
                 icon: "success",
@@ -20993,22 +24402,40 @@ if (uni.restoreGlobal) {
         });
       }
       function want() {
+        uni.request({
+          url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.goods.prefix}${cfg.api.goods.create_deal}`,
+          method: "POST",
+          data: {
+            exchange_form: {
+              buyer: getApp().globalData.login.userid,
+              seller: content.value.owner.userid,
+              goods: content.value.goods_id,
+              price: content.value.price
+            }
+          },
+          success(res) {
+            formatAppLog("log", "at pages/browse_goods/browse_goods.vue:221", res);
+            uni.showToast({
+              icon: res.statusCode === 200 ? "success" : "error",
+              title: res.data.msg
+            });
+          }
+        });
       }
       function call_goods() {
-        formatAppLog("log", "at pages/browse_goods/browse_goods.vue:222", "reach call");
+        formatAppLog("log", "at pages/browse_goods/browse_goods.vue:232", "reach call");
         call_report(content.value.goods_id);
       }
       function call_report(id) {
-        formatAppLog("log", "at pages/browse_goods/browse_goods.vue:227", id);
+        formatAppLog("log", "at pages/browse_goods/browse_goods.vue:237", id);
         uni.navigateTo({
           url: "/pages/report/report?refer_to=" + id + "&report_by=" + getApp().globalData.login.userid
         });
       }
       return (_ctx, _cache) => {
-        const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$4);
-        const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_0$1);
-        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$6);
-        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_3);
+        const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_0$5);
+        const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$1);
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$7);
         return vue.openBlock(), vue.createElementBlock(
           vue.Fragment,
           null,
@@ -21025,9 +24452,10 @@ if (uni.restoreGlobal) {
               vue.createElementVNode("view", { class: "main_content" }, [
                 vue.createVNode(_component_uni_card, {
                   isFull: "true",
+                  avatarCircle: "true",
                   title: content.value.owner.username || content.value.owner,
                   subTitle: new Date(content.value.post_date).toLocaleString(),
-                  thumbnail: content.value.owner.headImg || vue.unref(cfg).default_avatar
+                  thumbnail: vue.unref(cfg).server + `:` + vue.unref(cfg).port + `/` + content.value.owner.headImg || vue.unref(cfg).default_avatar
                 }, {
                   default: vue.withCtx(() => [
                     vue.createElementVNode(
@@ -21103,24 +24531,7 @@ if (uni.restoreGlobal) {
                   onClick: favorite
                 }, null, 8, ["type"]),
                 vue.createElementVNode("button", { onClick: want }, "我想要")
-              ])) : vue.createCommentVNode("v-if", true),
-              vue.createVNode(
-                _component_uni_popup,
-                {
-                  type: "bottom",
-                  ref_key: "report",
-                  ref: report
-                },
-                {
-                  default: vue.withCtx(() => [
-                    vue.createVNode(reportPopup)
-                  ]),
-                  _: 1
-                  /* STABLE */
-                },
-                512
-                /* NEED_PATCH */
-              )
+              ])) : vue.createCommentVNode("v-if", true)
             ])) : vue.createCommentVNode("v-if", true)
           ],
           64
@@ -21129,11 +24540,11 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const PagesBrowse_goodsBrowse_goods = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-fdc5c65b"], ["__file", "F:/HBuilderProjects/FreeMarket/pages/browse_goods/browse_goods.vue"]]);
-  const _sfc_main$d = /* @__PURE__ */ vue.defineComponent({
+  const PagesBrowse_goodsBrowse_goods = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["__scopeId", "data-v-fdc5c65b"], ["__file", "F:/HBuilderProjects/FreeMarket/pages/browse_goods/browse_goods.vue"]]);
+  const _sfc_main$e = /* @__PURE__ */ vue.defineComponent({
     __name: "edit_info",
     setup(__props) {
-      const date = vue.reactive({
+      vue.reactive({
         current: new Date()
       });
       vue.reactive({
@@ -21143,10 +24554,44 @@ if (uni.restoreGlobal) {
       const info = vue.ref({});
       onLoad(() => {
         info.value = getApp().globalData.login;
-        formatAppLog("log", "at pages/edit_info/edit_info.vue:53", info.value);
+        formatAppLog("log", "at pages/edit_info/edit_info.vue:58", info.value);
       });
+      function changeBirthday(e) {
+        formatAppLog("log", "at pages/edit_info/edit_info.vue:62", e.detail.value);
+        info.value.birthday = e.detail.value;
+        formatAppLog("log", "at pages/edit_info/edit_info.vue:64", info.value);
+        formatAppLog("log", "at pages/edit_info/edit_info.vue:65", info.value.birthday);
+      }
       function onSubmit(e) {
-        formatAppLog("log", "at pages/edit_info/edit_info.vue:57", e.detail.value);
+        formatAppLog("log", "at pages/edit_info/edit_info.vue:70", e.detail.value);
+        uni.request({
+          url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.user.prefix}${cfg.api.user.modify_info}`,
+          method: "POST",
+          data: {
+            modify_form: {
+              userid: getApp().globalData.login.userid,
+              ...e.detail.value
+            }
+          },
+          success(res) {
+            formatAppLog("log", "at pages/edit_info/edit_info.vue:82", res);
+            if (res.statusCode === 200) {
+              getApp().globalData.login = res.data.data;
+              uni.setStorage({
+                key: "user_login",
+                data: res.data.data,
+                complete() {
+                  uni.$emit("user");
+                  uni.navigateBack();
+                  uni.showToast({
+                    icon: "success",
+                    title: "修改成功"
+                  });
+                }
+              });
+            }
+          }
+        });
       }
       return (_ctx, _cache) => {
         return vue.openBlock(), vue.createElementBlock("view", { class: "_form" }, [
@@ -21157,23 +24602,37 @@ if (uni.restoreGlobal) {
               vue.createElementVNode("label", null, [
                 vue.createTextVNode(" 用户名 "),
                 vue.createElementVNode("input", {
+                  value: info.value.username,
                   name: "username",
                   placeholder: "用户名"
-                })
+                }, null, 8, ["value"])
               ]),
               vue.createElementVNode("label", null, [
                 vue.createTextVNode(" 简介 "),
                 vue.createElementVNode("input", {
+                  value: info.value.desc,
                   name: "desc",
                   placeholder: "简介"
-                })
+                }, null, 8, ["value"])
               ]),
               vue.createElementVNode("label", null, [
                 vue.createTextVNode(" 性别 "),
                 vue.createElementVNode("radio-group", { name: "gender" }, [
-                  vue.createElementVNode("radio", { value: "male" }, "男"),
-                  vue.createElementVNode("radio", { value: "female" }, "女"),
-                  vue.createElementVNode("radio", { value: "others" }, "其他")
+                  vue.createElementVNode("radio", {
+                    color: "#1296db",
+                    checked: info.value.gender === "male",
+                    value: "male"
+                  }, "男", 8, ["checked"]),
+                  vue.createElementVNode("radio", {
+                    color: "#1296db",
+                    checked: info.value.gender === "female",
+                    value: "female"
+                  }, "女", 8, ["checked"]),
+                  vue.createElementVNode("radio", {
+                    color: "#1296db",
+                    checked: info.value.gender === "others",
+                    value: "others"
+                  }, "其他", 8, ["checked"])
                 ])
               ]),
               vue.createElementVNode("label", null, [
@@ -21181,12 +24640,13 @@ if (uni.restoreGlobal) {
                 vue.createElementVNode("picker", {
                   name: "birthday",
                   mode: "date",
-                  value: date.current
-                }, vue.toDisplayString(date.current), 9, ["value"])
+                  value: info.value.birthday,
+                  onChange: changeBirthday
+                }, vue.toDisplayString(new Date(info.value.birthday).toLocaleDateString()), 41, ["value"])
               ]),
               vue.createElementVNode("label", null, [
                 vue.createTextVNode(" 城市 "),
-                vue.createElementVNode("picker")
+                vue.createElementVNode("picker", { mode: "region" })
               ]),
               vue.createElementVNode("button", { "form-type": "submit" }, "确认修改")
             ],
@@ -21197,42 +24657,64 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const PagesEdit_infoEdit_info = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__scopeId", "data-v-176afe41"], ["__file", "F:/HBuilderProjects/FreeMarket/pages/edit_info/edit_info.vue"]]);
-  const _sfc_main$c = /* @__PURE__ */ vue.defineComponent({
+  const PagesEdit_infoEdit_info = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["__scopeId", "data-v-176afe41"], ["__file", "F:/HBuilderProjects/FreeMarket/pages/edit_info/edit_info.vue"]]);
+  const _sfc_main$d = /* @__PURE__ */ vue.defineComponent({
     __name: "search",
     setup(__props) {
       const type = vue.ref("");
-      const history = vue.ref(["item1", "item2", "item itemi", "item3"]);
+      const history = vue.ref();
       const searchText = vue.ref("");
       const isClear = vue.ref(false);
       const focusOn = vue.ref(false);
       const start_at = vue.ref(0);
       const result = vue.ref([]);
+      const enableBottomRequest = vue.ref(true);
       onLoad((option) => {
         type.value = option.type;
-        operateHistory("w");
+        operateHistory("r", null);
       });
-      function operateHistory(op) {
-        formatAppLog("log", "at pages/search/search.vue:79", op);
-        if (op === "r")
-          ;
-        else {
+      onReachBottom(() => {
+        doSearch(searchText.value, false, false);
+      });
+      function operateHistory(op, i2) {
+        formatAppLog("log", "at pages/search/search.vue:92", i2);
+        if (op === "r") {
+          history.value = JSON.parse(uni.getStorageSync("history"));
+        } else {
           if (op === "w") {
-            formatAppLog("log", "at pages/search/search.vue:88", "w");
+            if (i2 === "")
+              return;
+            formatAppLog("log", "at pages/search/search.vue:103", history.value.includes(i2));
+            if (history.value.includes(i2)) {
+              history.value.filter((_i) => _i !== i2);
+            }
+            formatAppLog("log", "at pages/search/search.vue:108", history.value);
+            history.value.push(i2);
+            formatAppLog("log", "at pages/search/search.vue:112", history.value);
+            let tmp = history.value[0];
+            const last_index = history.value.indexOf(i2);
+            history.value[0] = i2;
+            history.value[last_index] = tmp;
+            formatAppLog("log", "at pages/search/search.vue:121", history.value);
           } else if (op === "d") {
-            formatAppLog("log", "at pages/search/search.vue:92", "d");
+            history.value = history.value.filter((_i) => _i !== i2);
           } else if (op === "c") {
-            formatAppLog("log", "at pages/search/search.vue:96", "c");
+            history.value = [];
           }
+          formatAppLog("log", "at pages/search/search.vue:134", "setStorage");
+          uni.setStorageSync("history", JSON.stringify(history.value));
         }
+        formatAppLog("log", "at pages/search/search.vue:139", history.value);
       }
       function onChange() {
         isClear.value = searchText.value.length > 0;
       }
       function doSearch(txt, isItem, isNew) {
         const key = isItem ? txt : searchText.value;
+        const amount = 2;
         if (isNew)
           start_at.value = 0;
+        operateHistory("w", txt);
         uni.request({
           url: cfg.server + ":" + cfg.port + cfg.api.prefix + cfg.api.user.prefix + cfg.api.user.search,
           method: "POST",
@@ -21241,16 +24723,17 @@ if (uni.restoreGlobal) {
               keyword: key,
               type: type.value,
               start_at: start_at.value,
-              amount: 10
+              amount
             }
           },
           success(res) {
-            formatAppLog("log", "at pages/search/search.vue:135", res);
+            formatAppLog("log", "at pages/search/search.vue:172", res);
             if (res.statusCode === 200) {
+              enableBottomRequest.value = res.data.data.length === amount;
               start_at.value = res.data.next_index;
               result.value = res.data.data;
               focusOn.value = true;
-              formatAppLog("log", "at pages/search/search.vue:141", result.value);
+              formatAppLog("log", "at pages/search/search.vue:179", result.value);
             }
           }
         });
@@ -21259,15 +24742,8 @@ if (uni.restoreGlobal) {
         searchText.value = "";
         isClear.value = false;
       }
-      function delHistory(i2) {
-        formatAppLog("log", "at pages/search/search.vue:153", "del");
-        history.value = history.value.filter((_i) => _i !== i2);
-      }
-      function clearHistory() {
-        history.value = [];
-      }
       return (_ctx, _cache) => {
-        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$6);
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$7);
         return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
           vue.createElementVNode("view", {
             class: "search-full-scale",
@@ -21275,7 +24751,7 @@ if (uni.restoreGlobal) {
           }, [
             vue.createElementVNode("view", {
               class: "search-btn",
-              onClick: _cache[0] || (_cache[0] = ($event) => doSearch(``, false, true))
+              onClick: _cache[0] || (_cache[0] = ($event) => doSearch(searchText.value, false, true))
             }, "搜索"),
             vue.withDirectives(vue.createVNode(
               _component_uni_icons,
@@ -21312,7 +24788,9 @@ if (uni.restoreGlobal) {
           !focusOn.value ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, [
             vue.createElementVNode("view", { class: "option" }, [
               vue.createElementVNode("view", null, "历史记录"),
-              vue.createElementVNode("view", { onClick: clearHistory }, "清空")
+              vue.createElementVNode("view", {
+                onClick: _cache[3] || (_cache[3] = ($event) => operateHistory("c", null))
+              }, "清空")
             ]),
             vue.createElementVNode("view", { class: "history" }, [
               (vue.openBlock(true), vue.createElementBlock(
@@ -21329,7 +24807,7 @@ if (uni.restoreGlobal) {
                     vue.createVNode(_component_uni_icons, {
                       type: "close",
                       class: "item-close",
-                      onClick: ($event) => delHistory(i2)
+                      onClick: ($event) => operateHistory("d", i2)
                     }, null, 8, ["onClick"])
                   ]);
                 }),
@@ -21341,30 +24819,61 @@ if (uni.restoreGlobal) {
             key: 1,
             class: "result"
           }, [
-            vue.createTextVNode(
-              vue.toDisplayString(result.value) + " ",
-              1
-              /* TEXT */
-            ),
-            vue.createElementVNode("view", null, "再怎么找也没有了")
+            vue.createCommentVNode(" {{result}} "),
+            vue.createCommentVNode("  "),
+            (vue.openBlock(true), vue.createElementBlock(
+              vue.Fragment,
+              null,
+              vue.renderList(result.value, (i2, index) => {
+                return vue.openBlock(), vue.createElementBlock("view", null, [
+                  type.value === "goods" ? (vue.openBlock(), vue.createBlock(GoodsUnit, {
+                    key: 0,
+                    data: i2
+                  }, null, 8, ["data"])) : (vue.openBlock(), vue.createBlock(PostUnit, {
+                    key: 1,
+                    data: i2
+                  }, null, 8, ["data"]))
+                ]);
+              }),
+              256
+              /* UNKEYED_FRAGMENT */
+            )),
+            !enableBottomRequest.value ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, "再怎么找也没有了")) : vue.createCommentVNode("v-if", true)
           ]))
         ]);
       };
     }
   });
-  const PagesSearchSearch = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__file", "F:/HBuilderProjects/FreeMarket/pages/search/search.vue"]]);
-  const _sfc_main$b = /* @__PURE__ */ vue.defineComponent({
+  const PagesSearchSearch = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["__file", "F:/HBuilderProjects/FreeMarket/pages/search/search.vue"]]);
+  const _sfc_main$c = /* @__PURE__ */ vue.defineComponent({
     __name: "browse_post",
     setup(__props) {
       getApp();
       const post = vue.ref({});
       onLoad((option) => {
-        formatAppLog("log", "at pages/browse_post/browse_post.vue:43", option);
+        formatAppLog("log", "at pages/browse_post/browse_post.vue:69", option);
         uni.showNavigationBarLoading();
         request(option);
       });
       function getSubmit(c2) {
-        formatAppLog("log", "at pages/browse_post/browse_post.vue:50", c2);
+        uni.request({
+          url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.user.prefix}${cfg.api.user.create_comment}`,
+          method: "POST",
+          data: {
+            comment_form: {
+              content: c2,
+              comment_to: post.value.post_id,
+              comment_by: getApp().globalData.login.userid
+            }
+          },
+          success(res) {
+            if (res.statusCode === 200) {
+              const t2 = res.data;
+              t2.comment_by = getApp().globalData.login;
+              post.value.comments.push(t2);
+            }
+          }
+        });
       }
       function request(data) {
         uni.request({
@@ -21376,7 +24885,7 @@ if (uni.restoreGlobal) {
           },
           // 只要能发起请求并得到服务器响应就算success
           success(res) {
-            formatAppLog("log", "at pages/browse_post/browse_post.vue:67", res);
+            formatAppLog("log", "at pages/browse_post/browse_post.vue:112", res.data.data);
             if (res.statusCode === 200) {
               post.value = res.data.data;
               uni.setNavigationBarTitle({
@@ -21389,115 +24898,133 @@ if (uni.restoreGlobal) {
           }
         });
       }
+      function favorite() {
+        uni.request({
+          url: cfg.server + ":" + cfg.port + cfg.api.prefix + cfg.api.user.prefix + cfg.api.user.favorite,
+          method: "POST",
+          data: {
+            favorite_form: {
+              userid: getApp().globalData.login.userid,
+              refer_to: post.value.post_id
+            }
+          },
+          success(res) {
+            formatAppLog("log", "at pages/browse_post/browse_post.vue:141", res);
+            if (res.statusCode === 200) {
+              uni.showToast({
+                icon: "success",
+                title: res.data.msg
+              });
+              post.value.isFavorite = !post.value.isFavorite;
+            }
+          }
+        });
+      }
+      function call_post() {
+        call_report(post.value.post_id);
+      }
+      function call_report(id) {
+        uni.navigateTo({
+          url: `/pages/report/report?refer_to=${id}&report_by=${getApp().globalData.login.userid}`
+        });
+      }
       return (_ctx, _cache) => {
-        const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_0$1);
-        return vue.openBlock(), vue.createElementBlock("view", { class: "content post" }, [
-          vue.createElementVNode("view", { class: "imgs" }, [
-            vue.createTextVNode(
-              vue.toDisplayString(post.value.imgs) + " ",
-              1
-              /* TEXT */
-            ),
-            vue.createElementVNode("swiper", { circular: "" }, [
-              (vue.openBlock(true), vue.createElementBlock(
-                vue.Fragment,
-                null,
-                vue.renderList(post.value.imgs, (i2, index) => {
-                  return vue.openBlock(), vue.createElementBlock(
-                    "swiper-item",
-                    null,
-                    vue.toDisplayString(i2),
+        const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$7);
+        const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$1);
+        return vue.openBlock(), vue.createElementBlock(
+          vue.Fragment,
+          null,
+          [
+            vue.createElementVNode("view", { class: "content post" }, [
+              vue.createElementVNode("view", { class: "post-by-info" }, [
+                vue.createElementVNode("image", {
+                  src: vue.unref(cfg).server + `:` + vue.unref(cfg).port + `/` + post.value.post_by.headImg || vue.unref(cfg).default_avatar,
+                  class: "avatar"
+                }, null, 8, ["src"]),
+                vue.createElementVNode("view", { class: "info" }, [
+                  vue.createElementVNode(
+                    "text",
+                    { class: "username" },
+                    vue.toDisplayString(post.value.post_by.username),
                     1
                     /* TEXT */
-                  );
-                }),
-                256
-                /* UNKEYED_FRAGMENT */
-              ))
-            ])
-          ]),
-          vue.createElementVNode(
-            "view",
-            { class: "text" },
-            vue.toDisplayString(post.value.content),
-            1
-            /* TEXT */
-          ),
-          vue.createVNode(_component_uni_section, {
-            id: "comment",
-            titleFontSize: "20px",
-            title: "评论",
-            type: "line",
-            class: "content comments"
-          }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(commentInput, { onSubmit: getSubmit }),
-              vue.createVNode(commentDisplay, {
-                _data: post.value.comments
-              }, null, 8, ["_data"])
+                  ),
+                  vue.createElementVNode(
+                    "text",
+                    { class: "post-date" },
+                    vue.toDisplayString(new Date(post.value.post_date).toLocaleString()),
+                    1
+                    /* TEXT */
+                  )
+                ]),
+                vue.createElementVNode("view", null, [
+                  vue.createVNode(_component_uni_icons, {
+                    color: "#1296db",
+                    size: "40",
+                    type: post.value.isFavorite ? "star-filled" : "star",
+                    onClick: favorite
+                  }, null, 8, ["type"])
+                ])
+              ]),
+              vue.createElementVNode("view", { class: "imgs" }, [
+                vue.createCommentVNode(" {{post.imgs}} "),
+                vue.createElementVNode("swiper", {
+                  circular: "",
+                  "indicator-dots": "true"
+                }, [
+                  (vue.openBlock(true), vue.createElementBlock(
+                    vue.Fragment,
+                    null,
+                    vue.renderList(post.value.imgs, (i2, index) => {
+                      return vue.openBlock(), vue.createElementBlock("swiper-item", { "item-id": index }, [
+                        vue.createCommentVNode(" {{i}} "),
+                        vue.createElementVNode("image", {
+                          src: vue.unref(cfg).server + ":" + vue.unref(cfg).port + "/" + i2.url
+                        }, null, 8, ["src"])
+                      ], 8, ["item-id"]);
+                    }),
+                    256
+                    /* UNKEYED_FRAGMENT */
+                  ))
+                ])
+              ]),
+              vue.createElementVNode(
+                "view",
+                { class: "text" },
+                vue.toDisplayString(post.value.content),
+                1
+                /* TEXT */
+              ),
+              vue.createElementVNode("view", null, [
+                vue.createVNode(commonReport, { onCall: call_post })
+              ])
             ]),
-            _: 1
-            /* STABLE */
-          })
-        ]);
+            vue.createVNode(_component_uni_section, {
+              id: "comment",
+              titleFontSize: "20px",
+              title: "评论",
+              type: "line",
+              class: "content comments"
+            }, {
+              default: vue.withCtx(() => [
+                vue.createVNode(commentInput, { onSubmit: getSubmit }),
+                vue.createVNode(commentDisplay, {
+                  _data: post.value.comments,
+                  onReport: call_report
+                }, null, 8, ["_data"])
+              ]),
+              _: 1
+              /* STABLE */
+            })
+          ],
+          64
+          /* STABLE_FRAGMENT */
+        );
       };
     }
   });
-  const PagesBrowse_postBrowse_post = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__file", "F:/HBuilderProjects/FreeMarket/pages/browse_post/browse_post.vue"]]);
-  const _sfc_main$a = /* @__PURE__ */ vue.defineComponent({
-    __name: "history-goods",
-    props: {
-      data: { type: null, required: true }
-    },
-    setup(__props) {
-      return (_ctx, _cache) => {
-        return vue.openBlock(), vue.createElementBlock("view", { class: "frame" }, [
-          __props.data.imgs.length !== 0 ? (vue.openBlock(), vue.createElementBlock("image", {
-            key: 0,
-            src: `${vue.unref(cfg).server}:${vue.unref(cfg).port}/${__props.data.imgs[0].url}`
-          }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true),
-          vue.createElementVNode("view", { class: "info" }, [
-            vue.createCommentVNode(" {{ data }} "),
-            vue.createElementVNode(
-              "p",
-              null,
-              vue.toDisplayString(__props.data.goods_name),
-              1
-              /* TEXT */
-            ),
-            vue.createElementVNode(
-              "p",
-              null,
-              vue.toDisplayString(__props.data.desc),
-              1
-              /* TEXT */
-            ),
-            vue.createElementVNode(
-              "p",
-              null,
-              " ￥" + vue.toDisplayString(__props.data.price),
-              1
-              /* TEXT */
-            )
-          ])
-        ]);
-      };
-    }
-  });
-  const historyGoods = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__scopeId", "data-v-9788bc81"], ["__file", "F:/HBuilderProjects/FreeMarket/components/history-unit/sub/history-goods.vue"]]);
-  const _sfc_main$9 = /* @__PURE__ */ vue.defineComponent({
-    __name: "history-post",
-    props: {
-      data: { type: null, required: true }
-    },
-    setup(__props) {
-      return (_ctx, _cache) => {
-        return null;
-      };
-    }
-  });
-  const historyPost = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__file", "F:/HBuilderProjects/FreeMarket/components/history-unit/sub/history-post.vue"]]);
-  const _sfc_main$8 = /* @__PURE__ */ vue.defineComponent({
+  const PagesBrowse_postBrowse_post = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["__file", "F:/HBuilderProjects/FreeMarket/pages/browse_post/browse_post.vue"]]);
+  const _sfc_main$b = /* @__PURE__ */ vue.defineComponent({
     __name: "history-unit",
     props: {
       data: { type: null, required: true },
@@ -21507,24 +25034,34 @@ if (uni.restoreGlobal) {
       const props = __props;
       function goto() {
         formatAppLog("log", "at components/history-unit/history-unit.vue:24", "type:", props.type);
-        if (props.type === "goods")
-          formatAppLog("log", "at components/history-unit/history-unit.vue:26", "g");
-        else if (props.type === "post")
-          formatAppLog("log", "at components/history-unit/history-unit.vue:27", "p");
+        formatAppLog("log", "at components/history-unit/history-unit.vue:25", props.data);
+        let url;
+        const id = props.data.history_to;
+        if (props.type === "goods") {
+          formatAppLog("log", "at components/history-unit/history-unit.vue:30", "g");
+          url = "browse_goods";
+        } else if (props.type === "post") {
+          formatAppLog("log", "at components/history-unit/history-unit.vue:34", "p");
+          url = "browse_post";
+        }
+        formatAppLog("log", "at components/history-unit/history-unit.vue:37", url);
+        uni.navigateTo({
+          url: `/pages/${url}/${url}?id=${id}&userid=${getApp().globalData.login.userid}`
+        });
       }
       return (_ctx, _cache) => {
         return vue.openBlock(), vue.createElementBlock("view", { onClick: goto }, [
           vue.createCommentVNode(" 访问日期 "),
           vue.createTextVNode(
-            " " + vue.toDisplayString(__props.data.post_date) + " ",
+            " " + vue.toDisplayString(new Date(__props.data.post_date).toLocaleString()) + " ",
             1
             /* TEXT */
           ),
           vue.createCommentVNode(" 数据 "),
-          __props.type === "goods" ? (vue.openBlock(), vue.createBlock(historyGoods, {
+          __props.type === "goods" ? (vue.openBlock(), vue.createBlock(GoodsUnit, {
             key: 0,
             data: __props.data.detail
-          }, null, 8, ["data"])) : __props.type === "post" ? (vue.openBlock(), vue.createBlock(historyPost, {
+          }, null, 8, ["data"])) : __props.type === "post" ? (vue.openBlock(), vue.createBlock(PostUnit, {
             key: 1,
             data: __props.data.detail
           }, null, 8, ["data"])) : vue.createCommentVNode("v-if", true)
@@ -21532,8 +25069,8 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__file", "F:/HBuilderProjects/FreeMarket/components/history-unit/history-unit.vue"]]);
-  const _sfc_main$7 = /* @__PURE__ */ vue.defineComponent({
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["__file", "F:/HBuilderProjects/FreeMarket/components/history-unit/history-unit.vue"]]);
+  const _sfc_main$a = /* @__PURE__ */ vue.defineComponent({
     __name: "history",
     setup(__props) {
       const data = vue.ref([]);
@@ -21571,13 +25108,17 @@ if (uni.restoreGlobal) {
             filter: {
               userid: getApp().globalData.login.userid,
               type: type.value,
-              query: { userid: getApp().globalData.login.userid },
+              query: {
+                userid: getApp().globalData.login.userid,
+                // 需要在获取结果前找全所有的数据
+                history_to: type.value
+              },
               start_at: start_at.value,
               count
             }
           },
           success(res) {
-            formatAppLog("log", "at pages/history/history.vue:80", res);
+            formatAppLog("log", "at pages/history/history.vue:84", res);
             if (res.statusCode === 200) {
               enableBottomRequest.value = res.data.data.length === count;
               if (start_type)
@@ -21594,8 +25135,8 @@ if (uni.restoreGlobal) {
         });
       }
       return (_ctx, _cache) => {
-        const _component_uni_segmented_control = resolveEasycom(vue.resolveDynamicComponent("uni-segmented-control"), __easycom_0$2);
-        const _component_history_unit = resolveEasycom(vue.resolveDynamicComponent("history-unit"), __easycom_1$2);
+        const _component_uni_segmented_control = resolveEasycom(vue.resolveDynamicComponent("uni-segmented-control"), __easycom_0$1);
+        const _component_history_unit = resolveEasycom(vue.resolveDynamicComponent("history-unit"), __easycom_1);
         return vue.openBlock(), vue.createElementBlock("view", null, [
           vue.createVNode(_component_uni_segmented_control, {
             class: "segs",
@@ -21634,581 +25175,26 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const PagesHistoryHistory = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__file", "F:/HBuilderProjects/FreeMarket/pages/history/history.vue"]]);
-  const _sfc_main$6 = {
-    name: "UniBadge",
-    emits: ["click"],
-    props: {
-      type: {
-        type: String,
-        default: "error"
-      },
-      inverted: {
-        type: Boolean,
-        default: false
-      },
-      isDot: {
-        type: Boolean,
-        default: false
-      },
-      maxNum: {
-        type: Number,
-        default: 99
-      },
-      absolute: {
-        type: String,
-        default: ""
-      },
-      offset: {
-        type: Array,
-        default() {
-          return [0, 0];
-        }
-      },
-      text: {
-        type: [String, Number],
-        default: ""
-      },
-      size: {
-        type: String,
-        default: "small"
-      },
-      customStyle: {
-        type: Object,
-        default() {
-          return {};
-        }
-      }
-    },
-    data() {
-      return {};
-    },
-    computed: {
-      width() {
-        return String(this.text).length * 8 + 12;
-      },
-      classNames() {
-        const {
-          inverted,
-          type,
-          size,
-          absolute
-        } = this;
-        return [
-          inverted ? "uni-badge--" + type + "-inverted" : "",
-          "uni-badge--" + type,
-          "uni-badge--" + size,
-          absolute ? "uni-badge--absolute" : ""
-        ].join(" ");
-      },
-      positionStyle() {
-        if (!this.absolute)
-          return {};
-        let w2 = this.width / 2, h2 = 10;
-        if (this.isDot) {
-          w2 = 5;
-          h2 = 5;
-        }
-        const x2 = `${-w2 + this.offset[0]}px`;
-        const y2 = `${-h2 + this.offset[1]}px`;
-        const whiteList = {
-          rightTop: {
-            right: x2,
-            top: y2
-          },
-          rightBottom: {
-            right: x2,
-            bottom: y2
-          },
-          leftBottom: {
-            left: x2,
-            bottom: y2
-          },
-          leftTop: {
-            left: x2,
-            top: y2
-          }
-        };
-        const match = whiteList[this.absolute];
-        return match ? match : whiteList["rightTop"];
-      },
-      dotStyle() {
-        if (!this.isDot)
-          return {};
-        return {
-          width: "10px",
-          minWidth: "0",
-          height: "10px",
-          padding: "0",
-          borderRadius: "10px"
-        };
-      },
-      displayValue() {
-        const {
-          isDot,
-          text,
-          maxNum
-        } = this;
-        return isDot ? "" : Number(text) > maxNum ? `${maxNum}+` : text;
-      }
-    },
-    methods: {
-      onClick() {
-        this.$emit("click");
-      }
-    }
-  };
-  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-badge--x" }, [
-      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
-      $props.text ? (vue.openBlock(), vue.createElementBlock(
-        "text",
-        {
-          key: 0,
-          class: vue.normalizeClass([$options.classNames, "uni-badge"]),
-          style: vue.normalizeStyle([$options.positionStyle, $props.customStyle, $options.dotStyle]),
-          onClick: _cache[0] || (_cache[0] = ($event) => $options.onClick())
-        },
-        vue.toDisplayString($options.displayValue),
-        7
-        /* TEXT, CLASS, STYLE */
-      )) : vue.createCommentVNode("v-if", true)
-    ]);
-  }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$2], ["__scopeId", "data-v-c97cb896"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-badge/components/uni-badge/uni-badge.vue"]]);
-  const _sfc_main$5 = {
-    name: "UniListItem",
-    emits: ["click", "switchChange"],
-    props: {
-      direction: {
-        type: String,
-        default: "row"
-      },
-      title: {
-        type: String,
-        default: ""
-      },
-      note: {
-        type: String,
-        default: ""
-      },
-      ellipsis: {
-        type: [Number, String],
-        default: 0
-      },
-      disabled: {
-        type: [Boolean, String],
-        default: false
-      },
-      clickable: {
-        type: Boolean,
-        default: false
-      },
-      showArrow: {
-        type: [Boolean, String],
-        default: false
-      },
-      link: {
-        type: [Boolean, String],
-        default: false
-      },
-      to: {
-        type: String,
-        default: ""
-      },
-      showBadge: {
-        type: [Boolean, String],
-        default: false
-      },
-      showSwitch: {
-        type: [Boolean, String],
-        default: false
-      },
-      switchChecked: {
-        type: [Boolean, String],
-        default: false
-      },
-      badgeText: {
-        type: String,
-        default: ""
-      },
-      badgeType: {
-        type: String,
-        default: "success"
-      },
-      badgeStyle: {
-        type: Object,
-        default() {
-          return {};
-        }
-      },
-      rightText: {
-        type: String,
-        default: ""
-      },
-      thumb: {
-        type: String,
-        default: ""
-      },
-      thumbSize: {
-        type: String,
-        default: "base"
-      },
-      showExtraIcon: {
-        type: [Boolean, String],
-        default: false
-      },
-      extraIcon: {
-        type: Object,
-        default() {
-          return {
-            type: "",
-            color: "#000000",
-            size: 20
-          };
-        }
-      },
-      border: {
-        type: Boolean,
-        default: true
-      },
-      customStyle: {
-        type: Object,
-        default() {
-          return {
-            padding: "",
-            backgroundColor: "#FFFFFF"
-          };
-        }
-      },
-      keepScrollPosition: {
-        type: Boolean,
-        default: false
-      }
-    },
-    watch: {
-      "customStyle.padding": {
-        handler(padding) {
-          if (typeof padding == "number") {
-            padding += "";
-          }
-          let paddingArr = padding.split(" ");
-          if (paddingArr.length === 1) {
-            this.padding = {
-              "top": padding,
-              "right": padding,
-              "bottom": padding,
-              "left": padding
-            };
-          } else if (paddingArr.length === 2) {
-            this.padding = {
-              "top": padding[0],
-              "right": padding[1],
-              "bottom": padding[0],
-              "left": padding[1]
-            };
-          } else if (paddingArr.length === 4) {
-            this.padding = {
-              "top": padding[0],
-              "right": padding[1],
-              "bottom": padding[2],
-              "left": padding[3]
-            };
-          }
-        },
-        immediate: true
-      }
-    },
-    // inject: ['list'],
-    data() {
-      return {
-        isFirstChild: false,
-        padding: {
-          top: "",
-          right: "",
-          bottom: "",
-          left: ""
-        }
-      };
-    },
-    mounted() {
-      this.list = this.getForm();
-      if (this.list) {
-        if (!this.list.firstChildAppend) {
-          this.list.firstChildAppend = true;
-          this.isFirstChild = true;
-        }
-      }
-    },
-    methods: {
-      /**
-       * 获取父元素实例
-       */
-      getForm(name = "uniList") {
-        let parent = this.$parent;
-        let parentName = parent.$options.name;
-        while (parentName !== name) {
-          parent = parent.$parent;
-          if (!parent)
-            return false;
-          parentName = parent.$options.name;
-        }
-        return parent;
-      },
-      onClick() {
-        if (this.to !== "") {
-          this.openPage();
-          return;
-        }
-        if (this.clickable || this.link) {
-          this.$emit("click", {
-            data: {}
-          });
-        }
-      },
-      onSwitchChange(e) {
-        this.$emit("switchChange", e.detail);
-      },
-      openPage() {
-        if (["navigateTo", "redirectTo", "reLaunch", "switchTab"].indexOf(this.link) !== -1) {
-          this.pageApi(this.link);
-        } else {
-          this.pageApi("navigateTo");
-        }
-      },
-      pageApi(api2) {
-        let callback = {
-          url: this.to,
-          success: (res) => {
-            this.$emit("click", {
-              data: res
-            });
-          },
-          fail: (err) => {
-            this.$emit("click", {
-              data: err
-            });
-          }
-        };
-        switch (api2) {
-          case "navigateTo":
-            uni.navigateTo(callback);
-            break;
-          case "redirectTo":
-            uni.redirectTo(callback);
-            break;
-          case "reLaunch":
-            uni.reLaunch(callback);
-            break;
-          case "switchTab":
-            uni.switchTab(callback);
-            break;
-          default:
-            uni.navigateTo(callback);
-        }
-      }
-    }
-  };
-  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$6);
-    const _component_uni_badge = resolveEasycom(vue.resolveDynamicComponent("uni-badge"), __easycom_1$1);
-    return vue.openBlock(), vue.createElementBlock("view", {
-      class: vue.normalizeClass([{ "uni-list-item--disabled": $props.disabled }, "uni-list-item"]),
-      style: vue.normalizeStyle({ "background-color": $props.customStyle.backgroundColor }),
-      "hover-class": !$props.clickable && !$props.link || $props.disabled || $props.showSwitch ? "" : "uni-list-item--hover",
-      onClick: _cache[1] || (_cache[1] = (...args) => $options.onClick && $options.onClick(...args))
-    }, [
-      !$data.isFirstChild ? (vue.openBlock(), vue.createElementBlock(
-        "view",
-        {
-          key: 0,
-          class: vue.normalizeClass(["border--left", { "uni-list--border": $props.border }])
-        },
-        null,
-        2
-        /* CLASS */
-      )) : vue.createCommentVNode("v-if", true),
-      vue.createElementVNode(
-        "view",
-        {
-          class: vue.normalizeClass(["uni-list-item__container", { "container--right": $props.showArrow || $props.link, "flex--direction": $props.direction === "column" }]),
-          style: vue.normalizeStyle({ paddingTop: $data.padding.top, paddingLeft: $data.padding.left, paddingRight: $data.padding.right, paddingBottom: $data.padding.bottom })
-        },
-        [
-          vue.renderSlot(_ctx.$slots, "header", {}, () => [
-            vue.createElementVNode("view", { class: "uni-list-item__header" }, [
-              $props.thumb ? (vue.openBlock(), vue.createElementBlock("view", {
-                key: 0,
-                class: "uni-list-item__icon"
-              }, [
-                vue.createElementVNode("image", {
-                  src: $props.thumb,
-                  class: vue.normalizeClass(["uni-list-item__icon-img", ["uni-list--" + $props.thumbSize]])
-                }, null, 10, ["src"])
-              ])) : $props.showExtraIcon ? (vue.openBlock(), vue.createElementBlock("view", {
-                key: 1,
-                class: "uni-list-item__icon"
-              }, [
-                vue.createVNode(_component_uni_icons, {
-                  color: $props.extraIcon.color,
-                  size: $props.extraIcon.size,
-                  type: $props.extraIcon.type
-                }, null, 8, ["color", "size", "type"])
-              ])) : vue.createCommentVNode("v-if", true)
-            ])
-          ], true),
-          vue.renderSlot(_ctx.$slots, "body", {}, () => [
-            vue.createElementVNode(
-              "view",
-              {
-                class: vue.normalizeClass(["uni-list-item__content", { "uni-list-item__content--center": $props.thumb || $props.showExtraIcon || $props.showBadge || $props.showSwitch }])
-              },
-              [
-                $props.title ? (vue.openBlock(), vue.createElementBlock(
-                  "text",
-                  {
-                    key: 0,
-                    class: vue.normalizeClass(["uni-list-item__content-title", [$props.ellipsis !== 0 && $props.ellipsis <= 2 ? "uni-ellipsis-" + $props.ellipsis : ""]])
-                  },
-                  vue.toDisplayString($props.title),
-                  3
-                  /* TEXT, CLASS */
-                )) : vue.createCommentVNode("v-if", true),
-                $props.note ? (vue.openBlock(), vue.createElementBlock(
-                  "text",
-                  {
-                    key: 1,
-                    class: "uni-list-item__content-note"
-                  },
-                  vue.toDisplayString($props.note),
-                  1
-                  /* TEXT */
-                )) : vue.createCommentVNode("v-if", true)
-              ],
-              2
-              /* CLASS */
-            )
-          ], true),
-          vue.renderSlot(_ctx.$slots, "footer", {}, () => [
-            $props.rightText || $props.showBadge || $props.showSwitch ? (vue.openBlock(), vue.createElementBlock(
-              "view",
-              {
-                key: 0,
-                class: vue.normalizeClass(["uni-list-item__extra", { "flex--justify": $props.direction === "column" }])
-              },
-              [
-                $props.rightText ? (vue.openBlock(), vue.createElementBlock(
-                  "text",
-                  {
-                    key: 0,
-                    class: "uni-list-item__extra-text"
-                  },
-                  vue.toDisplayString($props.rightText),
-                  1
-                  /* TEXT */
-                )) : vue.createCommentVNode("v-if", true),
-                $props.showBadge ? (vue.openBlock(), vue.createBlock(_component_uni_badge, {
-                  key: 1,
-                  type: $props.badgeType,
-                  text: $props.badgeText,
-                  "custom-style": $props.badgeStyle
-                }, null, 8, ["type", "text", "custom-style"])) : vue.createCommentVNode("v-if", true),
-                $props.showSwitch ? (vue.openBlock(), vue.createElementBlock("switch", {
-                  key: 2,
-                  disabled: $props.disabled,
-                  checked: $props.switchChecked,
-                  onChange: _cache[0] || (_cache[0] = (...args) => $options.onSwitchChange && $options.onSwitchChange(...args))
-                }, null, 40, ["disabled", "checked"])) : vue.createCommentVNode("v-if", true)
-              ],
-              2
-              /* CLASS */
-            )) : vue.createCommentVNode("v-if", true)
-          ], true)
-        ],
-        6
-        /* CLASS, STYLE */
-      ),
-      $props.showArrow || $props.link ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
-        key: 1,
-        size: 16,
-        class: "uni-icon-wrapper",
-        color: "#bbb",
-        type: "arrowright"
-      })) : vue.createCommentVNode("v-if", true)
-    ], 14, ["hover-class"]);
-  }
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$1], ["__scopeId", "data-v-c7524739"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue"]]);
-  const _sfc_main$4 = {
-    name: "uniList",
-    "mp-weixin": {
-      options: {
-        multipleSlots: false
-      }
-    },
-    props: {
-      stackFromEnd: {
-        type: Boolean,
-        default: false
-      },
-      enableBackToTop: {
-        type: [Boolean, String],
-        default: false
-      },
-      scrollY: {
-        type: [Boolean, String],
-        default: false
-      },
-      border: {
-        type: Boolean,
-        default: true
-      },
-      renderReverse: {
-        type: Boolean,
-        default: false
-      }
-    },
-    // provide() {
-    // 	return {
-    // 		list: this
-    // 	};
-    // },
-    created() {
-      this.firstChildAppend = false;
-    },
-    methods: {
-      loadMore(e) {
-        this.$emit("scrolltolower");
-      },
-      scroll(e) {
-        this.$emit("scroll", e);
-      }
-    }
-  };
-  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-list uni-border-top-bottom" }, [
-      $props.border ? (vue.openBlock(), vue.createElementBlock("view", {
-        key: 0,
-        class: "uni-list--border-top"
-      })) : vue.createCommentVNode("v-if", true),
-      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
-      $props.border ? (vue.openBlock(), vue.createElementBlock("view", {
-        key: 1,
-        class: "uni-list--border-bottom"
-      })) : vue.createCommentVNode("v-if", true)
-    ]);
-  }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render], ["__scopeId", "data-v-c2f1266a"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
-  const _sfc_main$3 = /* @__PURE__ */ vue.defineComponent({
+  const PagesHistoryHistory = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["__file", "F:/HBuilderProjects/FreeMarket/pages/history/history.vue"]]);
+  const _sfc_main$9 = /* @__PURE__ */ vue.defineComponent({
     __name: "settings",
     setup(__props) {
+      const isLogin = vue.ref(false);
+      onLoad(() => {
+        isLogin.value = Object.keys(getApp().globalData.login).length !== 0;
+      });
       function goto(url) {
         uni.navigateTo({
           url
         });
       }
+      function logout() {
+        uni.$emit("logout");
+        uni.navigateBack();
+      }
       return (_ctx, _cache) => {
-        const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_0);
-        const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_1);
+        const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_0$4);
+        const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_1$3);
         return vue.openBlock(), vue.createElementBlock("view", null, [
           vue.createVNode(_component_uni_list, { border: "true" }, {
             default: vue.withCtx(() => [
@@ -22233,24 +25219,33 @@ if (uni.restoreGlobal) {
             _: 1
             /* STABLE */
           }),
-          vue.createElementVNode("button", { class: "logout" }, "退出登录")
+          isLogin.value ? (vue.openBlock(), vue.createElementBlock("button", {
+            key: 0,
+            class: "logout",
+            onClick: logout
+          }, "退出登录")) : vue.createCommentVNode("v-if", true)
         ]);
       };
     }
   });
-  const PagesSettingsSettings = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__file", "F:/HBuilderProjects/FreeMarket/pages/settings/settings.vue"]]);
-  const _sfc_main$2 = /* @__PURE__ */ vue.defineComponent({
+  const PagesSettingsSettings = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__file", "F:/HBuilderProjects/FreeMarket/pages/settings/settings.vue"]]);
+  const _sfc_main$8 = /* @__PURE__ */ vue.defineComponent({
     __name: "mygoods",
     setup(__props) {
       const data = vue.ref([]);
       const end_index = vue.ref(0);
+      const enableBottomRequest = vue.ref(true);
       onLoad(() => {
-        request(false);
+        request(true);
       });
       onPullDownRefresh(() => {
         request(true);
       });
+      onReachBottom(() => {
+        enableBottomRequest.value && request(false);
+      });
       function request(type) {
+        formatAppLog("log", "at pages/mygoods/mygoods.vue:39", getApp().globalData.login.userid);
         if (type)
           end_index.value = 0;
         const amount = 4;
@@ -22261,15 +25256,45 @@ if (uni.restoreGlobal) {
             filter: {
               start_at: end_index.value,
               amount,
-              owner: getApp().globalData.login.userid
+              sub_filter: {
+                owner: getApp().globalData.login.userid
+              }
             }
           },
           success(res) {
-            formatAppLog("log", "at pages/mygoods/mygoods.vue:46", res);
+            formatAppLog("log", "at pages/mygoods/mygoods.vue:59", res);
             if (res.statusCode === 200) {
-              data.value = res.data.data;
+              data.value = type ? res.data.data.data : data.value.concat(res.data.data.data);
+              enableBottomRequest.value = res.data.data.data.length === res.data.data.next_index;
+              end_index.value = res.data.data.next_index;
             }
           }
+        });
+      }
+      async function delGoods(id) {
+        const r2 = await uni.showModal({
+          title: "警告",
+          content: "是否继续？"
+        });
+        formatAppLog("log", "at pages/mygoods/mygoods.vue:76", r2);
+        r2.confirm && uni.request({
+          url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.goods.prefix}${cfg.api.goods.remove_goods}`,
+          method: "POST",
+          data: {
+            goods_id: id,
+            userid: getApp().globalData.login.userid
+          },
+          success(res) {
+            formatAppLog("log", "at pages/mygoods/mygoods.vue:85", res);
+            if (res.statusCode === 200) {
+              data.value = data.value.filter((i2) => i2.goods_id !== id);
+            }
+          }
+        });
+      }
+      function gotoMod(id) {
+        uni.navigateTo({
+          url: `/pages/new_goods/new_goods?operation=modify&goods_id=${id}`
         });
       }
       return (_ctx, _cache) => {
@@ -22278,26 +25303,38 @@ if (uni.restoreGlobal) {
             vue.Fragment,
             null,
             vue.renderList(data.value, (i2, index) => {
-              return vue.openBlock(), vue.createElementBlock(
-                "view",
-                {
-                  key: index,
-                  class: "items"
-                },
-                vue.toDisplayString(i2),
-                1
-                /* TEXT */
-              );
+              return vue.openBlock(), vue.createElementBlock("view", {
+                key: index,
+                class: "items"
+              }, [
+                vue.createCommentVNode(" {{i}} "),
+                vue.createVNode(GoodsUnit, { data: i2 }, null, 8, ["data"]),
+                vue.createElementVNode("button", {
+                  onClick: ($event) => gotoMod(i2.goods_id)
+                }, "修改", 8, ["onClick"]),
+                vue.createElementVNode("button", {
+                  onClick: ($event) => delGoods(i2.goods_id)
+                }, "删除", 8, ["onClick"])
+              ]);
             }),
             128
             /* KEYED_FRAGMENT */
-          ))
+          )),
+          vue.withDirectives(vue.createElementVNode(
+            "view",
+            null,
+            "再怎么找也没有了",
+            512
+            /* NEED_PATCH */
+          ), [
+            [vue.vShow, !enableBottomRequest.value]
+          ])
         ]);
       };
     }
   });
-  const PagesMygoodsMygoods = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__file", "F:/HBuilderProjects/FreeMarket/pages/mygoods/mygoods.vue"]]);
-  const _sfc_main$1 = /* @__PURE__ */ vue.defineComponent({
+  const PagesMygoodsMygoods = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__file", "F:/HBuilderProjects/FreeMarket/pages/mygoods/mygoods.vue"]]);
+  const _sfc_main$7 = /* @__PURE__ */ vue.defineComponent({
     __name: "report",
     setup(__props) {
       const to = vue.ref("");
@@ -22339,35 +25376,35 @@ if (uni.restoreGlobal) {
                 vue.createElementVNode("label", null, [
                   vue.createElementVNode("radio", {
                     color: "#1296db",
-                    value: "law violation"
+                    value: "违反法律法规"
                   }),
                   vue.createTextVNode(" 违反法律法规 ")
                 ]),
                 vue.createElementVNode("label", null, [
                   vue.createElementVNode("radio", {
                     color: "#1296db",
-                    value: ""
+                    value: "敏感内容"
                   }),
                   vue.createTextVNode(" 敏感内容 ")
                 ]),
                 vue.createElementVNode("label", null, [
                   vue.createElementVNode("radio", {
                     color: "#1296db",
-                    value: "inappropriate content"
+                    value: "内容不适"
                   }),
                   vue.createTextVNode(" 内容不适 ")
                 ]),
                 vue.createElementVNode("label", null, [
                   vue.createElementVNode("radio", {
                     color: "#1296db",
-                    value: "fake content"
+                    value: "虚假信息"
                   }),
                   vue.createTextVNode(" 虚假信息 ")
                 ]),
                 vue.createElementVNode("label", null, [
                   vue.createElementVNode("radio", {
                     color: "#1296db",
-                    value: "other"
+                    value: "其他"
                   }),
                   vue.createTextVNode(" 其他 "),
                   vue.createElementVNode("textarea", {
@@ -22385,7 +25422,649 @@ if (uni.restoreGlobal) {
       };
     }
   });
-  const PagesReportReport = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__file", "F:/HBuilderProjects/FreeMarket/pages/report/report.vue"]]);
+  const PagesReportReport = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["__file", "F:/HBuilderProjects/FreeMarket/pages/report/report.vue"]]);
+  const _sfc_main$6 = /* @__PURE__ */ vue.defineComponent({
+    __name: "edit_auth",
+    setup(__props) {
+      const user = vue.ref({});
+      onLoad(() => {
+        user.value = getApp().globalData.login;
+      });
+      return (_ctx, _cache) => {
+        return vue.openBlock(), vue.createElementBlock("view", null, [
+          vue.createElementVNode("form", null, [
+            vue.createCommentVNode(" 原密码 "),
+            vue.createElementVNode("input"),
+            vue.createCommentVNode(" 新密码 "),
+            vue.createElementVNode("input"),
+            vue.createCommentVNode(" 确认密码 "),
+            vue.createElementVNode("input")
+          ])
+        ]);
+      };
+    }
+  });
+  const PagesEdit_authEdit_auth = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__file", "F:/HBuilderProjects/FreeMarket/pages/edit_auth/edit_auth.vue"]]);
+  const _sfc_main$5 = /* @__PURE__ */ vue.defineComponent({
+    __name: "custom_exchange",
+    setup(__props) {
+      const exchange_data = vue.ref({
+        exchange_id: "",
+        price: 0
+      });
+      vue.ref(false);
+      const keypad = vue.ref(null);
+      const pay_option = vue.reactive({
+        index: 0,
+        array: ["线上支付", "卖家确认"]
+      });
+      onLoad((option) => {
+        loadGoods(option.id);
+      });
+      function loadGoods(id) {
+        uni.request({
+          url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.goods.prefix}${cfg.api.goods.deal_info}`,
+          method: "POST",
+          data: {
+            exchange_id: id,
+            type: "buyer"
+          },
+          success(res) {
+            formatAppLog("log", "at pages/exchange/custom_exchange/custom_exchange.vue:77", res);
+            if (res.statusCode === 200) {
+              exchange_data.value = res.data.data;
+            }
+          }
+        });
+      }
+      function confirmChange(action, proceed) {
+        if (action === 1) {
+          uni.showModal({
+            title: "三思而后行",
+            content: "请确保与买家协调好，避免造成您的经济损失",
+            success(e) {
+              if (e.cancel)
+                return;
+              else
+                confirmContinue(action, proceed);
+            }
+          });
+        } else {
+          confirmContinue(action, proceed);
+        }
+      }
+      function confirmContinue(action, proceed) {
+        uni.request({
+          url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.goods.prefix}${cfg.api.goods.proceed_deal}`,
+          method: "POST",
+          data: {
+            proceed_form: {
+              action,
+              exchange_id: exchange_data.value.exchange_id,
+              isProceed: proceed,
+              setter: exchange_data.value,
+              pay: pay_option.array[pay_option.index]
+            }
+          },
+          success(res) {
+            formatAppLog("log", "at pages/exchange/custom_exchange/custom_exchange.vue:119", res);
+            if (res.statusCode === 200)
+              ;
+          }
+        });
+      }
+      function showKeypad() {
+        keypad.value.open();
+      }
+      function changePrice(p2) {
+        exchange_data.value.price = 1 * p2;
+        keypad.value.close();
+      }
+      function pickerChange(e) {
+        pay_option.index = e.detail.value;
+      }
+      return (_ctx, _cache) => {
+        const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_0$2);
+        return vue.openBlock(), vue.createElementBlock("view", null, [
+          vue.createCommentVNode(" 买方 "),
+          vue.createCommentVNode(" 商品信息 "),
+          vue.createVNode(GoodsUnit, {
+            data: exchange_data.value.goods_snapshot
+          }, null, 8, ["data"]),
+          vue.createCommentVNode(" 价格 price "),
+          vue.createElementVNode("view", null, [
+            vue.createElementVNode("view", { style: { "width": "100vw", "display": "flex", "flex-direction": "row", "justify-content": "space-between" } }, [
+              vue.createElementVNode("text", null, "实付价格"),
+              vue.createElementVNode(
+                "text",
+                null,
+                "￥ " + vue.toDisplayString(exchange_data.value.price),
+                1
+                /* TEXT */
+              )
+            ]),
+            exchange_data.value.status === 0 ? (vue.openBlock(), vue.createElementBlock("button", {
+              key: 0,
+              onClick: showKeypad
+            }, "修改价格")) : vue.createCommentVNode("v-if", true)
+          ]),
+          vue.createCommentVNode(" 备注 addon"),
+          vue.withDirectives(vue.createElementVNode(
+            "input",
+            {
+              "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => exchange_data.value.desc = $event),
+              style: { "height": "10vh" },
+              placeholder: "备注"
+            },
+            null,
+            512
+            /* NEED_PATCH */
+          ), [
+            [vue.vModelText, exchange_data.value.desc]
+          ]),
+          vue.createCommentVNode(" 支付方式 "),
+          vue.createElementVNode("picker", {
+            style: { "margin": "2vh" },
+            onChange: pickerChange,
+            value: pay_option.index,
+            range: pay_option.array
+          }, " 支付选项：" + vue.toDisplayString(pay_option.array[pay_option.index]), 41, ["value", "range"]),
+          exchange_data.value.status === 0 ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, [
+            vue.createElementVNode("button", {
+              onClick: _cache[1] || (_cache[1] = ($event) => confirmChange(0, false))
+            }, "暂存"),
+            vue.createElementVNode("button", {
+              onClick: _cache[2] || (_cache[2] = ($event) => confirmChange(1, true))
+            }, "继续")
+          ])) : vue.createCommentVNode("v-if", true),
+          exchange_data.value.status === 0 ? (vue.openBlock(), vue.createBlock(
+            _component_uni_popup,
+            {
+              key: 1,
+              ref_key: "keypad",
+              ref: keypad,
+              type: "bottom"
+            },
+            {
+              default: vue.withCtx(() => [
+                vue.createVNode(PriceKeypad, {
+                  price: exchange_data.value.price,
+                  onChangePrice: changePrice
+                }, null, 8, ["price"])
+              ]),
+              _: 1
+              /* STABLE */
+            },
+            512
+            /* NEED_PATCH */
+          )) : vue.createCommentVNode("v-if", true)
+        ]);
+      };
+    }
+  });
+  const PagesExchangeCustom_exchangeCustom_exchange = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["__file", "F:/HBuilderProjects/FreeMarket/pages/exchange/custom_exchange/custom_exchange.vue"]]);
+  const _sfc_main$4 = {
+    name: "UniSteps",
+    props: {
+      direction: {
+        // 排列方向 row column
+        type: String,
+        default: "row"
+      },
+      activeColor: {
+        // 激活状态颜色
+        type: String,
+        default: "#2979FF"
+      },
+      deactiveColor: {
+        // 未激活状态颜色
+        type: String,
+        default: "#B7BDC6"
+      },
+      active: {
+        // 当前步骤
+        type: Number,
+        default: 0
+      },
+      activeIcon: {
+        // 当前步骤
+        type: String,
+        default: "checkbox-filled"
+      },
+      options: {
+        type: Array,
+        default() {
+          return [];
+        }
+      }
+      // 数据
+    },
+    data() {
+      return {};
+    }
+  };
+  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$7);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-steps" }, [
+      vue.createElementVNode(
+        "view",
+        {
+          class: vue.normalizeClass([$props.direction === "column" ? "uni-steps__column" : "uni-steps__row"])
+        },
+        [
+          vue.createElementVNode(
+            "view",
+            {
+              class: vue.normalizeClass([$props.direction === "column" ? "uni-steps__column-text-container" : "uni-steps__row-text-container"])
+            },
+            [
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList($props.options, (item, index) => {
+                  return vue.openBlock(), vue.createElementBlock(
+                    "view",
+                    {
+                      key: index,
+                      class: vue.normalizeClass([$props.direction === "column" ? "uni-steps__column-text" : "uni-steps__row-text"])
+                    },
+                    [
+                      vue.createElementVNode(
+                        "text",
+                        {
+                          style: vue.normalizeStyle({ color: index === $props.active ? $props.activeColor : $props.deactiveColor }),
+                          class: vue.normalizeClass([$props.direction === "column" ? "uni-steps__column-title" : "uni-steps__row-title"])
+                        },
+                        vue.toDisplayString(item.title),
+                        7
+                        /* TEXT, CLASS, STYLE */
+                      ),
+                      vue.createElementVNode(
+                        "text",
+                        {
+                          style: vue.normalizeStyle({ color: $props.deactiveColor }),
+                          class: vue.normalizeClass([$props.direction === "column" ? "uni-steps__column-desc" : "uni-steps__row-desc"])
+                        },
+                        vue.toDisplayString(item.desc),
+                        7
+                        /* TEXT, CLASS, STYLE */
+                      )
+                    ],
+                    2
+                    /* CLASS */
+                  );
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ],
+            2
+            /* CLASS */
+          ),
+          vue.createElementVNode(
+            "view",
+            {
+              class: vue.normalizeClass([$props.direction === "column" ? "uni-steps__column-container" : "uni-steps__row-container"])
+            },
+            [
+              (vue.openBlock(true), vue.createElementBlock(
+                vue.Fragment,
+                null,
+                vue.renderList($props.options, (item, index) => {
+                  return vue.openBlock(), vue.createElementBlock(
+                    "view",
+                    {
+                      class: vue.normalizeClass([$props.direction === "column" ? "uni-steps__column-line-item" : "uni-steps__row-line-item"]),
+                      key: index
+                    },
+                    [
+                      vue.createElementVNode(
+                        "view",
+                        {
+                          class: vue.normalizeClass([$props.direction === "column" ? "uni-steps__column-line" : "uni-steps__row-line", $props.direction === "column" ? "uni-steps__column-line--before" : "uni-steps__row-line--before"]),
+                          style: vue.normalizeStyle({ backgroundColor: index <= $props.active && index !== 0 ? $props.activeColor : index === 0 ? "transparent" : $props.deactiveColor })
+                        },
+                        null,
+                        6
+                        /* CLASS, STYLE */
+                      ),
+                      index === $props.active ? (vue.openBlock(), vue.createElementBlock(
+                        "view",
+                        {
+                          key: 0,
+                          class: vue.normalizeClass([$props.direction === "column" ? "uni-steps__column-check" : "uni-steps__row-check"])
+                        },
+                        [
+                          vue.createVNode(_component_uni_icons, {
+                            color: $props.activeColor,
+                            type: $props.activeIcon,
+                            size: "14"
+                          }, null, 8, ["color", "type"])
+                        ],
+                        2
+                        /* CLASS */
+                      )) : (vue.openBlock(), vue.createElementBlock(
+                        "view",
+                        {
+                          key: 1,
+                          class: vue.normalizeClass([$props.direction === "column" ? "uni-steps__column-circle" : "uni-steps__row-circle"]),
+                          style: vue.normalizeStyle({ backgroundColor: index < $props.active ? $props.activeColor : $props.deactiveColor })
+                        },
+                        null,
+                        6
+                        /* CLASS, STYLE */
+                      )),
+                      vue.createElementVNode(
+                        "view",
+                        {
+                          class: vue.normalizeClass([$props.direction === "column" ? "uni-steps__column-line" : "uni-steps__row-line", $props.direction === "column" ? "uni-steps__column-line--after" : "uni-steps__row-line--after"]),
+                          style: vue.normalizeStyle({ backgroundColor: index < $props.active && index !== $props.options.length - 1 ? $props.activeColor : index === $props.options.length - 1 ? "transparent" : $props.deactiveColor })
+                        },
+                        null,
+                        6
+                        /* CLASS, STYLE */
+                      )
+                    ],
+                    2
+                    /* CLASS */
+                  );
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
+            ],
+            2
+            /* CLASS */
+          )
+        ],
+        2
+        /* CLASS */
+      )
+    ]);
+  }
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render], ["__scopeId", "data-v-c0a11c53"], ["__file", "F:/HBuilderProjects/FreeMarket/uni_modules/uni-steps/components/uni-steps/uni-steps.vue"]]);
+  const _sfc_main$3 = /* @__PURE__ */ vue.defineComponent({
+    __name: "confirm_exchange",
+    setup(__props) {
+      const data = vue.ref({});
+      const steps = vue.reactive({
+        active: 0,
+        list: [{
+          title: "已发起"
+        }, {
+          title: "待付款"
+        }, {
+          title: "待收货"
+        }, {
+          title: "已完成"
+        }]
+      });
+      onLoad((option) => {
+        request(option.id);
+      });
+      function request(id) {
+        uni.request({
+          url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.goods.prefix}${cfg.api.goods.deal_info}`,
+          method: "POST",
+          data: {
+            exchange_id: id,
+            type: "seller"
+          },
+          success(res) {
+            formatAppLog("log", "at pages/exchange/confirm_exchange/confirm_exchange.vue:77", res);
+            if (res.statusCode === 200) {
+              data.value = res.data.data;
+              steps.active = data.value.status;
+            }
+          }
+        });
+      }
+      function finishDeal() {
+        uni.request({
+          url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.goods.prefix}${cfg.api.goods.finish_deal}`,
+          method: "POST",
+          data: {
+            finish_form: {
+              exchange_id: data.value.exchange_id
+            }
+          },
+          success(res) {
+            formatAppLog("log", "at pages/exchange/confirm_exchange/confirm_exchange.vue:99", res);
+            if (res.statusCode === 200) {
+              uni.showToast({
+                icon: "success",
+                title: "交易完成"
+              });
+            }
+          }
+        });
+      }
+      function cancelDeal() {
+      }
+      function gotoPay() {
+        uni.navigateTo({
+          url: `/pages/pay/pay?id=${data.value.exchange_id}&price=${data.value.price}`
+        });
+      }
+      return (_ctx, _cache) => {
+        const _component_uni_steps = resolveEasycom(vue.resolveDynamicComponent("uni-steps"), __easycom_0);
+        return vue.openBlock(), vue.createElementBlock("view", null, [
+          vue.createCommentVNode(" {{ data }} "),
+          vue.createElementVNode(
+            "view",
+            null,
+            vue.toDisplayString(data.value._target.headImg) + " " + vue.toDisplayString(data.value._target.username) + " " + vue.toDisplayString(new Date(data.value.post_date).toLocaleString()),
+            1
+            /* TEXT */
+          ),
+          vue.createElementVNode("view", null, [
+            vue.createVNode(GoodsUnit, {
+              data: data.value.goods_snapshot
+            }, null, 8, ["data"])
+          ]),
+          vue.createElementVNode("view", null, [
+            vue.createElementVNode("text", null, [
+              vue.createTextVNode(" 实付： "),
+              vue.createElementVNode(
+                "text",
+                null,
+                " ￥" + vue.toDisplayString(data.value.price),
+                1
+                /* TEXT */
+              )
+            ])
+          ]),
+          vue.createElementVNode("view", null, [
+            vue.createVNode(_component_uni_steps, {
+              options: steps.list,
+              active: steps.active
+            }, null, 8, ["options", "active"])
+          ]),
+          vue.createElementVNode("view", null, [
+            data.value.status === 1 ? (vue.openBlock(), vue.createElementBlock("view", { key: 0 }, [
+              vue.createCommentVNode(" 选择支付方式 "),
+              vue.createElementVNode("button", { onClick: gotoPay }, "支付")
+            ])) : vue.createCommentVNode("v-if", true),
+            data.value.status === 2 ? (vue.openBlock(), vue.createElementBlock("view", { key: 1 }, [
+              vue.createCommentVNode(" 确认收货 "),
+              vue.createElementVNode("button", {
+                onClick: _cache[0] || (_cache[0] = ($event) => finishDeal())
+              }, "确认收货")
+            ])) : vue.createCommentVNode("v-if", true),
+            data.value.status !== 3 && data.value.status !== -1 ? (vue.openBlock(), vue.createElementBlock("view", { key: 2 }, [
+              vue.createCommentVNode(" 确认收货 "),
+              vue.createElementVNode("button", {
+                onClick: _cache[1] || (_cache[1] = ($event) => cancelDeal())
+              }, "取消订单")
+            ])) : vue.createCommentVNode("v-if", true)
+          ])
+        ]);
+      };
+    }
+  });
+  const PagesExchangeConfirm_exchangeConfirm_exchange = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["__file", "F:/HBuilderProjects/FreeMarket/pages/exchange/confirm_exchange/confirm_exchange.vue"]]);
+  const _sfc_main$2 = /* @__PURE__ */ vue.defineComponent({
+    __name: "mypost",
+    setup(__props) {
+      const data = vue.ref([]);
+      const end_index = vue.ref(0);
+      const enableBottomRequest = vue.ref(true);
+      onLoad(() => {
+        request(true);
+      });
+      onPullDownRefresh(() => {
+        request(true);
+      });
+      onReachBottom(() => {
+        request(false);
+      });
+      function request(type) {
+        const amount = 10;
+        if (type)
+          end_index.value = 0;
+        uni.request({
+          url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.post.prefix}${cfg.api.post.post_display}`,
+          method: "POST",
+          data: {
+            filter: {
+              start_at: end_index.value,
+              amount,
+              sub_filter: {
+                post_by: getApp().globalData.login.userid
+              }
+            }
+          },
+          success(res) {
+            formatAppLog("log", "at pages/mypost/mypost.vue:53", res);
+            if (res.statusCode === 200) {
+              enableBottomRequest.value = res.data.data.length === amount;
+              end_index.value = res.data.next_index;
+              data.value = type ? res.data.data : data.value.concat(res.data.data);
+            }
+          }
+        });
+      }
+      function gotoMod(id) {
+        uni.navigateTo({
+          url: `/pages/new_post/new_post?op=modify&post_id=${id}`
+        });
+      }
+      async function delPost(id) {
+        const r2 = await uni.showModal({
+          title: "警告",
+          content: "是否继续？"
+        });
+        r2.confirm && uni.request({
+          url: ``,
+          method: "POST",
+          data: {
+            post_id: id,
+            userid: getApp().globalData.login.userid
+          },
+          success(res) {
+            if (res.statusCode === 200) {
+              data.value = data.value.filter((i2) => i2.post_id !== id);
+            }
+          }
+        });
+      }
+      return (_ctx, _cache) => {
+        return vue.openBlock(), vue.createElementBlock("view", null, [
+          (vue.openBlock(true), vue.createElementBlock(
+            vue.Fragment,
+            null,
+            vue.renderList(data.value, (i2, index) => {
+              return vue.openBlock(), vue.createElementBlock("view", {
+                key: index,
+                class: "items"
+              }, [
+                vue.createVNode(PostUnit, { data: i2 }, null, 8, ["data"]),
+                vue.createElementVNode("button", {
+                  onClick: ($event) => gotoMod(i2.post_id)
+                }, "修改", 8, ["onClick"]),
+                vue.createElementVNode("button", {
+                  onClick: ($event) => delPost(i2.post_id)
+                }, "删除", 8, ["onClick"])
+              ]);
+            }),
+            128
+            /* KEYED_FRAGMENT */
+          )),
+          vue.withDirectives(vue.createElementVNode(
+            "view",
+            null,
+            "再怎么找也没有了",
+            512
+            /* NEED_PATCH */
+          ), [
+            [vue.vShow, !enableBottomRequest.value]
+          ])
+        ]);
+      };
+    }
+  });
+  const PagesMypostMypost = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["__file", "F:/HBuilderProjects/FreeMarket/pages/mypost/mypost.vue"]]);
+  const _sfc_main$1 = /* @__PURE__ */ vue.defineComponent({
+    __name: "pay",
+    setup(__props) {
+      const id = vue.ref("");
+      const price = vue.ref(0);
+      const picker = vue.reactive({
+        index: 0,
+        array: ["支付宝", "微信", "云闪付"]
+      });
+      onLoad((option) => {
+        id.value = option.id;
+        price.value = option.price;
+      });
+      function pickerChange(e) {
+        picker.index = e.target.value;
+      }
+      function pay() {
+        {
+          uni.request({
+            url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.goods.prefix}${cfg.api.goods.pay_deal}`,
+            method: "POST",
+            data: {
+              pay_form: {
+                exchange_id: id.value,
+                pay_method: picker.array[picker.index],
+                price: price.value
+              }
+            },
+            success(res) {
+              if (res.statusCode === 200) {
+                uni.navigateBack();
+                uni.showToast({
+                  icon: "success",
+                  title: "支付成功"
+                });
+              }
+            }
+          });
+        }
+      }
+      return (_ctx, _cache) => {
+        return vue.openBlock(), vue.createElementBlock("view", null, [
+          vue.createElementVNode(
+            "text",
+            null,
+            "￥" + vue.toDisplayString(price.value),
+            1
+            /* TEXT */
+          ),
+          vue.createTextVNode(" 请选择支付方式： "),
+          vue.createElementVNode("picker", {
+            onChange: pickerChange,
+            value: picker.index,
+            range: picker.array
+          }, vue.toDisplayString(picker.array[picker.index]), 41, ["value", "range"]),
+          vue.createElementVNode("button", { onClick: pay }, "支付")
+        ]);
+      };
+    }
+  });
+  const PagesPayPay = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__file", "F:/HBuilderProjects/FreeMarket/pages/pay/pay.vue"]]);
   __definePage("pages/index/index", PagesIndexIndex);
   __definePage("pages/discover/discover", PagesDiscoverDiscover);
   __definePage("pages/message/message", PagesMessageMessage);
@@ -22405,6 +26084,11 @@ if (uni.restoreGlobal) {
   __definePage("pages/settings/settings", PagesSettingsSettings);
   __definePage("pages/mygoods/mygoods", PagesMygoodsMygoods);
   __definePage("pages/report/report", PagesReportReport);
+  __definePage("pages/edit_auth/edit_auth", PagesEdit_authEdit_auth);
+  __definePage("pages/exchange/custom_exchange/custom_exchange", PagesExchangeCustom_exchangeCustom_exchange);
+  __definePage("pages/exchange/confirm_exchange/confirm_exchange", PagesExchangeConfirm_exchangeConfirm_exchange);
+  __definePage("pages/mypost/mypost", PagesMypostMypost);
+  __definePage("pages/pay/pay", PagesPayPay);
   const _sfc_main = {
     onLaunch() {
       try {

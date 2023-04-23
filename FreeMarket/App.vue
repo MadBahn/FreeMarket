@@ -3,6 +3,15 @@
 	export default {
 		onLaunch() {
 			const self = this;
+			const req_handler = {
+				invoke(a) {
+					console.log(a);
+					a.data = {
+						...a.data,
+						verify: getApp().globalData.login.userid
+					};
+				}
+			}
 			try {
 				uni.getStorage({
 					key: "user_login",
@@ -12,6 +21,8 @@
 						// console.log(this.globalData)
 					}
 				});
+				uni.addInterceptor('request', req_handler);
+				uni.addInterceptor('uploadFile', req_handler);
 			} catch(e){
 				//TODO handle the exception
 			}

@@ -98,6 +98,29 @@ router.post("/register", ( async (req, res) => {
     }
 }));
 
+//获取账号信息
+router.post("/user_info", async (req, res) => {
+    // 使用query处理通用的get请求
+    const { userid } = req.body;
+
+    // console.log(userid);
+
+    const result = await userModel.aggregate([
+        {
+            $match: { userid: userid }
+        },
+        {
+            $project: { password: 0, email: 0, _id: 0, __v: 0 }
+        },
+        {
+            $limit: 1
+        }
+    ]);
+
+    const out = commonModule.responseUnifier(200, "OK", result[0]);
+    res.status(out.code).json(out);
+});
+
 //修改个人信息
 router.post("/modify_info", (async (req, res) => {
     //id、登录信息（不需要验证）不变，其他可变
@@ -161,6 +184,7 @@ router.post("/create_comment", async (req, res) => {
 
     const next = await commonModule.checkUserAndData(comment_form.comment_by, comment_form.comment_to);
 
+    console.log(next);
     if (next.cond) {
         const out = await new commentModel({
             ...comment_form,
@@ -171,12 +195,13 @@ router.post("/create_comment", async (req, res) => {
 
         const id = (() => {
             switch (comment_form.comment_to.split(":")[0]) {
-                case "goods": return next.to.owner.userid;
-                case "post": return next.to.post_by.userid;
+                case "goods": return next.to.owner;
+                case "post": return next.to.post_by;
             }
         })();
+        console.log(id);
 
-        await commonModule.sendMsg(id,`${next.user.userid}评论了${comment_form.comment_to}，${comment_form.content}`,comment_form.comment_to.split(":")[0]);
+        await commonModule.sendMsg(id,"有人评论了",`${next.user.userid}评论了${comment_form.comment_to}，${comment_form.content}`,comment_form.comment_to.split(":")[0]);
 
         res.status(200).json(out);
     } else {
@@ -358,6 +383,45 @@ router.post("/get_history",async (req, res) => {
     res.status(200).json(out);
 });
 
+//获取用户发布的数据
+router.post("/get_published", async (req, res) => {
+    const { userid, type, field } = req.body;
+
+    console.log(req.body);
+    let out;
+
+    const result = await (async () => {
+        switch (type) {
+            case "goods":
+                console.log("g");
+                return await goodsModel
+                    .find({owner: userid})
+                    .sort("-post_date")
+                    .skip(field.start_at)
+                    .limit(field.amount)
+                    .exec();
+            case "post":
+                console.log("p");
+                return await postModel
+                    .find({post_by: userid})
+                    .sort("-post_date")
+                    .skip(field.start_at)
+                    .limit(field.amount)
+                    .exec();
+        }
+    })();
+
+    // const result = await commonModule.subQuery(require(`../model/${type}`), filter);
+    console.log(result);
+
+    out = commonModule.responseUnifier(200, "OK", {
+        data: result,
+        next_index: field.start_at + field.amount
+    });
+
+    res.status(out.code).json(out);
+});
+
 //搜索
 router.post("/search", async (req, res) => {
     //包含关键字、类型
@@ -422,9 +486,36 @@ router.post("/get_msg", async (req, res) => {
 
     let out;
 
-    const result = await messageModel.find({ receiver: userid }).exec();
-    console.log(result);
-    res.send(result);
+    // const result = await messageModel.find({ receiver: userid }).exec();
+    const result = await messageModel
+        .aggregate([{
+                $match: {receiver: userid},
+            },
+            {
+                $sort: { post_date: -1 }
+            },
+            {
+                $group: {
+                    _id: '$type',
+                    content: {$first: '$content'},
+                    post_date: {$first: '$post_date'},
+                    receiver: {$first: '$receiver'}
+                }
+            }
+        ]);
+    const data = {};
+
+    //将数组转换为纯对象
+    for(let i of result) {
+        for(let j of Object.keys(i)){
+            if(j === "_id") {
+                data[i[j]] = i;
+            }
+        }
+    }
+
+    out = commonModule.responseUnifier(200, "OK", data);
+    res.status(out.code).json(out);
 });
 
 //获取不同类别的消息
@@ -439,7 +530,7 @@ router.post("/msg_detail", async (req, res) => {
         .limit(field.amount)
         .exec();
 
-    out = commonModule.responseUnifier(200, "OK", result);
+    out = commonModule.responseUnifier(200, "OK", {data: result, next_index: field.start_at + field.amount});
 
     res.status(out.code).json(out);
 

@@ -10,3 +10,20 @@
     overflow-y: scroll;
   }
 }
+
+.total-ram {
+  $h: 3vh;
+
+  margin-left: 1vw;
+  border: 1px #dadada solid;
+  border-radius: calc($h / 2);
+  width: 30vw;
+  height: $h;
+
+  .used-ram {
+    border-radius: calc($h / 2);
+    transition: 1s;
+    height: 100%;
+    background-color: #646cff;
+  }
+}

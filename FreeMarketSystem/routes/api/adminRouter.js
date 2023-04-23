@@ -108,24 +108,45 @@ router.post("/remove_complete", async (req, res) => {
     res.status(out.code).json(out);
 });
 
+//
 router.post("/get_report", async (req, res) => {
     const { isRecent } = req.body;
 
     let out;
 
-    const result = await reportModel.find()
+    const filter = {};
+    if(isRecent) filter.isDone = false;
+    const result = await reportModel.find(filter)
         .sort("-post_date")
         .limit(isRecent ? 3 : 0)
         .exec();
-    console.log(result);
+
+    // console.log(result);
+
+
 
     for (let i in result) {
-        const tmp = await commonModule.subQuery(require(`../model/${result[i]._doc.refer_to.split(":")[0]}`));
+        const sub_filter = (() => {
+            switch (result[i]._doc.refer_to.split(":")[0]) {
+                case "goods": return {goods_id: result[i]._doc.refer_to};
+                case "post": return {post_id: result[i]._doc.refer_to};
+                case "comment": return {comment_id: result[i]._doc.refer_to};
+            }
+        })();
+
+        console.log(sub_filter);
+
+        const tmp = await commonModule
+            .subQuery(
+                require(`../model/${result[i]._doc.refer_to.split(":")[0]}`),
+                sub_filter);
         const user = await userModel.findOne({userid: result[i]._doc.report_by}).exec();
         console.log(tmp);
         if(tmp) result[i]._doc.refer_to_obj = tmp;
         if(user) result[i]._doc.report_by = commonModule.removePassword(user);
     }
+
+    // console.log(result);
 
     res.status(200).json(result);
 
@@ -169,7 +190,7 @@ router.post("/handle_report", async (req, res) => {
                 black_id: `black:${uuid.v4()}`,
                 refer_to: tmp_user.userid
             }).save();
-            await commonModule.sendMsg(tmp_user.userid, `你的账号由于违规，经举报，已被封禁`, "user");
+            await commonModule.sendMsg(tmp_user.userid, "账号违规", `你的账号由于违规，经举报，已被封禁`, "user");
         }
     //    无论type为何值，举报的isDel属性都会被更改
         await r.set({isDone: true}).save();
@@ -196,7 +217,7 @@ router.post("/add_blacklist", async (req, res) => {
             refer_to: target
         }).save();
 
-        await commonModule.sendMsg(target, `${target}，您的账号已被封禁`, 'user');
+        await commonModule.sendMsg(target, "账号被封禁", `${target}，您的账号已被封禁`, 'user');
         out = commonModule.responseUnifier(200, "封禁成功", result);
     } else {
         out = commonModule.responseUnifier(400, "封禁的对象不存在");
@@ -214,7 +235,7 @@ router.post("/remove_blacklist", async (req, res) => {
 
     out = commonModule.responseUnifier(200, "解封成功");
 
-    await commonModule.sendMsg(target, `${target}，您的账号已被解封`, 'user');
+    await commonModule.sendMsg(target, "账号解封", `${target}，您的账号已被解封`, 'user');
 
     res.status(out.code).json(out);
 });
@@ -297,7 +318,7 @@ router.post("/lock", async (req, res) => {
             })();
 
             console.log("id:",id);
-            await commonModule.sendMsg(id, `你的数据已被${result._doc.isDel ? "锁定" : "解锁"}`, coll);
+            await commonModule.sendMsg(id, "数据被锁定", `你的数据已被${result._doc.isDel ? "锁定" : "解锁"}`, coll);
 
             out = commonModule.responseUnifier(200, "锁定成功", result);
         }
@@ -310,6 +331,8 @@ router.post("/lock", async (req, res) => {
 
 router.post("/server_info", async (req, res) => {
 //    CPU, RAM, OS
+    const _package = require("../../package.json");
+    console.log(_package);
     const cpu = os.cpus()[0];
     // process.stdout.write("\x07");
     res.send({
@@ -323,7 +346,11 @@ router.post("/server_info", async (req, res) => {
             platform: os.platform(),
             version: os.version()
         },
-        RAM: `${(os.totalmem() / 1024 / 1024 / 1024).toFixed(2)}GB`
+        RAM: `${(os.totalmem() / 1024 / 1024 / 1024).toFixed(2)}GB`,
+        Server: {
+            name: _package.name,
+            version: _package.version
+        }
     });
 });
 

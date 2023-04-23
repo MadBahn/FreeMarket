@@ -1,0 +1,1 @@
+<view class="post_info data-v-f6381624"><view class="img data-v-f6381624"><image class="img data-v-f6381624" src="{{a}}"/></view><view class="detail data-v-f6381624"><text class="data-v-f6381624">标题：{{b}}</text><text class="data-v-f6381624">发帖者：{{c}}</text><text class="data-v-f6381624" style="overflow:hidden">内容：{{d}}</text></view></view>

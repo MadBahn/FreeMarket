@@ -12,9 +12,9 @@
 			<label>
 				性别
 				<radio-group name="gender">
-					<radio :checked="info.gender === 'male'" value="male">男</radio>
-					<radio :checked="info.gender === 'female'" value="female">女</radio>
-					<radio :checked="info.gender === 'others'" value="others">其他</radio>
+					<radio color="#1296db" :checked="info.gender === 'male'" value="male">男</radio>
+					<radio color="#1296db" :checked="info.gender === 'female'" value="female">女</radio>
+					<radio color="#1296db" :checked="info.gender === 'others'" value="others">其他</radio>
 				</radio-group>
 			</label>
 			<label>
@@ -30,10 +30,19 @@
 			</label>
 			<label>
 				城市
-				<picker mode="region"></picker>
+				<!-- <picker mode="region"></picker> -->
+				<text @click="() => city_pop.open()">{{ info.city || "没有城市" }}</text>
 			</label>
 			<button form-type="submit">确认修改</button>
 		</form>
+		<uni-popup 
+			ref="city_pop" 
+			type="bottom"
+			background-color="#fff"
+			class="popup"
+		>
+			<t-index-address @select="changeCity"></t-index-address>
+		</uni-popup>
 	</view>
 </template>
 
@@ -46,11 +55,9 @@
 	const date = reactive({
 		current: new Date()
 	});
-	const city = reactive({
-		province: [],
-		cities: []
-	});
 	const info = ref({});
+	
+	const city_pop = ref(null);
 	
 	onLoad(() => {
 		// initialize the data
@@ -65,6 +72,13 @@
 		console.log(info.value.birthday);
 	}
 	
+	function changeCity(d) {
+		// console.log(d);
+		info.value.city = `${d.province}-${d.name}`;
+		console.log(info.value);
+		city_pop.value.close();
+	}
+	
 	// 提交修改请求
 	function onSubmit(e) {
 		console.log(e.detail.value);
@@ -75,7 +89,8 @@
 			data: {
 				modify_form: {
 					userid: getApp().globalData.login.userid,
-					...e.detail.value
+					...e.detail.value,
+					city: info.value.city
 				}
 			},
 			success(res) {
@@ -106,5 +121,10 @@
 <style lang="scss" scoped>
 	._form {
 		width: 100vw;
+	}
+	
+	.popup {
+		height: 30vh;
+		background-color: white;
 	}
 </style>

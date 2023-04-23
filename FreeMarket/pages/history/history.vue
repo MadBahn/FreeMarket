@@ -71,7 +71,11 @@
 				filter: {
 					userid: getApp().globalData.login.userid,
 					type: type.value,
-					query: {userid: getApp().globalData.login.userid,},
+					query: {
+						userid: getApp().globalData.login.userid,
+						// 需要在获取结果前找全所有的数据
+						history_to: type.value
+					},
 					start_at: start_at.value,
 					count: count
 				}
@@ -100,7 +104,7 @@
 	
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.segs {
 		width: 30vw;
 	}

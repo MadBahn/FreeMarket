@@ -9,6 +9,7 @@ import {confirm} from "@tauri-apps/api/dialog";
 import ReportUnit from "@/components/report_unit/report_unit";
 
 import "./report.scss";
+import {ColumnsType} from "antd/es/table";
 
 function Report() {
     // 举报数据
@@ -27,42 +28,15 @@ function Report() {
         setSearch(selectedKeys[0]);
         setColumn(dataIndex);
     }
-    //bug.
-    const getColumnSearchProps = (dataIndex) => ({
-        filterDropDown: ({setSelectedKeys, selectedKeys, confirm}) => (
-            <div>
-                <Input
-                    ref={searchInput}
-                    value={selectedKeys[0]}
-                    onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-                    onPressEnter={() => doSearch(selectedKeys, confirm, dataIndex)}
-                />
-                <Button
-                    icon={<SearchOutlined />}
-                    onClick={() => doSearch(selectedKeys, confirm, dataIndex)}
-                >
-                    检索
-                </Button>
-            </div>
-        ),
-        filterIcon: () => (
-            // <SearchOutlined />
-            <div>search</div>
-        ),
-        onFilter: (v, r) =>
-            r[dataIndex].toString().toLowerCase().includes(v.toLowerCase()),
-    });
 
-    const columns = [
+    const columns : ColumnsType<any> = [
         {
             title: "举报者",
             dataIndex: "report_by",
-            ...getColumnSearchProps("username"),
             render: (r) => <p>{r.username || r.userid}</p>
         },
         {
             title: "原因",
-            ...getColumnSearchProps("reason"),
             render: (r) =>
                 <div>
                     {`${r.reason}${r.other_reason ? `: ${r.other_reason}`: ''} `}
@@ -130,7 +104,8 @@ function Report() {
                 className="report"
                 dataSource={data}
                 loading={loading}
-                columns={columns}
+                columns={//@ts-ignore
+                    columns}
                 pagination={{
                     hideOnSinglePage: true,
                     defaultPageSize: 4
@@ -144,6 +119,7 @@ function Report() {
                         const keys = [];
                         if(e) keys.push(r._id);
                         console.log(e, r, keys);
+                        //@ts-ignore
                         setExpandKey(keys);
                     }
                 }}

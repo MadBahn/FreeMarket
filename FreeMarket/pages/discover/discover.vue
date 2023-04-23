@@ -9,7 +9,7 @@
 			<block v-slot:default>
 				<view 
 					class="searchBox" 
-					@click="goto(`/pages/search/search?type=posts`)"
+					@click="goto(`/pages/search/search?type=post`)"
 				>
 					<!-- flex-direction属性为row-reverse -->
 					<view id="searchBtn">搜索</view>
@@ -17,7 +17,7 @@
 				</view>
 			</block>
 		</uni-nav-bar>
-		<view class="B">
+		<view class="data">
 			<uni-card 
 				v-for="(i, index) in posts"
 				@click="goto(`/pages/browse_post/browse_post?id=` + 
@@ -28,6 +28,7 @@
 			>
 				<text>{{i.title}}</text>
 			</uni-card>
+			<view v-show="!enableBottomRequest">再怎么找也没有了</view>
 		</view>
 	</view>
 </template>
@@ -70,9 +71,10 @@
 				 cfg.api.post.post_display,
 			method: "POST",
 			data: {
-				"filter": {
-					"satrt_at": end_index.value,
-					"amount": amount
+				filter: {
+					start_at: end_index.value,
+					amount: amount,
+					sub_filter: {}
 				}
 			},
 			success(res) {
@@ -110,14 +112,14 @@
 <style scoped lang="scss">
 	$w: 100vw;
 	
-	.A, .B {
+	.A, .data {
 		width: $w;
 	}
 	.A{
 		height: 10vh;
 		background-color: aqua;
 	}
-	.B{
+	.data{
 		height: 100vh;
 		// background-color: beige;
 	}

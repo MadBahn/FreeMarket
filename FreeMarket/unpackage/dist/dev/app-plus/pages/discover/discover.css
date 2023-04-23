@@ -814,13 +814,13 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.A[data-v-7f6951af], .B[data-v-7f6951af] {
+.A[data-v-7f6951af], .data[data-v-7f6951af] {
   width: 100vw;
 }
 .A[data-v-7f6951af] {
   height: 10vh;
   background-color: aqua;
 }
-.B[data-v-7f6951af] {
+.data[data-v-7f6951af] {
   height: 100vh;
 }

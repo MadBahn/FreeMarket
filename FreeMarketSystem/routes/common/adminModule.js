@@ -13,9 +13,6 @@ const blacklistModel = require("../model/blacklist");
 
 const adminModule = {};
 
-
-
-
 //移除token
 adminModule.removeToken = async (token) => {
     const client = redis.createClient();

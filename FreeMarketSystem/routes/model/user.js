@@ -5,6 +5,7 @@ const userSchema = mongoose.Schema({
     username: { type: String, unique: true },
     headImg: { type: String },
     email: { type: String, unique: true },
+    //通过sha1加密
     password: { type: String },
     gender: { type: String },
     birthday: { type: Date },

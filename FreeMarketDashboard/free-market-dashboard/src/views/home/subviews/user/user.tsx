@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import {Button, Table} from "antd";
+import {Button, Input, message, Table} from "antd";
+import { LockOutlined, DeleteOutlined, StopOutlined, SearchOutlined } from "@ant-design/icons";
 import {http} from "@tauri-apps/api";
+import {confirm} from "@tauri-apps/api/dialog";
+import {ColumnsType} from "antd/es/table";
 
 import cfg from "@/common/cfg.json";
 
 import "./user.scss";
-import {confirm} from "@tauri-apps/api/dialog";
-import {ColumnsType} from "antd/es/table";
 
 function User() {
+    const [ msgAPI, msgContext ] = message.useMessage();
     //前端自行整理用户或后端处理
     const [ userData, setUserData ] = useState([]);
     const [ loading, setLoading ] = useState(false);
+
+    const [ filter, setFilter ] = useState({username: ""});
 
     const queryIndex = 0;
 
@@ -27,7 +31,7 @@ function User() {
 
         },
         {
-            title: "id",
+            title: "用户id",
             dataIndex: "userid",
             key: "userid",
             width: "30%"
@@ -49,16 +53,19 @@ function User() {
             title: "操作",
             render: (_, record) => <div>
                 <Button
+                    icon={<LockOutlined />}
                     onClick={() => lockUser(record.userid)}
                 >
                     { !record.isDel ? "锁定" : "解锁" }
                 </Button>
                 <Button
+                    icon={<StopOutlined />}
                     onClick={() => blackUser(record.userid, record.status)}
                 >
                     {record.status ? "解封" : "封禁"}
                 </Button>
                 <Button
+                    icon={<DeleteOutlined />}
                     onClick={() => delUser(record.userid)}
                     type="primary"
                     danger
@@ -79,7 +86,8 @@ function User() {
         http.fetch(`${cfg.base_url}api/admin/user_list`, {
             method: "POST",
             body: http.Body.json({
-                token: localStorage.getItem("token")
+                token: localStorage.getItem("token"),
+                filter: filter
             })
         }).then(r => {
             // console.log(r);
@@ -113,6 +121,10 @@ function User() {
                 })
             }).then( r => {
                 if(r.status === 200) {
+                    msgAPI.open({
+                        type: "success",
+                        content: ""
+                    });
                     request();
                 }
             });
@@ -135,6 +147,11 @@ function User() {
             }).then(async r => {
                 if(r.status === 200) { // @ts-ignore
                     request();
+                } else {
+                    msgAPI.open({
+                        type: "error",
+                        content: "加载失败"
+                    });
                 }
             });
         }
@@ -163,7 +180,24 @@ function User() {
     // @ts-ignore
     return (
         <div>
-
+            <div className="query_form">
+                <Input
+                    placeholder="用户名"
+                    onChange={(e) =>
+                        setFilter({username: e.target.value})
+                    }
+                />
+                <Button
+                    icon={<SearchOutlined />}
+                    type="primary"
+                    onClick={() => {
+                        console.log(filter)
+                        request()
+                    }}
+                >
+                    检索
+                </Button>
+            </div>
             <Table
                 dataSource={userData}
                 columns={//@ts-ignore
@@ -171,7 +205,7 @@ function User() {
                 loading={loading}
                 pagination={{
                     hideOnSinglePage: true,
-                    defaultPageSize: 4
+                    defaultPageSize: 6
                 }}
             />
         </div>

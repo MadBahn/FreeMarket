@@ -8,7 +8,6 @@
     "pages/exchange/exchange",
     "pages/new_post/new_post",
     "pages/new_goods/new_goods",
-    "pages/chat/chat",
     "pages/login/login",
     "pages/register/register",
     "pages/browse_goods/browse_goods",

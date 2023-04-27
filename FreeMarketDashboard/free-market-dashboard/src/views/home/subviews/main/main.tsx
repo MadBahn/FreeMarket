@@ -9,6 +9,7 @@ import cfg from "@/common/cfg.json";
 import "./main.scss";
 import {confirm} from "@tauri-apps/api/dialog";
 import ReportUnit from "@/components/report_unit/report_unit";
+import SmallChart from "@/components/small_chart/small_chart";
 
 function Main(props: any) {
 
@@ -45,13 +46,35 @@ function Main(props: any) {
         series: [{type: 'bar'}]
     };
 
+    const cpuInfo = {
+        data: [
+            {type: "usage", percent: 0.3},
+            {type: "free", percent: 0.3},
+        ],
+        content: {
+            title: "CPU使用率",
+        }
+    };
+    const ramInfo = {
+        data: [
+            {type: "usage", percent: 0.3},
+            {type: "free", percent: 0.3},
+        ],
+        content: {
+            title: "内存占用"
+        }
+    };
+
     //从redux获取数据条数
     // const { data_count } = useSelector((state) => state.common);
 
     const [ option, setOption ] = useState(ops);
+
     const [ recent, setRecent ] = useState([]);
     const [ status, setStatus ] = useState({});
     const [ ramUsage, setRamUsage ] = useState(0.0);
+    const [ cpuUsage, setCpuUsage ] = useState(0.0);
+    const [ isConnect, setIsConnect ] = useState(false);
 
     const getCount = () => {
         http.fetch(`${cfg.base_url}api/admin/count`, {
@@ -79,7 +102,8 @@ function Main(props: any) {
             method: "POST",
             body: http.Body.json({
                 token: localStorage.getItem("token"),
-                isRecent: true
+                isRecent: true,
+                filter: {}
             })
         }).then(r => {
             //@ts-ignore
@@ -133,15 +157,34 @@ function Main(props: any) {
                 socket.emit("init", { type: "admin", token: localStorage.getItem("token") });
             });
             socket.on("status",(e) => {
-                console.log(e);
+                setIsConnect(true);
+                // console.log(e);
                 setStatus({...e});
 
                 const { ram, freeram } = e;
                 //@ts-ignore
-                setRamUsage((((ram - freeram)/ram) * 100).toFixed(2));
+                setRamUsage((ram - freeram)/ram);
+                setCpuUsage(e.cpu);
+
+                console.log(ramUsage, cpuUsage);
+                ramInfo.data=([
+                    {type: "usage", percent: ramUsage},
+                    {type: "free", percent: 1 - ramUsage},
+                ]);
+
+                cpuInfo.data=([
+                    {type: "usage", percent: cpuUsage},
+                    {type: "free", percent: 1 - cpuUsage},
+                ]);
+
+                // console.log(cpuInfo, ramInfo);
+                console.log(isConnect);
+            });
+
+            socket.on("disconnect", () => {
+                setIsConnect(false);
             });
         }
-
         return () => {
             console.log("Unmount");
             socket.disconnect();
@@ -164,21 +207,35 @@ function Main(props: any) {
                     {recent.length === 0 && (<Empty description="最近没有需要处理的举报"/>)}
                 </Card>
                 <Card className="panel">
-                    <p>服务器地址：{cfg.base_url}</p>
-                    {JSON.stringify(status)}
-                {/*    CPU*/}
-                {/*    RAM*/}
+                    <div className="status">
+                        <div
+                            className="status-dot"
+                            style={{
+                                backgroundColor: `${isConnect ? "lightgreen" : "red"}`
+                            }}
+                        />
+                        <p>{isConnect ? `已连接服务器：${cfg.base_url}` : "与服务器断开了连接"}</p>
+                    </div>
+                    {/*<p>服务器地址：{cfg.base_url}</p>*/}
                     <div style={{
                         display: "flex",
                         flexDirection: "row",
                         flexWrap: "wrap",
                         alignItems: "flex-start"
                     }}>
-                        <p>内存占用</p>
-                        <div className="total-ram">
-                            <div className="used-ram" style={{width: `${ramUsage}%`}}/>
+                        <h2>实时监控</h2>
+                        <div className="chart-body">
+                            <SmallChart
+                                data={[{value: cpuUsage}]}
+                                item="CPU占用"
+                            />
+                            <SmallChart
+                                data={[{value: ramUsage}]}
+                                item="内存占用"
+                            />
                         </div>
                     </div>
+
 
                 </Card>
             </div>

@@ -53,12 +53,6 @@
                 "enablePullDownRefresh": false
             }
         },{
-            "path": "pages/chat/chat",
-            "style": {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-        },{
 			"path": "pages/login/login",
 			"style": {
 			    "navigationBarTitleText": "登录",

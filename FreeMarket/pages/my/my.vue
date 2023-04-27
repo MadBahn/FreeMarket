@@ -30,6 +30,7 @@
 		<view class="views">
 			<view class="menu-items" @click="goto(`/pages/favorite/favorite`)">
 				<uni-icons 
+					color="#0055ff"
 					size="35" 
 					customPrefix="iconfont" 
 					type="icon-favor"
@@ -38,6 +39,7 @@
 			</view>
 			<view class="menu-items" @click="goto(`/pages/history/history`)">
 				<uni-icons 
+					color="#0055ff"
 					size="35"
 					customPrefix="iconfont"
 					type="icon-lishi"
@@ -46,6 +48,7 @@
 			</view>
 			<view class="menu-items" @click="goto(`/pages/mypost/mypost`)">
 				<uni-icons
+					color="#0055ff"
 					size="35"
 					customPrefix="iconfont"
 					type="icon-tiezi">
@@ -56,6 +59,7 @@
 		<view class="exchange">
 			<view class="menu-items" @click="goto(`/pages/mygoods/mygoods`)">
 				<uni-icons 
+					color="#0055ff"
 					size="35" 
 					customPrefix="iconfont" 
 					type="icon-31quanbushangpin"
@@ -64,6 +68,7 @@
 			</view>
 			<view class="menu-items" @click="goto(`/pages/exchange/exchange?type=buyer`)">
 				<uni-icons
+					color="#0055ff"
 					size="35"
 					customPrefix="iconfont"
 					type="icon-mairu"
@@ -72,6 +77,7 @@
 			</view>
 			<view class="menu-items" @click="goto(`/pages/exchange/exchange?type=seller`)">
 				<uni-icons
+					color="#0055ff"
 					size="35"
 					customPrefix="iconfont"
 					type="icon-maichu"
@@ -79,8 +85,17 @@
 				<text>我卖出的</text>
 			</view>
 		</view>
-		<button @click="goto(`/pages/settings/settings`)">设置</button>
-		<!-- <button v-if="isLogin" @click="logout">退出登录</button> -->
+		<button 
+			style="width: 85vw;text-align: left;" 
+			@click="goto(`/pages/settings/settings`)"
+		>
+			<uni-icons
+				color="#0055ff"
+				size="20"
+				type="gear-filled"
+			></uni-icons>
+			设置
+		</button>
 		<uni-popup ref="action">
 			<view class="action">
 				<view @click="selecctImage(['camera'])">

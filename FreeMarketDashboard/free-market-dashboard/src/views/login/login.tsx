@@ -56,8 +56,6 @@ function Login() {
 
     const doEnterPress = () => {
         console.log("enter");
-
-
     }
 
     return (

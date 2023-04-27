@@ -1,1 +1,1 @@
-<view><view wx:for="{{a}}" wx:for-item="i" wx:key="e" class="items"><goods-unit wx:if="{{i.b}}" u-i="{{i.a}}" bind:__l="__l" u-p="{{i.b}}"/><button bindtap="{{i.c}}">修改</button><button bindtap="{{i.d}}">删除</button></view><view hidden="{{!b}}">再怎么找也没有了</view></view>
+<view><view wx:for="{{a}}" wx:for-item="i" wx:key="e" class="items"><goods-unit wx:if="{{i.b}}" u-i="{{i.a}}" bind:__l="__l" u-p="{{i.b}}"/><button bindtap="{{i.c}}">修改</button><button bindtap="{{i.d}}">删除</button></view><no-more wx:if="{{b}}" u-i="6e76d5f0-1" bind:__l="__l"/></view>

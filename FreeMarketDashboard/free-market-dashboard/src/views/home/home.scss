@@ -1,20 +1,33 @@
-.main{
-    width: 100%;
-    height: 100%;
-}
-
 .sider{
     height: 100%;
 }
 
-.header {
+.main{
     width: 100%;
-    height: 4vh;
-    line-height: 4vh;
-}
+    height: 100%;
 
-.content {
-    height: 96vh
+    .header {
+        width: 100%;
+        height: 4vh;
+        line-height: 4vh;
+    }
+
+    .content {
+        height: 96vh;
+    }
+
+
+    .footer {
+        width: 100%;
+        padding: 1vh 1vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        p {
+            display: block;
+        }
+    }
 }
 
 .logo {
@@ -30,3 +43,4 @@
 
     color: #dadada;
 }
+

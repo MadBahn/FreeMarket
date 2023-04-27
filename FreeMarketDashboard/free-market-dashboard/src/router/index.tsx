@@ -1,5 +1,6 @@
 import React, {lazy} from "react";
 import { Navigate } from "react-router-dom";
+import Error from "@/views/error/error";
 
 const Home = lazy(() => import("@/views/home/home"));
 const Login = lazy(() => import("@/views/login/login"));
@@ -28,8 +29,13 @@ const routes = [
         element: loading(<Login />)
     },
     {
+        path: "*",
+        element: <Error />
+    },
+    {
         path: "/",
         element: loading(<Home />),
+        errorElement: <Error />,
         children: [
             {
                 path: "/main",

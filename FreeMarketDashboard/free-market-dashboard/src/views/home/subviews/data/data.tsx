@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {Button, List, Pagination, Segmented, Table} from "antd";
+import {Button, DatePicker, message, Segmented, Table} from "antd";
+import {SearchOutlined} from "@ant-design/icons";
 
 import { CustomIcon } from "@/components/custom_icon/custom_icon";
 import { http } from "@tauri-apps/api";
@@ -9,11 +10,19 @@ import DataUnit from "@/components/data_unit/data_unit";
 import cfg from "@/common/cfg.json";
 import {ColumnsType} from "antd/es/table";
 
+import "./data.scss";
+
+const { RangePicker } = DatePicker;
+
 function Data(){
+    const [ msgAPI, msgContext ] = message.useMessage();
+
     const [ expandKey, setExpandKey ] = useState();
     const [ data, setData ] = useState([]);
     const [ option, setOption ] = useState("goods");
     const [ loading, setLoading ] = useState(false);
+
+    const [ dateField, setDateField ] = useState({});
 
     // let expandData: any[] = [];
 
@@ -137,8 +146,12 @@ function Data(){
                 filter: query
             })
         }).then(async r => {
-            if(r.status === 200) { // @ts-ignore
+            if(r.status === 200) {
                 await request(option);
+                msgAPI.open({
+                    type: "success",
+                    content: `${e.isDel ? "解锁" : "锁定"}成功`
+                });
             }
         });
     };
@@ -153,14 +166,19 @@ function Data(){
                 target: e
             })
         }).then(async r => {
-            if(r.status === 200) { // @ts-ignore
+            if(r.status === 200) {
+                msgAPI.open({
+                    type: "success",
+                    content: "删除成功"
+                });
+                // @ts-ignore
                 await request(option);
             }
         });
 
     }
 
-    const request = (model: string) => {
+    const request = (model: string, filter: object = {}) => {
         setData([]);
         setLoading(true);
         http.fetch(`${cfg.base_url}api/admin/data_admin`, {
@@ -169,7 +187,7 @@ function Data(){
                 token: localStorage.getItem("token"),
                 query: {
                     model: model,
-                    filter: {},
+                    filter: filter,
                     field: {start:0,limit:0}
                 }
             })
@@ -182,30 +200,58 @@ function Data(){
                         key: i._id
                     }))
                 );
+            } else {
+                msgAPI.open({
+                    type: "error",
+                    content: "加载失败"
+                });
             }
         });
     };
 
+    const changeRange = (e) => {
+        if(e)
+            setDateField({
+                $gt: new Date(e[0].$d),
+                $lt: new Date(e[1].$d)
+            });
+        else setDateField({});
+    }
+
+    const doQuery = () => {
+        const f = {};
+        // @ts-ignore
+        if(Object.keys(dateField).length !== 0) f.post_date = dateField;
+        request(option, f);
+    }
+
     // @ts-ignore
     return (
         <div>
-            <Segmented
-                options={options}
-                onChange={//@ts-ignore
-                    (e) => setOption(e)}
-            />
+            <div className="query_form">
+                <Segmented
+                    options={options}
+                    onChange={//@ts-ignore
+                        (e) => setOption(e)}
+                />
+                <RangePicker onChange={changeRange}/>
+                <Button
+                    icon={<SearchOutlined />}
+                    type="primary"
+                    onClick={doQuery}
+                >
+                    检索
+                </Button>
+            </div>
             <Table
-                style={{
-                    height: "80vh",
-                    overflowY: "scroll"
-                }}
                 columns={//@ts-ignore
                     columns}
                 loading={loading}
                 pagination={{
                     hideOnSinglePage: true,
-                    defaultPageSize: 4
+                    defaultPageSize: 8
                 }}
+                scroll={{ y: "65vh" }}
                 expandable={{
                     expandedRowKeys: expandKey,
                     rowExpandable: (r) => true,

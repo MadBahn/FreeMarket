@@ -48,7 +48,7 @@
 				</view>
 			</uni-card>
 		</view>
-		<view v-show="!enableBottomRequest">再怎么找也没有了</view>
+		<no-more v-if="!enableBottomRequest" />
 	</view>
 </template>
 

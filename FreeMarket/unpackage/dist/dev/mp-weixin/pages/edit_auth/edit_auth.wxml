@@ -1,1 +1,1 @@
-<view><form bindsubmit="{{a}}"><input password name="pwd_cur" placeholder="原密码"/><input password type="safe-password" name="pwd_new" placeholder="新密码"/><input password type="safe-password" name="repwd" placeholder="确认密码"/><button form-type="submit">确认修改</button></form></view>
+<view><form class="f" bindsubmit="{{a}}"><input password name="pwd_cur" placeholder="原密码"/><input password type="safe-password" name="pwd_new" placeholder="新密码"/><input password type="safe-password" name="repwd" placeholder="确认密码"/><button form-type="submit">确认修改</button></form></view>

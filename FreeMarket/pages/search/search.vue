@@ -37,12 +37,14 @@
 		</view>
 		
 		<view class="result" v-else>
-			<view class="unit" v-for="(i,index) in result">
-				<GoodsUnit v-if="type==='goods'" :data="i"/>
-				<PostUnit v-else :data="i"/>
+			<view v-if="result.length !== 0">
+				<view class="unit" v-for="(i,index) in result">
+					<GoodsUnit v-if="type==='goods'" :data="i"/>
+					<PostUnit v-else :data="i"/>
+				</view>
+				<no-more v-if="!enableBottomRequest" />
 			</view>
-			
-			<view v-if="!enableBottomRequest">再怎么找也没有了</view>
+			<empty v-else/>
 		</view>
 	</view>
 </template>

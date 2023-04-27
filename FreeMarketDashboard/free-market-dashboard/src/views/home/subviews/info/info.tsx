@@ -8,6 +8,7 @@ import {verify} from "@/common/verify";
 import cfg from "@/common/cfg.json";
 import {confirm} from "@tauri-apps/api/dialog";
 
+import "./info.scss";
 
 function Info() {
     const [info, setInfo] = useState({});
@@ -51,10 +52,12 @@ function Info() {
 
     // @ts-ignore
     return (
-        <div>
+        <div style={{
+            marginLeft: "1vw"
+        }}>
             {/*当前服务器的配置信息*/}
-            <div>
-                <h2>当前服务器硬件</h2>
+            <div className="info">
+                <p className="title">当前服务器硬件</p>
                 <p>
                     <h3>CPU</h3>
                     {//@ts-ignore
@@ -86,7 +89,7 @@ function Info() {
                     <p>容量：{//@ts-ignore
                         info.RAM}</p>
                 </p>
-                <h2>服务器</h2>
+                <p className="title">服务器</p>
                 <p>
                     {//@ts-ignore
                         info.Server && <p>

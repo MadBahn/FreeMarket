@@ -107,7 +107,7 @@
 	});
 	
 	onReachBottom(() => {
-		requestData(false);
+		if(enableBottomRequest.value) requestData(false);
 	});
 	
 	function switchSegs(e) {
@@ -155,7 +155,7 @@
 				console.log(res);
 				if(res.statusCode === 200) {
 					enableBottomRequest.value = 
-						res.data.data.length === amount;
+						res.data.data.data.length === amount;
 					start_index.value = res.data.data.next_index;
 					data.value = type ? res.data.data.data : data.value.concat(res.data.data.data);
 				}

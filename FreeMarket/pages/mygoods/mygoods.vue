@@ -6,7 +6,7 @@
 			<button @click="gotoMod(i.goods_id)">修改</button>
 			<button @click="delGoods(i.goods_id)">删除</button>
 		</view>
-		<view v-show="!enableBottomRequest">再怎么找也没有了</view>
+		<no-more v-if="!enableBottomRequest" />
 	</view>
 </template>
 
@@ -74,6 +74,7 @@
 			content: "是否继续？"
 		});
 		console.log(r);
+		// @ts-ignore
 		r.confirm && uni.request({
 			url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.goods.prefix}${cfg.api.goods.remove_goods}`,
 			method: "POST",
@@ -101,6 +102,11 @@
 <style lang="scss">
 	.items {
 		margin-bottom: 1vh;
-		border: 1px solid;
+		border: 1px solid #c2c2c2;
+		border-radius: 10px;
+		
+		button {
+			margin: 2vw;
+		}
 	}
 </style>

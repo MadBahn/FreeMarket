@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "antd";
-import { LockOutlined } from "@ant-design/icons";
+import { LockOutlined, DeleteOutlined } from "@ant-design/icons";
 import { confirm } from "@tauri-apps/api/dialog";
 
 import Goods from "@/components/data_unit/sub/goods/goods";
@@ -54,8 +54,19 @@ function DataUnit(props: any) {
             {type === "exchange" && <Exchange data={data_list} />}
             {type === "comment" && <Comment data={data_list} />}
             <div style={{marginTop: "2vh"}}>
-                <Button onClick={() => _Lock(data_list)}>{ !data_list.isDel ? "锁定":"解锁"}</Button>
-                <Button type="primary" onClick={() => _Delete(data_list)} danger>彻底删除</Button>
+                <Button
+                    icon={<LockOutlined />}
+                    onClick={() => _Lock(data_list)}
+                >
+                    { !data_list.isDel ? "锁定":"解锁"}
+                </Button>
+                <Button
+                    icon={<DeleteOutlined />}
+                    type="primary"
+                    onClick={() => _Delete(data_list)}
+                    danger>
+                    彻底删除
+                </Button>
             </div>
         </div>
     );

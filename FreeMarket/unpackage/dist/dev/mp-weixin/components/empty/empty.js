@@ -1,0 +1,1 @@
+"use strict";const e=require("../../common/assets.js"),t=require("../../common/vendor.js"),o={};function n(c,s){return{a:e._imports_0}}const r=t._export_sfc(o,[["render",n],["__scopeId","data-v-e2280098"],["__file","F:/HBuilderProjects/FreeMarket/components/empty/empty.vue"]]);wx.createComponent(r);

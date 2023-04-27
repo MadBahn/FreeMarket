@@ -2,6 +2,12 @@
 	<view class="content main">
 		<uni-list class="main" v-if="isLogin">
 			<uni-list-item 
+				:showExtraIcon="true"
+				:extraIcon="{
+					color: '#0055ff',
+					size: '30',
+					type: 'shop'
+				}"
 				@click="goto(`/pages/msg_detail/msg_detail?type=goods`)" 
 				clickable="true" 
 				title="商品消息"
@@ -9,6 +15,12 @@
 				:rightText="msg.goods ? new Date(msg.goods.post_date).toLocaleString() : no_msg"
 			/>
 			<uni-list-item 
+				:showExtraIcon="true"
+				:extraIcon="{
+					color: '#0055ff',
+					size: '30',
+					type: 'compose'
+				}"
 				@click="goto(`/pages/msg_detail/msg_detail?type=post`)" 
 				clickable="true" 
 				title="帖子消息" 
@@ -16,6 +28,12 @@
 				:rightText="msg.post ? new Date(msg.post.post_date).toLocaleString() : no_msg"
 			/>
 			<uni-list-item 
+				:showExtraIcon="true"
+				:extraIcon="{
+					color: '#0055ff',
+					size: '30',
+					type: 'cart'
+				}"
 				@click="goto(`/pages/msg_detail/msg_detail?type=exchange`)" 
 				clickable="true" 
 				title="交易消息" 
@@ -23,6 +41,12 @@
 				:rightText="msg.exchange ? new Date(msg.exchange.post_date).toLocaleString() : no_msg"
 			/>
 			<uni-list-item 
+				:showExtraIcon="true"
+				:extraIcon="{
+					color: '#0055ff',
+					size: '30',
+					type: 'person'
+				}"
 				@click="goto(`/pages/msg_detail/msg_detail?type=user`)" 
 				clickable="true" 
 				title="账号消息" 

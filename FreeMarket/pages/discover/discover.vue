@@ -28,7 +28,7 @@
 			>
 				<text>{{i.title}}</text>
 			</uni-card>
-			<view v-show="!enableBottomRequest">再怎么找也没有了</view>
+			<no-more v-if="!enableBottomRequest" />
 		</view>
 	</view>
 </template>

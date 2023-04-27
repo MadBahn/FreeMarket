@@ -1,15 +1,23 @@
 <template>
 	<view class="content">
-		<input v-model="newGoods.goods_name" placeholder="商品名"/>
+		<label>
+			商品名称：<input v-model="newGoods.goods_name" placeholder="商品名"/>
+		</label>
 		<view class="price">
 			<text>价格</text>
 			<view @click="showPrice">
-				<text>￥{{newGoods.price}}</text>
+				<text style="font-weight: bold;color: red;">￥{{newGoods.price}}</text>
 				<uni-icons type="right"></uni-icons>
 			</view>
 		</view>
-		<input v-model="newGoods.status" placeholder="商品状况"/>
-		<textarea v-model="newGoods.desc" placeholder="商品简介"></textarea>
+		<label>
+			商品状况：
+			<input v-model="newGoods.status" placeholder="商品状况"/>
+		</label>
+		<label>
+			商品简介：
+			<textarea v-model="newGoods.desc" placeholder="商品简介"></textarea>
+		</label>
 		<view>
 			<button @click="doGoods">
 				{{ operation === "new" ? "添加" : "修改" }}
@@ -224,7 +232,10 @@
 	
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+	$w: 70vw;
+	$h: 6vh;
+	
 	input, textarea, .price {
 		width: 95vw;
 		margin-top: 2vh;
@@ -240,48 +251,23 @@
 		justify-content: space-between;
 	}
 	
-	.price-input {
-		background-color: white;
-		width: 100vw;
-		height: 40vh;
-		display: flex;
-		flex-direction: column;
+	label {
+		margin-top: 2vh;
+		color: #adadad;
 		
-		.display {
-			padding: 2vh;
+		textarea, input {
+			color: black;
 		}
 		
-		.keyboard {
-			display: flex;
-			flex-direction: row;
-			// height: 52vh;
-			.number {
-				// flex: 0 0 1;
-				display: flex;
-				flex-wrap: wrap;
-				width: 75vw;
-				// height: 40vh;
-				
-				button {
-					$buttonHeight: 8vh;
-					margin: 0;
-					width: 25vw;
-					height: $buttonHeight;
-					line-height: $buttonHeight;
-				}
-			}
-			
-			.action {
-				width: 25vw;
-				display: flex;
-				flex-direction: column;
-				
-				button {
-					width: 100%;
-					height: 16vh;
-					line-height: 16vh;
-				}
-			}
-		}
+	}
+	
+	button {
+		width: $w;
+		height: calc($h * 1.5);
+		line-height: calc($h * 1.5);
+		border-radius: calc(($h * 1.5) / 2);
+		margin-top: 1rem;
+		background-color: $uni-color-primary;
+		color: white;
 	}
 </style>

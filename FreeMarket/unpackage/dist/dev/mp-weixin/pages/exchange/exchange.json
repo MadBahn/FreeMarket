@@ -4,6 +4,8 @@
   "usingComponents": {
     "uni-segmented-control": "../../uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control",
     "uni-card": "../../uni_modules/uni-card/components/uni-card/uni-card",
+    "no-more": "../../components/no-more/no-more",
+    "empty": "../../components/empty/empty",
     "goods-unit": "../../components/goods_unit/goods_unit"
   }
 }

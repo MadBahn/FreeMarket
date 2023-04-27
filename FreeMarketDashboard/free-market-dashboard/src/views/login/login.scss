@@ -6,19 +6,20 @@
     display: flex;
     flex-direction: column;
     padding: 15px;
+
+    .input {
+        margin-bottom: 2vh;
+    }
+
+    .btn {
+        height: 60px;
+        width: 100%;
+    }
+
+    h2 {
+        text-align: center;
+        font-weight: bold;
+        font-size: 4vh;
+    }
 }
 
-.input {
-    margin-bottom: 2vh;
-}
-
-.btn {
-    height: 60px;
-    width: 100%;
-}
-
-h2 {
-    text-align: center;
-    font-weight: bold;
-    font-size: 4vh;
-}

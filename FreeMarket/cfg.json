@@ -43,6 +43,7 @@
 			"proceed_deal": "/proceed_deal",
 			"pay_deal": "/pay_deal",
 			"finish_deal": "/finish_deal",
+			"cancel_deal": "/cancel_deal",
 			"get_deal": "/get_deal",
 			"deal_info": "/deal_info",
 			"remove_goods": "/remove_goods",
@@ -55,20 +56,6 @@
 			"create_post": "/create_post",
 			"modify_post": "/modify_post",
 			"remove_post": "/remove_post"
-		},
-		"favorite": {
-			"prefix": "/user"
-		},
-		"message": {
-			"prefix": "/user",
-			"send": "/send_msg",
-			"receive": "/receive_msg"
-		},
-		"history": {
-			"prefix": "/user"
-		},
-		"exchange": {
-			"prefix": "/user"
 		}
 	}
 }

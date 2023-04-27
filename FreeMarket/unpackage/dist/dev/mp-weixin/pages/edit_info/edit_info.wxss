@@ -1,1 +1,1 @@
-._form.data-v-176afe41{width:100vw}.popup.data-v-176afe41{height:30vh;background-color:#fff}
+._form.data-v-176afe41{width:100vw}._form form label.data-v-176afe41{margin-left:2vw}._form form label input.data-v-176afe41,._form form label picker.data-v-176afe41,._form form label radio-group.data-v-176afe41{margin:2vw}._form form label radio.data-v-176afe41{margin:2vw}._form form button.data-v-176afe41{width:70vw;height:9vh;line-height:9vh;border-radius:4.5vh;margin-top:1rem;background-color:#007aff;color:#fff}.popup.data-v-176afe41{height:30vh;background-color:#fff}

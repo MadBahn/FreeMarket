@@ -1,0 +1,1 @@
+"use strict";const e=require("../../common/vendor.js"),o={};function n(c,t){return{}}const r=e._export_sfc(o,[["render",n],["__scopeId","data-v-45255a5b"],["__file","F:/HBuilderProjects/FreeMarket/components/no-more/no-more.vue"]]);wx.createComponent(r);

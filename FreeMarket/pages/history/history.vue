@@ -109,8 +109,5 @@
 		width: 30vw;
 	}
 	
-	.items {
-		margin-bottom: 1vh;
-		border: 1px solid;
-	}
+	
 </style>

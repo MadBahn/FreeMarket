@@ -361,6 +361,8 @@ router.post("/cancel_deal", async (req, res) => {
         await commonModule.sendMsg(has_exchange.seller, "交易取消",`买家${has_exchange.buyer}已取消支付`, "goods");
         //添加log
         await has_exchange.set({status: -1}).save();
+
+        out = commonModule.responseUnifier(200, "交易取消成功");
     } else {
         out = commonModule.responseUnifier(400, "不是可取消的交易");
     }

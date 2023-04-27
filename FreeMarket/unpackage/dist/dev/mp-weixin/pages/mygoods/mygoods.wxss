@@ -1,1 +1,1 @@
-.items{margin-bottom:1vh;border:1px solid}
+.items{margin-bottom:1vh;border:1px solid #c2c2c2;border-radius:10px}.items button{margin:2vw}

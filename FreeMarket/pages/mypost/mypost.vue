@@ -1,11 +1,14 @@
 <template>
 	<view>
-		<view v-for="(i, index) in data" :key="index" class="items">
-			<PostUnit :data="i" />
-			<button @click="gotoMod(i.post_id)">修改</button>
-			<button @click="delPost(i.post_id)">删除</button>
+		<view v-if="data.length !== 0">
+			<view v-for="(i, index) in data" :key="index" class="items">
+				<PostUnit :data="i" />
+				<button @click="gotoMod(i.post_id)">修改</button>
+				<button @click="delPost(i.post_id)">删除</button>
+			</view>
+			<no-more v-if="!enableBottomRequest" />
 		</view>
-		<view v-show="!enableBottomRequest">再怎么找也没有了</view>
+		<empty v-else />
 	</view>
 </template>
 
@@ -73,6 +76,7 @@
 			title: "警告",
 			content: "是否继续？"
 		});
+		// @ts-ignore
 		r.confirm && uni.request({
 			url: ``,
 			method: "POST",
@@ -91,4 +95,13 @@
 </script>
 
 <style lang="scss" scoped>
+	.items {
+		margin-bottom: 1vh;
+		border: 1px solid #c2c2c2;
+		border-radius: 10px;
+		
+		button {
+			margin: 2vw;
+		}
+	}
 </style>

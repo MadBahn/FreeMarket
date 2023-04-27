@@ -4,14 +4,12 @@
 			<view class="msg_box" v-for="(i, index) in data" :key="i.message_id">
 				<!-- {{ i }} -->
 				<text class="title">{{ i.title }}</text>
-				<text class="content">{{ i.content }}</text>
+				<text class="context">{{ i.content }}</text>
 				<text class="date">{{ new Date(i.post_date).toLocaleString() }}</text>
 			</view>
-			<view v-if="!enableBottomRequest">没有更多的消息了</view>
+			<no-more v-if="!enableBottomRequest" />
 		</view>
-		<view v-else>
-			没有消息
-		</view>
+		<empty v-else/>
 	</view>
 </template>
 
@@ -77,15 +75,20 @@
 	.msg_box {
 		margin: 4vh 1vw;
 		padding: 3vh;
+		width: 80vw;
+		min-height: 20vh;
 		border: 1px solid #dadada;
 		border-radius: 15px;
+		display: flex;
+		flex-direction: column;
 		
 		text-align: left;
 		.title {
 			font-size: 20px;
 		}
 		
-		.content {
+		.context {
+			flex-grow: 1;
 			margin-top: 1vh;
 			margin-bottom: 1vh;
 			font-size: 15px;

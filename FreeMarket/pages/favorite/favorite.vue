@@ -17,11 +17,10 @@
 					<GoodsUnit v-if="type === 'goods'" :data="i.refer_to"/>
 					<PostUnit v-else :data="i.refer_to"/>
 					<!-- operation -->
-					
 				</view>
 			</view>
 		</view>
-		<view v-else>NO</view>
+		<empty v-else />
 	</view>
 </template>
 
@@ -102,7 +101,8 @@
 		
 		.favorite-item {
 			margin: 2vh;
-			border: 1px solid;
+			border: 1px solid #c2c2c2;
+			border-radius: 10px;
 			min-height: 10vh;
 			
 		}

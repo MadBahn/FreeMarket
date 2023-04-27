@@ -35,8 +35,21 @@
 	}
 	
 	function logout() {
-		uni.$emit("logout");
-		uni.navigateBack();
+		uni.showModal({
+			title: "确认",
+			content: "是否退出登录？",
+			success(e) {
+				if(e.cancel) return;
+				else {
+					uni.$emit("logout");
+					uni.navigateBack();
+					uni.showToast({
+						icon: "success",
+						title: "退出登录成功"
+					});
+				}
+			}
+		});
 	}
 	
 </script>

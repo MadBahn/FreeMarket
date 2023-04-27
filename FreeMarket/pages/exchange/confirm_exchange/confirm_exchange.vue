@@ -19,12 +19,12 @@
 		<view>
 			<text>
 				实付：
-				<text>
+				<text style="font-weight: bold;color: red;">
 					￥{{ data.price }}
 				</text>
 			</text>
 		</view>
-		<view>
+		<view class="steps">
 			<uni-steps :options="steps.list" :active="steps.active"/>
 		</view>
 		<view>
@@ -38,7 +38,7 @@
 			</view>
 			<view v-if="data.status !== 3 && data.status !== -1">
 				<!-- 确认收货 -->
-				<button @click="cancelDeal()">取消订单</button>
+				<button style="background-color: red;" @click="cancelDeal()">取消订单</button>
 			</view>
 		</view>
 	</view>
@@ -116,7 +116,33 @@
 	}
 	
 	function cancelDeal() {
-		
+		uni.showModal({
+			title: "确定",
+			content: "是否取消当前的交易？",
+			success(e) {
+				if(e.cancel) return;
+				
+				uni.request({
+					url: `${cfg.server}:${cfg.port}${cfg.api.prefix}${cfg.api.goods.prefix}${cfg.api.goods.cancel_deal}`,
+					method: "POST",
+					data: {
+						cancel_form : {
+							exchange_id: data.value.exchange_id
+						}
+					},
+					success(res) {
+						console.log(res);
+						if(res.statusCode === 200) {
+							uni.navigateBack();
+							uni.showToast({
+								icon: "success",
+								title: "交易取消成功。"
+							});
+						}
+					}
+				});
+			}
+		})
 	}
 	
 	function gotoPay() {
@@ -127,6 +153,9 @@
 </script>
 
 <style lang="scss" scoped>
+	$w: 70vw;
+	$h: 6vh;
+	
 	.seller {
 		display: flex;
 		flex-direction: row;
@@ -149,6 +178,21 @@
 			display: flex;
 			flex-direction: column;
 		}
+		
+	}
+	
+	.steps {
+		margin: 4vh 0;
+	}
+	
+	button {
+		width: $w;
+		height: calc($h * 1.5);
+		line-height: calc($h * 1.5);
+		border-radius: calc(($h * 1.5) / 2);
+		margin-top: 1rem;
+		background-color: $uni-color-primary;
+		color: white;
 	}
 	
 </style>

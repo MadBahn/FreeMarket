@@ -1,1 +1,1 @@
-<view bindtap="{{f}}"> {{a}} <goods-unit wx:if="{{b}}" u-i="bc66a510-0" bind:__l="__l" u-p="{{c}}"/><post-unit wx:elif="{{d}}" u-i="bc66a510-1" bind:__l="__l" u-p="{{e}}"/></view>
+<view class="items data-v-4c876b6e" bindtap="{{f}}"><text class="data-v-4c876b6e">{{a}}</text><goods-unit wx:if="{{b}}" class="data-v-4c876b6e" u-i="4c876b6e-0" bind:__l="__l" u-p="{{c}}"/><post-unit wx:elif="{{d}}" class="data-v-4c876b6e" u-i="4c876b6e-1" bind:__l="__l" u-p="{{e}}"/></view>

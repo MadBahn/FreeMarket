@@ -110,18 +110,20 @@ router.post("/remove_complete", async (req, res) => {
 
 //
 router.post("/get_report", async (req, res) => {
-    const { isRecent } = req.body;
+    const { isRecent, filter } = req.body;
 
     let out;
+    console.log(filter);
 
-    const filter = {};
     if(isRecent) filter.isDone = false;
+    if(filter.other_reason) filter.other_reason = new RegExp(filter.other_reason);
+    console.log(filter);
     const result = await reportModel.find(filter)
         .sort("-post_date")
         .limit(isRecent ? 3 : 0)
         .exec();
 
-    // console.log(result);
+    console.log(result);
 
 
 
@@ -287,7 +289,12 @@ router.post("/data_admin", async (req, res) => {
 
 router.post("/user_list", async (req, res) => {
 //    组合用户的基本信息及状态
-    const out = await adminModule.queryUser({}).then();
+    const { filter = {} } = req.body;
+
+    if(filter.username.length !== 0) filter.username = new RegExp(filter.username);
+    else delete filter.username;
+
+    const out = await adminModule.queryUser(filter).then();
     res.send(out);
 });
 

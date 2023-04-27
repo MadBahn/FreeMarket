@@ -1,7 +1,7 @@
 <template>
-	<view @click="goto">
+	<view class="items" @click="goto">
 		<!-- 访问日期 -->
-		{{ new Date(data.post_date).toLocaleString() }}
+		<text>{{ new Date(data.post_date).toLocaleString() }}</text>
 		<!-- 数据 -->
 		<GoodsUnit v-if="type==='goods'" :data="data.detail"/>
 		<PostUnit v-else-if="type==='post'" :data="data.detail"/>
@@ -9,8 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref } from "vue";
-	import { onLoad } from "@dcloudio/uni-app";
 	// 子组件
 	import GoodsUnit from "@/components/goods_unit/goods_unit.vue";
 	import PostUnit from "@/components/post_unit/post_unit.vue";
@@ -41,6 +39,15 @@
 	}
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+	.items {
+		margin: 1vh;
+		border: 1px solid #c2c2c2;
+		border-radius: 10px;
+		
+		text {
+			margin-left: 2vw;
+		}
+	}
+	
 </style>

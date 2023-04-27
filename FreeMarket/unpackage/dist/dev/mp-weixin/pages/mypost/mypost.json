@@ -2,6 +2,8 @@
   "navigationBarTitleText": "我发布的帖子",
   "enablePullDownRefresh": true,
   "usingComponents": {
+    "no-more": "../../components/no-more/no-more",
+    "empty": "../../components/empty/empty",
     "post-unit": "../../components/post_unit/post_unit"
   }
 }

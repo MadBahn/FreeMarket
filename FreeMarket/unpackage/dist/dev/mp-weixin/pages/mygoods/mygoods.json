@@ -2,6 +2,7 @@
   "navigationBarTitleText": "我发布的商品",
   "enablePullDownRefresh": true,
   "usingComponents": {
+    "no-more": "../../components/no-more/no-more",
     "goods-unit": "../../components/goods_unit/goods_unit"
   }
 }

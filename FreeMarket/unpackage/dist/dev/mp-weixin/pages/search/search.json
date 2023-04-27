@@ -3,6 +3,8 @@
   "enablePullDownRefresh": false,
   "usingComponents": {
     "uni-icons": "../../uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "no-more": "../../components/no-more/no-more",
+    "empty": "../../components/empty/empty",
     "goods-unit": "../../components/goods_unit/goods_unit",
     "post-unit": "../../components/post_unit/post_unit"
   }

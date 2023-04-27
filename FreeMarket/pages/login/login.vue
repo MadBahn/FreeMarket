@@ -90,7 +90,7 @@
 			line-height: $h;
 			margin: 1rem;
 			padding-left: 1rem;
-			border: 1px solid;
+			border: 1px solid #c2c2c2;
 			border-radius: calc($h / 2);
 		}
 	}

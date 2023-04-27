@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<form @submit="submitAuth">
+		<form class="f" @submit="submitAuth">
 			<!-- 原密码 -->
 			<input password name="pwd_cur" placeholder="原密码"/>
 			<!-- 新密码 -->
@@ -48,5 +48,30 @@
 </script>
 
 <style lang="scss">
-
+	$w: 70vw;
+	$h: 6vh;
+	
+	.f {
+		display: flex;
+		justify-content: center;
+		input {
+			width: $w;
+			height: $h;
+			line-height: $h;
+			margin: 1rem;
+			padding-left: 1rem;
+			border: 1px solid #c2c2c2;
+			border-radius: calc($h / 2);
+		}
+		
+		button {
+			width: $w;
+			height: calc($h * 1.5);
+			line-height: calc($h * 1.5);
+			border-radius: calc(($h * 1.5) / 2);
+			margin-top: 1rem;
+			background-color: $uni-color-primary;
+			color: white;
+		}
+	}
 </style>

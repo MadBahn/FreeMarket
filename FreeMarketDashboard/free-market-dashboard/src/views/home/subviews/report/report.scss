@@ -1,4 +1,15 @@
-.report {
-  height: 80vh;
-  overflow-y: scroll;
+.query_form {
+  padding: 1vw;
+  display: flex;
+  flex-direction: row;
+
+  Input {
+    width: 20vw;
+    margin-right: 1vw;
+  }
+
+  Button {
+    margin-left: 1vw;
+  }
+
 }

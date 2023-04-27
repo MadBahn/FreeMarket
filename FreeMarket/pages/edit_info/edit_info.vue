@@ -119,8 +119,33 @@
 </script>
 
 <style lang="scss" scoped>
+	$w: 70vw;
+	$h: 6vh;
+	
 	._form {
 		width: 100vw;
+		
+		form {
+			label {
+				margin-left: 2vw;
+				input, picker, radio-group {
+					margin: 2vw;
+				}
+				radio {
+					margin: 2vw;
+				}
+			}
+			
+			button {
+				width: $w;
+				height: calc($h * 1.5);
+				line-height: calc($h * 1.5);
+				border-radius: calc(($h * 1.5) / 2);
+				margin-top: 1rem;
+				background-color: $uni-color-primary;
+				color: white;
+			}
+		}
 	}
 	
 	.popup {

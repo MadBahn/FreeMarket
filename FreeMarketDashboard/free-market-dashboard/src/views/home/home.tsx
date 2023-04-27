@@ -10,11 +10,13 @@ import { HomeOutlined,
     InfoOutlined } from "@ant-design/icons";
 import { getTauriVersion } from "@tauri-apps/api/app";
 import {useDispatch} from "react-redux";
+import {message} from "@tauri-apps/api/dialog";
 
 import {init} from "@/store/reducer/common_reducer";
 import { verify } from "@/common/verify";
 
 import "./home.scss";
+
 
 
 function Home() {
@@ -26,6 +28,7 @@ function Home() {
     const [ key, setKey ] = useState("main");
     const [ label, setLabel ] = useState("首页");
     const [ ver, setVer ] = useState("");
+    const [ time, setTime ] = useState(new Date());
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -51,9 +54,20 @@ function Home() {
         verifyToken().then();
     });
 
+    useEffect(() => {
+        const t = setInterval(() => setTime(new Date()), 1000);
+
+        return () => {
+            clearInterval(t);
+        }
+    })
+
     const verifyToken = async () => {
         const isValid = await verify.doVerify();
-        !isValid && navigate("/login");
+        if(!isValid) {
+            await message("令牌失效，请重新登录");
+            navigate("/login");
+        }
     };
 
     const doSelect = (e : object) => {
@@ -93,8 +107,9 @@ function Home() {
                 <div className="content">
                     <Outlet/>
                 </div>
-                <Footer style={{padding: "1vh 1vw"}}>
-                    Powered by Tauri {ver}
+                <Footer className="footer">
+                    <p>Powered by Tauri {ver}</p>
+                    <p>{time.toLocaleString()}</p>
                 </Footer>
             </Layout>
         </Layout>

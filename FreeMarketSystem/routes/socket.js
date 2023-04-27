@@ -6,6 +6,23 @@ const pubSub = require("pubsub-js");
 
 const adminModule = require("./common/adminModule");
 
+const cpuRate = () => {
+    const cpus = os.cpus();
+    let [ user, nice, sys, idle, irq, total ] = [0, 0, 0, 0, 0, 0];
+    for (const c of cpus) {
+        const t = c.times;
+        user += t.user;
+        nice += t.nice;
+        sys += t.sys;
+        idle += t.idle;
+        irq += t.irq;
+    }
+    total += user + nice + sys + idle + irq;
+    // console.log(idle, total);
+    return (1 - idle / total);
+    // console.log(cpus);
+}
+
 //用于消息部分
 function getSocket(server) {
     const io = new Server( server,{
@@ -35,13 +52,19 @@ function getSocket(server) {
             console.log("init on server", e);
 
             if(e.token && (e.type === "admin" && await adminModule.tokenValidation(e.token))) {
+                console.log(cpuRate());
+                socket.emit("status", {
+                    cpu: cpuRate().toFixed(2) * 1.0,
+                    ram: (os.totalmem() / 1024 / 1024 / 1024).toFixed(2) * 1.0,
+                    freeram: (os.freemem() / 1024 / 1024 / 1024).toFixed(2) * 1.0
+                });
                 setInterval(() => {
                     socket.emit("status", {
-                        cpu: process.cpuUsage(),
+                        cpu: cpuRate().toFixed(2) * 1.0,
                         ram: (os.totalmem() / 1024 / 1024 / 1024).toFixed(2) * 1.0,
                         freeram: (os.freemem() / 1024 / 1024 / 1024).toFixed(2) * 1.0
                     });
-                }, 5000);
+                }, 2000);
             } else if(e.type === "client"){
                 for (let i of ioList) {
                     if(i.userid === e.user) return;

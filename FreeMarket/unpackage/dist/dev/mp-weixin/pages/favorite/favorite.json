@@ -3,6 +3,7 @@
   "enablePullDownRefresh": false,
   "usingComponents": {
     "uni-segmented-control": "../../uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control",
+    "empty": "../../components/empty/empty",
     "goods-unit": "../../components/goods_unit/goods_unit",
     "post-unit": "../../components/post_unit/post_unit"
   }

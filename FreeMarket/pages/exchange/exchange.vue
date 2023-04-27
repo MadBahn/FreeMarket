@@ -1,13 +1,13 @@
 <template>
 	<view>
-		<view>
-			<!-- 根据买卖方确定查询条件 -->
-			<uni-segmented-control 
-				:current="status_tab"
-				:values="segItems"
-				@clickItem="changeSeg"
-				styleType="text"
-			 />
+		<!-- 根据买卖方确定查询条件 -->
+		<uni-segmented-control 
+			:current="status_tab"
+			:values="segItems"
+			@clickItem="changeSeg"
+			styleType="text"
+		 />
+		<view v-if="data.length !== 0">
 			<uni-card 
 				v-for="(e, i) in data"
 				:title="(typeof(e._target) !== undefined) ? e._target.username : e._target" 
@@ -26,8 +26,9 @@
 				</view>
 				<button v-if="e.status !== -1 && e.status !== 3">取消</button>
 			</uni-card>
-			<view v-show="!enableBottomRequest">再怎么找也没有了</view>
+			<no-more v-if="!enableBottomRequest" />
 		</view>
+		<empty v-else />
 	</view>
 </template>
 

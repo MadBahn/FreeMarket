@@ -93,23 +93,27 @@
 
 		// 从localStorage获取历史记录
 		if (op === "r") {
-			history.value = JSON.parse(uni.getStorageSync("history"));
+			const t = uni.getStorageSync("history");
+			if(t) {
+				// console.log(t);
+				history.value = JSON.parse(t);
+			} else {
+				history.value = [];
+				uni.setStorageSync("history", JSON.stringify([]));
+			}
 		} else {
 			// 写入localHistory
 			if (op === "w"){
 				// 遍历列表是否存在历史记录，如有则尝试移至第一处，否则添加
 				// console.log("w");
 				if(i === "") return;
-				console.log(history.value.includes(i));
+
 				if(history.value.includes(i)) {
-					history.value.filter(j => j !== i);
+					history.value = history.value.filter(j => j !== i);
 				}
 				
-				console.log(history.value);
 				// push到末尾
 				history.value.push(i);
-				
-				console.log(history.value);
 				
 				// 交换数组位置
 				let tmp = history.value[0];
@@ -117,15 +121,14 @@
 				
 				history.value[0] = i;
 				history.value[last_index] = tmp;
-				
-				
-				
-				console.log(history.value);
+
+				// console.log(history.value);
 			}
 			// 删除一个历史记录
 			else if (op === "d") {
 				// console.log("d");
-				history.value = history.value.splice(index, 1);
+				
+				history.value = history.value.filter(j => j !== i);
 			}
 			// 清空历史记录
 			else if (op === "c") {
@@ -150,10 +153,12 @@
 		const key = isItem ? txt : searchText.value;
 		const amount = 2;
 		
+		if(isItem) searchText.value = txt;
+		
 		// 是否从搜索框发起请求
 		if(isNew) start_at.value = 0;
 		// 添加历史记录
-		operateHistory("w", txt, 0);
+		operateHistory("w", key, 0);
 		
 		// 检索请求
 		uni.request({
